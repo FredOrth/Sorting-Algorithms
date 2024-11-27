@@ -32,5 +32,21 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'SortingVariations.App'
+    if (project.hasProperty("mainClass")) {
+        mainClass.set(project.getProperty("mainClass"))
+    } else {
+        System.out.println("INFO: If you are trying to run the program, recall to specify the main class with -PmainClass=<package>.<java_class>")
+    }
+}
+
+tasks.test {
+    useJUnitPlatform()
+    
+    if (project.hasProperty("testClass")) {
+        filter {
+            includeTestsMatching project.getProperty("testClass")
+        }
+    } else {
+        println("INFO: Running all tests. To run a specific test class, use -PtestClass=<package>.<class>")
+    }
 }
