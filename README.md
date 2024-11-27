@@ -1,2 +1,2 @@
 # AppliedAlgorithmsExamProject
-Exam Project for the Applied Algorithms course at ITU. Implementing and testing MergeSorting and TimSort
+Exam project for the Applied Algorithms course at ITU. Implementing and testing MergeSorting and TimSort
