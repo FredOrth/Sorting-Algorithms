@@ -40,13 +40,6 @@ application {
 }
 
 tasks.test {
-    useJUnitPlatform()
-    
-    if (project.hasProperty("testClass")) {
-        filter {
-            includeTestsMatching project.getProperty("testClass")
-        }
-    } else {
-        println("INFO: Running all tests. To run a specific test class, use -PtestClass=<package>.<class>")
-    }
+    // Gradle automatically uses JUnit 4 when the dependencies include junit:junit.
+    // No need for `useJUnitPlatform()` here.
 }
