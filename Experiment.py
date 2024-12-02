@@ -6,7 +6,7 @@ import csv
 
 import subprocess
 #Timeout 
-TIMEOUT = 45
+TIMEOUT = 5
 SEED = 42
 #How many different values of M
 I_MAX = 30
@@ -40,8 +40,8 @@ def measure(algorithm: str, jar: str,
     result_string: str = run_java(jar, algorithm, 
         input_string)
     end: float = time.time()
-    assert result_string.strip() == 'null'
-    return end - start
+    # assert result_string.strip() == 'null'
+    return end - start+
     
 def benchmark(algorithm: str, jar: str)-> \
     List[Tuple[int,float]]:
@@ -61,7 +61,7 @@ def benchmark(algorithm: str, jar: str)-> \
     return results
     
 INSTANCES: List[Tuple[str,str]] = {
-    ("Mergesort", "SortingVariations/app/build/libs/app.jar")
+    ("recursive", "SortingVariations/app/build/libs/app.jar")
 }
 
 if __name__ == '__main__':

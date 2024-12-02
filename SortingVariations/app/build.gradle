@@ -36,14 +36,20 @@ application {
 
     applicationDefaultJvmArgs = ["-ea"]
     // Define the main class for the application.
-    if (project.hasProperty("mainClass")) {
-        mainClass.set(project.getProperty("mainClass"))
-    } else {
-        System.out.println("INFO: If you are trying to run the program, recall to specify the main class with -PmainClass=<package>.<java_class>")
-    }
+    // if (project.hasProperty("mainClass")) {
+    //     mainClass.set(project.getProperty("mainClass"))
+    // } else {
+    //     System.out.println("INFO: If you are trying to run the program, recall to specify the main class with -PmainClass=<package>.<java_class>")
+    // }
 }
 
 tasks.test {
     // Gradle automatically uses JUnit 4 when the dependencies include junit:junit.
     // No need for `useJUnitPlatform()` here.
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'SortingVariations.Main'
+    }
 }

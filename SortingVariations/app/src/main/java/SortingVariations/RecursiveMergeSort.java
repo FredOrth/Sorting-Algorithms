@@ -1,13 +1,16 @@
 package SortingVariations;
 
 public class RecursiveMergeSort<T extends Comparable<T>> implements Sorter<T>{
+    private int counter;
 
 
     @Override
     public void sort(T[] a){
+        this.counter = 0;
         T[] aux = a.clone();
         sort(a, aux, 0, a.length-1);
         //assert isSorted(a);
+        System.out.println(counter);
     }
     
 
@@ -39,10 +42,16 @@ public class RecursiveMergeSort<T extends Comparable<T>> implements Sorter<T>{
         int j = mid+1;
 
         for (int k = low; k <= high; k++) {
-            if      (i > mid)                   a[k] = aux[j++];
-            else if (j > high)                  a[k] = aux[i++];
-            else if ((aux[j].compareTo(aux[i]))<0)   a[k] = aux[j++];
-            else                                a[k] = aux[i++];
+            if(i > mid){
+            a[k] = aux[j++];}
+            else if (j > high)
+            { a[k] = aux[i++];}
+            else if((aux[j].compareTo(aux[i]))<0) 
+            {a[k] = aux[j++];
+            counter++;}
+            else 
+            {a[k] = aux[i++];
+            counter++;}
             
         }
         
