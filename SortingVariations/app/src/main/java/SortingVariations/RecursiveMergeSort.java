@@ -1,15 +1,17 @@
 package SortingVariations;
 
+public class RecursiveMergeSort<T extends Comparable<T>> implements Sorter<T>{
 
 
-public class MergeSort {
-
-    private MergeSort(){
-        // Class should not be instantiated
+    @Override
+    public void sort(T[] a){
+        T[] aux = a.clone();
+        sort(a, aux, 0, a.length-1);
+        //assert isSorted(a);
     }
+    
 
-
-    private static void sort(Comparable[] a, Comparable[] aux, int low, int high){
+    private void sort(T[] a, T[] aux, int low, int high){
         // Using Comparable we force the user to convert to complex types, should be fine
         // Basically just a checker whether it's not valid. Or actually this is our base case?
         if (high <= low) return;
@@ -25,13 +27,8 @@ public class MergeSort {
         merge(a, aux, low, mid, high);
     }
 
-    public static void sort(Comparable[] a){
-        Comparable[] aux = new Comparable[a.length];
-        sort(a, aux, 0, a.length-1);
-        //assert isSorted(a);
-    }
 
-    private static void merge(Comparable[] a, Comparable[] aux, int low, int mid, int high){
+    private void merge(T[] a, T[] aux, int low, int mid, int high){
 
         for (int k = low; k<=high; k++) {
             aux[k] = a[k];
@@ -44,18 +41,11 @@ public class MergeSort {
         for (int k = low; k <= high; k++) {
             if      (i > mid)                   a[k] = aux[j++];
             else if (j > high)                  a[k] = aux[i++];
-            else if (compare(aux[j], aux[i]))   a[k] = aux[j++];
+            else if ((aux[j].compareTo(aux[i]))<0)   a[k] = aux[j++];
             else                                a[k] = aux[i++];
             
         }
         
-    }
-
-    private static boolean compare(Comparable a, Comparable b){
-        int number = a.compareTo(b);
-        if (number <0) return true;
-        else return false;
-
     }
 
 

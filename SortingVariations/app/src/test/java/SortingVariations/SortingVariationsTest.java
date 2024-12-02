@@ -24,9 +24,20 @@ public class SortingVariationsTest {
     @Test
     public void mergeSortTest() {
         //Integer[] sortedArray = new Integer[]{1,1,3,3,4,4,4,4,4,4,5,6,16,76,94};
-        Integer[] sortedArray = testingArray1;
-        // MergeSort.sort(testingArray1);
+
+        int k = testingArray1.length;
+        Integer[] sortedArray = new Integer[k];
+
+        for (int i = 0; i < k; i++) {
+            sortedArray[i] = testingArray1[i];
+            
+        }
+        
         Arrays.sort(sortedArray);
+        RecursiveMergeSort<Integer> sorter = new RecursiveMergeSort<>();
+
+        sorter.sort(testingArray1);
+        
         assertArrayEquals(sortedArray, testingArray1);
     }
 

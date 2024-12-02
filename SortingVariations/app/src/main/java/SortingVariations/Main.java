@@ -1,20 +1,26 @@
 package SortingVariations;
 
+import java.util.Arrays;
+
 public class Main {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
+    
     public static void main(String[] args) {
-        System.out.println(new Main().getGreeting());
-        // assert false : "Assertions are enabled!";
-        // System.out.println("Assertions are disabled!");
-
-        Integer[] testingArray = new Integer[]{5,3,2,6,4,9,10,2,4};
-
-        MergeSort.sort(testingArray);
-        for (Integer integer : testingArray) {
-            System.out.println(integer);
+        if (args.length < 1) {
+            System.out.println("Usage: java Main <mergeSortType>");
+            return;
         }
+
+        String sortType = args[0];
+        Integer[] unsortedArray = {4, 1, 3, 9, 7};
+
+        Sorter<Integer> sorter = SorterFactory.getSorter(sortType);
+        
+        sorter.sort(unsortedArray);
+        //int comparisons = sorter.sort(unsortedArray);
+
+        System.out.println("Sorted Array: " + Arrays.toString(unsortedArray));
+        // System.out.println("Comparisons: " + comparisons);
     }
+
 }
