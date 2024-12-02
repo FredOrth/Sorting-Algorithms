@@ -9,7 +9,7 @@ public class MergeSort {
     }
 
 
-    public static void sort(Comparable[] a, Comparable[] aux, int low, int high){
+    private static void sort(Comparable[] a, Comparable[] aux, int low, int high){
         // Using Comparable we force the user to convert to complex types, should be fine
         // Basically just a checker whether it's not valid. Or actually this is our base case?
         if (high <= low) return;
@@ -31,7 +31,7 @@ public class MergeSort {
         //assert isSorted(a);
     }
 
-    public static void merge(Comparable[] a, Comparable[] aux, int low, int mid, int high){
+    private static void merge(Comparable[] a, Comparable[] aux, int low, int mid, int high){
 
         for (int k = low; k<=high; k++) {
             aux[k] = a[k];
@@ -51,7 +51,7 @@ public class MergeSort {
         
     }
 
-    public static boolean compare(Comparable a, Comparable b){
+    private static boolean compare(Comparable a, Comparable b){
         int number = a.compareTo(b);
         if (number <0) return true;
         else return false;
