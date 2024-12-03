@@ -6,7 +6,7 @@ import csv
 
 import subprocess
 #Timeout 
-TIMEOUT = 5
+TIMEOUT = 35
 SEED = 42
 #How many different values of M
 I_MAX = 30
@@ -41,20 +41,20 @@ def measure(algorithm: str, jar: str,
         input_string)
     end: float = time.time()
     # assert result_string.strip() == 'null'
-    return end - start+
+    return end - start, result_string
     
 def benchmark(algorithm: str, jar: str)-> \
-    List[Tuple[int,float]]:
-    results: List[Tuple[int,float]] = list()
+    List[Tuple[int,float, int]]:
+    results: List[Tuple[int,float,int]] = list()
 
     for n in NS:
         try: 
-            result_n: List[Tuple[int,float]] = list()
+            result_n: List[Tuple[int,float, int]] = list()
             for i in range(M):
                 input: List[int] = INPUT_DATA[n][i]
-                diff: float = measure(algorithm,jar,
+                diff, comp = measure(algorithm,jar,
                     input)
-                result_n.append((n,diff))
+                result_n.append((n,diff, comp))
             results += result_n
         except subprocess.TimeoutExpired:
             break
@@ -72,10 +72,11 @@ if __name__ == '__main__':
         for algorithm, jar in INSTANCES:
             results: List[Tuple[int,float]] = \
                 benchmark(algorithm,jar)
-            for (n,t) in results:
-                print(f"This is n: {n}, this is the time {t}, this is number of comparisons")
-                # writer.writerow({ 
-                #     'algorithm' : algorithm,
-                #     'n' : n,
-                #     'time' : t
-                # })
+            for (n,t,c) in results:
+                # print(f"This is n: {n}, this is the time {t}, this is number of comparisons {c}")
+                writer.writerow({ 
+                    'algorithm' : algorithm,
+                    'n' : n,
+                    'time' : t,
+                    'comparisons' : c
+                })
