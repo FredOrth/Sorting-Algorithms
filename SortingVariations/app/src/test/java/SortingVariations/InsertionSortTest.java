@@ -22,7 +22,7 @@ public class InsertionSortTest {
 
 
     @Test
-    public void mergeSortTest() {
+    public void insertionSortTest() {
 
         int k = testingArray1.length;
         Integer[] sortedArray = new Integer[k];
@@ -35,7 +35,7 @@ public class InsertionSortTest {
         Arrays.sort(sortedArray);
         InsertionSort<Integer> sorter = new InsertionSort<>();
 
-        sorter.sort(sortedArray);
+        sorter.sort(testingArray1);
         
         assertArrayEquals(sortedArray, testingArray1);
     }

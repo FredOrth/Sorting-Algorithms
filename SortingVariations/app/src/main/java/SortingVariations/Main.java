@@ -11,8 +11,8 @@ public class Main {
         //     return;
         // }
 
-        // String sortType = args[0];
-        String sortType = "recursive";
+        String sortType = args[0];
+        //String sortType = "recursive";
         Integer[] unsortedArray = {4, 1, 3, 9, 7};
 
 

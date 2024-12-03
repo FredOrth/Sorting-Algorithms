@@ -61,7 +61,7 @@ def benchmark(algorithm: str, jar: str)-> \
     return results
     
 INSTANCES: List[Tuple[str,str]] = {
-    ("insertion", "SortingVariations/app/build/libs/app.jar")
+    ("recursive", "SortingVariations/app/build/libs/app.jar")
 }
 
 if __name__ == '__main__':
