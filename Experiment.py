@@ -59,12 +59,19 @@ def benchmark(algorithm: str, jar: str)-> \
         except subprocess.TimeoutExpired:
             break
     return results
+
+# def build_java_project():
+#     subprocess.run(['./gradlew', 'build'], check=True)
     
 INSTANCES: List[Tuple[str,str]] = {
-    ("recursive", "SortingVariations/app/build/libs/app.jar")
+    ("recursiveMergeSort", "SortingVariations/app/build/libs/app.jar"),
+    ("insertionMergeSort", "SortingVariations/app/build/libs/app.jar")
 }
 
 if __name__ == '__main__':
+    
+    #build_java_project
+    
     with open('resultsMergesort.csv','w') as f:
         writer = csv.DictWriter(f, 
             fieldnames = ['algorithm','n','time', 'comparisons'])

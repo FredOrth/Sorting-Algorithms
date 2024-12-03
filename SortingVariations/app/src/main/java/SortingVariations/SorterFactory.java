@@ -1,16 +1,18 @@
 package SortingVariations;
 
 public class SorterFactory {
-    public static <T extends Comparable<T>> Sorter<T> getSorter(String type) {
+    public static <T extends Comparable<T>> Sorter<T> getSorter(String type, int cutoff) {
         // We could pass a cutoff or something to this ,ethod
-        switch (type.toLowerCase()) {
-            case "recursive":
+        switch (type) {
+            case "recursiveMergeSort":
                 return new RecursiveMergeSort<>();
             // Lav flere cases nednefor, skal bare returne den classe vi vil nbruge
 
-            case "insertion":
-                return new InsertionMergeSort<>();
-
+            case "insertionMergeSort":
+                if (cutoff < 0) {
+                    throw new IllegalArgumentException("Cutoff value required for insertion sort.");
+                }
+                return new InsertionMergeSort<>(cutoff);
             //for eksempel:
             // case "iterative":
             //     return new IterativeMergeSort<>();

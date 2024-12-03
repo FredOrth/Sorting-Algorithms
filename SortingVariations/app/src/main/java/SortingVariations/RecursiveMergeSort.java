@@ -3,7 +3,7 @@ package SortingVariations;
 public class RecursiveMergeSort<T extends Comparable<T>> implements Sorter<T>{
     private int counter;
 
-
+    
     @Override
     public void sort(T[] a){
         this.counter = 0;
@@ -12,7 +12,6 @@ public class RecursiveMergeSort<T extends Comparable<T>> implements Sorter<T>{
         //assert isSorted(a);
         System.out.println(counter);
     }
-    
 
     private void sort(T[] a, T[] aux, int low, int high){
         // Using Comparable we force the user to convert to complex types, should be fine

@@ -1,5 +1,6 @@
 package SortingVariations;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -11,31 +12,44 @@ public class Main {
         //     return;
         // }
 
-        String sortType = args[0];
-        //String sortType = "recursive";
-        Integer[] unsortedArray = {4, 1, 3, 9, 7};
+        String sortType = args[0].strip();
 
+        int cutoff = args.length > 1 ? Integer.parseInt(args[1]) : 10;
+        //String sortType = "recursive";
 
 
         Scanner scanner = new Scanner(System.in);
+        Integer[] arr = null;
+        int n = 0;
 
+        // This is just for debugging, run with ./gradlew run --args="recursiveMergeSort 3 debug"
+        // If run from python it will be as normal
+        if (args.length > 2 && args[2].equalsIgnoreCase("debug")) {
+            // Debug mode activated if the third argument is "debug"
+            System.out.println("Debug Mode Enabled");
         
-        int n = scanner.nextInt();
-        Integer[] arr = new Integer[n];
-        for(int i = 0; i<n; i++){
-            arr[i] = scanner.nextInt();
-        }  
+            // Simulated input for debugging
+            n = 5; // Size of the array
+            arr = new Integer[]{4, 1, 3, 9, 7}; // Predefined array
+        } else {
         
+            n = scanner.nextInt();
+            arr = new Integer[n];
+            for(int i = 0; i<n; i++){
+                arr[i] = scanner.nextInt();
+            }  
+        }
+            
 
-
-        Sorter<Integer> sorter = SorterFactory.getSorter(sortType);
+        Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff);
         
         sorter.sort(arr);
         
         //int comparisons = sorter.sort(unsortedArray);
 
-        // System.out.println("Sorted Array: " + Arrays.toString(unsortedArray));
+        // System.out.println("Sorted Array: " + Arrays.toString(arr));
         // System.out.println("Comparisons: " + comparisons);
+        scanner.close();
     }
 
 }
