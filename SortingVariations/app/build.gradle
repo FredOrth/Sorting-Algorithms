@@ -35,6 +35,11 @@ application {
     mainClass.set("SortingVariations.Main")
 
     applicationDefaultJvmArgs = ["-ea"]
+
+
+
+    // remember, we can run with gradle run --args="recursive" for example
+
     // Define the main class for the application.
     // if (project.hasProperty("mainClass")) {
     //     mainClass.set(project.getProperty("mainClass"))

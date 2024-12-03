@@ -8,6 +8,9 @@ public class SorterFactory {
                 return new RecursiveMergeSort<>();
             // Lav flere cases nednefor, skal bare returne den classe vi vil nbruge
 
+            case "insertion":
+                return new InsertionMergeSort<>();
+
             //for eksempel:
             // case "iterative":
             //     return new IterativeMergeSort<>();
