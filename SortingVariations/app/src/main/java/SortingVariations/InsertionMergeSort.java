@@ -1,5 +1,7 @@
 package SortingVariations;
 
+import java.util.Comparator;
+
 public class InsertionMergeSort<T extends Comparable<T>> implements Sorter<T> {
     int cutoff;
     int counter;
