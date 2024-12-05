@@ -1,7 +1,5 @@
 package SortingVariations;
 
-import java.util.Comparator;
-
 public class InsertionMergeSort<T extends Comparable<T>> implements Sorter<T> {
     int cutoff;
     int counter;
@@ -31,8 +29,6 @@ public class InsertionMergeSort<T extends Comparable<T>> implements Sorter<T> {
             return;
         }
         
-
-
 
         // find mid
         int mid = low + (high - low) / 2;
