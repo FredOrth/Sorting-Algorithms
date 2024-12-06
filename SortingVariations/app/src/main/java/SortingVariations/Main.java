@@ -12,6 +12,12 @@ public class Main {
         //     return;
         // }
 
+        Integer[] arr1 = {80, 100, 5, 43, 95, 52, 87, 34, 81, 79, 58, 51, 96, 29, 41, 19, 88, 28, 20, 63};
+        IterativeMergeSort<Integer> sorter1 = new IterativeMergeSort<>();
+        sorter1.sort(arr1);
+        
+        System.out.println(Arrays.toString(arr1));
+
         String sortType = args[0].strip();
 
         int cutoff = args.length > 1 ? Integer.parseInt(args[1]) : 10;

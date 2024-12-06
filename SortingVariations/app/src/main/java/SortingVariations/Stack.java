@@ -145,7 +145,7 @@ import java.util.Vector;
         throw new EmptyStackException();}
         if(len <n){
         throw new ArrayIndexOutOfBoundsException();}
-        return elementAt(n);
+        return elementAt(len-1-n);
      }
  
      /** use serialVersionUID from JDK 1.0.2 for interoperability */
