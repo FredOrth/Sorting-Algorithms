@@ -15,7 +15,6 @@ M = 5
 
 rng = np.random.default_rng(SEED)
 NS: List[int] = [int(1300 * 1.37**i) \
-NS: List[int] = [int(1300 * 1.37**i) \
     for i in range(I_MAX)]
 
 def run_java(jar: str, arg: str, input: str)->str:
