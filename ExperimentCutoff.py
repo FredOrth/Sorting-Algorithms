@@ -14,8 +14,7 @@ I_MAX = 30
 M = 5
 
 rng = np.random.default_rng(SEED)
-NS: List[int] = [int(1300 * 1.37**i) \
-NS: List[int] = [int(1300 * 1.37**i) \
+NS: List[int] = [int(150* 1.37**i) \
     for i in range(I_MAX)]
 
 def run_java(jar: str, arg: str, input: str)->str:
@@ -64,50 +63,38 @@ def benchmark(algorithm: str, jar: str)-> \
 # def build_java_project():
 #     subprocess.run(['./gradlew', 'build'], check=True)
     
-INSTANCES: List[Tuple[str,str]] = {
-    ("recursiveMergeSort", "SortingVariations/app/build/libs/app.jar"),
-    # ("insertionMergeSort", "SortingVariations/app/build/libs/app.jar"),
-    # ("iterativeMergeSort", "SortingVariations/app/build/libs/app.jar")
-}
+
 
 INSTANCES_C: List[Tuple[str,str]]= {
-    ("RecursiveMergeSortCutoff", "SortingVariations/app/build/libs/app.jar"),
-    ("insertionMergeSortCutoff", "SortingVariations/app/build/libs/app.jar"),
-    # ("iterativeMergeSort", "SortingVariations/app/build/libs/app.jar")
+    # ("IterativeMergeSort Cutoff", "SortingVariations/app/build/libs/app.jar"),
+    ("insertionMergeSort Cutoff", "SortingVariations/app/build/libs/app.jar")
+}
+
+LIST_OF_CUTOFFVALUES: list[int] = {
+    1,#Cutoff-value 1 is equal to the normal sorting algorithms. We should probably just refactor the other experiment to take this as well... oh well...
+    2,
+    4,
+    8,
+    16
 }
 
 if __name__ == '__main__':
     
     #build_java_project
     
-    with open('resultsMergesortTest.csv','w') as f:
-        writer = csv.DictWriter(f, 
-            fieldnames = ['algorithm','n','time', 'comparisons'])
-        writer.writeheader()
-        for algorithm, jar in INSTANCES:
-            results: List[Tuple[int,float]] = \
-                benchmark(algorithm,jar)
-            for (n,t,c) in results:
-                # print(f"This is n: {n}, this is the time {t}, this is number of comparisons {c}")
-                writer.writerow({ 
-                    'algorithm' : algorithm,
-                    'n' : n,
-                    'time' : t,
-                    'comparisons' : c
-                })
     with open('resultsCutoffValues.csv','w') as f:
         writer = csv.DictWriter(f, 
-            fieldnames = ['algorithm','n','time', 'comparisons'])
+            fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
         writer.writeheader()
-        for algorithm, jar in INSTANCES:
-            results: List[Tuple[int,float]] = \
-                benchmark(algorithm,jar)
-            for (n,t,c,cu) in results:
-                # print(f"This is n: {n}, this is the time {t}, this is number of comparisons {c}")
-                writer.writerow({ 
-                    'algorithm' : algorithm,
-                    'n' : n,
-                    'time' : t,
-                    'comparisons' : c,
-                    'cutofff' : cu
-                })
+        for algorithm, jar in INSTANCES_C:
+            results: List[Tuple[int,float]] = []
+            for cutoff in LIST_OF_CUTOFFVALUES:
+                    for n,t,c in benchmark(f"{algorithm} {cutoff}",jar):
+                        # print(f"{algorithm}, {n}, {c}, {cutoff}")
+                        writer.writerow({ 
+                            'algorithm' : algorithm,
+                            'n' : n,
+                            'time' : t,
+                            'comparisons' : c,
+                            'cutoff' : cutoff
+                        })

@@ -1,4 +1,4 @@
-package SortingVariations;
+package SortingVariations.Util;
 
 import java.util.EmptyStackException;
 import java.util.Vector;
