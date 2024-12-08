@@ -14,7 +14,7 @@ I_MAX = 30
 M = 5
 
 rng = np.random.default_rng(SEED)
-NS: List[int] = [int(30 * 1.41**i) \
+NS: List[int] = [int(1300 * 1.37**i) \
     for i in range(I_MAX)]
 
 def run_java(jar: str, arg: str, input: str)->str:
@@ -65,14 +65,14 @@ def benchmark(algorithm: str, jar: str)-> \
     
 INSTANCES: List[Tuple[str,str]] = {
     ("recursiveMergeSort", "SortingVariations/app/build/libs/app.jar"),
-    ("insertionMergeSort", "SortingVariations/app/build/libs/app.jar")
+    # ("insertionMergeSort", "SortingVariations/app/build/libs/app.jar")
 }
 
 if __name__ == '__main__':
     
     #build_java_project
     
-    with open('resultsMergesort.csv','w') as f:
+    with open('resultsMergesortTest.csv','w') as f:
         writer = csv.DictWriter(f, 
             fieldnames = ['algorithm','n','time', 'comparisons'])
         writer.writeheader()
