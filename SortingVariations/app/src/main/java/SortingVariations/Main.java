@@ -28,6 +28,8 @@ public class Main {
         Integer[] arr = null;
         int n = 0;
 
+        if(args[1].equals("cutoff"))
+
         // This is just for debugging, run with ./gradlew run --args="recursiveMergeSort 3 debug"
         // If run from python it will be as normal
         if (args.length > 2 && args[2].equalsIgnoreCase("debug")) {
