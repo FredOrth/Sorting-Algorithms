@@ -28,12 +28,12 @@ public class IterativeMergeSort<T extends Comparable<T>> implements Sorter<T>{
                 }
             }
         }
-        while(stack.size()>1){
+        while(stack.size()>1){ // two while loops for the same logic?
             stack.push(merge(stack.pop(), stack.pop()));
         }
-        T[] finishedArray = stack.pop();
+        T[] finishedArray = stack.pop(); // Are we saying the "sortedArray" is equal to 1 pop of the stack ? Or is this assuming we have merged all of them, meaning there is only one run left on the stack?
         for(int i = 0; i<a.length; i++){
-            a[i] = finishedArray[i];
+            a[i] = finishedArray[i]; // repopulating our initial array of items that we want to return?
         }
     }
 
