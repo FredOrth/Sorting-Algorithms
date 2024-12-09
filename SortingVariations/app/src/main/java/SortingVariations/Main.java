@@ -2,10 +2,27 @@ package SortingVariations;
 
 import java.util.Scanner;
 
+import SortingVariations.Util.StableTestClass;
+
 public class Main {
 
     
     public static void main(String[] args) {
+        StableTestClass str = new StableTestClass(1, 0);
+        StableTestClass str1 = new StableTestClass(1, 1);
+        StableTestClass str2 = new StableTestClass(1, 2);
+        StableTestClass str3 = new StableTestClass(1, 3);
+        StableTestClass str4 = new StableTestClass(1, 4);
+        StableTestClass str5 = new StableTestClass(1, 5);
+        StableTestClass str6 = new StableTestClass(1, 6);
+        StableTestClass[] arr1 = {str,str1,str2,str3,str4,str5,str6};
+
+        IterativeMergeSortC<StableTestClass> po = new IterativeMergeSortC<>(1);
+        po.sort(arr1);
+        for(int i = 0; i<arr1.length; i++){
+            System.out.println(arr1[i].getComparable() + " " + arr1[i].getTester());
+        }
+
         // // if (args.length < 2) {
         // //     System.out.println("Usage: java Main <mergeSortType>");
         // //     return;

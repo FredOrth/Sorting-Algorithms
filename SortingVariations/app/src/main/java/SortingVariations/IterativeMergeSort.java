@@ -1,9 +1,7 @@
 package SortingVariations;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-
-import SortingVariations.Util.Stack;
+import java.util.Stack;
 
 public class IterativeMergeSort<T extends Comparable<T>> implements Sorter<T>{
 
@@ -17,16 +15,14 @@ public class IterativeMergeSort<T extends Comparable<T>> implements Sorter<T>{
             // T[] comps = (T[]) new Object[]{comp};
             T[] comps = (T[]) Array.newInstance(a.getClass().getComponentType(), 1);
             comps[0] = comp;
-            stack.push(comps);
             while(stack.size() > 1){
-                System.out.println(Arrays.toString(stack.peekItem(1)));
-                System.out.println(Arrays.toString(stack.peek()));
-                if(stack.peek().length == stack.peekItem(1).length){
-                    stack.push(merge(stack.pop(), stack.pop()));
+                if(stack.peek().length == comps.length){
+                    comps = merge(comps, stack.pop());
                 }else{
                     break;
                 }
             }
+            stack.push(comps);
         }
         while(stack.size()>1){ // two while loops for the same logic?
             stack.push(merge(stack.pop(), stack.pop()));

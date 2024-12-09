@@ -22,5 +22,4 @@ public class StableTestClass implements Comparable<StableTestClass> {
         return s.getComparable() - this.comparable;
     }
 
-
 }
