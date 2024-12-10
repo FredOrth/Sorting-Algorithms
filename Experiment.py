@@ -5,12 +5,12 @@ import time
 import csv
 
 import subprocess
-#Timeout 
+# Timeout
 TIMEOUT = 35
 SEED = 42
-#How many different values of M
+# How many different values of M
 I_MAX = 30
-#How many repetitions per m
+# How many repetitions per m
 M = 5
 
 rng = np.random.default_rng(SEED)
@@ -42,7 +42,7 @@ def measure(algorithm: str, jar: str,
     end: float = time.time()
     # assert result_string.strip() == 'null'
     return end - start, result_string
-    
+
 def benchmark(algorithm: str, jar: str)-> \
     List[Tuple[int,float, int]]:
     results: List[Tuple[int,float,int]] = list()
@@ -62,7 +62,7 @@ def benchmark(algorithm: str, jar: str)-> \
 
 # def build_java_project():
 #     subprocess.run(['./gradlew', 'build'], check=True)
-    
+
 INSTANCES: List[Tuple[str,str]] = {
     ("recursiveMergeSort", "SortingVariations/app/build/libs/app.jar"),
     # ("insertionMergeSort", "SortingVariations/app/build/libs/app.jar"),
