@@ -36,7 +36,7 @@ public class IterativeMergeSortC<T extends Comparable<T>> implements Sorter<T>{
                 
             while(stack.size() > 1){
                 if(stack.peek().length == comps.length){
-                  comps = merge(comps, stack.pop());  
+                    comps = merge(comps, stack.pop());  
                 }else{
                     break;
                 }
