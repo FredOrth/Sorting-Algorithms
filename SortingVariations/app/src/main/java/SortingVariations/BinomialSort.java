@@ -59,8 +59,10 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
         if(sequence > cutoff){
             arrLength = sequence;
         }else{
-            arrLength = cutoff;
-            
+            if(a.length-i<cutoff){
+                arrLength = a.length-i;
+            }else{
+            arrLength = cutoff;}
             }
             T[] comps = (T[]) Array.newInstance(a.getClass().getComponentType(), arrLength);
             for(int j = 0; j<comps.length; j++){
