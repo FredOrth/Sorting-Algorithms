@@ -14,7 +14,7 @@ def generate_plot(csv_file: str, title: str, x_label: str, y_label: str):
 
     plt.figure(figsize=(10, 6))
     for algorithm, group in grouped:
-        plt.plot(group["n"], group["time"], label=algorithm, marker="o")
+        plt.plot(group["comparisons"], group["time"], label=algorithm, marker="o")
 
     plt.xlabel(x_label)
     plt.ylabel(y_label)
@@ -28,8 +28,8 @@ def generate_plot(csv_file: str, title: str, x_label: str, y_label: str):
 if __name__ == '__main__':
     generate_plot(
         "resultsMergesort.csv",
-        "Mergesort Performance",
-        "Input Size (n)",
+        "Mergesort Performance (Comparisons)",
+        "Number of Comparisons",
         "Time (seconds)",
     )
 
