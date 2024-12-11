@@ -18,6 +18,9 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
     @Override
     public void sort(T[] a) {
         counter = 0;
+        if(a.length == 0){
+            return;
+        }
         //Setup
         Stack<T[]> stack = new Stack<>();
         int i = 0;
@@ -38,7 +41,7 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
                     break;
                 }
             }
-            assert stack.peek().length >= comps.length*2;
+            assert stack.size() == 0 || stack.peek().length >= comps.length*2;
             stack.add(comps);
     }
     while(stack.size()>1){
@@ -82,7 +85,7 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
         if(j==a.length-1){
             return 1;
         }
-        if(a[j].compareTo(a[j+1])<0){
+        if(a[j].compareTo(a[j+1])<=0){
             j++;
             counter++;
             while(j<a.length-1){
@@ -99,7 +102,7 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
             counter++;
             while(j<a.length-1){
                 counter++;
-                if(a[j].compareTo(a[j+1])>= 0){
+                if(a[j].compareTo(a[j+1])> 0){
                     j++;
                 }else{
                     break;
