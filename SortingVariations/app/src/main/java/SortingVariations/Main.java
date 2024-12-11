@@ -1,5 +1,6 @@
 package SortingVariations;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import SortingVariations.Util.StableTestClass;
@@ -8,6 +9,14 @@ public class Main {
 
     
     public static void main(String[] args) {
+
+        Integer[] arr2 = {11,5,22,23,24,25,1,6,5,4,3,9};
+        BinomialSort<Integer> bio = new BinomialSort<>(5, true);
+        bio.sort(arr2);
+        System.out.println(Arrays.toString(arr2));
+
+
+
         StableTestClass str = new StableTestClass(1, 0);
         StableTestClass str1 = new StableTestClass(1, 1);
         StableTestClass str2 = new StableTestClass(1, 2);
