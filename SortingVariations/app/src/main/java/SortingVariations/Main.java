@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         Integer[] arr2 = {11,5,22,23,24,25,1,6,5,4,3,9};
-        BinomialSort<Integer> bio = new BinomialSort<>(5);
+        BinomialSort<Integer> bio = new BinomialSort<>(5, true);
         bio.sort(arr2);
         System.out.println(Arrays.toString(arr2));
 

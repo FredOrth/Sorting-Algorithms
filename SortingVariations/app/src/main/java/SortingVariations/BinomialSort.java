@@ -7,10 +7,12 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
     private int counter = 0;
     private int cutoff;
     private InsertionSort<T> insertionSort;
+    private boolean adaptive;
 
-    public BinomialSort(int cutoff){
+    public BinomialSort(int cutoff, boolean adaptive){
         this.cutoff = cutoff;
         this.insertionSort = new InsertionSort<>();
+        this.adaptive = adaptive;
     }
 
     @Override
@@ -18,14 +20,10 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
         counter = 0;
         //Setup
         Stack<T[]> stack = new Stack<>();
-        int cutoffCounter = 0;
         int i = 0;
         while(i<a.length){
-            // System.out.println("new number: " + a[i]);
-            int sequence = findSequence(i, a);
-            T[] comps = makeArray(a, i, sequence);
-            i += comps.length;
-
+            T[] comps = makeArray(a, i);
+            i+=comps.length;
             while(stack.size()>1){
                 if(stack.peek().length < comps.length){
                     comps = merge(comps, stack.pop());
@@ -40,6 +38,7 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
                     break;
                 }
             }
+            assert stack.peek().length >= comps.length*2;
             stack.add(comps);
     }
     while(stack.size()>1){
@@ -53,18 +52,19 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
 
     }
 
-    private T[] makeArray(T[] a, int i, int sequence){
+    private T[] makeArray(T[] a, int i){
         int arrLength;
-        // System.out.println("Numbers:");
-        if(sequence > cutoff){
+        int sequence = findSequence(i, a);
+        if(adaptive && sequence> cutoff){
             arrLength = sequence;
         }else{
             if(a.length-i<cutoff){
                 arrLength = a.length-i;
             }else{
             arrLength = cutoff;}
-            }
-            T[] comps = (T[]) Array.newInstance(a.getClass().getComponentType(), arrLength);
+        }
+
+        T[] comps = (T[]) Array.newInstance(a.getClass().getComponentType(), arrLength);
             for(int j = 0; j<comps.length; j++){
                 // System.out.println(a[i]);
                 comps[j] = a[i];
@@ -73,46 +73,9 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
         if(comps.length<= cutoff){
             insertionSort.sort(comps);
         }
+
         return comps;
     }
-        
-    
-
-    // public int findSequence(int i, T[]a){
-    //     int j = i;
-    //     System.out.println("This is the sequence:");
-    //     if(a[j].compareTo(a[j+1])<0){
-    //         counter++;
-    //         j++;
-    //         while(j<a.length-1){
-    //             if(a[j].compareTo(a[j+1])<0){
-    //                 System.out.println(a[j]);
-    //                 System.out.println(a[j+1]);
-    //             counter++;
-    //             j++;
-    //         }else{
-    //             break;
-    //         }
-    //         }
-    //     }else{
-    //         counter++;
-    //         j++;
-    //         while(j<a.length-1){
-    //         if(a[j].compareTo(a[j+1])>=0){
-    //             counter++;
-    //             j++;
-    //         }else{
-    //             break;
-    //         }
-    //         }
-    //         for(int k = i; k<j/2; k++){
-    //             T bigElement = a[j-(k-i)];
-    //             a[j-(k-i)] = a[k];
-    //             a[k]= bigElement;
-    //         }
-    //     }
-    //     return j;
-    // }
 
     private int findSequence(int i, T[]a){
         int j = i;
@@ -127,6 +90,7 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
                 if(a[j].compareTo(a[j+1])<0){
                     j++;
                 }else{
+                    j++;
                     break;
                 }
             }
