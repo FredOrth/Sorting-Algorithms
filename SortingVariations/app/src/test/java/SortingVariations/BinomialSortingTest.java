@@ -1,6 +1,7 @@
 package SortingVariations;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -9,12 +10,16 @@ import org.junit.Test;
 
 import SortingVariations.Util.StableTestClass;
 
+
 public class BinomialSortingTest {
     private Integer[] testingArray1;
     private String[] emptyArray;
     private String[] unevenNumber;
     private StableTestClass[] stableTest1;
     private StableTestClass[] stableTest2;
+    private Integer[] arr10000;
+    private Integer[] arr100000;
+    private Integer[] arr1000000;
 
     @Before
     public void setup(){
@@ -35,6 +40,26 @@ public class BinomialSortingTest {
             StableTestClass s = new StableTestClass(9, i/5);
             stableTest2[i] = s;
         }
+        }
+    }
+
+    //-2147483648 to 2147483647
+    @Before
+    public void setupStressTest(){
+        Random random = new Random();
+        this.arr10000 = new Integer[10000];
+        for(int i = 0; i<10000; i++){
+            arr10000[i] = random.nextInt(-2147483647, 2147483646);
+        }
+
+        this.arr100000 = new Integer[100000];
+        for(int i = 0; i<100000; i++){
+            arr100000[i] = random.nextInt(-2147483647, 2147483646);
+        }
+
+        this.arr1000000 = new Integer[1000000];
+        for(int i = 0; i<1000000; i++){
+            arr1000000[i] = random.nextInt(-2147483647, 2147483646);
         }
     }
 
@@ -149,5 +174,89 @@ public class BinomialSortingTest {
         assertEquals(2,stableTest1[2].getTester());
     }
 
+    @Test 
+    public void stressTest(){
+        BinomialSort<Integer> bioAdaptive = new BinomialSort<>(3, true);
+
+        Integer[] stress1Test = new Integer[arr10000.length];
+        for(int i = 0; i<arr10000.length; i++){
+            stress1Test[i] = arr10000[i];
+        }
+        bioAdaptive.sort(arr10000);
+        Arrays.sort(stress1Test);
+
+        assertEquals(stress1Test, arr10000);
+
+        //reset
+        setupStressTest();
+
+        BinomialSort<Integer> bioNonAdaptive = new BinomialSort<>(3, true);
+
+        Integer[] stress1Test2 = new Integer[arr10000.length];
+        for(int i = 0; i<arr10000.length; i++){
+            stress1Test2[i] = arr10000[i];
+        }
+        bioNonAdaptive.sort(arr10000);
+        Arrays.sort(stress1Test2);
+
+        assertEquals(stress1Test2, arr10000);
+        
+    }   
+
+    @Test
+    public void stressTest2(){
+        BinomialSort<Integer> bioAdaptive = new BinomialSort<>(3, true);
+
+        Integer[] stress1Test = new Integer[arr100000.length];
+        for(int i = 0; i<arr100000.length; i++){
+            stress1Test[i] = arr100000[i];
+        }
+        bioAdaptive.sort(arr100000);
+        Arrays.sort(stress1Test);
+
+        assertEquals(stress1Test, arr100000);
+
+        //reset
+        setupStressTest();
+
+        BinomialSort<Integer> bioNonAdaptive = new BinomialSort<>(3, true);
+
+        Integer[] stress1Test2 = new Integer[arr100000.length];
+        for(int i = 0; i<arr100000.length; i++){
+            stress1Test2[i] = arr100000[i];
+        }
+        bioNonAdaptive.sort(arr100000);
+        Arrays.sort(stress1Test2);
+
+        assertEquals(stress1Test2, arr100000);
+    }
+
+    @Test
+    public void stressTest3(){
+        BinomialSort<Integer> bioAdaptive = new BinomialSort<>(3, true);
+
+        Integer[] stress1Test = new Integer[arr1000000.length];
+        for(int i = 0; i<arr1000000.length; i++){
+            stress1Test[i] = arr1000000[i];
+        }
+        bioAdaptive.sort(arr1000000);
+        Arrays.sort(stress1Test);
+
+        assertEquals(stress1Test, arr1000000);
+
+        //reset
+        setupStressTest();
+
+        BinomialSort<Integer> bioNonAdaptive = new BinomialSort<>(3, true);
+
+        Integer[] stress1Test2 = new Integer[arr1000000.length];
+        for(int i = 0; i<arr1000000.length; i++){
+            stress1Test2[i] = arr1000000[i];
+        }
+        bioNonAdaptive.sort(arr1000000);
+        Arrays.sort(stress1Test2);
+
+        assertEquals(stress1Test2, arr1000000);
+    }
 
 }
