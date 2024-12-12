@@ -3,6 +3,8 @@ package SortingVariations;
 import java.lang.reflect.Array;
 import java.util.Stack;
 
+import org.checkerframework.checker.units.qual.s;
+
 
 
 public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
@@ -13,14 +15,19 @@ public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
     }
 
     private sortMode sortMode;
+    private InsertionSort<T> insertionSort;
+    private int c;
     
-    public LevelSort(sortMode mode){ // main call could be LevelSort<Integer> adaptiveSort = new LevelSort<>(SortMode.adaptive);
+    
+    public LevelSort(sortMode mode, int c){ // main call could be LevelSort<Integer> adaptiveSort = new LevelSort<>(SortMode.adaptive);
         this.sortMode = mode;
+        this.insertionSort = new InsertionSort<>();
+        this.c = c;
     }
 
     @Override
     public void sort(T[] a) {
-        T[] comps = (T[]) Array.newInstance(a.getClass().getComponentType(), 1);
+        T[] comps = (T[]) Array.newInstance(a.getClass().getComponentType(), a.length); // a.length or 1?
 
         //the stack, here it shoulb be able to be of int[], since each run is represented by its start and end indices.
         Stack<int[]> stackOfRuns = new Stack<>();
@@ -30,14 +37,21 @@ public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
 
         //looking for pre-sorted runs
         int start = 0;
-        for (int i = 1; i <= a.length; i++) {
-            //a run end is found if we reach the end of the array, or the next element(run) is smaller.
-            if (i == a.length || a[i].compareTo(a[i-1]) < -0) {
-                stackOfRuns.push(new int[] {start, i});
-                stackOfLevels.push(-1); //placeholder level
-            }
-            //next run start set to i
-            start = i;
+        // for (int i = 1; i <= a.length; i++) {
+        //     //a run end is found if we reach the end of the array, or the next element(run) is smaller.
+        //     if (i == a.length || a[i].compareTo(a[i-1]) < -0) {
+        //         stackOfRuns.push(new int[] {start, i});
+        //         stackOfLevels.push(-1); //placeholder level
+        //     }
+        //     //next run start set to i
+        //     start = i;
+        // }
+
+        while (start < a.length) {
+            int[] newRun = createRun(a, start, c);
+            stackOfRuns.push(newRun);
+            stackOfLevels.push(-1); // placehodler for level
+            start = newRun[1];
         }
 
         //level invariant matained handling and merging
@@ -61,6 +75,7 @@ public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
                 leftRun = mergeRuns(topRun, leftRun, a, comps);
                 newLevel = calculateBoundaryLeveL(leftRun[0], leftRun[1], newRun[1]);
             }
+
             stackOfRuns.push(new int[] {leftRun[0], leftRun[1]});
             stackOfLevels.push(newLevel);
         }
@@ -106,4 +121,59 @@ public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
         return level;
     }
     
+    public int[] createRun(T[] a, int runStart, int c) { // why can't I acess the instanciation?
+            int actualLength = 1;
+            if (this.sortMode == sortMode.adaptive) {
+                // adaptive ie. explore how long is the run
+                actualLength = findLongestRun(a, runStart, a.length);
+            }
+            if (actualLength >= c ) {
+                return new int[]{runStart, runStart + actualLength};
+            } else {
+                int runEnd = Math.min(runStart + c, a.length);
+                T[] subArray = createSubarray(a, runStart, runEnd);
+                insertionSort.sort(subArray);
+                System.arraycopy(subArray, 0, a, runStart, subArray.length);
+                return new int[] {runStart, runEnd};
+            }
+    }
+
+    public int findLongestRun(T[] a, int runStart, int runEnd) {
+        boolean ascending = true; // it is sorted
+        int i = runStart + 1;
+
+        if (i < runEnd && a[i].compareTo(a[i-1]) < 0) {
+            ascending = false;
+        }
+
+        while (i < runEnd) {
+            if (ascending && a[i].compareTo(a[i-1]) < 0) break;
+            if (!ascending && a[i].compareTo(a[i-1]) < 0) break;
+            i++;
+        }
+
+        if (!ascending) {
+            reverse(a, runStart, i - 1);
+        }
+
+        return i - runStart;
+    }
+
+    public void reverse(T[] a, int runStart, int runEnd) { // use the sequence select thing instead?
+        while (runStart < runEnd) {
+            T temp = a[runStart];
+            a[runStart] = a[runEnd];
+            a[runEnd] = temp;
+            runStart++;
+            runEnd--;
+        }
+    }
+
+
+    private T[] createSubarray(T[] a, int runStart, int runEnd) {
+        int length = runEnd - runStart;
+        T[] subarray = (T[]) Array.newInstance(a.getClass().getComponentType(), length);
+        System.arraycopy(a, runStart, subarray, 0, length);
+        return subarray;
+    }
 }
