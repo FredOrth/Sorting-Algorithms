@@ -18,7 +18,7 @@ public class IterativeMergeSortIndex<T extends Comparable<T>> implements Sorter<
         Stack<Integer[]> stack = new Stack<>();
         int i = 0;
 
-        while(i<a.length-1){
+        while(i<a.length){
             Integer[] arr = new Integer[2];
 
             if(i+cutoff<=a.length){
@@ -31,6 +31,7 @@ public class IterativeMergeSortIndex<T extends Comparable<T>> implements Sorter<
                 arr[0] = i;
                 i=a.length-1;
                 arr[1] = i;
+                i++;
             }
 
             insertionSort(a, arr[0], arr[1]);
@@ -52,6 +53,7 @@ public class IterativeMergeSortIndex<T extends Comparable<T>> implements Sorter<
         while(stack.size()>1){
             Integer[] arr = stack.pop();
             merge(a,aux,stack.peek()[0], arr[0]-1, arr[1]);
+            stack.peek()[1] = arr[1];
         }
 
 
