@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         Integer[] arr2 = {11,5,22,23,24,25,1,6,5,4,3,9,1};
-        IterativeMergeSortIndex<Integer> bio = new IterativeMergeSortIndex<>(3);
+        BinomialSortIndex<Integer> bio = new BinomialSortIndex<>(3, true);
         bio.sort(arr2);
         System.out.println(Arrays.toString(arr2));
 
@@ -26,7 +26,7 @@ public class Main {
         StableTestClass str6 = new StableTestClass(1, 6);
         StableTestClass[] arr1 = {str,str1,str2,str3,str4,str5,str6};
 
-        IterativeMergeSortIndex<StableTestClass> po = new IterativeMergeSortIndex<>(3);
+        BinomialSortIndex<StableTestClass> po = new BinomialSortIndex<>(3, true);
         po.sort(arr1);
         for(int i = 0; i<arr1.length; i++){
             System.out.println(arr1[i].getComparable() + " " + arr1[i].getTester());
