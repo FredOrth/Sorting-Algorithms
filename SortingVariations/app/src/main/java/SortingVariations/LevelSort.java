@@ -1,6 +1,7 @@
 package SortingVariations;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Stack;
 
 import org.checkerframework.checker.units.qual.s;
@@ -8,7 +9,7 @@ import org.checkerframework.checker.units.qual.s;
 
 
 public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
-
+    
     public enum sortMode {
         adaptive,
         nonAdaptive
@@ -59,51 +60,92 @@ public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
             int[] newRun = stackOfRuns.pop(); // new run due to being popped 1st
             int[] leftRun = stackOfRuns.pop(); // left run as it was popped last
 
-            int newLevel = calculateBoundaryLeveL(leftRun[0], leftRun[1], newRun[1]);
+            int newLevel = calculateBoundaryLeveL(leftRun[0], leftRun[1]-1, newRun[1]-1);
 
             // merge(a, aRun[0], aRun[1], bRun[0], bRun[1], comps);
 
             // stackOfRuns.push(new int[] {bRun[0], aRun[1]});
 
+            System.out.println("Attempting to merge: Left Run = [" + leftRun[0] + ", " + (leftRun[1]-1) + "], New Run = ["
+                    + (newRun[0]) + ", " + newRun[1] + "]");
+
+            System.out.println("Stack before merge: " + stackOfRuns.size() + " runs remaining.");
+
             //check if it's been merging at the right level
             System.out.println("Boundary merged at level: " + newLevel);
 
             //Merge while invariant is violated
-            while (!stackOfRuns.isEmpty() && stackOfLevels.peek() < newLevel) {
+            while (!stackOfRuns.isEmpty() && stackOfLevels.peek() < newLevel) { // need to figure out where it goes out of bounds. Doesn't work adding the -1 in the final run/merge.
                 int[] topRun = stackOfRuns.pop();
                 int toplevel = stackOfLevels.pop();
                 leftRun = mergeRuns(topRun, leftRun, a, comps);
                 newLevel = calculateBoundaryLeveL(leftRun[0], leftRun[1], newRun[1]);
             }
-
+            System.out.println("Stack after merge: " + stackOfRuns.size() + " runs remaining.");
             stackOfRuns.push(new int[] {leftRun[0], leftRun[1]});
             stackOfLevels.push(newLevel);
         }
         //call merge if needed.
         if (stackOfRuns.size() == 1) {
             int[] finalRun = stackOfRuns.pop();
-            merge(a, finalRun[0], finalRun[1], a.length, a.length, comps); //since array is already sorted 2nd run starts and ends with a.length
+            merge(a, comps, finalRun[0], finalRun[1], a.length); //since array is already sorted 2nd run starts and ends with a.length. need -1, so it stays within index.
         }
     }   
 
     // merge runs, does what it implies. Combines two runs returns their resulting new range.
+    // Includes check whether the runs are contiguous or not.
     private int[] mergeRuns(int[] leftRun, int[] rightRun, T[] a, T[] comps) {
-        merge(a, leftRun[0], leftRun[1], rightRun[0], rightRun[1], comps);
+        // Check if the runs are contiguous
+        if (leftRun[1] + 1 != rightRun[0]) {
+            System.out.println("Error: runs are not contiguous!");
+            throw new IllegalArgumentException("Runs are not contiguous");
+        }
+
+        System.out.println(
+                "Before merging: Left Run = " + Arrays.toString(Arrays.copyOfRange(a, leftRun[0], leftRun[1] + 1))
+                        + ", Right Run = " + Arrays.toString(Arrays.copyOfRange(a, rightRun[0], rightRun[1] + 1)));
+
+        merge(a, comps, leftRun[0], leftRun[1], rightRun[1]);
+
+        System.out.println("After merging: Resulting Run = [" + leftRun[0] + ", " + rightRun[1] + "]");
+
+        // Returns the new range of the merged run
         return new int[] { leftRun[0], rightRun[1] };
     }
 
+    // working with 2 contigous runs
+    public void merge(T[] a, T[] comps, int leftStart, int middle, int rightEnd) { // the method expects that rightEnd is within the bounds of the array.
+                                                                                   // However, the merge() function might be causing it to go beyond the length of the array.
+        System.out.println("Merging: leftStart = " + leftStart + ", rightEnd = " + rightEnd);
 
-    public void merge(T[] a, int aStart, int aEnd, int bStart, int bEnd, T[] comps) { //might have to change the argument naming here to not make them too confusing.
-        int i = aStart, j =bStart;
-        
-        for (int k = aStart; k < bEnd; k++) {
-            if (i < aEnd && (j >= bEnd || a[i].compareTo(a[j])<= 0)) {
-                comps[k] = a[i++];
+        int left = leftStart;
+        int right = middle + 1;
+        int tempIndex = leftStart;
+
+        // Logic to try to ensure we're not going out of bounds when comparing.
+        while (left <= middle && right <= rightEnd) {
+            if (a[left].compareTo(a[right]) <= 0) {
+                comps[tempIndex++] = a[left++];
             } else {
-                comps[k] = a[j++];
+                comps[tempIndex++] = a[right++];
             }
         }
-        System.arraycopy(comps, aStart, a, aStart, bEnd - aStart); 
+
+        // Copy remaining elements from left run
+        while (left <= middle) {
+            comps[tempIndex++] = a[left++];
+        }
+
+        // Copy remaining elements from right run
+        while (right <= rightEnd) {
+            comps[tempIndex++] = a[right++];
+        }
+
+        // Copy the merged subarray back to the original array
+        // Need to ensure the the indices are within the arraybounds.
+        System.arraycopy(comps, leftStart, a, leftStart, rightEnd - leftStart + 1);
+
+        System.out.println("After merge: " + Arrays.toString(Arrays.copyOfRange(a, leftStart, rightEnd + 1)));
     }
     
 
@@ -170,10 +212,11 @@ public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
     }
 
 
-    private T[] createSubarray(T[] a, int runStart, int runEnd) {
+    private T[] createSubarray(T[] a, int runStart, int runEnd) { 
         int length = runEnd - runStart;
         T[] subarray = (T[]) Array.newInstance(a.getClass().getComponentType(), length);
         System.arraycopy(a, runStart, subarray, 0, length);
         return subarray;
     }
+
 }
