@@ -7,7 +7,6 @@ import java.util.Stack;
 import org.checkerframework.checker.units.qual.s;
 
 
-
 public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
     
     public enum sortMode {
@@ -88,7 +87,9 @@ public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
         //call merge if needed.
         if (stackOfRuns.size() == 1) {
             int[] finalRun = stackOfRuns.pop();
-            merge(a, comps, finalRun[0], finalRun[1], a.length); //since array is already sorted 2nd run starts and ends with a.length. need -1, so it stays within index.
+            //adding new final run[1] definition, to ensure it cover the entire array.
+            finalRun[1] = Math.max(finalRun[1], a.length -1);
+            merge(a, comps, finalRun[0], finalRun[1], a.length -1); //since array is already sorted 2nd run starts and ends with a.length. need -1, so it stays within index.
         }
     }   
 
@@ -110,7 +111,8 @@ public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
         System.out.println("After merging: Resulting Run = [" + leftRun[0] + ", " + rightRun[1] + "]");
 
         // Returns the new range of the merged run
-        return new int[] { leftRun[0], rightRun[1] };
+        // return new int[] { leftRun[0], rightRun[1] };
+        return new int[] {leftRun[0], Math.max(leftRun[1], rightRun[1])};
     }
 
     // working with 2 contigous runs
@@ -164,20 +166,32 @@ public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
     }
     
     public int[] createRun(T[] a, int runStart, int c) { // why can't I acess the instanciation?
+            // int actualLength = 1;
+            // if (this.sortMode == sortMode.adaptive) {
+            //     // adaptive ie. explore how long is the run
+            //     actualLength = findLongestRun(a, runStart, a.length);
+            // }
+            // if (actualLength >= c ) {
+            //     return new int[]{runStart, runStart + actualLength};
+            // } else {
+            //     int runEnd = Math.min(runStart + c, a.length);
+            //     T[] subArray = createSubarray(a, runStart, runEnd);
+            //     insertionSort.sort(subArray);
+            //     System.arraycopy(subArray, 0, a, runStart, subArray.length);
+            //     return new int[] {runStart, runEnd};
+            // }
             int actualLength = 1;
             if (this.sortMode == sortMode.adaptive) {
-                // adaptive ie. explore how long is the run
                 actualLength = findLongestRun(a, runStart, a.length);
             }
-            if (actualLength >= c ) {
-                return new int[]{runStart, runStart + actualLength};
-            } else {
-                int runEnd = Math.min(runStart + c, a.length);
+
+            int runEnd = Math.min(runStart + Math.max(actualLength, c), a.length);
+            if (actualLength < c) {
                 T[] subArray = createSubarray(a, runStart, runEnd);
                 insertionSort.sort(subArray);
                 System.arraycopy(subArray, 0, a, runStart, subArray.length);
-                return new int[] {runStart, runEnd};
             }
+            return new int[] {runStart, runEnd};
     }
 
     public int findLongestRun(T[] a, int runStart, int runEnd) {
