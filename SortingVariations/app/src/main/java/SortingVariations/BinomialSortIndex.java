@@ -55,8 +55,6 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
             
             while(!stack.isEmpty()){
                 Integer[] topStack = stack.peek();
-                System.out.println(topStack[1] + " " + topStack[0]);
-                System.out.println(arr[1] + " " + arr[0]);
                 if(topStack[1]-topStack[0] + 1 < arr[1] - arr[0] + 1){
                     merge(a, aux, topStack[0], arr[0]-1, arr[1]);
                     stack.pop();
@@ -68,8 +66,6 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
 
             while(!stack.isEmpty()){
                 Integer[] topStack = stack.peek();
-                System.out.println(topStack[1] + " " + topStack[0]);
-                System.out.println(arr[1] + " " + arr[0]);
                 if(topStack[1]-topStack[0] +1 < (arr[1] - arr[0] + 1) * 2){
                     merge(a, aux, topStack[0], arr[0]-1, arr[1]);
                     arr[0] = topStack[0];
@@ -79,7 +75,6 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
             }
         }
 
-        // assert stack.size() == 0 || stack.peek().length >= comps.length*2;
         assert stack.isEmpty() ||stack.peek()[1]-stack.peek()[0]+1 >= (arr[1]-arr[0]+1)*2;
         stack.add(arr);
 
