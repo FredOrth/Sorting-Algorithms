@@ -68,7 +68,7 @@ def benchmark(algorithm: str, jar: str)-> \
 
 INSTANCES_C: List[Tuple[str,str]]= {
     # ("IterativeMergeSort Cutoff", "SortingVariations/app/build/libs/app.jar"),
-    ("insertionMergeSort Cutoff", "SortingVariations/app/build/libs/app.jar")
+    ("insertionMergeSortCutoff", "SortingVariations/app/build/libs/app.jar")
 }
 
 LIST_OF_CUTOFFVALUES: list[int] = {

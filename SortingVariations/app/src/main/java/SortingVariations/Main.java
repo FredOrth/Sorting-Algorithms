@@ -16,29 +16,17 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         // Integer[] arr = null;
         // int n = 0;
-        if(args.length == 1){
-            System.out.println("args length less than 1");
-        }
-        else if(args[1].equals("Cutoff")){
-            cutoff = Integer.parseInt(args[2]);
+        if(args.length < 1){
+            cutoff = Integer.parseInt(args[1]);
             Integer[] unsortedArray = new Integer[scanner.nextInt()];
             for(int i = 0; i<unsortedArray.length; i++){
                 unsortedArray[i] = scanner.nextInt();
             }
             Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff);
             sorter.sort(unsortedArray);
-        }
 
-        // This is just for debugging, run with ./gradlew run --args="recursiveMergeSort 3 debug"
-        // If run from python it will be as normal
-        else if (args.length > 2 && args[2].equalsIgnoreCase("debug")) {
-            // Debug mode activated if the third argument is "debug"
-            System.out.println("Debug Mode Enabled");
-        
-            // Simulated input for debugging
-            // n = 5; // Size of the array
-            // arr = new Integer[]{4, 1, 3, 9, 7}; // Predefined array
-        } else {
+        }else{
+
             Integer[] unsortedArray = new Integer[scanner.nextInt()];
             for(int i = 0; i<unsortedArray.length; i++){
                 unsortedArray[i] = scanner.nextInt();
@@ -46,19 +34,23 @@ public class Main {
             Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff);
             sorter.sort(unsortedArray);
                 }  
-            
-        
-        
-            
-        
-        
-        
-        // sorter.sort(arr);
-        
-        
 
-        // System.out.println("Sorted Array: " + Arrays.toString(arr));
-        // System.out.println("Comparisons: " + comparisons);
+        //Dunno if this is needed ???
+
+
+        // This is just for debugging, run with ./gradlew run --args="recursiveMergeSort 3 debug"
+        // If run from python it will be as normal
+        // else if (args.length > 2 && args[2].equalsIgnoreCase("debug")) {
+        //     // Debug mode activated if the third argument is "debug"
+        //     System.out.println("Debug Mode Enabled");
+        
+        //     // Simulated input for debugging
+        //     // n = 5; // Size of the array
+        //     // arr = new Integer[]{4, 1, 3, 9, 7}; // Predefined array
+        // } 
+
+
+            
         scanner.close();
     }
 
