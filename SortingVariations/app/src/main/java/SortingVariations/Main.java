@@ -6,22 +6,6 @@ public class Main {
 
     
     public static void main(String[] args) {
-
-        // // if (args.length < 2) {
-        // //     System.out.println("Usage: java Main <mergeSortType>");
-        // //     return;
-        // // }
-
-        // Integer[] arr1 = {80, 100, 5, 43, 95, 52, 87, 34, 81, 79, 58, 51, 96, 29, 41, 19, 88, 28, 20, 63};
-        // IterativeMergeSort<Integer> sorter1 = new IterativeMergeSort<>();
-        // sorter1.sort(arr1);
-        
-        // System.out.println(Arrays.toString(arr1));
-
-        for(int i = 0; i<args.length; i++){
-            System.out.println(args[i]);
-        }
-
         String sortType = args[0];
 
         // int cutoff = args.length > 1 ? Integer.parseInt(args[1]) : 10;
@@ -32,8 +16,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         // Integer[] arr = null;
         // int n = 0;
-
-        if(args[1].equals("Cutoff")){
+        if(args.length == 1){
+            System.out.println("args length less than 1");
+        }
+        else if(args[1].equals("Cutoff")){
             cutoff = Integer.parseInt(args[2]);
             Integer[] unsortedArray = new Integer[scanner.nextInt()];
             for(int i = 0; i<unsortedArray.length; i++){

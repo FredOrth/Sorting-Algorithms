@@ -6,7 +6,7 @@ import csv
 
 import subprocess
 #Timeout 
-TIMEOUT = 1
+TIMEOUT = 0.5
 SEED = 42
 #How many different values of M
 I_MAX = 30
@@ -18,7 +18,8 @@ NS: List[int] = [int(150* 1.37**i) \
     for i in range(I_MAX)]
 
 def run_java(jar: str, arg: str, input: str)->str:
-    p = subprocess.Popen(['java','-Xmx8g', '-jar',jar,arg], 
+    args = arg.split()
+    p = subprocess.Popen(['java','-Xmx8g', '-jar',jar] + args, 
         stdin=subprocess.PIPE, 
         stdout=subprocess.PIPE)
     (output,_) = p.communicate(input.encode('utf-8'), 
@@ -52,10 +53,9 @@ def benchmark(algorithm: str, jar: str)-> \
             result_n: List[Tuple[int,float, int]] = list()
             for i in range(M):
                 input: List[int] = INPUT_DATA[n][i]
-                print(algorithm)
                 diff, comp = measure(algorithm,jar,
                     input)
-                result_n.append((n,diff, comp))
+                result_n.append((float(n),float(diff), float(comp)))
             results += result_n
         except subprocess.TimeoutExpired:
             break
