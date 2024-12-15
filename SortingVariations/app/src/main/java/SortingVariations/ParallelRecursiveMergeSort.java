@@ -53,7 +53,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
         protected T[] compute() {
             if (high - low + 1 <= threshold) {
                 // Sequential sort for small subarrays
-                // we can play which sorting algorithm we use here
+                // we can play which sequential algorithm we use here
                 T[] sorted = java.util.Arrays.copyOfRange(array, low, high + 1);
                 RecursiveMergeSort<T> sequentialSorter = new RecursiveMergeSort<>();
                 sequentialSorter.sort(sorted);
@@ -76,7 +76,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
             return merge(leftResult, rightResult);
         }
 
-        // MErge method, without lo mid and high, could mayve use the same one as the recursiveMerrgeSort but this was easier
+        // MErge method, without lo mid and high, could mayve use the same one as the recursive MergeSort but this was easier
         private T[] merge(T[] left, T[] right) {
             T[] merged = java.util.Arrays.copyOf(left, left.length + right.length);
             int i = 0, j = 0, k = 0;
@@ -98,6 +98,49 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
     }
 
 
+
+    // NOT WORKING YET, BUGS
+    public int[] twoSequenceSelect(T[] a,T[] b, int k){
+        int[] aiBi = new int[2];
+
+
+        int low = Math.max(0,k-b.length);
+        int high = Math.min(k,a.length);
+
+        while (low < high) {
+            int ja = (low + high) / 2; // Midpoint for binary search
+            int jb = k - ja;           // Complement index for b
+
+            // Bounds checks and default behavior
+            T leftA = (ja > 0) ? a[ja - 1] : null; // Treat null as -∞
+            T rightA = (ja < a.length) ? a[ja] : null; // Treat null as +∞
+            T leftB = (jb > 0) ? b[jb - 1] : null; // Treat null as -∞
+            T rightB = (jb < b.length) ? b[jb] : null; // Treat null as +∞
+
+            // Condition checks
+            if ((leftA == null || rightB == null || leftA.compareTo(rightB) <= 0) &&
+                    (leftB == null || rightA == null || leftB.compareTo(rightA) < 0)) {
+                // Both conditions are satisfied
+                aiBi[0] = ja;
+                aiBi[1] = jb;
+                return aiBi;
+            }
+
+            // Adjust binary search bounds
+            if (leftA != null && rightB != null && leftA.compareTo(rightB) > 0) {
+                high = ja; // ja is too large
+            } else {
+                low = ja + 1; // ja is too small
+            }
+        }
+
+
+        aiBi[0] = low;
+        aiBi[1] = k - low;
+        return aiBi;
+    }
+
+
     // Benchmarking below:
 
     public static void runSize(ForkJoinPool pool, int pSize, int threshold, int n) {
@@ -114,7 +157,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
                     public void setup() {
                         java.util.Collections.shuffle(java.util.Arrays.asList(intArray));
 
-                        comparisonCounter = new AtomicInteger(0); // Initialize a fresh counter
+                        comparisonCounter = new AtomicInteger(0); // initialize fresh counter
                     }
 
                     public double applyAsDouble(int i) {
