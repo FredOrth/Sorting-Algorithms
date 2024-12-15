@@ -1,1501 +1,496 @@
 algorithm,n,time,comparisons,cutoff
-insertionMergeSort Cutoff,150,0.11823105812072754,"901
-",16
-insertionMergeSort Cutoff,150,0.10933256149291992,"903
-",16
-insertionMergeSort Cutoff,150,0.10884714126586914,"900
-",16
-insertionMergeSort Cutoff,150,0.10765719413757324,"905
-",16
-insertionMergeSort Cutoff,150,0.11021637916564941,"879
-",16
-insertionMergeSort Cutoff,205,0.1104736328125,"1329
-",16
-insertionMergeSort Cutoff,205,0.10886430740356445,"1327
-",16
-insertionMergeSort Cutoff,205,0.1089019775390625,"1318
-",16
-insertionMergeSort Cutoff,205,0.10729765892028809,"1338
-",16
-insertionMergeSort Cutoff,205,0.10972762107849121,"1318
-",16
-insertionMergeSort Cutoff,281,0.15801119804382324,"1926
-",16
-insertionMergeSort Cutoff,281,0.10536050796508789,"1917
-",16
-insertionMergeSort Cutoff,281,0.14268255233764648,"1947
-",16
-insertionMergeSort Cutoff,281,0.10755515098571777,"1948
-",16
-insertionMergeSort Cutoff,281,0.13945245742797852,"1940
-",16
-insertionMergeSort Cutoff,385,0.14017391204833984,"2838
-",16
-insertionMergeSort Cutoff,385,0.14272570610046387,"2823
-",16
-insertionMergeSort Cutoff,385,0.12263703346252441,"2830
-",16
-insertionMergeSort Cutoff,385,0.12404155731201172,"2833
-",16
-insertionMergeSort Cutoff,385,0.12498998641967773,"2827
-",16
-insertionMergeSort Cutoff,528,0.10709738731384277,"4100
-",16
-insertionMergeSort Cutoff,528,0.12412023544311523,"4117
-",16
-insertionMergeSort Cutoff,528,0.12737464904785156,"4113
-",16
-insertionMergeSort Cutoff,528,0.14049649238586426,"4112
-",16
-insertionMergeSort Cutoff,528,0.13994193077087402,"4118
-",16
-insertionMergeSort Cutoff,723,0.15345048904418945,"5991
-",16
-insertionMergeSort Cutoff,723,0.1632082462310791,"5974
-",16
-insertionMergeSort Cutoff,723,0.1483769416809082,"5922
-",16
-insertionMergeSort Cutoff,723,0.1645803451538086,"6005
-",16
-insertionMergeSort Cutoff,723,0.1504526138305664,"5984
-",16
-insertionMergeSort Cutoff,991,0.14352798461914062,"8595
-",16
-insertionMergeSort Cutoff,991,0.13428401947021484,"8590
-",16
-insertionMergeSort Cutoff,991,0.1415855884552002,"8603
-",16
-insertionMergeSort Cutoff,991,0.1407177448272705,"8596
-",16
-insertionMergeSort Cutoff,991,0.14032626152038574,"8603
-",16
-insertionMergeSort Cutoff,1358,0.14265990257263184,"12466
-",16
-insertionMergeSort Cutoff,1358,0.1452043056488037,"12461
-",16
-insertionMergeSort Cutoff,1358,0.15009498596191406,"12457
-",16
-insertionMergeSort Cutoff,1358,0.15923166275024414,"12480
-",16
-insertionMergeSort Cutoff,1358,0.1829240322113037,"12454
-",16
-insertionMergeSort Cutoff,1861,0.14670753479003906,"17879
-",16
-insertionMergeSort Cutoff,1861,0.16782546043395996,"17924
-",16
-insertionMergeSort Cutoff,1861,0.15688538551330566,"17905
-",16
-insertionMergeSort Cutoff,1861,0.1584463119506836,"17914
-",16
-insertionMergeSort Cutoff,1861,0.15538549423217773,"17912
-",16
-insertionMergeSort Cutoff,2550,0.17512011528015137,"25687
-",16
-insertionMergeSort Cutoff,2550,0.16807270050048828,"25733
-",16
-insertionMergeSort Cutoff,2550,0.15822386741638184,"25700
-",16
-insertionMergeSort Cutoff,2550,0.1509861946105957,"25724
-",16
-insertionMergeSort Cutoff,2550,0.16413545608520508,"25640
-",16
-insertionMergeSort Cutoff,3493,0.14875388145446777,"36767
-",16
-insertionMergeSort Cutoff,3493,0.1376936435699463,"36811
-",16
-insertionMergeSort Cutoff,3493,0.16046476364135742,"36801
-",16
-insertionMergeSort Cutoff,3493,0.165421724319458,"36695
-",16
-insertionMergeSort Cutoff,3493,0.15429449081420898,"36796
-",16
-insertionMergeSort Cutoff,4786,0.1506795883178711,"52606
-",16
-insertionMergeSort Cutoff,4786,0.14028096199035645,"52611
-",16
-insertionMergeSort Cutoff,4786,0.15453839302062988,"52553
-",16
-insertionMergeSort Cutoff,4786,0.15656423568725586,"52513
-",16
-insertionMergeSort Cutoff,4786,0.15431785583496094,"52525
-",16
-insertionMergeSort Cutoff,6557,0.17096281051635742,"75028
-",16
-insertionMergeSort Cutoff,6557,0.17185616493225098,"74922
-",16
-insertionMergeSort Cutoff,6557,0.16270232200622559,"75087
-",16
-insertionMergeSort Cutoff,6557,0.15517139434814453,"74878
-",16
-insertionMergeSort Cutoff,6557,0.15315604209899902,"74980
-",16
-insertionMergeSort Cutoff,8983,0.17845630645751953,"106718
-",16
-insertionMergeSort Cutoff,8983,0.194502592086792,"106731
-",16
-insertionMergeSort Cutoff,8983,0.18304228782653809,"106670
-",16
-insertionMergeSort Cutoff,8983,0.17399120330810547,"106722
-",16
-insertionMergeSort Cutoff,8983,0.18027925491333008,"106660
-",16
-insertionMergeSort Cutoff,12307,0.18415212631225586,"151868
-",16
-insertionMergeSort Cutoff,12307,0.18376827239990234,"151948
-",16
-insertionMergeSort Cutoff,12307,0.17914295196533203,"151928
-",16
-insertionMergeSort Cutoff,12307,0.20372748374938965,"151901
-",16
-insertionMergeSort Cutoff,12307,0.18132829666137695,"151869
-",16
-insertionMergeSort Cutoff,16861,0.1949019432067871,"215572
-",16
-insertionMergeSort Cutoff,16861,0.1732332706451416,"215445
-",16
-insertionMergeSort Cutoff,16861,0.19242286682128906,"215600
-",16
-insertionMergeSort Cutoff,16861,0.1962141990661621,"215436
-",16
-insertionMergeSort Cutoff,16861,0.19698286056518555,"215553
-",16
-insertionMergeSort Cutoff,23100,0.21291208267211914,"306209
-",16
-insertionMergeSort Cutoff,23100,0.1990675926208496,"306167
-",16
-insertionMergeSort Cutoff,23100,0.20835304260253906,"306049
-",16
-insertionMergeSort Cutoff,23100,0.20831513404846191,"306018
-",16
-insertionMergeSort Cutoff,23100,0.20673179626464844,"306264
-",16
-insertionMergeSort Cutoff,31647,0.21494317054748535,"433204
-",16
-insertionMergeSort Cutoff,31647,0.2153337001800537,"433304
-",16
-insertionMergeSort Cutoff,31647,0.20959019660949707,"433160
-",16
-insertionMergeSort Cutoff,31647,0.21801280975341797,"433169
-",16
-insertionMergeSort Cutoff,31647,0.22643256187438965,"433273
-",16
-insertionMergeSort Cutoff,43357,0.24048972129821777,"614015
-",16
-insertionMergeSort Cutoff,43357,0.24886417388916016,"613814
-",16
-insertionMergeSort Cutoff,43357,0.22061586380004883,"613821
-",16
-insertionMergeSort Cutoff,43357,0.2346961498260498,"614161
-",16
-insertionMergeSort Cutoff,43357,0.24654054641723633,"614143
-",16
-insertionMergeSort Cutoff,59399,0.305042028427124,"867416
-",16
-insertionMergeSort Cutoff,59399,0.25255537033081055,"867632
-",16
-insertionMergeSort Cutoff,59399,0.2529909610748291,"867479
-",16
-insertionMergeSort Cutoff,59399,0.2668929100036621,"867642
-",16
-insertionMergeSort Cutoff,59399,0.2755014896392822,"867568
-",16
-insertionMergeSort Cutoff,81377,0.2826526165008545,"1226197
-",16
-insertionMergeSort Cutoff,81377,0.2725977897644043,"1226241
-",16
-insertionMergeSort Cutoff,81377,0.2972390651702881,"1226202
-",16
-insertionMergeSort Cutoff,81377,0.284146785736084,"1226219
-",16
-insertionMergeSort Cutoff,81377,0.30632686614990234,"1226360
-",16
-insertionMergeSort Cutoff,111486,0.3709568977355957,"1729943
-",16
-insertionMergeSort Cutoff,111486,0.34725379943847656,"1730463
-",16
-insertionMergeSort Cutoff,111486,0.32797861099243164,"1730239
-",16
-insertionMergeSort Cutoff,111486,0.3610572814941406,"1729751
-",16
-insertionMergeSort Cutoff,111486,0.37386536598205566,"1730374
-",16
-insertionMergeSort Cutoff,152736,0.45734500885009766,"2440156
-",16
-insertionMergeSort Cutoff,152736,0.4525163173675537,"2440136
-",16
-insertionMergeSort Cutoff,152736,0.46810388565063477,"2440311
-",16
-insertionMergeSort Cutoff,152736,0.5020742416381836,"2440479
-",16
-insertionMergeSort Cutoff,152736,0.4739055633544922,"2440260
-",16
-insertionMergeSort Cutoff,209249,0.5198335647583008,"3437504
-",16
-insertionMergeSort Cutoff,209249,0.5276203155517578,"3437685
-",16
-insertionMergeSort Cutoff,209249,0.5291359424591064,"3437326
-",16
-insertionMergeSort Cutoff,209249,0.4618394374847412,"3438158
-",16
-insertionMergeSort Cutoff,209249,0.5468506813049316,"3437590
-",16
-insertionMergeSort Cutoff,286671,0.6354415416717529,"4839104
-",16
-insertionMergeSort Cutoff,286671,0.620314359664917,"4839588
-",16
-insertionMergeSort Cutoff,286671,0.5658285617828369,"4838539
-",16
-insertionMergeSort Cutoff,286671,0.5620822906494141,"4838462
-",16
-insertionMergeSort Cutoff,286671,0.57619309425354,"4838522
-",16
-insertionMergeSort Cutoff,392740,0.6948976516723633,"6808586
-",16
-insertionMergeSort Cutoff,392740,0.6753199100494385,"6808381
-",16
-insertionMergeSort Cutoff,392740,0.7091019153594971,"6808664
-",16
-insertionMergeSort Cutoff,392740,0.673255205154419,"6808430
-",16
-insertionMergeSort Cutoff,392740,0.6601307392120361,"6808232
-",16
-insertionMergeSort Cutoff,538054,0.8836889266967773,"9564737
-",16
-insertionMergeSort Cutoff,538054,0.8680634498596191,"9565416
-",16
-insertionMergeSort Cutoff,538054,0.8835785388946533,"9565435
-",16
-insertionMergeSort Cutoff,538054,0.9541356563568115,"9565243
-",16
-insertionMergeSort Cutoff,538054,0.8107812404632568,"9565186
-",16
-insertionMergeSort Cutoff,737134,1.024648904800415,"13452013
-",16
-insertionMergeSort Cutoff,737134,1.1983380317687988,"13452393
-",16
-insertionMergeSort Cutoff,737134,1.040132999420166,"13452320
-",16
-insertionMergeSort Cutoff,737134,1.031446933746338,"13452637
-",16
-insertionMergeSort Cutoff,737134,1.048084020614624,"13451515
-",16
-insertionMergeSort Cutoff,1009873,1.3682384490966797,"18872222
-",16
-insertionMergeSort Cutoff,1009873,1.475632905960083,"18871682
-",16
-insertionMergeSort Cutoff,1009873,1.3742175102233887,"18870747
-",16
-insertionMergeSort Cutoff,1009873,1.4726109504699707,"18871707
-",16
-insertionMergeSort Cutoff,1009873,1.39821457862854,"18871946
-",16
-insertionMergeSort Cutoff,1383527,2.053652763366699,"26507062
-",16
-insertionMergeSort Cutoff,1383527,1.9415488243103027,"26508566
-",16
-insertionMergeSort Cutoff,1383527,1.9956390857696533,"26507058
-",16
-insertionMergeSort Cutoff,1383527,1.7618186473846436,"26506564
-",16
-insertionMergeSort Cutoff,1383527,1.9633283615112305,"26506951
-",16
-insertionMergeSort Cutoff,150,0.09622454643249512,"901
-",1
-insertionMergeSort Cutoff,150,0.09109067916870117,"903
-",1
-insertionMergeSort Cutoff,150,0.09412622451782227,"900
-",1
-insertionMergeSort Cutoff,150,0.09410738945007324,"905
-",1
-insertionMergeSort Cutoff,150,0.09398245811462402,"879
-",1
-insertionMergeSort Cutoff,205,0.09226202964782715,"1329
-",1
-insertionMergeSort Cutoff,205,0.10975098609924316,"1327
-",1
-insertionMergeSort Cutoff,205,0.11008358001708984,"1318
-",1
-insertionMergeSort Cutoff,205,0.1102457046508789,"1338
-",1
-insertionMergeSort Cutoff,205,0.09262657165527344,"1318
-",1
-insertionMergeSort Cutoff,281,0.12544560432434082,"1926
-",1
-insertionMergeSort Cutoff,281,0.12492704391479492,"1917
-",1
-insertionMergeSort Cutoff,281,0.1255357265472412,"1947
-",1
-insertionMergeSort Cutoff,281,0.12515711784362793,"1948
-",1
-insertionMergeSort Cutoff,281,0.10828423500061035,"1940
-",1
-insertionMergeSort Cutoff,385,0.14136743545532227,"2838
-",1
-insertionMergeSort Cutoff,385,0.1425611972808838,"2823
-",1
-insertionMergeSort Cutoff,385,0.13863682746887207,"2830
-",1
-insertionMergeSort Cutoff,385,0.13918447494506836,"2833
-",1
-insertionMergeSort Cutoff,385,0.12458586692810059,"2827
-",1
-insertionMergeSort Cutoff,528,0.12482690811157227,"4100
-",1
-insertionMergeSort Cutoff,528,0.1399543285369873,"4117
-",1
-insertionMergeSort Cutoff,528,0.13784265518188477,"4113
-",1
-insertionMergeSort Cutoff,528,0.10844969749450684,"4112
-",1
-insertionMergeSort Cutoff,528,0.12425351142883301,"4118
-",1
-insertionMergeSort Cutoff,723,0.14329028129577637,"5991
-",1
-insertionMergeSort Cutoff,723,0.1404578685760498,"5974
-",1
-insertionMergeSort Cutoff,723,0.13613271713256836,"5922
-",1
-insertionMergeSort Cutoff,723,0.12273931503295898,"6005
-",1
-insertionMergeSort Cutoff,723,0.12479209899902344,"5984
-",1
-insertionMergeSort Cutoff,991,0.1426677703857422,"8595
-",1
-insertionMergeSort Cutoff,991,0.14021515846252441,"8590
-",1
-insertionMergeSort Cutoff,991,0.13878679275512695,"8603
-",1
-insertionMergeSort Cutoff,991,0.14049649238586426,"8596
-",1
-insertionMergeSort Cutoff,991,0.13863825798034668,"8603
-",1
-insertionMergeSort Cutoff,1358,0.14249277114868164,"12466
-",1
-insertionMergeSort Cutoff,1358,0.14035511016845703,"12461
-",1
-insertionMergeSort Cutoff,1358,0.13968133926391602,"12457
-",1
-insertionMergeSort Cutoff,1358,0.14343881607055664,"12480
-",1
-insertionMergeSort Cutoff,1358,0.13597607612609863,"12454
-",1
-insertionMergeSort Cutoff,1861,0.14169597625732422,"17879
-",1
-insertionMergeSort Cutoff,1861,0.13327956199645996,"17924
-",1
-insertionMergeSort Cutoff,1861,0.1408395767211914,"17905
-",1
-insertionMergeSort Cutoff,1861,0.13607525825500488,"17914
-",1
-insertionMergeSort Cutoff,1861,0.13809418678283691,"17912
-",1
-insertionMergeSort Cutoff,2550,0.1396183967590332,"25687
-",1
-insertionMergeSort Cutoff,2550,0.13818097114562988,"25733
-",1
-insertionMergeSort Cutoff,2550,0.14190006256103516,"25700
-",1
-insertionMergeSort Cutoff,2550,0.13792967796325684,"25724
-",1
-insertionMergeSort Cutoff,2550,0.13892292976379395,"25640
-",1
-insertionMergeSort Cutoff,3493,0.14212703704833984,"36767
-",1
-insertionMergeSort Cutoff,3493,0.1401519775390625,"36811
-",1
-insertionMergeSort Cutoff,3493,0.15706682205200195,"36801
-",1
-insertionMergeSort Cutoff,3493,0.1550447940826416,"36695
-",1
-insertionMergeSort Cutoff,3493,0.1617436408996582,"36796
-",1
-insertionMergeSort Cutoff,4786,0.1597151756286621,"52606
-",1
-insertionMergeSort Cutoff,4786,0.15658330917358398,"52611
-",1
-insertionMergeSort Cutoff,4786,0.15831494331359863,"52553
-",1
-insertionMergeSort Cutoff,4786,0.15120553970336914,"52513
-",1
-insertionMergeSort Cutoff,4786,0.16051173210144043,"52525
-",1
-insertionMergeSort Cutoff,6557,0.16473078727722168,"75028
-",1
-insertionMergeSort Cutoff,6557,0.17118144035339355,"74922
-",1
-insertionMergeSort Cutoff,6557,0.18166637420654297,"75087
-",1
-insertionMergeSort Cutoff,6557,0.1571042537689209,"74878
-",1
-insertionMergeSort Cutoff,6557,0.17356204986572266,"74980
-",1
-insertionMergeSort Cutoff,8983,0.17597603797912598,"106718
-",1
-insertionMergeSort Cutoff,8983,0.17598652839660645,"106731
-",1
-insertionMergeSort Cutoff,8983,0.18401479721069336,"106670
-",1
-insertionMergeSort Cutoff,8983,0.16410183906555176,"106722
-",1
-insertionMergeSort Cutoff,8983,0.18305516242980957,"106660
-",1
-insertionMergeSort Cutoff,12307,0.20199942588806152,"151868
-",1
-insertionMergeSort Cutoff,12307,0.19651222229003906,"151948
-",1
-insertionMergeSort Cutoff,12307,0.19423437118530273,"151928
-",1
-insertionMergeSort Cutoff,12307,0.1977384090423584,"151901
-",1
-insertionMergeSort Cutoff,12307,0.18184733390808105,"151869
-",1
-insertionMergeSort Cutoff,16861,0.18857979774475098,"215572
-",1
-insertionMergeSort Cutoff,16861,0.19556736946105957,"215445
-",1
-insertionMergeSort Cutoff,16861,0.21550345420837402,"215600
-",1
-insertionMergeSort Cutoff,16861,0.20800280570983887,"215436
-",1
-insertionMergeSort Cutoff,16861,0.19440007209777832,"215553
-",1
-insertionMergeSort Cutoff,23100,0.2358090877532959,"306209
-",1
-insertionMergeSort Cutoff,23100,0.2729456424713135,"306167
-",1
-insertionMergeSort Cutoff,23100,0.2521340847015381,"306049
-",1
-insertionMergeSort Cutoff,23100,0.26992321014404297,"306018
-",1
-insertionMergeSort Cutoff,23100,0.255861759185791,"306264
-",1
-insertionMergeSort Cutoff,31647,0.24036455154418945,"433204
-",1
-insertionMergeSort Cutoff,31647,0.25388288497924805,"433304
-",1
-insertionMergeSort Cutoff,31647,0.2488086223602295,"433160
-",1
-insertionMergeSort Cutoff,31647,0.2395007610321045,"433169
-",1
-insertionMergeSort Cutoff,31647,0.2698974609375,"433273
-",1
-insertionMergeSort Cutoff,43357,0.24341607093811035,"614015
-",1
-insertionMergeSort Cutoff,43357,0.252514123916626,"613814
-",1
-insertionMergeSort Cutoff,43357,0.24255967140197754,"613821
-",1
-insertionMergeSort Cutoff,43357,0.2509193420410156,"614161
-",1
-insertionMergeSort Cutoff,43357,0.25635814666748047,"614143
-",1
-insertionMergeSort Cutoff,59399,0.42023491859436035,"867416
-",1
-insertionMergeSort Cutoff,59399,0.33982348442077637,"867632
-",1
-insertionMergeSort Cutoff,59399,0.3266754150390625,"867479
-",1
-insertionMergeSort Cutoff,59399,0.2678101062774658,"867642
-",1
-insertionMergeSort Cutoff,59399,0.2897603511810303,"867568
-",1
-insertionMergeSort Cutoff,81377,0.29688572883605957,"1226197
-",1
-insertionMergeSort Cutoff,81377,0.30740785598754883,"1226241
-",1
-insertionMergeSort Cutoff,81377,0.30000925064086914,"1226202
-",1
-insertionMergeSort Cutoff,81377,0.29912328720092773,"1226219
-",1
-insertionMergeSort Cutoff,81377,0.296480655670166,"1226360
-",1
-insertionMergeSort Cutoff,111486,0.3766145706176758,"1729943
-",1
-insertionMergeSort Cutoff,111486,0.3446159362792969,"1730463
-",1
-insertionMergeSort Cutoff,111486,0.3534536361694336,"1730239
-",1
-insertionMergeSort Cutoff,111486,0.3528599739074707,"1729751
-",1
-insertionMergeSort Cutoff,111486,0.352583646774292,"1730374
-",1
-insertionMergeSort Cutoff,152736,0.47385287284851074,"2440156
-",1
-insertionMergeSort Cutoff,152736,0.46226024627685547,"2440136
-",1
-insertionMergeSort Cutoff,152736,0.4857323169708252,"2440311
-",1
-insertionMergeSort Cutoff,152736,0.4491701126098633,"2440479
-",1
-insertionMergeSort Cutoff,152736,0.45898008346557617,"2440260
-",1
-insertionMergeSort Cutoff,209249,0.524796724319458,"3437504
-",1
-insertionMergeSort Cutoff,209249,0.5063550472259521,"3437685
-",1
-insertionMergeSort Cutoff,209249,0.5693678855895996,"3437326
-",1
-insertionMergeSort Cutoff,209249,0.5163099765777588,"3438158
-",1
-insertionMergeSort Cutoff,209249,0.5672330856323242,"3437590
-",1
-insertionMergeSort Cutoff,286671,0.5888810157775879,"4839104
-",1
-insertionMergeSort Cutoff,286671,0.5794816017150879,"4839588
-",1
-insertionMergeSort Cutoff,286671,0.5608475208282471,"4838539
-",1
-insertionMergeSort Cutoff,286671,0.5555469989776611,"4838462
-",1
-insertionMergeSort Cutoff,286671,0.5787568092346191,"4838522
-",1
-insertionMergeSort Cutoff,392740,0.9613258838653564,"6808586
-",1
-insertionMergeSort Cutoff,392740,0.6861715316772461,"6808381
-",1
-insertionMergeSort Cutoff,392740,0.8245961666107178,"6808664
-",1
-insertionMergeSort Cutoff,392740,0.9573237895965576,"6808430
-",1
-insertionMergeSort Cutoff,392740,0.7724931240081787,"6808232
-",1
-insertionMergeSort Cutoff,538054,0.9982469081878662,"9564737
-",1
-insertionMergeSort Cutoff,538054,1.084066390991211,"9565416
-",1
-insertionMergeSort Cutoff,538054,0.8648853302001953,"9565435
-",1
-insertionMergeSort Cutoff,538054,1.0150432586669922,"9565243
-",1
-insertionMergeSort Cutoff,538054,1.1853528022766113,"9565186
-",1
-insertionMergeSort Cutoff,737134,1.0195202827453613,"13452013
-",1
-insertionMergeSort Cutoff,737134,1.0674386024475098,"13452393
-",1
-insertionMergeSort Cutoff,737134,1.0475454330444336,"13452320
-",1
-insertionMergeSort Cutoff,737134,1.0159525871276855,"13452637
-",1
-insertionMergeSort Cutoff,737134,1.0373296737670898,"13451515
-",1
-insertionMergeSort Cutoff,1009873,1.3585889339447021,"18872222
-",1
-insertionMergeSort Cutoff,1009873,1.5195536613464355,"18871682
-",1
-insertionMergeSort Cutoff,1009873,1.5411458015441895,"18870747
-",1
-insertionMergeSort Cutoff,1009873,1.250223159790039,"18871707
-",1
-insertionMergeSort Cutoff,1009873,1.257798671722412,"18871946
-",1
-insertionMergeSort Cutoff,1383527,1.8415796756744385,"26507062
-",1
-insertionMergeSort Cutoff,1383527,1.894484281539917,"26508566
-",1
-insertionMergeSort Cutoff,1383527,1.7283060550689697,"26507058
-",1
-insertionMergeSort Cutoff,1383527,1.7776124477386475,"26506564
-",1
-insertionMergeSort Cutoff,1383527,1.8741605281829834,"26506951
-",1
-insertionMergeSort Cutoff,150,0.10116314888000488,"901
-",2
-insertionMergeSort Cutoff,150,0.09464740753173828,"903
-",2
-insertionMergeSort Cutoff,150,0.10974717140197754,"900
-",2
-insertionMergeSort Cutoff,150,0.1092677116394043,"905
-",2
-insertionMergeSort Cutoff,150,0.09545469284057617,"879
-",2
-insertionMergeSort Cutoff,205,0.10976433753967285,"1329
-",2
-insertionMergeSort Cutoff,205,0.10826659202575684,"1327
-",2
-insertionMergeSort Cutoff,205,0.0915076732635498,"1318
-",2
-insertionMergeSort Cutoff,205,0.09320831298828125,"1338
-",2
-insertionMergeSort Cutoff,205,0.11076760292053223,"1318
-",2
-insertionMergeSort Cutoff,281,0.12275099754333496,"1926
-",2
-insertionMergeSort Cutoff,281,0.11053323745727539,"1917
-",2
-insertionMergeSort Cutoff,281,0.10424971580505371,"1947
-",2
-insertionMergeSort Cutoff,281,0.12645316123962402,"1948
-",2
-insertionMergeSort Cutoff,281,0.14038777351379395,"1940
-",2
-insertionMergeSort Cutoff,385,0.1380767822265625,"2838
-",2
-insertionMergeSort Cutoff,385,0.1225736141204834,"2823
-",2
-insertionMergeSort Cutoff,385,0.12541866302490234,"2830
-",2
-insertionMergeSort Cutoff,385,0.1217503547668457,"2833
-",2
-insertionMergeSort Cutoff,385,0.12290430068969727,"2827
-",2
-insertionMergeSort Cutoff,528,0.1255965232849121,"4100
-",2
-insertionMergeSort Cutoff,528,0.12559175491333008,"4117
-",2
-insertionMergeSort Cutoff,528,0.1244194507598877,"4113
-",2
-insertionMergeSort Cutoff,528,0.10820627212524414,"4112
-",2
-insertionMergeSort Cutoff,528,0.10928654670715332,"4118
-",2
-insertionMergeSort Cutoff,723,0.14390134811401367,"5991
-",2
-insertionMergeSort Cutoff,723,0.12226986885070801,"5974
-",2
-insertionMergeSort Cutoff,723,0.1423490047454834,"5922
-",2
-insertionMergeSort Cutoff,723,0.1407148838043213,"6005
-",2
-insertionMergeSort Cutoff,723,0.13666701316833496,"5984
-",2
-insertionMergeSort Cutoff,991,0.14077210426330566,"8595
-",2
-insertionMergeSort Cutoff,991,0.14017200469970703,"8590
-",2
-insertionMergeSort Cutoff,991,0.13968372344970703,"8603
-",2
-insertionMergeSort Cutoff,991,0.144378662109375,"8596
-",2
-insertionMergeSort Cutoff,991,0.13716650009155273,"8603
-",2
-insertionMergeSort Cutoff,1358,0.13861322402954102,"12466
-",2
-insertionMergeSort Cutoff,1358,0.14496541023254395,"12461
-",2
-insertionMergeSort Cutoff,1358,0.13494133949279785,"12457
-",2
-insertionMergeSort Cutoff,1358,0.14029884338378906,"12480
-",2
-insertionMergeSort Cutoff,1358,0.13666749000549316,"12454
-",2
-insertionMergeSort Cutoff,1861,0.1423511505126953,"17879
-",2
-insertionMergeSort Cutoff,1861,0.13744354248046875,"17924
-",2
-insertionMergeSort Cutoff,1861,0.13885021209716797,"17905
-",2
-insertionMergeSort Cutoff,1861,0.13813567161560059,"17914
-",2
-insertionMergeSort Cutoff,1861,0.14348721504211426,"17912
-",2
-insertionMergeSort Cutoff,2550,0.13653850555419922,"25687
-",2
-insertionMergeSort Cutoff,2550,0.14099502563476562,"25733
-",2
-insertionMergeSort Cutoff,2550,0.16161656379699707,"25700
-",2
-insertionMergeSort Cutoff,2550,0.14855527877807617,"25724
-",2
-insertionMergeSort Cutoff,2550,0.13556432723999023,"25640
-",2
-insertionMergeSort Cutoff,3493,0.14198756217956543,"36767
-",2
-insertionMergeSort Cutoff,3493,0.1581435203552246,"36811
-",2
-insertionMergeSort Cutoff,3493,0.13488125801086426,"36801
-",2
-insertionMergeSort Cutoff,3493,0.14044499397277832,"36695
-",2
-insertionMergeSort Cutoff,3493,0.13766145706176758,"36796
-",2
-insertionMergeSort Cutoff,4786,0.1547837257385254,"52606
-",2
-insertionMergeSort Cutoff,4786,0.16069698333740234,"52611
-",2
-insertionMergeSort Cutoff,4786,0.16952753067016602,"52553
-",2
-insertionMergeSort Cutoff,4786,0.16813373565673828,"52513
-",2
-insertionMergeSort Cutoff,4786,0.17040276527404785,"52525
-",2
-insertionMergeSort Cutoff,6557,0.1616513729095459,"75028
-",2
-insertionMergeSort Cutoff,6557,0.1604909896850586,"74922
-",2
-insertionMergeSort Cutoff,6557,0.17656850814819336,"75087
-",2
-insertionMergeSort Cutoff,6557,0.16587209701538086,"74878
-",2
-insertionMergeSort Cutoff,6557,0.16879725456237793,"74980
-",2
-insertionMergeSort Cutoff,8983,0.16576743125915527,"106718
-",2
-insertionMergeSort Cutoff,8983,0.1741189956665039,"106731
-",2
-insertionMergeSort Cutoff,8983,0.16770005226135254,"106670
-",2
-insertionMergeSort Cutoff,8983,0.17652463912963867,"106722
-",2
-insertionMergeSort Cutoff,8983,0.17846059799194336,"106660
-",2
-insertionMergeSort Cutoff,12307,0.1984708309173584,"151868
-",2
-insertionMergeSort Cutoff,12307,0.18859076499938965,"151948
-",2
-insertionMergeSort Cutoff,12307,0.17494440078735352,"151928
-",2
-insertionMergeSort Cutoff,12307,0.19954586029052734,"151901
-",2
-insertionMergeSort Cutoff,12307,0.20848751068115234,"151869
-",2
-insertionMergeSort Cutoff,16861,0.18157267570495605,"215572
-",2
-insertionMergeSort Cutoff,16861,0.19597697257995605,"215445
-",2
-insertionMergeSort Cutoff,16861,0.18758201599121094,"215600
-",2
-insertionMergeSort Cutoff,16861,0.19474577903747559,"215436
-",2
-insertionMergeSort Cutoff,16861,0.20966434478759766,"215553
-",2
-insertionMergeSort Cutoff,23100,0.24269437789916992,"306209
-",2
-insertionMergeSort Cutoff,23100,0.21831297874450684,"306167
-",2
-insertionMergeSort Cutoff,23100,0.22364544868469238,"306049
-",2
-insertionMergeSort Cutoff,23100,0.2016763687133789,"306018
-",2
-insertionMergeSort Cutoff,23100,0.1949005126953125,"306264
-",2
-insertionMergeSort Cutoff,31647,0.2247171401977539,"433204
-",2
-insertionMergeSort Cutoff,31647,0.2345595359802246,"433304
-",2
-insertionMergeSort Cutoff,31647,0.21840524673461914,"433160
-",2
-insertionMergeSort Cutoff,31647,0.2122507095336914,"433169
-",2
-insertionMergeSort Cutoff,31647,0.22528791427612305,"433273
-",2
-insertionMergeSort Cutoff,43357,0.2191002368927002,"614015
-",2
-insertionMergeSort Cutoff,43357,0.22238540649414062,"613814
-",2
-insertionMergeSort Cutoff,43357,0.25256800651550293,"613821
-",2
-insertionMergeSort Cutoff,43357,0.2460646629333496,"614161
-",2
-insertionMergeSort Cutoff,43357,0.23182082176208496,"614143
-",2
-insertionMergeSort Cutoff,59399,0.26105427742004395,"867416
-",2
-insertionMergeSort Cutoff,59399,0.25296545028686523,"867632
-",2
-insertionMergeSort Cutoff,59399,0.26331186294555664,"867479
-",2
-insertionMergeSort Cutoff,59399,0.2402036190032959,"867642
-",2
-insertionMergeSort Cutoff,59399,0.2711985111236572,"867568
-",2
-insertionMergeSort Cutoff,81377,0.28594493865966797,"1226197
-",2
-insertionMergeSort Cutoff,81377,0.2828364372253418,"1226241
-",2
-insertionMergeSort Cutoff,81377,0.29296398162841797,"1226202
-",2
-insertionMergeSort Cutoff,81377,0.2741250991821289,"1226219
-",2
-insertionMergeSort Cutoff,81377,0.2979006767272949,"1226360
-",2
-insertionMergeSort Cutoff,111486,0.3693404197692871,"1729943
-",2
-insertionMergeSort Cutoff,111486,0.3613772392272949,"1730463
-",2
-insertionMergeSort Cutoff,111486,0.355729341506958,"1730239
-",2
-insertionMergeSort Cutoff,111486,0.3463265895843506,"1729751
-",2
-insertionMergeSort Cutoff,111486,0.34333133697509766,"1730374
-",2
-insertionMergeSort Cutoff,152736,0.5174932479858398,"2440156
-",2
-insertionMergeSort Cutoff,152736,0.4769120216369629,"2440136
-",2
-insertionMergeSort Cutoff,152736,0.47850751876831055,"2440311
-",2
-insertionMergeSort Cutoff,152736,0.4334251880645752,"2440479
-",2
-insertionMergeSort Cutoff,152736,0.5165584087371826,"2440260
-",2
-insertionMergeSort Cutoff,209249,0.52984619140625,"3437504
-",2
-insertionMergeSort Cutoff,209249,0.5388929843902588,"3437685
-",2
-insertionMergeSort Cutoff,209249,0.528045654296875,"3437326
-",2
-insertionMergeSort Cutoff,209249,0.5055952072143555,"3438158
-",2
-insertionMergeSort Cutoff,209249,0.5398399829864502,"3437590
-",2
-insertionMergeSort Cutoff,286671,0.6204557418823242,"4839104
-",2
-insertionMergeSort Cutoff,286671,0.611814022064209,"4839588
-",2
-insertionMergeSort Cutoff,286671,0.5644874572753906,"4838539
-",2
-insertionMergeSort Cutoff,286671,0.5780749320983887,"4838462
-",2
-insertionMergeSort Cutoff,286671,0.607874870300293,"4838522
-",2
-insertionMergeSort Cutoff,392740,0.6825299263000488,"6808586
-",2
-insertionMergeSort Cutoff,392740,0.7066938877105713,"6808381
-",2
-insertionMergeSort Cutoff,392740,0.6775507926940918,"6808664
-",2
-insertionMergeSort Cutoff,392740,0.6962764263153076,"6808430
-",2
-insertionMergeSort Cutoff,392740,0.6529257297515869,"6808232
-",2
-insertionMergeSort Cutoff,538054,0.9762845039367676,"9564737
-",2
-insertionMergeSort Cutoff,538054,0.824948787689209,"9565416
-",2
-insertionMergeSort Cutoff,538054,0.8326005935668945,"9565435
-",2
-insertionMergeSort Cutoff,538054,0.8344168663024902,"9565243
-",2
-insertionMergeSort Cutoff,538054,0.8807120323181152,"9565186
-",2
-insertionMergeSort Cutoff,737134,1.0465009212493896,"13452013
-",2
-insertionMergeSort Cutoff,737134,1.2046966552734375,"13452393
-",2
-insertionMergeSort Cutoff,737134,0.9907374382019043,"13452320
-",2
-insertionMergeSort Cutoff,737134,1.1564581394195557,"13452637
-",2
-insertionMergeSort Cutoff,737134,1.3039298057556152,"13451515
-",2
-insertionMergeSort Cutoff,1009873,1.6181247234344482,"18872222
-",2
-insertionMergeSort Cutoff,1009873,1.7527360916137695,"18871682
-",2
-insertionMergeSort Cutoff,1009873,1.8744709491729736,"18870747
-",2
-insertionMergeSort Cutoff,1009873,1.5500156879425049,"18871707
-",2
-insertionMergeSort Cutoff,1009873,1.5153071880340576,"18871946
-",2
-insertionMergeSort Cutoff,1383527,1.9067010879516602,"26507062
-",2
-insertionMergeSort Cutoff,1383527,1.8443503379821777,"26508566
-",2
-insertionMergeSort Cutoff,1383527,1.8321714401245117,"26507058
-",2
-insertionMergeSort Cutoff,1383527,1.7706739902496338,"26506564
-",2
-insertionMergeSort Cutoff,1383527,1.704087257385254,"26506951
-",2
-insertionMergeSort Cutoff,150,0.11023974418640137,"901
-",4
-insertionMergeSort Cutoff,150,0.10929584503173828,"903
-",4
-insertionMergeSort Cutoff,150,0.09319090843200684,"900
-",4
-insertionMergeSort Cutoff,150,0.092559814453125,"905
-",4
-insertionMergeSort Cutoff,150,0.09438872337341309,"879
-",4
-insertionMergeSort Cutoff,205,0.10701179504394531,"1329
-",4
-insertionMergeSort Cutoff,205,0.12385368347167969,"1327
-",4
-insertionMergeSort Cutoff,205,0.10983705520629883,"1318
-",4
-insertionMergeSort Cutoff,205,0.10722517967224121,"1338
-",4
-insertionMergeSort Cutoff,205,0.10799169540405273,"1318
-",4
-insertionMergeSort Cutoff,281,0.12659311294555664,"1926
-",4
-insertionMergeSort Cutoff,281,0.10728955268859863,"1917
-",4
-insertionMergeSort Cutoff,281,0.09517383575439453,"1947
-",4
-insertionMergeSort Cutoff,281,0.09170699119567871,"1948
-",4
-insertionMergeSort Cutoff,281,0.1089012622833252,"1940
-",4
-insertionMergeSort Cutoff,385,0.12319493293762207,"2838
-",4
-insertionMergeSort Cutoff,385,0.12504172325134277,"2823
-",4
-insertionMergeSort Cutoff,385,0.1256241798400879,"2830
-",4
-insertionMergeSort Cutoff,385,0.1265702247619629,"2833
-",4
-insertionMergeSort Cutoff,385,0.12477397918701172,"2827
-",4
-insertionMergeSort Cutoff,528,0.1257610321044922,"4100
-",4
-insertionMergeSort Cutoff,528,0.10753917694091797,"4117
-",4
-insertionMergeSort Cutoff,528,0.10855650901794434,"4113
-",4
-insertionMergeSort Cutoff,528,0.12592267990112305,"4112
-",4
-insertionMergeSort Cutoff,528,0.12401485443115234,"4118
-",4
-insertionMergeSort Cutoff,723,0.12479496002197266,"5991
-",4
-insertionMergeSort Cutoff,723,0.13971805572509766,"5974
-",4
-insertionMergeSort Cutoff,723,0.13958263397216797,"5922
-",4
-insertionMergeSort Cutoff,723,0.13982582092285156,"6005
-",4
-insertionMergeSort Cutoff,723,0.13975882530212402,"5984
-",4
-insertionMergeSort Cutoff,991,0.14139080047607422,"8595
-",4
-insertionMergeSort Cutoff,991,0.13787841796875,"8590
-",4
-insertionMergeSort Cutoff,991,0.13962507247924805,"8603
-",4
-insertionMergeSort Cutoff,991,0.1402132511138916,"8596
-",4
-insertionMergeSort Cutoff,991,0.1411442756652832,"8603
-",4
-insertionMergeSort Cutoff,1358,0.1374037265777588,"12466
-",4
-insertionMergeSort Cutoff,1358,0.14068055152893066,"12461
-",4
-insertionMergeSort Cutoff,1358,0.13962197303771973,"12457
-",4
-insertionMergeSort Cutoff,1358,0.13762235641479492,"12480
-",4
-insertionMergeSort Cutoff,1358,0.13852405548095703,"12454
-",4
-insertionMergeSort Cutoff,1861,0.1377706527709961,"17879
-",4
-insertionMergeSort Cutoff,1861,0.13785147666931152,"17924
-",4
-insertionMergeSort Cutoff,1861,0.14430618286132812,"17905
-",4
-insertionMergeSort Cutoff,1861,0.13621234893798828,"17914
-",4
-insertionMergeSort Cutoff,1861,0.1600351333618164,"17912
-",4
-insertionMergeSort Cutoff,2550,0.149017333984375,"25687
-",4
-insertionMergeSort Cutoff,2550,0.14380526542663574,"25733
-",4
-insertionMergeSort Cutoff,2550,0.15432429313659668,"25700
-",4
-insertionMergeSort Cutoff,2550,0.11730337142944336,"25724
-",4
-insertionMergeSort Cutoff,2550,0.14187908172607422,"25640
-",4
-insertionMergeSort Cutoff,3493,0.16251873970031738,"36767
-",4
-insertionMergeSort Cutoff,3493,0.16848087310791016,"36811
-",4
-insertionMergeSort Cutoff,3493,0.16077160835266113,"36801
-",4
-insertionMergeSort Cutoff,3493,0.15230822563171387,"36695
-",4
-insertionMergeSort Cutoff,3493,0.14124441146850586,"36796
-",4
-insertionMergeSort Cutoff,4786,0.15174245834350586,"52606
-",4
-insertionMergeSort Cutoff,4786,0.15677833557128906,"52611
-",4
-insertionMergeSort Cutoff,4786,0.15392160415649414,"52553
-",4
-insertionMergeSort Cutoff,4786,0.1607663631439209,"52513
-",4
-insertionMergeSort Cutoff,4786,0.15269756317138672,"52525
-",4
-insertionMergeSort Cutoff,6557,0.15153026580810547,"75028
-",4
-insertionMergeSort Cutoff,6557,0.15108847618103027,"74922
-",4
-insertionMergeSort Cutoff,6557,0.1571354866027832,"75087
-",4
-insertionMergeSort Cutoff,6557,0.17314910888671875,"74878
-",4
-insertionMergeSort Cutoff,6557,0.17231154441833496,"74980
-",4
-insertionMergeSort Cutoff,8983,0.1664257049560547,"106718
-",4
-insertionMergeSort Cutoff,8983,0.1731419563293457,"106731
-",4
-insertionMergeSort Cutoff,8983,0.17367196083068848,"106670
-",4
-insertionMergeSort Cutoff,8983,0.17611241340637207,"106722
-",4
-insertionMergeSort Cutoff,8983,0.1894524097442627,"106660
-",4
-insertionMergeSort Cutoff,12307,0.17960357666015625,"151868
-",4
-insertionMergeSort Cutoff,12307,0.1739339828491211,"151948
-",4
-insertionMergeSort Cutoff,12307,0.17978811264038086,"151928
-",4
-insertionMergeSort Cutoff,12307,0.20481610298156738,"151901
-",4
-insertionMergeSort Cutoff,12307,0.1738722324371338,"151869
-",4
-insertionMergeSort Cutoff,16861,0.18342018127441406,"215572
-",4
-insertionMergeSort Cutoff,16861,0.19642043113708496,"215445
-",4
-insertionMergeSort Cutoff,16861,0.18871569633483887,"215600
-",4
-insertionMergeSort Cutoff,16861,0.1994493007659912,"215436
-",4
-insertionMergeSort Cutoff,16861,0.2204732894897461,"215553
-",4
-insertionMergeSort Cutoff,23100,0.19334816932678223,"306209
-",4
-insertionMergeSort Cutoff,23100,0.20920133590698242,"306167
-",4
-insertionMergeSort Cutoff,23100,0.21331167221069336,"306049
-",4
-insertionMergeSort Cutoff,23100,0.1994321346282959,"306018
-",4
-insertionMergeSort Cutoff,23100,0.2021942138671875,"306264
-",4
-insertionMergeSort Cutoff,31647,0.2113792896270752,"433204
-",4
-insertionMergeSort Cutoff,31647,0.21524500846862793,"433304
-",4
-insertionMergeSort Cutoff,31647,0.22861886024475098,"433160
-",4
-insertionMergeSort Cutoff,31647,0.21303629875183105,"433169
-",4
-insertionMergeSort Cutoff,31647,0.23660492897033691,"433273
-",4
-insertionMergeSort Cutoff,43357,0.23572945594787598,"614015
-",4
-insertionMergeSort Cutoff,43357,0.2469494342803955,"613814
-",4
-insertionMergeSort Cutoff,43357,0.22393059730529785,"613821
-",4
-insertionMergeSort Cutoff,43357,0.2602512836456299,"614161
-",4
-insertionMergeSort Cutoff,43357,0.2443079948425293,"614143
-",4
-insertionMergeSort Cutoff,59399,0.2828526496887207,"867416
-",4
-insertionMergeSort Cutoff,59399,0.2661569118499756,"867632
-",4
-insertionMergeSort Cutoff,59399,0.2566382884979248,"867479
-",4
-insertionMergeSort Cutoff,59399,0.2550363540649414,"867642
-",4
-insertionMergeSort Cutoff,59399,0.2567269802093506,"867568
-",4
-insertionMergeSort Cutoff,81377,0.2899627685546875,"1226197
-",4
-insertionMergeSort Cutoff,81377,0.301588773727417,"1226241
-",4
-insertionMergeSort Cutoff,81377,0.289470911026001,"1226202
-",4
-insertionMergeSort Cutoff,81377,0.296527624130249,"1226219
-",4
-insertionMergeSort Cutoff,81377,0.3053255081176758,"1226360
-",4
-insertionMergeSort Cutoff,111486,0.3742640018463135,"1729943
-",4
-insertionMergeSort Cutoff,111486,0.3713386058807373,"1730463
-",4
-insertionMergeSort Cutoff,111486,0.36069202423095703,"1730239
-",4
-insertionMergeSort Cutoff,111486,0.3507578372955322,"1729751
-",4
-insertionMergeSort Cutoff,111486,0.354752779006958,"1730374
-",4
-insertionMergeSort Cutoff,152736,0.4413745403289795,"2440156
-",4
-insertionMergeSort Cutoff,152736,0.4735374450683594,"2440136
-",4
-insertionMergeSort Cutoff,152736,0.4588184356689453,"2440311
-",4
-insertionMergeSort Cutoff,152736,0.44674158096313477,"2440479
-",4
-insertionMergeSort Cutoff,152736,0.4683854579925537,"2440260
-",4
-insertionMergeSort Cutoff,209249,0.496138334274292,"3437504
-",4
-insertionMergeSort Cutoff,209249,0.524249792098999,"3437685
-",4
-insertionMergeSort Cutoff,209249,0.5684947967529297,"3437326
-",4
-insertionMergeSort Cutoff,209249,0.5155267715454102,"3438158
-",4
-insertionMergeSort Cutoff,209249,0.5130419731140137,"3437590
-",4
-insertionMergeSort Cutoff,286671,0.6086175441741943,"4839104
-",4
-insertionMergeSort Cutoff,286671,0.5397324562072754,"4839588
-",4
-insertionMergeSort Cutoff,286671,0.6085968017578125,"4838539
-",4
-insertionMergeSort Cutoff,286671,0.5700023174285889,"4838462
-",4
-insertionMergeSort Cutoff,286671,0.5545523166656494,"4838522
-",4
-insertionMergeSort Cutoff,392740,0.8720674514770508,"6808586
-",4
-insertionMergeSort Cutoff,392740,0.6085121631622314,"6808381
-",4
-insertionMergeSort Cutoff,392740,0.6752941608428955,"6808664
-",4
-insertionMergeSort Cutoff,392740,0.6596944332122803,"6808430
-",4
-insertionMergeSort Cutoff,392740,0.6566822528839111,"6808232
-",4
-insertionMergeSort Cutoff,538054,0.8367626667022705,"9564737
-",4
-insertionMergeSort Cutoff,538054,1.193845272064209,"9565416
-",4
-insertionMergeSort Cutoff,538054,0.8254497051239014,"9565435
-",4
-insertionMergeSort Cutoff,538054,0.9125442504882812,"9565243
-",4
-insertionMergeSort Cutoff,538054,0.847121000289917,"9565186
-",4
-insertionMergeSort Cutoff,737134,1.0430142879486084,"13452013
-",4
-insertionMergeSort Cutoff,737134,1.1693334579467773,"13452393
-",4
-insertionMergeSort Cutoff,737134,1.0183534622192383,"13452320
-",4
-insertionMergeSort Cutoff,737134,1.1385188102722168,"13452637
-",4
-insertionMergeSort Cutoff,737134,1.0513246059417725,"13451515
-",4
-insertionMergeSort Cutoff,1009873,1.3305034637451172,"18872222
-",4
-insertionMergeSort Cutoff,1009873,1.468397617340088,"18871682
-",4
-insertionMergeSort Cutoff,1009873,1.4152908325195312,"18870747
-",4
-insertionMergeSort Cutoff,1009873,1.5182216167449951,"18871707
-",4
-insertionMergeSort Cutoff,1009873,1.2774646282196045,"18871946
-",4
-insertionMergeSort Cutoff,1383527,2.093982219696045,"26507062
-",4
-insertionMergeSort Cutoff,1383527,1.6705167293548584,"26508566
-",4
-insertionMergeSort Cutoff,1383527,1.745849609375,"26507058
-",4
-insertionMergeSort Cutoff,1383527,1.723442792892456,"26506564
-",4
-insertionMergeSort Cutoff,1383527,1.6455247402191162,"26506951
-",4
-insertionMergeSort Cutoff,150,0.10163021087646484,"901
-",8
-insertionMergeSort Cutoff,150,0.10704159736633301,"903
-",8
-insertionMergeSort Cutoff,150,0.10553121566772461,"900
-",8
-insertionMergeSort Cutoff,150,0.10890913009643555,"905
-",8
-insertionMergeSort Cutoff,150,0.09259581565856934,"879
-",8
-insertionMergeSort Cutoff,205,0.09273242950439453,"1329
-",8
-insertionMergeSort Cutoff,205,0.09434747695922852,"1327
-",8
-insertionMergeSort Cutoff,205,0.10827994346618652,"1318
-",8
-insertionMergeSort Cutoff,205,0.10883355140686035,"1338
-",8
-insertionMergeSort Cutoff,205,0.09336423873901367,"1318
-",8
-insertionMergeSort Cutoff,281,0.10563135147094727,"1926
-",8
-insertionMergeSort Cutoff,281,0.09291601181030273,"1917
-",8
-insertionMergeSort Cutoff,281,0.12772393226623535,"1947
-",8
-insertionMergeSort Cutoff,281,0.1354520320892334,"1948
-",8
-insertionMergeSort Cutoff,281,0.1260831356048584,"1940
-",8
-insertionMergeSort Cutoff,385,0.12531709671020508,"2838
-",8
-insertionMergeSort Cutoff,385,0.12307333946228027,"2823
-",8
-insertionMergeSort Cutoff,385,0.12534880638122559,"2830
-",8
-insertionMergeSort Cutoff,385,0.14121246337890625,"2833
-",8
-insertionMergeSort Cutoff,385,0.1250932216644287,"2827
-",8
-insertionMergeSort Cutoff,528,0.1080927848815918,"4100
-",8
-insertionMergeSort Cutoff,528,0.10802578926086426,"4117
-",8
-insertionMergeSort Cutoff,528,0.11030268669128418,"4113
-",8
-insertionMergeSort Cutoff,528,0.12358379364013672,"4112
-",8
-insertionMergeSort Cutoff,528,0.1246798038482666,"4118
-",8
-insertionMergeSort Cutoff,723,0.14333319664001465,"5991
-",8
-insertionMergeSort Cutoff,723,0.13709044456481934,"5974
-",8
-insertionMergeSort Cutoff,723,0.14163875579833984,"5922
-",8
-insertionMergeSort Cutoff,723,0.13928771018981934,"6005
-",8
-insertionMergeSort Cutoff,723,0.14495182037353516,"5984
-",8
-insertionMergeSort Cutoff,991,0.13639116287231445,"8595
-",8
-insertionMergeSort Cutoff,991,0.14611482620239258,"8590
-",8
-insertionMergeSort Cutoff,991,0.13466787338256836,"8603
-",8
-insertionMergeSort Cutoff,991,0.13968682289123535,"8596
-",8
-insertionMergeSort Cutoff,991,0.10655999183654785,"8603
-",8
-insertionMergeSort Cutoff,1358,0.139418363571167,"12466
-",8
-insertionMergeSort Cutoff,1358,0.13979291915893555,"12461
-",8
-insertionMergeSort Cutoff,1358,0.1401534080505371,"12457
-",8
-insertionMergeSort Cutoff,1358,0.14183950424194336,"12480
-",8
-insertionMergeSort Cutoff,1358,0.13683605194091797,"12454
-",8
-insertionMergeSort Cutoff,1861,0.14469027519226074,"17879
-",8
-insertionMergeSort Cutoff,1861,0.1334390640258789,"17924
-",8
-insertionMergeSort Cutoff,1861,0.1398301124572754,"17905
-",8
-insertionMergeSort Cutoff,1861,0.14046096801757812,"17914
-",8
-insertionMergeSort Cutoff,1861,0.13847732543945312,"17912
-",8
-insertionMergeSort Cutoff,2550,0.1392664909362793,"25687
-",8
-insertionMergeSort Cutoff,2550,0.1443023681640625,"25733
-",8
-insertionMergeSort Cutoff,2550,0.15122175216674805,"25700
-",8
-insertionMergeSort Cutoff,2550,0.16006922721862793,"25724
-",8
-insertionMergeSort Cutoff,2550,0.14596867561340332,"25640
-",8
-insertionMergeSort Cutoff,3493,0.1592087745666504,"36767
-",8
-insertionMergeSort Cutoff,3493,0.1497349739074707,"36811
-",8
-insertionMergeSort Cutoff,3493,0.14136075973510742,"36801
-",8
-insertionMergeSort Cutoff,3493,0.15569257736206055,"36695
-",8
-insertionMergeSort Cutoff,3493,0.13879013061523438,"36796
-",8
-insertionMergeSort Cutoff,4786,0.15807437896728516,"52606
-",8
-insertionMergeSort Cutoff,4786,0.15511870384216309,"52611
-",8
-insertionMergeSort Cutoff,4786,0.1706225872039795,"52553
-",8
-insertionMergeSort Cutoff,4786,0.14943504333496094,"52513
-",8
-insertionMergeSort Cutoff,4786,0.1524829864501953,"52525
-",8
-insertionMergeSort Cutoff,6557,0.15257620811462402,"75028
-",8
-insertionMergeSort Cutoff,6557,0.1596851348876953,"74922
-",8
-insertionMergeSort Cutoff,6557,0.17314720153808594,"75087
-",8
-insertionMergeSort Cutoff,6557,0.16845250129699707,"74878
-",8
-insertionMergeSort Cutoff,6557,0.1571807861328125,"74980
-",8
-insertionMergeSort Cutoff,8983,0.17369294166564941,"106718
-",8
-insertionMergeSort Cutoff,8983,0.1538844108581543,"106731
-",8
-insertionMergeSort Cutoff,8983,0.17772841453552246,"106670
-",8
-insertionMergeSort Cutoff,8983,0.16623330116271973,"106722
-",8
-insertionMergeSort Cutoff,8983,0.1694786548614502,"106660
-",8
-insertionMergeSort Cutoff,12307,0.17985153198242188,"151868
-",8
-insertionMergeSort Cutoff,12307,0.16969966888427734,"151948
-",8
-insertionMergeSort Cutoff,12307,0.18552327156066895,"151928
-",8
-insertionMergeSort Cutoff,12307,0.19263863563537598,"151901
-",8
-insertionMergeSort Cutoff,12307,0.17095470428466797,"151869
-",8
-insertionMergeSort Cutoff,16861,0.2097330093383789,"215572
-",8
-insertionMergeSort Cutoff,16861,0.21251153945922852,"215445
-",8
-insertionMergeSort Cutoff,16861,0.21264076232910156,"215600
-",8
-insertionMergeSort Cutoff,16861,0.19282746315002441,"215436
-",8
-insertionMergeSort Cutoff,16861,0.21455717086791992,"215553
-",8
-insertionMergeSort Cutoff,23100,0.21906471252441406,"306209
-",8
-insertionMergeSort Cutoff,23100,0.21349120140075684,"306167
-",8
-insertionMergeSort Cutoff,23100,0.20153427124023438,"306049
-",8
-insertionMergeSort Cutoff,23100,0.20581889152526855,"306018
-",8
-insertionMergeSort Cutoff,23100,0.21227455139160156,"306264
-",8
-insertionMergeSort Cutoff,31647,0.20925354957580566,"433204
-",8
-insertionMergeSort Cutoff,31647,0.22247719764709473,"433304
-",8
-insertionMergeSort Cutoff,31647,0.2092301845550537,"433160
-",8
-insertionMergeSort Cutoff,31647,0.21961450576782227,"433169
-",8
-insertionMergeSort Cutoff,31647,0.22880220413208008,"433273
-",8
-insertionMergeSort Cutoff,43357,0.22972655296325684,"614015
-",8
-insertionMergeSort Cutoff,43357,0.23465275764465332,"613814
-",8
-insertionMergeSort Cutoff,43357,0.2460637092590332,"613821
-",8
-insertionMergeSort Cutoff,43357,0.23531818389892578,"614161
-",8
-insertionMergeSort Cutoff,43357,0.2478179931640625,"614143
-",8
-insertionMergeSort Cutoff,59399,0.2700777053833008,"867416
-",8
-insertionMergeSort Cutoff,59399,0.25811767578125,"867632
-",8
-insertionMergeSort Cutoff,59399,0.25240159034729004,"867479
-",8
-insertionMergeSort Cutoff,59399,0.26300787925720215,"867642
-",8
-insertionMergeSort Cutoff,59399,0.2600586414337158,"867568
-",8
-insertionMergeSort Cutoff,81377,0.2703402042388916,"1226197
-",8
-insertionMergeSort Cutoff,81377,0.3060598373413086,"1226241
-",8
-insertionMergeSort Cutoff,81377,0.2750403881072998,"1226202
-",8
-insertionMergeSort Cutoff,81377,0.29001331329345703,"1226219
-",8
-insertionMergeSort Cutoff,81377,0.3123021125793457,"1226360
-",8
-insertionMergeSort Cutoff,111486,0.3642385005950928,"1729943
-",8
-insertionMergeSort Cutoff,111486,0.36621809005737305,"1730463
-",8
-insertionMergeSort Cutoff,111486,0.33478856086730957,"1730239
-",8
-insertionMergeSort Cutoff,111486,0.3284127712249756,"1729751
-",8
-insertionMergeSort Cutoff,111486,0.35426878929138184,"1730374
-",8
-insertionMergeSort Cutoff,152736,0.4508364200592041,"2440156
-",8
-insertionMergeSort Cutoff,152736,0.4803481101989746,"2440136
-",8
-insertionMergeSort Cutoff,152736,0.4474515914916992,"2440311
-",8
-insertionMergeSort Cutoff,152736,0.4478750228881836,"2440479
-",8
-insertionMergeSort Cutoff,152736,0.47179126739501953,"2440260
-",8
-insertionMergeSort Cutoff,209249,0.5437562465667725,"3437504
-",8
-insertionMergeSort Cutoff,209249,0.5015902519226074,"3437685
-",8
-insertionMergeSort Cutoff,209249,0.5468277931213379,"3437326
-",8
-insertionMergeSort Cutoff,209249,0.5142498016357422,"3438158
-",8
-insertionMergeSort Cutoff,209249,0.510178804397583,"3437590
-",8
-insertionMergeSort Cutoff,286671,0.5753977298736572,"4839104
-",8
-insertionMergeSort Cutoff,286671,0.5867116451263428,"4839588
-",8
-insertionMergeSort Cutoff,286671,0.594266414642334,"4838539
-",8
-insertionMergeSort Cutoff,286671,0.5691063404083252,"4838462
-",8
-insertionMergeSort Cutoff,286671,0.605064868927002,"4838522
-",8
-insertionMergeSort Cutoff,392740,0.6383616924285889,"6808586
-",8
-insertionMergeSort Cutoff,392740,0.7063963413238525,"6808381
-",8
-insertionMergeSort Cutoff,392740,0.6557953357696533,"6808664
-",8
-insertionMergeSort Cutoff,392740,0.7472527027130127,"6808430
-",8
-insertionMergeSort Cutoff,392740,0.7390072345733643,"6808232
-",8
-insertionMergeSort Cutoff,538054,0.8142704963684082,"9564737
-",8
-insertionMergeSort Cutoff,538054,0.8260002136230469,"9565416
-",8
-insertionMergeSort Cutoff,538054,0.823113203048706,"9565435
-",8
-insertionMergeSort Cutoff,538054,0.9270029067993164,"9565243
-",8
-insertionMergeSort Cutoff,538054,0.8643398284912109,"9565186
-",8
-insertionMergeSort Cutoff,737134,1.0175909996032715,"13452013
-",8
-insertionMergeSort Cutoff,737134,1.0301332473754883,"13452393
-",8
-insertionMergeSort Cutoff,737134,0.9823689460754395,"13452320
-",8
-insertionMergeSort Cutoff,737134,1.0293376445770264,"13452637
-",8
-insertionMergeSort Cutoff,737134,1.037109613418579,"13451515
-",8
-insertionMergeSort Cutoff,1009873,1.420408010482788,"18872222
-",8
-insertionMergeSort Cutoff,1009873,1.5121920108795166,"18871682
-",8
-insertionMergeSort Cutoff,1009873,1.4288835525512695,"18870747
-",8
-insertionMergeSort Cutoff,1009873,1.5472183227539062,"18871707
-",8
-insertionMergeSort Cutoff,1009873,1.3086485862731934,"18871946
-",8
-insertionMergeSort Cutoff,1383527,1.871434211730957,"26507062
-",8
-insertionMergeSort Cutoff,1383527,1.8354909420013428,"26508566
-",8
-insertionMergeSort Cutoff,1383527,1.7095909118652344,"26507058
-",8
-insertionMergeSort Cutoff,1383527,1.815955400466919,"26506564
-",8
-insertionMergeSort Cutoff,1383527,1.8832616806030273,"26506951
-",8
+insertionMergeSort Cutoff,150.0,0.18287944793701172,993.0,16
+insertionMergeSort Cutoff,150.0,0.13784289360046387,1033.0,16
+insertionMergeSort Cutoff,150.0,0.14380955696105957,960.0,16
+insertionMergeSort Cutoff,150.0,0.13633179664611816,1019.0,16
+insertionMergeSort Cutoff,150.0,0.17331814765930176,985.0,16
+insertionMergeSort Cutoff,205.0,0.1386711597442627,1530.0,16
+insertionMergeSort Cutoff,205.0,0.14003562927246094,1551.0,16
+insertionMergeSort Cutoff,205.0,0.22481393814086914,1525.0,16
+insertionMergeSort Cutoff,205.0,0.1740715503692627,1558.0,16
+insertionMergeSort Cutoff,205.0,0.16696786880493164,1586.0,16
+insertionMergeSort Cutoff,281.0,0.20319104194641113,2082.0,16
+insertionMergeSort Cutoff,281.0,0.15608716011047363,2115.0,16
+insertionMergeSort Cutoff,281.0,0.18516802787780762,2091.0,16
+insertionMergeSort Cutoff,281.0,0.18099045753479004,2068.0,16
+insertionMergeSort Cutoff,281.0,0.1756420135498047,2038.0,16
+insertionMergeSort Cutoff,385.0,0.1684253215789795,3230.0,16
+insertionMergeSort Cutoff,385.0,0.18911314010620117,3162.0,16
+insertionMergeSort Cutoff,385.0,0.1814279556274414,3249.0,16
+insertionMergeSort Cutoff,385.0,0.18017148971557617,3196.0,16
+insertionMergeSort Cutoff,385.0,0.21902227401733398,3157.0,16
+insertionMergeSort Cutoff,528.0,0.17136001586914062,4705.0,16
+insertionMergeSort Cutoff,528.0,0.13832783699035645,4777.0,16
+insertionMergeSort Cutoff,528.0,0.14023637771606445,4675.0,16
+insertionMergeSort Cutoff,528.0,0.14071989059448242,4695.0,16
+insertionMergeSort Cutoff,528.0,0.1259450912475586,4684.0,16
+insertionMergeSort Cutoff,723.0,0.17180991172790527,6603.0,16
+insertionMergeSort Cutoff,723.0,0.16833782196044922,6572.0,16
+insertionMergeSort Cutoff,723.0,0.17030787467956543,6540.0,16
+insertionMergeSort Cutoff,723.0,0.17160367965698242,6570.0,16
+insertionMergeSort Cutoff,723.0,0.17145776748657227,6690.0,16
+insertionMergeSort Cutoff,991.0,0.1543712615966797,10141.0,16
+insertionMergeSort Cutoff,991.0,0.1717815399169922,10275.0,16
+insertionMergeSort Cutoff,991.0,0.19033265113830566,10226.0,16
+insertionMergeSort Cutoff,991.0,0.18399739265441895,10184.0,16
+insertionMergeSort Cutoff,991.0,0.18452668190002441,10194.0,16
+insertionMergeSort Cutoff,1358.0,0.15528035163879395,13539.0,16
+insertionMergeSort Cutoff,1358.0,0.17734909057617188,13477.0,16
+insertionMergeSort Cutoff,1358.0,0.16780757904052734,13572.0,16
+insertionMergeSort Cutoff,1358.0,0.1736905574798584,13555.0,16
+insertionMergeSort Cutoff,1358.0,0.17121267318725586,13382.0,16
+insertionMergeSort Cutoff,1861.0,0.17269349098205566,20472.0,16
+insertionMergeSort Cutoff,1861.0,0.18782663345336914,20443.0,16
+insertionMergeSort Cutoff,1861.0,0.17037677764892578,20535.0,16
+insertionMergeSort Cutoff,1861.0,0.1858818531036377,20521.0,16
+insertionMergeSort Cutoff,1861.0,0.190582275390625,20493.0,16
+insertionMergeSort Cutoff,2550.0,0.1852121353149414,27471.0,16
+insertionMergeSort Cutoff,2550.0,0.18541574478149414,27625.0,16
+insertionMergeSort Cutoff,2550.0,0.17134857177734375,27407.0,16
+insertionMergeSort Cutoff,2550.0,0.20162320137023926,27589.0,16
+insertionMergeSort Cutoff,2550.0,0.20200133323669434,27414.0,16
+insertionMergeSort Cutoff,3493.0,0.18605399131774902,41169.0,16
+insertionMergeSort Cutoff,3493.0,0.20647478103637695,41151.0,16
+insertionMergeSort Cutoff,3493.0,0.19872593879699707,40995.0,16
+insertionMergeSort Cutoff,3493.0,0.1873316764831543,41185.0,16
+insertionMergeSort Cutoff,3493.0,0.18287110328674316,41113.0,16
+insertionMergeSort Cutoff,4786.0,0.18836450576782227,55256.0,16
+insertionMergeSort Cutoff,4786.0,0.2032473087310791,55389.0,16
+insertionMergeSort Cutoff,4786.0,0.21334099769592285,55642.0,16
+insertionMergeSort Cutoff,4786.0,0.19890999794006348,55491.0,16
+insertionMergeSort Cutoff,4786.0,0.18555927276611328,55400.0,16
+insertionMergeSort Cutoff,6557.0,0.2017207145690918,82503.0,16
+insertionMergeSort Cutoff,6557.0,0.20093750953674316,82153.0,16
+insertionMergeSort Cutoff,6557.0,0.2017378807067871,82568.0,16
+insertionMergeSort Cutoff,6557.0,0.20146560668945312,82341.0,16
+insertionMergeSort Cutoff,6557.0,0.20073175430297852,82282.0,16
+insertionMergeSort Cutoff,8983.0,0.21465206146240234,111625.0,16
+insertionMergeSort Cutoff,8983.0,0.23235011100769043,111643.0,16
+insertionMergeSort Cutoff,8983.0,0.21757245063781738,111481.0,16
+insertionMergeSort Cutoff,8983.0,0.2195439338684082,111518.0,16
+insertionMergeSort Cutoff,8983.0,0.21212148666381836,111599.0,16
+insertionMergeSort Cutoff,12307.0,0.2158360481262207,164107.0,16
+insertionMergeSort Cutoff,12307.0,0.23348379135131836,164779.0,16
+insertionMergeSort Cutoff,12307.0,0.2570176124572754,164258.0,16
+insertionMergeSort Cutoff,12307.0,0.28099751472473145,164303.0,16
+insertionMergeSort Cutoff,12307.0,0.2612266540527344,164411.0,16
+insertionMergeSort Cutoff,16861.0,0.2579948902130127,234294.0,16
+insertionMergeSort Cutoff,16861.0,0.24725770950317383,234072.0,16
+insertionMergeSort Cutoff,16861.0,0.2556788921356201,234402.0,16
+insertionMergeSort Cutoff,16861.0,0.24666428565979004,233660.0,16
+insertionMergeSort Cutoff,16861.0,0.2720222473144531,234184.0,16
+insertionMergeSort Cutoff,23100.0,0.269059419631958,326533.0,16
+insertionMergeSort Cutoff,23100.0,0.25800371170043945,325735.0,16
+insertionMergeSort Cutoff,23100.0,0.2716550827026367,326120.0,16
+insertionMergeSort Cutoff,23100.0,0.2764136791229248,326089.0,16
+insertionMergeSort Cutoff,23100.0,0.2716686725616455,326233.0,16
+insertionMergeSort Cutoff,31647.0,0.2888486385345459,483410.0,16
+insertionMergeSort Cutoff,31647.0,0.33271360397338867,484664.0,16
+insertionMergeSort Cutoff,31647.0,0.3205561637878418,483548.0,16
+insertionMergeSort Cutoff,31647.0,0.2856907844543457,483434.0,16
+insertionMergeSort Cutoff,31647.0,0.27947020530700684,482693.0,16
+insertionMergeSort Cutoff,43357.0,0.35013246536254883,648321.0,16
+insertionMergeSort Cutoff,43357.0,0.3464062213897705,647816.0,16
+insertionMergeSort Cutoff,43357.0,0.31685400009155273,647753.0,16
+insertionMergeSort Cutoff,43357.0,0.3249034881591797,647409.0,16
+insertionMergeSort Cutoff,43357.0,0.3499417304992676,648001.0,16
+insertionMergeSort Cutoff,150.0,0.4822578430175781,901.0,1
+insertionMergeSort Cutoff,150.0,0.26468491554260254,903.0,1
+insertionMergeSort Cutoff,150.0,0.1958451271057129,900.0,1
+insertionMergeSort Cutoff,150.0,0.20234942436218262,905.0,1
+insertionMergeSort Cutoff,150.0,0.15303444862365723,879.0,1
+insertionMergeSort Cutoff,205.0,0.15767574310302734,1329.0,1
+insertionMergeSort Cutoff,205.0,0.17386722564697266,1327.0,1
+insertionMergeSort Cutoff,205.0,0.21422338485717773,1318.0,1
+insertionMergeSort Cutoff,205.0,0.17252445220947266,1338.0,1
+insertionMergeSort Cutoff,205.0,0.15433621406555176,1318.0,1
+insertionMergeSort Cutoff,281.0,0.17254972457885742,1926.0,1
+insertionMergeSort Cutoff,281.0,0.17075657844543457,1917.0,1
+insertionMergeSort Cutoff,281.0,0.17026162147521973,1947.0,1
+insertionMergeSort Cutoff,281.0,0.1885993480682373,1948.0,1
+insertionMergeSort Cutoff,281.0,0.19002509117126465,1940.0,1
+insertionMergeSort Cutoff,385.0,0.19280767440795898,2838.0,1
+insertionMergeSort Cutoff,385.0,0.18196344375610352,2823.0,1
+insertionMergeSort Cutoff,385.0,0.16936993598937988,2830.0,1
+insertionMergeSort Cutoff,385.0,0.17311310768127441,2833.0,1
+insertionMergeSort Cutoff,385.0,0.18521690368652344,2827.0,1
+insertionMergeSort Cutoff,528.0,0.17142796516418457,4100.0,1
+insertionMergeSort Cutoff,528.0,0.17374515533447266,4117.0,1
+insertionMergeSort Cutoff,528.0,0.17522478103637695,4113.0,1
+insertionMergeSort Cutoff,528.0,0.18103671073913574,4112.0,1
+insertionMergeSort Cutoff,528.0,0.18636870384216309,4118.0,1
+insertionMergeSort Cutoff,723.0,0.23254895210266113,5991.0,1
+insertionMergeSort Cutoff,723.0,0.23092174530029297,5974.0,1
+insertionMergeSort Cutoff,723.0,0.2018263339996338,5922.0,1
+insertionMergeSort Cutoff,723.0,0.18725967407226562,6005.0,1
+insertionMergeSort Cutoff,723.0,0.18523621559143066,5984.0,1
+insertionMergeSort Cutoff,991.0,0.20879602432250977,8595.0,1
+insertionMergeSort Cutoff,991.0,0.21192646026611328,8590.0,1
+insertionMergeSort Cutoff,991.0,0.18496036529541016,8603.0,1
+insertionMergeSort Cutoff,991.0,0.2690098285675049,8596.0,1
+insertionMergeSort Cutoff,991.0,0.33129358291625977,8603.0,1
+insertionMergeSort Cutoff,1358.0,0.3158230781555176,12466.0,1
+insertionMergeSort Cutoff,1358.0,0.20310568809509277,12461.0,1
+insertionMergeSort Cutoff,1358.0,0.20273303985595703,12457.0,1
+insertionMergeSort Cutoff,1358.0,0.23148488998413086,12480.0,1
+insertionMergeSort Cutoff,1358.0,0.2172386646270752,12454.0,1
+insertionMergeSort Cutoff,1861.0,0.20065879821777344,17879.0,1
+insertionMergeSort Cutoff,1861.0,0.20355844497680664,17924.0,1
+insertionMergeSort Cutoff,1861.0,0.20319509506225586,17905.0,1
+insertionMergeSort Cutoff,1861.0,0.2180795669555664,17914.0,1
+insertionMergeSort Cutoff,1861.0,0.20293736457824707,17912.0,1
+insertionMergeSort Cutoff,2550.0,0.21718215942382812,25687.0,1
+insertionMergeSort Cutoff,2550.0,0.20232844352722168,25733.0,1
+insertionMergeSort Cutoff,2550.0,0.20031332969665527,25700.0,1
+insertionMergeSort Cutoff,2550.0,0.20284748077392578,25724.0,1
+insertionMergeSort Cutoff,2550.0,0.2030656337738037,25640.0,1
+insertionMergeSort Cutoff,3493.0,0.20877385139465332,36767.0,1
+insertionMergeSort Cutoff,3493.0,0.1964261531829834,36811.0,1
+insertionMergeSort Cutoff,3493.0,0.1977534294128418,36801.0,1
+insertionMergeSort Cutoff,3493.0,0.21830248832702637,36695.0,1
+insertionMergeSort Cutoff,3493.0,0.21975278854370117,36796.0,1
+insertionMergeSort Cutoff,4786.0,0.21172690391540527,52606.0,1
+insertionMergeSort Cutoff,4786.0,0.25268030166625977,52611.0,1
+insertionMergeSort Cutoff,4786.0,0.23003315925598145,52553.0,1
+insertionMergeSort Cutoff,4786.0,0.2130880355834961,52513.0,1
+insertionMergeSort Cutoff,4786.0,0.21544504165649414,52525.0,1
+insertionMergeSort Cutoff,6557.0,0.23038291931152344,75028.0,1
+insertionMergeSort Cutoff,6557.0,0.23147034645080566,74922.0,1
+insertionMergeSort Cutoff,6557.0,0.22941327095031738,75087.0,1
+insertionMergeSort Cutoff,6557.0,0.2328929901123047,74878.0,1
+insertionMergeSort Cutoff,6557.0,0.22906184196472168,74980.0,1
+insertionMergeSort Cutoff,8983.0,0.24093365669250488,106718.0,1
+insertionMergeSort Cutoff,8983.0,0.23248767852783203,106731.0,1
+insertionMergeSort Cutoff,8983.0,0.22797036170959473,106670.0,1
+insertionMergeSort Cutoff,8983.0,0.23154282569885254,106722.0,1
+insertionMergeSort Cutoff,8983.0,0.24637866020202637,106660.0,1
+insertionMergeSort Cutoff,12307.0,0.26364970207214355,151868.0,1
+insertionMergeSort Cutoff,12307.0,0.28606200218200684,151948.0,1
+insertionMergeSort Cutoff,12307.0,0.2615182399749756,151928.0,1
+insertionMergeSort Cutoff,12307.0,0.259901762008667,151901.0,1
+insertionMergeSort Cutoff,12307.0,0.25658559799194336,151869.0,1
+insertionMergeSort Cutoff,16861.0,0.29613208770751953,215572.0,1
+insertionMergeSort Cutoff,16861.0,0.3410053253173828,215445.0,1
+insertionMergeSort Cutoff,16861.0,0.3037149906158447,215600.0,1
+insertionMergeSort Cutoff,16861.0,0.286865234375,215436.0,1
+insertionMergeSort Cutoff,16861.0,0.27890753746032715,215553.0,1
+insertionMergeSort Cutoff,23100.0,0.2878246307373047,306209.0,1
+insertionMergeSort Cutoff,23100.0,0.31531190872192383,306167.0,1
+insertionMergeSort Cutoff,23100.0,0.28241920471191406,306049.0,1
+insertionMergeSort Cutoff,23100.0,0.30568909645080566,306018.0,1
+insertionMergeSort Cutoff,23100.0,0.30770349502563477,306264.0,1
+insertionMergeSort Cutoff,31647.0,0.3431882858276367,433204.0,1
+insertionMergeSort Cutoff,31647.0,0.3384549617767334,433304.0,1
+insertionMergeSort Cutoff,31647.0,0.3549036979675293,433160.0,1
+insertionMergeSort Cutoff,31647.0,0.31682300567626953,433169.0,1
+insertionMergeSort Cutoff,31647.0,0.2975633144378662,433273.0,1
+insertionMergeSort Cutoff,43357.0,0.34841442108154297,614015.0,1
+insertionMergeSort Cutoff,43357.0,0.4738192558288574,613814.0,1
+insertionMergeSort Cutoff,43357.0,0.3626081943511963,613821.0,1
+insertionMergeSort Cutoff,43357.0,0.35665273666381836,614161.0,1
+insertionMergeSort Cutoff,43357.0,0.35958266258239746,614143.0,1
+insertionMergeSort Cutoff,59399.0,0.44502878189086914,867416.0,1
+insertionMergeSort Cutoff,59399.0,0.46141886711120605,867632.0,1
+insertionMergeSort Cutoff,59399.0,0.4228019714355469,867479.0,1
+insertionMergeSort Cutoff,59399.0,0.4658522605895996,867642.0,1
+insertionMergeSort Cutoff,59399.0,0.4485349655151367,867568.0,1
+insertionMergeSort Cutoff,81377.0,0.5083825588226318,1226197.0,1
+insertionMergeSort Cutoff,81377.0,0.5288527011871338,1226241.0,1
+insertionMergeSort Cutoff,81377.0,0.48358988761901855,1226202.0,1
+insertionMergeSort Cutoff,81377.0,0.5123693943023682,1226219.0,1
+insertionMergeSort Cutoff,81377.0,0.4945414066314697,1226360.0,1
+insertionMergeSort Cutoff,150.0,0.18092989921569824,901.0,2
+insertionMergeSort Cutoff,150.0,0.15552449226379395,903.0,2
+insertionMergeSort Cutoff,150.0,0.1586437225341797,900.0,2
+insertionMergeSort Cutoff,150.0,0.1563737392425537,905.0,2
+insertionMergeSort Cutoff,150.0,0.15965819358825684,879.0,2
+insertionMergeSort Cutoff,205.0,0.16830801963806152,1329.0,2
+insertionMergeSort Cutoff,205.0,0.15445804595947266,1327.0,2
+insertionMergeSort Cutoff,205.0,0.15626192092895508,1318.0,2
+insertionMergeSort Cutoff,205.0,0.1417558193206787,1338.0,2
+insertionMergeSort Cutoff,205.0,0.14037561416625977,1318.0,2
+insertionMergeSort Cutoff,281.0,0.17202281951904297,1926.0,2
+insertionMergeSort Cutoff,281.0,0.16972017288208008,1917.0,2
+insertionMergeSort Cutoff,281.0,0.14226222038269043,1947.0,2
+insertionMergeSort Cutoff,281.0,0.1705334186553955,1948.0,2
+insertionMergeSort Cutoff,281.0,0.1713087558746338,1940.0,2
+insertionMergeSort Cutoff,385.0,0.17135167121887207,2838.0,2
+insertionMergeSort Cutoff,385.0,0.20265460014343262,2823.0,2
+insertionMergeSort Cutoff,385.0,0.17318177223205566,2830.0,2
+insertionMergeSort Cutoff,385.0,0.18721389770507812,2833.0,2
+insertionMergeSort Cutoff,385.0,0.1855466365814209,2827.0,2
+insertionMergeSort Cutoff,528.0,0.17632412910461426,4100.0,2
+insertionMergeSort Cutoff,528.0,0.18421483039855957,4117.0,2
+insertionMergeSort Cutoff,528.0,0.16967201232910156,4113.0,2
+insertionMergeSort Cutoff,528.0,0.14000630378723145,4112.0,2
+insertionMergeSort Cutoff,528.0,0.1392960548400879,4118.0,2
+insertionMergeSort Cutoff,723.0,0.17215657234191895,5991.0,2
+insertionMergeSort Cutoff,723.0,0.1717665195465088,5974.0,2
+insertionMergeSort Cutoff,723.0,0.1860792636871338,5922.0,2
+insertionMergeSort Cutoff,723.0,0.17101669311523438,6005.0,2
+insertionMergeSort Cutoff,723.0,0.19111347198486328,5984.0,2
+insertionMergeSort Cutoff,991.0,0.20296096801757812,8595.0,2
+insertionMergeSort Cutoff,991.0,0.18485379219055176,8590.0,2
+insertionMergeSort Cutoff,991.0,0.18532538414001465,8603.0,2
+insertionMergeSort Cutoff,991.0,0.1893012523651123,8596.0,2
+insertionMergeSort Cutoff,991.0,0.18660807609558105,8603.0,2
+insertionMergeSort Cutoff,1358.0,0.20150160789489746,12466.0,2
+insertionMergeSort Cutoff,1358.0,0.18872404098510742,12461.0,2
+insertionMergeSort Cutoff,1358.0,0.1860513687133789,12457.0,2
+insertionMergeSort Cutoff,1358.0,0.20889949798583984,12480.0,2
+insertionMergeSort Cutoff,1358.0,0.18535900115966797,12454.0,2
+insertionMergeSort Cutoff,1861.0,0.20276427268981934,17879.0,2
+insertionMergeSort Cutoff,1861.0,0.18886971473693848,17924.0,2
+insertionMergeSort Cutoff,1861.0,0.21699786186218262,17905.0,2
+insertionMergeSort Cutoff,1861.0,0.23177695274353027,17914.0,2
+insertionMergeSort Cutoff,1861.0,0.20420575141906738,17912.0,2
+insertionMergeSort Cutoff,2550.0,0.20043015480041504,25687.0,2
+insertionMergeSort Cutoff,2550.0,0.20138239860534668,25733.0,2
+insertionMergeSort Cutoff,2550.0,0.20056414604187012,25700.0,2
+insertionMergeSort Cutoff,2550.0,0.20159006118774414,25724.0,2
+insertionMergeSort Cutoff,2550.0,0.22014570236206055,25640.0,2
+insertionMergeSort Cutoff,3493.0,0.20076322555541992,36767.0,2
+insertionMergeSort Cutoff,3493.0,0.2186734676361084,36811.0,2
+insertionMergeSort Cutoff,3493.0,0.2009570598602295,36801.0,2
+insertionMergeSort Cutoff,3493.0,0.21264100074768066,36695.0,2
+insertionMergeSort Cutoff,3493.0,0.2135941982269287,36796.0,2
+insertionMergeSort Cutoff,4786.0,0.21321892738342285,52606.0,2
+insertionMergeSort Cutoff,4786.0,0.20247769355773926,52611.0,2
+insertionMergeSort Cutoff,4786.0,0.20038223266601562,52553.0,2
+insertionMergeSort Cutoff,4786.0,0.20758652687072754,52513.0,2
+insertionMergeSort Cutoff,4786.0,0.21170997619628906,52525.0,2
+insertionMergeSort Cutoff,6557.0,0.22596096992492676,75028.0,2
+insertionMergeSort Cutoff,6557.0,0.23126006126403809,74922.0,2
+insertionMergeSort Cutoff,6557.0,0.22971487045288086,75087.0,2
+insertionMergeSort Cutoff,6557.0,0.23867249488830566,74878.0,2
+insertionMergeSort Cutoff,6557.0,0.22626519203186035,74980.0,2
+insertionMergeSort Cutoff,8983.0,0.26434803009033203,106718.0,2
+insertionMergeSort Cutoff,8983.0,0.2783482074737549,106731.0,2
+insertionMergeSort Cutoff,8983.0,0.2451009750366211,106670.0,2
+insertionMergeSort Cutoff,8983.0,0.24936461448669434,106722.0,2
+insertionMergeSort Cutoff,8983.0,0.25915026664733887,106660.0,2
+insertionMergeSort Cutoff,12307.0,0.2616918087005615,151868.0,2
+insertionMergeSort Cutoff,12307.0,0.24365735054016113,151948.0,2
+insertionMergeSort Cutoff,12307.0,0.2622673511505127,151928.0,2
+insertionMergeSort Cutoff,12307.0,0.26015806198120117,151901.0,2
+insertionMergeSort Cutoff,12307.0,0.2604341506958008,151869.0,2
+insertionMergeSort Cutoff,16861.0,0.27133655548095703,215572.0,2
+insertionMergeSort Cutoff,16861.0,0.27330446243286133,215445.0,2
+insertionMergeSort Cutoff,16861.0,0.2884047031402588,215600.0,2
+insertionMergeSort Cutoff,16861.0,0.30768823623657227,215436.0,2
+insertionMergeSort Cutoff,16861.0,0.28934216499328613,215553.0,2
+insertionMergeSort Cutoff,23100.0,0.28937864303588867,306209.0,2
+insertionMergeSort Cutoff,23100.0,0.2843804359436035,306167.0,2
+insertionMergeSort Cutoff,23100.0,0.301929235458374,306049.0,2
+insertionMergeSort Cutoff,23100.0,0.39404749870300293,306018.0,2
+insertionMergeSort Cutoff,23100.0,0.3738713264465332,306264.0,2
+insertionMergeSort Cutoff,31647.0,0.32158446311950684,433204.0,2
+insertionMergeSort Cutoff,31647.0,0.31454038619995117,433304.0,2
+insertionMergeSort Cutoff,31647.0,0.3096787929534912,433160.0,2
+insertionMergeSort Cutoff,31647.0,0.3402857780456543,433169.0,2
+insertionMergeSort Cutoff,31647.0,0.3335864543914795,433273.0,2
+insertionMergeSort Cutoff,43357.0,0.35769009590148926,614015.0,2
+insertionMergeSort Cutoff,43357.0,0.3663153648376465,613814.0,2
+insertionMergeSort Cutoff,43357.0,0.3347182273864746,613821.0,2
+insertionMergeSort Cutoff,43357.0,0.3803081512451172,614161.0,2
+insertionMergeSort Cutoff,43357.0,0.3421671390533447,614143.0,2
+insertionMergeSort Cutoff,59399.0,0.44562506675720215,867416.0,2
+insertionMergeSort Cutoff,59399.0,0.3820502758026123,867632.0,2
+insertionMergeSort Cutoff,59399.0,0.4693472385406494,867479.0,2
+insertionMergeSort Cutoff,59399.0,0.4437413215637207,867642.0,2
+insertionMergeSort Cutoff,59399.0,0.4267117977142334,867568.0,2
+insertionMergeSort Cutoff,150.0,0.16675972938537598,905.0,4
+insertionMergeSort Cutoff,150.0,0.15747284889221191,906.0,4
+insertionMergeSort Cutoff,150.0,0.16921567916870117,897.0,4
+insertionMergeSort Cutoff,150.0,0.14313602447509766,906.0,4
+insertionMergeSort Cutoff,150.0,0.1542060375213623,885.0,4
+insertionMergeSort Cutoff,205.0,0.17248940467834473,1328.0,4
+insertionMergeSort Cutoff,205.0,0.15497064590454102,1327.0,4
+insertionMergeSort Cutoff,205.0,0.15488815307617188,1330.0,4
+insertionMergeSort Cutoff,205.0,0.14113211631774902,1329.0,4
+insertionMergeSort Cutoff,205.0,0.14056801795959473,1318.0,4
+insertionMergeSort Cutoff,281.0,0.15600991249084473,1949.0,4
+insertionMergeSort Cutoff,281.0,0.15732240676879883,1928.0,4
+insertionMergeSort Cutoff,281.0,0.17769742012023926,1962.0,4
+insertionMergeSort Cutoff,281.0,0.15323352813720703,1961.0,4
+insertionMergeSort Cutoff,281.0,0.22242426872253418,1939.0,4
+insertionMergeSort Cutoff,385.0,0.3069169521331787,2826.0,4
+insertionMergeSort Cutoff,385.0,0.17332077026367188,2816.0,4
+insertionMergeSort Cutoff,385.0,0.18895506858825684,2838.0,4
+insertionMergeSort Cutoff,385.0,0.18538498878479004,2826.0,4
+insertionMergeSort Cutoff,385.0,0.1727738380432129,2820.0,4
+insertionMergeSort Cutoff,528.0,0.15437817573547363,4113.0,4
+insertionMergeSort Cutoff,528.0,0.1740574836730957,4176.0,4
+insertionMergeSort Cutoff,528.0,0.172074556350708,4141.0,4
+insertionMergeSort Cutoff,528.0,0.1869945526123047,4126.0,4
+insertionMergeSort Cutoff,528.0,0.18800806999206543,4167.0,4
+insertionMergeSort Cutoff,723.0,0.18323516845703125,5973.0,4
+insertionMergeSort Cutoff,723.0,0.172926664352417,5960.0,4
+insertionMergeSort Cutoff,723.0,0.18719935417175293,5930.0,4
+insertionMergeSort Cutoff,723.0,0.18606925010681152,5985.0,4
+insertionMergeSort Cutoff,723.0,0.18487286567687988,5984.0,4
+insertionMergeSort Cutoff,991.0,0.17230534553527832,8668.0,4
+insertionMergeSort Cutoff,991.0,0.19955873489379883,8655.0,4
+insertionMergeSort Cutoff,991.0,0.18743491172790527,8621.0,4
+insertionMergeSort Cutoff,991.0,0.18593692779541016,8664.0,4
+insertionMergeSort Cutoff,991.0,0.17241692543029785,8657.0,4
+insertionMergeSort Cutoff,1358.0,0.1921367645263672,12463.0,4
+insertionMergeSort Cutoff,1358.0,0.1803290843963623,12474.0,4
+insertionMergeSort Cutoff,1358.0,0.18467426300048828,12449.0,4
+insertionMergeSort Cutoff,1358.0,0.1881551742553711,12454.0,4
+insertionMergeSort Cutoff,1358.0,0.18887662887573242,12446.0,4
+insertionMergeSort Cutoff,1861.0,0.2336740493774414,17955.0,4
+insertionMergeSort Cutoff,1861.0,0.2531125545501709,17960.0,4
+insertionMergeSort Cutoff,1861.0,0.22517609596252441,17994.0,4
+insertionMergeSort Cutoff,1861.0,0.1925063133239746,17998.0,4
+insertionMergeSort Cutoff,1861.0,0.19681453704833984,18038.0,4
+insertionMergeSort Cutoff,2550.0,0.18935322761535645,25678.0,4
+insertionMergeSort Cutoff,2550.0,0.20327162742614746,25730.0,4
+insertionMergeSort Cutoff,2550.0,0.19748401641845703,25726.0,4
+insertionMergeSort Cutoff,2550.0,0.18560242652893066,25710.0,4
+insertionMergeSort Cutoff,2550.0,0.18813204765319824,25649.0,4
+insertionMergeSort Cutoff,3493.0,0.22018051147460938,36904.0,4
+insertionMergeSort Cutoff,3493.0,0.2034907341003418,36860.0,4
+insertionMergeSort Cutoff,3493.0,0.2036900520324707,36876.0,4
+insertionMergeSort Cutoff,3493.0,0.21970200538635254,36786.0,4
+insertionMergeSort Cutoff,3493.0,0.19856595993041992,36883.0,4
+insertionMergeSort Cutoff,4786.0,0.22143030166625977,52679.0,4
+insertionMergeSort Cutoff,4786.0,0.21079254150390625,52666.0,4
+insertionMergeSort Cutoff,4786.0,0.20716142654418945,52622.0,4
+insertionMergeSort Cutoff,4786.0,0.21605968475341797,52633.0,4
+insertionMergeSort Cutoff,4786.0,0.2107868194580078,52625.0,4
+insertionMergeSort Cutoff,6557.0,0.2129230499267578,75136.0,4
+insertionMergeSort Cutoff,6557.0,0.22278285026550293,75084.0,4
+insertionMergeSort Cutoff,6557.0,0.20889997482299805,75136.0,4
+insertionMergeSort Cutoff,6557.0,0.21274352073669434,74991.0,4
+insertionMergeSort Cutoff,6557.0,0.25963282585144043,75015.0,4
+insertionMergeSort Cutoff,8983.0,0.2795894145965576,107021.0,4
+insertionMergeSort Cutoff,8983.0,0.22813820838928223,107037.0,4
+insertionMergeSort Cutoff,8983.0,0.24745535850524902,107057.0,4
+insertionMergeSort Cutoff,8983.0,0.23244094848632812,107034.0,4
+insertionMergeSort Cutoff,8983.0,0.23270487785339355,107051.0,4
+insertionMergeSort Cutoff,12307.0,0.24369525909423828,151816.0,4
+insertionMergeSort Cutoff,12307.0,0.24112343788146973,151997.0,4
+insertionMergeSort Cutoff,12307.0,0.26019978523254395,151953.0,4
+insertionMergeSort Cutoff,12307.0,0.24156618118286133,151946.0,4
+insertionMergeSort Cutoff,12307.0,0.23863911628723145,151916.0,4
+insertionMergeSort Cutoff,16861.0,0.25543880462646484,216503.0,4
+insertionMergeSort Cutoff,16861.0,0.2608509063720703,216338.0,4
+insertionMergeSort Cutoff,16861.0,0.2876102924346924,216454.0,4
+insertionMergeSort Cutoff,16861.0,0.2738187313079834,216245.0,4
+insertionMergeSort Cutoff,16861.0,0.30303335189819336,216481.0,4
+insertionMergeSort Cutoff,23100.0,0.2830183506011963,306217.0,4
+insertionMergeSort Cutoff,23100.0,0.42225050926208496,306148.0,4
+insertionMergeSort Cutoff,23100.0,0.2903892993927002,306045.0,4
+insertionMergeSort Cutoff,23100.0,0.34917163848876953,306045.0,4
+insertionMergeSort Cutoff,23100.0,0.28125476837158203,306256.0,4
+insertionMergeSort Cutoff,31647.0,0.31018495559692383,434933.0,4
+insertionMergeSort Cutoff,31647.0,0.3250460624694824,434974.0,4
+insertionMergeSort Cutoff,31647.0,0.3211476802825928,434944.0,4
+insertionMergeSort Cutoff,31647.0,0.3034355640411377,434962.0,4
+insertionMergeSort Cutoff,31647.0,0.31674623489379883,434974.0,4
+insertionMergeSort Cutoff,43357.0,0.3457629680633545,614165.0,4
+insertionMergeSort Cutoff,43357.0,0.3427269458770752,613926.0,4
+insertionMergeSort Cutoff,43357.0,0.3534533977508545,613847.0,4
+insertionMergeSort Cutoff,43357.0,0.346038818359375,614175.0,4
+insertionMergeSort Cutoff,43357.0,0.3599832057952881,614113.0,4
+insertionMergeSort Cutoff,59399.0,0.4359734058380127,869945.0,4
+insertionMergeSort Cutoff,59399.0,0.49274492263793945,870141.0,4
+insertionMergeSort Cutoff,59399.0,0.4100203514099121,870106.0,4
+insertionMergeSort Cutoff,59399.0,0.36690568923950195,870306.0,4
+insertionMergeSort Cutoff,59399.0,0.403850793838501,870288.0,4
+insertionMergeSort Cutoff,150.0,0.1957552433013916,913.0,8
+insertionMergeSort Cutoff,150.0,0.18674302101135254,924.0,8
+insertionMergeSort Cutoff,150.0,0.1567678451538086,902.0,8
+insertionMergeSort Cutoff,150.0,0.1536388397216797,920.0,8
+insertionMergeSort Cutoff,150.0,0.14107847213745117,895.0,8
+insertionMergeSort Cutoff,205.0,0.15509438514709473,1380.0,8
+insertionMergeSort Cutoff,205.0,0.1586439609527588,1383.0,8
+insertionMergeSort Cutoff,205.0,0.1563096046447754,1393.0,8
+insertionMergeSort Cutoff,205.0,0.16447114944458008,1365.0,8
+insertionMergeSort Cutoff,205.0,0.1686108112335205,1392.0,8
+insertionMergeSort Cutoff,281.0,0.15732598304748535,1974.0,8
+insertionMergeSort Cutoff,281.0,0.1723489761352539,1967.0,8
+insertionMergeSort Cutoff,281.0,0.17373371124267578,2000.0,8
+insertionMergeSort Cutoff,281.0,0.1714468002319336,1982.0,8
+insertionMergeSort Cutoff,281.0,0.13944768905639648,1961.0,8
+insertionMergeSort Cutoff,385.0,0.17437100410461426,2907.0,8
+insertionMergeSort Cutoff,385.0,0.17385149002075195,2887.0,8
+insertionMergeSort Cutoff,385.0,0.1866469383239746,2914.0,8
+insertionMergeSort Cutoff,385.0,0.15641450881958008,2902.0,8
+insertionMergeSort Cutoff,385.0,0.15579748153686523,2894.0,8
+insertionMergeSort Cutoff,528.0,0.15423917770385742,4291.0,8
+insertionMergeSort Cutoff,528.0,0.15672731399536133,4303.0,8
+insertionMergeSort Cutoff,528.0,0.17126679420471191,4311.0,8
+insertionMergeSort Cutoff,528.0,0.1872105598449707,4273.0,8
+insertionMergeSort Cutoff,528.0,0.1730668544769287,4339.0,8
+insertionMergeSort Cutoff,723.0,0.18852734565734863,6097.0,8
+insertionMergeSort Cutoff,723.0,0.18458032608032227,6095.0,8
+insertionMergeSort Cutoff,723.0,0.17041754722595215,6032.0,8
+insertionMergeSort Cutoff,723.0,0.17236900329589844,6080.0,8
+insertionMergeSort Cutoff,723.0,0.17062664031982422,6100.0,8
+insertionMergeSort Cutoff,991.0,0.17249798774719238,9014.0,8
+insertionMergeSort Cutoff,991.0,0.1708967685699463,8973.0,8
+insertionMergeSort Cutoff,991.0,0.17045307159423828,9000.0,8
+insertionMergeSort Cutoff,991.0,0.18735432624816895,9002.0,8
+insertionMergeSort Cutoff,991.0,0.18882155418395996,8979.0,8
+insertionMergeSort Cutoff,1358.0,0.18000102043151855,12679.0,8
+insertionMergeSort Cutoff,1358.0,0.17389869689941406,12619.0,8
+insertionMergeSort Cutoff,1358.0,0.1841871738433838,12687.0,8
+insertionMergeSort Cutoff,1358.0,0.19257783889770508,12643.0,8
+insertionMergeSort Cutoff,1358.0,0.23148226737976074,12648.0,8
+insertionMergeSort Cutoff,1861.0,0.2008817195892334,18472.0,8
+insertionMergeSort Cutoff,1861.0,0.18545842170715332,18510.0,8
+insertionMergeSort Cutoff,1861.0,0.19450998306274414,18542.0,8
+insertionMergeSort Cutoff,1861.0,0.19281005859375,18548.0,8
+insertionMergeSort Cutoff,1861.0,0.22303247451782227,18637.0,8
+insertionMergeSort Cutoff,2550.0,0.24916434288024902,26001.0,8
+insertionMergeSort Cutoff,2550.0,0.22212839126586914,26039.0,8
+insertionMergeSort Cutoff,2550.0,0.20418190956115723,25960.0,8
+insertionMergeSort Cutoff,2550.0,0.21453523635864258,25993.0,8
+insertionMergeSort Cutoff,2550.0,0.18842434883117676,25933.0,8
+insertionMergeSort Cutoff,3493.0,0.19779324531555176,37801.0,8
+insertionMergeSort Cutoff,3493.0,0.2021315097808838,37851.0,8
+insertionMergeSort Cutoff,3493.0,0.18366074562072754,37707.0,8
+insertionMergeSort Cutoff,3493.0,0.19934511184692383,37679.0,8
+insertionMergeSort Cutoff,3493.0,0.20267605781555176,37784.0,8
+insertionMergeSort Cutoff,4786.0,0.2138683795928955,52980.0,8
+insertionMergeSort Cutoff,4786.0,0.20116329193115234,53051.0,8
+insertionMergeSort Cutoff,4786.0,0.1858210563659668,52959.0,8
+insertionMergeSort Cutoff,4786.0,0.21923351287841797,52997.0,8
+insertionMergeSort Cutoff,4786.0,0.2167956829071045,52992.0,8
+insertionMergeSort Cutoff,6557.0,0.23161077499389648,76693.0,8
+insertionMergeSort Cutoff,6557.0,0.22437310218811035,76531.0,8
+insertionMergeSort Cutoff,6557.0,0.21834635734558105,76680.0,8
+insertionMergeSort Cutoff,6557.0,0.22988629341125488,76717.0,8
+insertionMergeSort Cutoff,6557.0,0.22826266288757324,76619.0,8
+insertionMergeSort Cutoff,8983.0,0.24561381340026855,108201.0,8
+insertionMergeSort Cutoff,8983.0,0.23505449295043945,108256.0,8
+insertionMergeSort Cutoff,8983.0,0.25788044929504395,108063.0,8
+insertionMergeSort Cutoff,8983.0,0.2625603675842285,108159.0,8
+insertionMergeSort Cutoff,8983.0,0.25035834312438965,108282.0,8
+insertionMergeSort Cutoff,12307.0,0.2509770393371582,154359.0,8
+insertionMergeSort Cutoff,12307.0,0.24553871154785156,154539.0,8
+insertionMergeSort Cutoff,12307.0,0.2572591304779053,154323.0,8
+insertionMergeSort Cutoff,12307.0,0.2420186996459961,154497.0,8
+insertionMergeSort Cutoff,12307.0,0.24846696853637695,154473.0,8
+insertionMergeSort Cutoff,16861.0,0.2878694534301758,221439.0,8
+insertionMergeSort Cutoff,16861.0,0.2559628486633301,221176.0,8
+insertionMergeSort Cutoff,16861.0,0.27648282051086426,221533.0,8
+insertionMergeSort Cutoff,16861.0,0.2553226947784424,221211.0,8
+insertionMergeSort Cutoff,16861.0,0.2581474781036377,221538.0,8
+insertionMergeSort Cutoff,23100.0,0.2985985279083252,310131.0,8
+insertionMergeSort Cutoff,23100.0,0.3013172149658203,309995.0,8
+insertionMergeSort Cutoff,23100.0,0.28383803367614746,310093.0,8
+insertionMergeSort Cutoff,23100.0,0.2996797561645508,310062.0,8
+insertionMergeSort Cutoff,23100.0,0.2896757125854492,310076.0,8
+insertionMergeSort Cutoff,31647.0,0.36156797409057617,446190.0,8
+insertionMergeSort Cutoff,31647.0,0.37366318702697754,446618.0,8
+insertionMergeSort Cutoff,31647.0,0.3342716693878174,446212.0,8
+insertionMergeSort Cutoff,31647.0,0.3409860134124756,445690.0,8
+insertionMergeSort Cutoff,31647.0,0.3298830986022949,446008.0,8
+insertionMergeSort Cutoff,43357.0,0.34745001792907715,620374.0,8
+insertionMergeSort Cutoff,43357.0,0.3188626766204834,620128.0,8
+insertionMergeSort Cutoff,43357.0,0.35428643226623535,619949.0,8
+insertionMergeSort Cutoff,43357.0,0.338392972946167,620271.0,8
+insertionMergeSort Cutoff,43357.0,0.3367469310760498,619997.0,8

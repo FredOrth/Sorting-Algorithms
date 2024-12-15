@@ -6,7 +6,7 @@ import csv
 
 import subprocess
 #Timeout 
-TIMEOUT = 35
+TIMEOUT = 0.5
 SEED = 42
 #How many different values of M
 I_MAX = 30
@@ -18,7 +18,8 @@ NS: List[int] = [int(150* 1.37**i) \
     for i in range(I_MAX)]
 
 def run_java(jar: str, arg: str, input: str)->str:
-    p = subprocess.Popen(['java','-Xmx8g', '-jar',jar,arg], 
+    args = arg.split()
+    p = subprocess.Popen(['java','-Xmx8g', '-jar',jar] + args, 
         stdin=subprocess.PIPE, 
         stdout=subprocess.PIPE)
     (output,_) = p.communicate(input.encode('utf-8'), 
@@ -54,7 +55,7 @@ def benchmark(algorithm: str, jar: str)-> \
                 input: List[int] = INPUT_DATA[n][i]
                 diff, comp = measure(algorithm,jar,
                     input)
-                result_n.append((n,diff, comp))
+                result_n.append((float(n),float(diff), float(comp)))
             results += result_n
         except subprocess.TimeoutExpired:
             break
@@ -89,12 +90,12 @@ if __name__ == '__main__':
         for algorithm, jar in INSTANCES_C:
             results: List[Tuple[int,float]] = []
             for cutoff in LIST_OF_CUTOFFVALUES:
-                    for n,t,c in benchmark(f"{algorithm} {cutoff}",jar):
-                        # print(f"{algorithm}, {n}, {c}, {cutoff}")
-                        writer.writerow({ 
-                            'algorithm' : algorithm,
-                            'n' : n,
-                            'time' : t,
-                            'comparisons' : c,
-                            'cutoff' : cutoff
-                        })
+                # print(f"{algorithm} {cutoff}",jar)
+                for n,t,c in benchmark(f"{algorithm} {cutoff}",jar):
+                    writer.writerow({ 
+                        'algorithm' : algorithm,
+                        'n' : n,
+                        'time' : t,
+                        'comparisons' : c,
+                        'cutoff' : cutoff
+                    })
