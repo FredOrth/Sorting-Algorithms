@@ -6,7 +6,7 @@ import csv
 
 import subprocess
 #Timeout 
-TIMEOUT = 35
+TIMEOUT = 1
 SEED = 42
 #How many different values of M
 I_MAX = 30
@@ -52,6 +52,7 @@ def benchmark(algorithm: str, jar: str)-> \
             result_n: List[Tuple[int,float, int]] = list()
             for i in range(M):
                 input: List[int] = INPUT_DATA[n][i]
+                print(algorithm)
                 diff, comp = measure(algorithm,jar,
                     input)
                 result_n.append((n,diff, comp))
@@ -89,12 +90,12 @@ if __name__ == '__main__':
         for algorithm, jar in INSTANCES_C:
             results: List[Tuple[int,float]] = []
             for cutoff in LIST_OF_CUTOFFVALUES:
-                    for n,t,c in benchmark(f"{algorithm} {cutoff}",jar):
-                        # print(f"{algorithm}, {n}, {c}, {cutoff}")
-                        writer.writerow({ 
-                            'algorithm' : algorithm,
-                            'n' : n,
-                            'time' : t,
-                            'comparisons' : c,
-                            'cutoff' : cutoff
-                        })
+                # print(f"{algorithm} {cutoff}",jar)
+                for n,t,c in benchmark(f"{algorithm} {cutoff}",jar):
+                    writer.writerow({ 
+                        'algorithm' : algorithm,
+                        'n' : n,
+                        'time' : t,
+                        'comparisons' : c,
+                        'cutoff' : cutoff
+                    })
