@@ -1,6 +1,6 @@
 package SortingVariations;
 
-public class InsertionMergeSort<T extends Comparable<T>> implements Sorter<T> {
+public class InsertionMergeSort<T extends Comparable<T>> extends Sorter1<T> implements Sorter<T> {
     int cutoff;
     int counter;
 
@@ -42,50 +42,6 @@ public class InsertionMergeSort<T extends Comparable<T>> implements Sorter<T> {
     }
 
 
-    private void merge(T[] a, T[] aux, int low, int mid, int high){
-
-        for (int k = low; k<=high; k++) {
-            aux[k] = a[k];
-        }
-
-
-        int i = low;
-        int j = mid+1;
-
-        for (int k = low; k <= high; k++) {
-            if(i > mid){
-            a[k] = aux[j++];}
-            else if (j > high)
-            { a[k] = aux[i++];}
-            else if((aux[j].compareTo(aux[i]))<0) 
-            {a[k] = aux[j++];
-            counter++;}
-            else 
-            {a[k] = aux[i++];
-            counter++;}
-            
-        }
-        
-    }
-
-    private void insertionSort(T[] a, int low, int high) {
-        for (int i = low + 1; i <= high; i++) {
-            T key = a[i];
-            int j = i - 1;
-
-            while (j >= low && a[j].compareTo(key) > 0) {
-                counter++; // Couning that its[j] > key
-                a[j + 1] = a[j];
-                j--;
-            }
     
-            // if while loop condition failscount comparison
-            if (j >= low) {
-                counter++; // Counting comparison when while loop eends
-            }
-
-            a[j + 1] = key;
-        }
-    }
 
 }
