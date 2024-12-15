@@ -17,6 +17,7 @@ public class Main {
 
         Integer[] testArray1 = { 0, 1, 2, 3, 5, 4, 6, 7 }; //{ 1, 2, 3, 5, 4, 6, 7, 8 }; // Mixed runs  we have a scenario, where left run is {0 -> 5 and right is 6 -> 8}
         Integer[] testArray2 = { 8, 7, 6, 5, 4, 3, 2, 1 }; // Reverse order
+        String[] testArray3 = {"f","a","l","k","e","n"}; // a, e, f, k, l, n
 
         System.out.println("Starting new sorting: ...");
         LevelSort<Integer> sorterAdaptive = new LevelSort<>(LevelSort.sortMode.adaptive, 4);
@@ -28,10 +29,18 @@ public class Main {
         sorterNonAdaptive.sort(testArray2);
         System.out.println("Non-Adaptive sorted: " + Arrays.toString(testArray2));
         
-        System.out.println("Starting new sorting: ...");
-        sorterNonAdaptive.sort(testArray1);
-        System.out.println("Non-Adaptive sorted: " + Arrays.toString(testArray1));
+        // System.out.println("Starting new sorting: ...");
+        // sorterNonAdaptive.sort(testArray1);
+        // System.out.println("Non-Adaptive sorted: " + Arrays.toString(testArray1));
         
+        // System.out.println("Starting new sorting: ...");
+        // sorterAdaptive.sort(testArray2);
+        // System.out.println("Adaptive sorted: " + Arrays.toString(testArray2));
+
+        System.out.println("Starting new sorting: ...");
+        sorterNonAdaptive.sort(testArray3);
+        System.out.println("Non-Adaptive sorted: " + Arrays.toString(testArray3));
+
         System.out.println("Starting new sorting: ...");
         sorterAdaptive.sort(testArray2);
         System.out.println("Adaptive sorted: " + Arrays.toString(testArray2));
