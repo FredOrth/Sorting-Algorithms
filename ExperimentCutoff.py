@@ -63,7 +63,7 @@ def benchmark(algorithm: str, jar: str)-> \
 
 # def build_java_project():
 #     subprocess.run(['./gradlew', 'build'], check=True)
-    
+
 
 
 INSTANCES_C: List[Tuple[str,str]]= {

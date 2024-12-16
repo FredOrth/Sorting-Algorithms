@@ -3,7 +3,7 @@ package SortingVariations;
 import java.lang.reflect.Array;
 import java.util.Stack;
 
-public class IterativeMergeSort<T extends Comparable<T>> implements Sorter<T>{
+public class IterativeMergeSort<T extends Comparable<T>> extends Sorter1<T> implements Sorter<T>{
 
 
 

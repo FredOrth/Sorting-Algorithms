@@ -3,7 +3,7 @@ package SortingVariations;
 import java.lang.reflect.Array;
 import java.util.Stack;
 
-public class IterativeMergeSortC<T extends Comparable<T>> implements Sorter<T>{
+public class IterativeMergeSortC<T extends Comparable<T>> extends Sorter1<T> implements Sorter<T>{
     private int cutoff; //Need to make this compatible with insertionSort, discuss with Frederik and Tobias
     private int counter;
 

@@ -1,6 +1,6 @@
 package SortingVariations;
 
-public class RecursiveMergeSort<T extends Comparable<T>> implements Sorter<T>{
+public class RecursiveMergeSort<T extends Comparable<T>> extends Sorter1<T> implements Sorter<T>{
     private int counter;
 
     
@@ -28,33 +28,5 @@ public class RecursiveMergeSort<T extends Comparable<T>> implements Sorter<T>{
         // final merge? or no, this is the merge for all the recursive calls when it becmes small enough
         merge(a, aux, low, mid, high);
     }
-
-
-    private void merge(T[] a, T[] aux, int low, int mid, int high){
-
-        for (int k = low; k<=high; k++) {
-            aux[k] = a[k];
-        }
-
-
-        int i = low;
-        int j = mid+1;
-
-        for (int k = low; k <= high; k++) {
-            if(i > mid){
-            a[k] = aux[j++];}
-            else if (j > high)
-            { a[k] = aux[i++];}
-            else if((aux[j].compareTo(aux[i]))<0) 
-            {a[k] = aux[j++];
-            counter++;}
-            else 
-            {a[k] = aux[i++];
-            counter++;}
-            
-        }
-        
-    }
-
 
 }
