@@ -14,6 +14,8 @@ import static org.junit.Assert.assertEquals;
 public class ParallelRecursiveMergeSortTest {
 
     private Integer[] testingArray1;
+    private Integer[] testingArray2;
+    private Integer[] testingArray3;
     private String[] emptyArray;
     private String[] unevenNumber;
     private StableTestClass[] stableTest1;
@@ -22,6 +24,8 @@ public class ParallelRecursiveMergeSortTest {
     @Before
     public void setup(){
         testingArray1 = new Integer[]{76,3,16,3,1,94,1,6,34,4,4,4,4,4,5};
+        testingArray2 = new Integer[]{10, 2, 2, 9, 1, 15, 15, 3, 8, 8, 8, 22, 0, -1, 100};
+        testingArray3 = new Integer[]{100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30,100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30,100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30,100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30};
         emptyArray = new String[]{};
         unevenNumber = new String[] {"Hello", "Heyo", "And", "Anders", "Polution", "And", "Pull"};
         stableTest1 = new StableTestClass[10];
@@ -111,20 +115,21 @@ public class ParallelRecursiveMergeSortTest {
     @Test
     public void parallelTestWithParallelMergeSort() {
 
-        int k = testingArray1.length;
+        int k = testingArray3.length;
         Integer[] sortedArray = new Integer[k];
 
-        System.arraycopy(testingArray1, 0, sortedArray, 0, k);
+        System.arraycopy(testingArray3, 0, sortedArray, 0, k);
 
         Arrays.sort(sortedArray);
         ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(1,true);
 
 
-        parallelSort.sort(testingArray1);
+        System.out.println(parallelSort.sort(testingArray3));
 
-        assertArrayEquals(sortedArray, testingArray1);
+        assertArrayEquals(sortedArray, testingArray3);
 
     }
+
 
 
 }

@@ -5,12 +5,12 @@ public class RecursiveMergeSort<T extends Comparable<T>> implements Sorter<T>{
 
     
     @Override
-    public void sort(T[] a){
+    public Integer sort(T[] a){
         this.counter = 0;
         T[] aux = a.clone();
         sort(a, aux, 0, a.length-1);
         //assert isSorted(a);
-        System.out.println(counter);
+        return counter;
     }
 
     private void sort(T[] a, T[] aux, int low, int high){
@@ -31,6 +31,7 @@ public class RecursiveMergeSort<T extends Comparable<T>> implements Sorter<T>{
 
 
     private void merge(T[] a, T[] aux, int low, int mid, int high){
+
 
         for (int k = low; k<=high; k++) {
             aux[k] = a[k];

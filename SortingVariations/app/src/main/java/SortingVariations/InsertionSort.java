@@ -3,7 +3,7 @@ package SortingVariations;
 public class InsertionSort<T extends Comparable<T>> {
 
 
-    public void sort(T[] a) {
+    public Integer sort(T[] a) {
         int n = a.length;
         for (int i = 1; i < n; i++) {
             for (int j = i; j > 0 && (a[j].compareTo(a[j-1])<0); j--) {
@@ -12,6 +12,8 @@ public class InsertionSort<T extends Comparable<T>> {
             assert isSorted(a, 0, i);
         }
         assert isSorted(a);
+        int dummy = 0;
+        return 0;
     }
     
 

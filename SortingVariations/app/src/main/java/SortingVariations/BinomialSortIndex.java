@@ -13,7 +13,7 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
     }
 
     @Override
-    public void sort(T[] a) {
+    public Integer sort(T[] a) {
         T[] aux = a.clone();
         counter = 0;
 
@@ -86,7 +86,7 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
         stack.peek()[1] = arr[1];
     }
 
-    System.out.println(counter);
+    return counter;
 }
 
     private int findSequence(int i, T[]a){

@@ -9,7 +9,7 @@ public class IterativeMergeSort<T extends Comparable<T>> implements Sorter<T>{
 
 
     @Override
-    public void sort(T[] a){
+    public Integer sort(T[] a){
         Stack<T[]> stack = new Stack<>();
         for (T comp : a) {
             // T[] comps = (T[]) new Object[]{comp};
@@ -31,6 +31,9 @@ public class IterativeMergeSort<T extends Comparable<T>> implements Sorter<T>{
         for(int i = 0; i<a.length; i++){
             a[i] = finishedArray[i]; // repopulating our initial array of items that we want to return?
         }
+
+        int dummy = 0;
+        return dummy;
     }
 
     public T[] merge(T[] a, T[]b){

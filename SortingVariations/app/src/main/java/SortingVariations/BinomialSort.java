@@ -16,10 +16,10 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
     }
 
     @Override
-    public void sort(T[] a) {
+    public Integer sort(T[] a) {
         counter = 0;
         if(a.length == 0){
-            return;
+            return 0;
         }
         //Setup
         Stack<T[]> stack = new Stack<>();
@@ -53,6 +53,7 @@ public class BinomialSort<T extends Comparable<T>> implements Sorter<T> {
         a[j] = finishedArray[j];
     }
 
+    return counter;
     }
 
     private T[] makeArray(T[] a, int i){

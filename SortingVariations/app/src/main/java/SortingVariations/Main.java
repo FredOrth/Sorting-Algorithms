@@ -23,7 +23,7 @@ public class Main {
             for(int i = 0; i<unsortedArray.length; i++){
                 unsortedArray[i] = scanner.nextInt();
             }
-            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff);
+            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false);
             sorter.sort(unsortedArray);
         }
 
@@ -41,7 +41,7 @@ public class Main {
             for(int i = 0; i<unsortedArray.length; i++){
                 unsortedArray[i] = scanner.nextInt();
             }
-            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff);
+            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false);
             sorter.sort(unsortedArray);
                 }  
             

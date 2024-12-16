@@ -36,7 +36,7 @@ public class SortingVariationsTest {
         Arrays.sort(sortedArray);
         RecursiveMergeSort<Integer> sorter = new RecursiveMergeSort<>();
 
-        sorter.sort(testingArray1);
+        System.out.println(sorter.sort(testingArray1));
         
         assertArrayEquals(sortedArray, testingArray1);
     }

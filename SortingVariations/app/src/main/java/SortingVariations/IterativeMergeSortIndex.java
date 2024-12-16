@@ -13,7 +13,7 @@ public class IterativeMergeSortIndex<T extends Comparable<T>> implements Sorter<
 
 
     @Override
-    public void sort(T[] a){
+    public Integer sort(T[] a){
         T[] aux = a.clone();
         Stack<Integer[]> stack = new Stack<>();
         int i = 0;
@@ -56,7 +56,7 @@ public class IterativeMergeSortIndex<T extends Comparable<T>> implements Sorter<
             stack.peek()[1] = arr[1];
         }
 
-
+        return counter;
     }
 
     private void merge(T[] a, T[] aux, int low, int mid, int high){

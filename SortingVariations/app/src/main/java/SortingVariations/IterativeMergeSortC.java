@@ -14,7 +14,7 @@ public class IterativeMergeSortC<T extends Comparable<T>> implements Sorter<T>{
 
 
     @Override
-    public void sort(T[] a){
+    public Integer sort(T[] a){
         Stack<T[]> stack = new Stack<>();
         int cutoffCounter = 0;
         InsertionSort<T> insertionSort = new InsertionSort<>();
@@ -53,6 +53,7 @@ public class IterativeMergeSortC<T extends Comparable<T>> implements Sorter<T>{
         }
         
         // System.out.println(counter);
+        return counter;
         //Maybe???
         // System.arraycopy(finishedArray, 0, a, 0, a.length);
     }

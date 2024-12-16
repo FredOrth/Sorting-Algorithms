@@ -9,14 +9,14 @@ public class InsertionMergeSort<T extends Comparable<T>> implements Sorter<T> {
     }
 
     @Override
-    public void sort(T[] a){
+    public Integer sort(T[] a){
         this.counter = 0;
 
         T[] aux = a.clone();
 
         sort(a, aux, 0, a.length-1);
 
-        System.out.print(counter);
+        return counter;
     }
 
 

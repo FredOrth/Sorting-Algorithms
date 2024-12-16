@@ -22,7 +22,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
 
 
     @Override
-    public void sort(T[] a) {
+    public Integer sort(T[] a) {
         ForkJoinPool pool = new ForkJoinPool();
         AtomicInteger comparisonCounter = new AtomicInteger(0);
         // invoke sort task
@@ -32,7 +32,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
         System.arraycopy(sorted, 0, a, 0, a.length);
 
         // Here we need to get the number of comparisons out to python somehow. Integer return instead of void?
-        System.out.println(comparisonCounter.get());
+        return comparisonCounter.get();
         // or just print?
 
     }
@@ -60,7 +60,8 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
                 // we can play which sequential algorithm we use here
                 T[] sorted = java.util.Arrays.copyOfRange(array, low, high + 1);
                 RecursiveMergeSort<T> sequentialSorter = new RecursiveMergeSort<>();
-                sequentialSorter.sort(sorted);
+
+                comparisonCounter.addAndGet(sequentialSorter.sort(sorted));
                 return sorted;
             }
 
@@ -86,6 +87,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
 
         // MErge method, without lo mid and high, could maybe use the same one as the recursive MergeSort but this was easier
         private T[] sequentialMerge(T[] left, T[] right) {
+
             T[] merged = java.util.Arrays.copyOf(left, left.length + right.length);
             int i = 0, j = 0, k = 0;
 
@@ -105,6 +107,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
         }
 
         private T[] parallelMerge(T[] left, T[] right) {
+
             T[] merged = java.util.Arrays.copyOf(left, left.length + right.length);
             int size = merged.length;
 
