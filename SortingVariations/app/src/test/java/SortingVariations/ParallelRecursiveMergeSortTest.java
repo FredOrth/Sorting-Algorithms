@@ -1,12 +1,15 @@
 package SortingVariations;
 
 import SortingVariations.Util.StableTestClass;
+import SortingVariations.Util.TwoSequenceSelect;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class ParallelRecursiveMergeSortTest {
 
@@ -47,7 +50,7 @@ public class ParallelRecursiveMergeSortTest {
         System.arraycopy(testingArray1, 0, sortedArray, 0, k);
 
         Arrays.sort(sortedArray);
-        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(10);
+        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(10,false);
 
 
         parallelSort.sort(testingArray1);
@@ -55,4 +58,73 @@ public class ParallelRecursiveMergeSortTest {
         assertArrayEquals(sortedArray, testingArray1);
 
     }
+
+    @Test
+    public void twoSequenceSelectSmallArrayTest(){
+        int[] aibi = TwoSequenceSelect.twoSequenceSelect(new Integer[]{1, 3, 5}, new Integer[]{2, 4, 6}, 4);
+
+        // Extract ja and jb from the result
+        int ja = aibi[0];
+        int jb = aibi[1];
+
+        // Arrays a and b
+        Integer[] a = new Integer[]{1, 3, 5};
+        Integer[] b = new Integer[]{2, 4, 6};
+
+        // Find the k-th element
+        Integer kthElement;
+        if (ja > 0 && (jb == 0 || a[ja - 1] <= b[jb - 1])) {
+            kthElement = b[jb - 1]; // Take from b
+        } else {
+            kthElement = a[ja - 1]; // Take from a
+        }
+
+        Assert.assertEquals((Integer)4,kthElement);
+
+    }
+
+    @Test
+    public void twoSequenceSelectLargerArrayTest(){
+
+        int[] aibi = TwoSequenceSelect.twoSequenceSelect(new Integer[]{1, 2,3,4, 5,6,7,8,9,10,11,12,13,14,19}, new Integer[]{2, 4, 6,13}, 16);
+
+        // Extract ja and jb from the result
+        int ja = aibi[0];
+        int jb = aibi[1];
+
+        // Arrays a and b
+        Integer[] a = new Integer[]{1, 2,3,4, 5,6,7,8,9,10,11,12,13,14,19};
+        Integer[] b = new Integer[]{2, 4, 6,13};
+
+        // Find the k-th element
+        Integer kthElement;
+        if (ja > 0 && (jb == 0 || a[ja - 1] <= b[jb - 1])) {
+            kthElement = b[jb - 1]; // Take from b
+        } else {
+            kthElement = a[ja - 1]; // Take from a
+        }
+
+        Assert.assertEquals((Integer)13,kthElement);
+
+    }
+
+    @Test
+    public void parallelTestWithParallelMergeSort() {
+
+        int k = testingArray1.length;
+        Integer[] sortedArray = new Integer[k];
+
+        System.arraycopy(testingArray1, 0, sortedArray, 0, k);
+
+        Arrays.sort(sortedArray);
+        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(1,true);
+
+
+        parallelSort.sort(testingArray1);
+
+        assertArrayEquals(sortedArray, testingArray1);
+
+    }
+
+
 }

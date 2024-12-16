@@ -1,11 +1,11 @@
 package SortingVariations;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.Future;
-import java.util.concurrent.RecursiveTask;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import SortingVariations.Benchmarking.*;
+import SortingVariations.Util.TwoSequenceSelect;
 
 import static SortingVariations.Benchmarking.SearchAndSort.fillIntArray;
 import static SortingVariations.Benchmarking.SearchAndSort.shuffle;
@@ -13,9 +13,11 @@ import static SortingVariations.Benchmarking.SearchAndSort.shuffle;
 public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sorter<T> {
 
     private final int threshold;
+    private final boolean useParallelMerging;
 
-    public ParallelRecursiveMergeSort(int threshold){
+    public ParallelRecursiveMergeSort(int threshold, boolean useParallelMerging){
         this.threshold=threshold;
+        this.useParallelMerging=useParallelMerging;
     }
 
 
@@ -23,31 +25,33 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
     public void sort(T[] a) {
         ForkJoinPool pool = new ForkJoinPool();
         AtomicInteger comparisonCounter = new AtomicInteger(0);
-        // invotke sort task
-        T[] sorted = pool.invoke(new MergeSortTask<>(a, 0, a.length - 1, threshold,comparisonCounter));
+        // invoke sort task
+        T[] sorted = pool.invoke(new MergeSortTask<>(a, 0, a.length - 1, threshold,comparisonCounter,useParallelMerging));
 
         // copy it back to the original array.
         System.arraycopy(sorted, 0, a, 0, a.length);
 
         // Here we need to get the number of comparisons out to python somehow. Integer return instead of void?
+        System.out.println(comparisonCounter.get());
         // or just print?
 
     }
-
-
 
     private static class MergeSortTask<T extends Comparable<T>> extends RecursiveTask<T[]> {
         private final T[] array;
         private final int low, high, threshold;
         private final AtomicInteger comparisonCounter;
+        private final boolean useParallelMerging;
 
-        public MergeSortTask(T[] array, int low, int high, int threshold,AtomicInteger comparisonCounter) {
+        public MergeSortTask(T[] array, int low, int high, int threshold,AtomicInteger comparisonCounter,boolean useParallelMerging) {
             this.array = array;
             this.low = low;
             this.high = high;
             this.threshold = threshold;
             this.comparisonCounter = comparisonCounter;
+            this.useParallelMerging = useParallelMerging;
         }
+
 
         @Override
         protected T[] compute() {
@@ -64,8 +68,8 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
             int mid = low + (high - low) / 2;
 
             // make subtasks
-            MergeSortTask<T> leftTask = new MergeSortTask<>(array, low, mid, threshold,comparisonCounter);
-            MergeSortTask<T> rightTask = new MergeSortTask<>(array, mid + 1, high, threshold,comparisonCounter);
+            MergeSortTask<T> leftTask = new MergeSortTask<>(array, low, mid, threshold,comparisonCounter,useParallelMerging);
+            MergeSortTask<T> rightTask = new MergeSortTask<>(array, mid + 1, high, threshold,comparisonCounter,useParallelMerging);
 
             // fork and compute subtasks
             leftTask.fork();
@@ -73,11 +77,15 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
             T[] leftResult = leftTask.join();      // Wait for the left half to finish
 
             // merge
-            return merge(leftResult, rightResult);
+            if (useParallelMerging) {
+                return parallelMerge(leftResult, rightResult);
+            } else {
+                return sequentialMerge(leftResult, rightResult);
+            }
         }
 
-        // MErge method, without lo mid and high, could mayve use the same one as the recursive MergeSort but this was easier
-        private T[] merge(T[] left, T[] right) {
+        // MErge method, without lo mid and high, could maybe use the same one as the recursive MergeSort but this was easier
+        private T[] sequentialMerge(T[] left, T[] right) {
             T[] merged = java.util.Arrays.copyOf(left, left.length + right.length);
             int i = 0, j = 0, k = 0;
 
@@ -95,50 +103,68 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
 
             return merged;
         }
-    }
+
+        private T[] parallelMerge(T[] left, T[] right) {
+            T[] merged = java.util.Arrays.copyOf(left, left.length + right.length);
+            int size = merged.length;
+
+            int p = Math.min(ForkJoinPool.commonPool().getParallelism(), merged.length);
+            // I believe this is a good way to find p, the getParallelism shoudl return the number of threads available
+            int chunkSize = (merged.length + p - 1) / p; // i think we ahve to be rounding up when dividing the tasks (i think, check this)
+
+            // ForkJoinPool pool = new ForkJoinPool();
+            List<RecursiveAction> tasks = new ArrayList<>();
 
 
+            for (int i = 0; i < p; i++) {
+                int start = i * chunkSize;
+                int end = Math.min(start + chunkSize - 1, size - 1);
 
-    // NOT WORKING YET, BUGS
-    public int[] twoSequenceSelect(T[] a,T[] b, int k){
-        int[] aiBi = new int[2];
+                // Find indices for this chunk using twoSequenceSelect
+                int[] startIndices = TwoSequenceSelect.twoSequenceSelect(left, right, start);
+                int[] endIndices = TwoSequenceSelect.twoSequenceSelect(left, right, end + 1);
 
+                int ia = startIndices[0];
+                int ib = startIndices[1];
+                int iaEnd = endIndices[0];
+                int ibEnd = endIndices[1];
 
-        int low = Math.max(0,k-b.length);
-        int high = Math.min(k,a.length);
+                // Create a task to merge this chunk
+                tasks.add(new RecursiveAction() {
 
-        while (low < high) {
-            int ja = (low + high) / 2; // Midpoint for binary search
-            int jb = k - ja;           // Complement index for b
+                    @Override
+                    protected void compute() {
+                        int i = start;
 
-            // Bounds checks and default behavior
-            T leftA = (ja > 0) ? a[ja - 1] : null; // Treat null as -∞
-            T rightA = (ja < a.length) ? a[ja] : null; // Treat null as +∞
-            T leftB = (jb > 0) ? b[jb - 1] : null; // Treat null as -∞
-            T rightB = (jb < b.length) ? b[jb] : null; // Treat null as +∞
+                        // Use an array to store mutable indices
+                        int[] indices = {ia, ib};
 
-            // Condition checks
-            if ((leftA == null || rightB == null || leftA.compareTo(rightB) <= 0) &&
-                    (leftB == null || rightA == null || leftB.compareTo(rightA) < 0)) {
-                // Both conditions are satisfied
-                aiBi[0] = ja;
-                aiBi[1] = jb;
-                return aiBi;
+                        while (indices[0] < iaEnd && indices[1] < ibEnd) {
+                            comparisonCounter.incrementAndGet();
+                            if (left[indices[0]].compareTo(right[indices[1]]) <= 0) {
+                                merged[i++] = left[indices[0]++];
+                            } else {
+                                merged[i++] = right[indices[1]++];
+                            }
+                        }
+
+                        while (indices[0] < iaEnd) merged[i++] = left[indices[0]++];
+                        while (indices[1] < ibEnd) merged[i++] = right[indices[1]++];
+                    }
+                });
+
             }
+            // Works statically i guess.
+            ForkJoinTask.invokeAll(tasks);
 
-            // Adjust binary search bounds
-            if (leftA != null && rightB != null && leftA.compareTo(rightB) > 0) {
-                high = ja; // ja is too large
-            } else {
-                low = ja + 1; // ja is too small
-            }
+            return merged;
         }
 
 
-        aiBi[0] = low;
-        aiBi[1] = k - low;
-        return aiBi;
     }
+
+
+
 
 
     // Benchmarking below:
@@ -161,7 +187,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
                     }
 
                     public double applyAsDouble(int i) {
-                        MergeSortTask<Integer> task = new MergeSortTask<>(intArray, 0, pSize - 1, threshold,comparisonCounter);
+                        MergeSortTask<Integer> task = new MergeSortTask<>(intArray, 0, pSize - 1, threshold,comparisonCounter,false);
                         pool.invoke(task);
                         //testSorted(intArray);
                         // only needed while testing
