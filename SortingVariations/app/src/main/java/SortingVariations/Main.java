@@ -1,9 +1,6 @@
 package SortingVariations;
 
-import java.util.Arrays;
 import java.util.Scanner;
-
-import SortingVariations.Util.StableTestClass;
 
 public class Main {
 
