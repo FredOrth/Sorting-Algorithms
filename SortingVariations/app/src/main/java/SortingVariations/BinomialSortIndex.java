@@ -3,7 +3,7 @@ package SortingVariations;
 import java.util.Stack;
 
 public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
-    private int counter = 0;
+    private int counter;
     private int cutoff;
     private boolean adaptive;
 
@@ -86,6 +86,7 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
         stack.peek()[1] = arr[1];
     }
 
+    System.out.println(counter);
 }
 
     private int findSequence(int i, T[]a){

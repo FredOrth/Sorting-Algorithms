@@ -57,8 +57,8 @@ public class IterativeMergeSort<T extends Comparable<T>> implements Sorter<T>{
                         aCounter++;
                     }else{
                         arrToReturn[aCounter+bCounter] = b[bCounter];
-                        System.out.println(a[aCounter]);
-                        System.out.println(b[bCounter]);
+                        // System.out.println(a[aCounter]);
+                        // System.out.println(b[bCounter]);
                         bCounter++;
                     }
             

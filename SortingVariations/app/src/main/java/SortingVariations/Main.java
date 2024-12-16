@@ -6,20 +6,18 @@ public class Main {
 
     
     public static void main(String[] args) {
-        String sortType = args[0];
 
         // int cutoff = args.length > 1 ? Integer.parseInt(args[1]) : 10;
         int cutoff = 10;
         // //String sortType = "recursive";
 
 
+        String sortType = args[0];
         Scanner scanner = new Scanner(System.in);
         // Integer[] arr = null;
         // int n = 0;
-        if(args.length == 1){
-            System.out.println("args length less than 1");
-        }
-        else if(args[1].equals("Cutoff")){
+
+        if(args[1].equals("cutoff")){
             cutoff = Integer.parseInt(args[2]);
             Integer[] unsortedArray = new Integer[scanner.nextInt()];
             for(int i = 0; i<unsortedArray.length; i++){

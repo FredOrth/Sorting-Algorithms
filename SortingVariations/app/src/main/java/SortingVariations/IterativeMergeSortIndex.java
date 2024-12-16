@@ -82,7 +82,7 @@ public class IterativeMergeSortIndex<T extends Comparable<T>> implements Sorter<
             counter++;}
             
         }
-        
+        System.out.println(counter);
     }
 
     private void insertionSort(T[] a, int low, int high) {

@@ -3,10 +3,12 @@ import numpy as np # type: ignore
 from typing import List
 import time
 import csv
+import string
+import random
 
 import subprocess
 #Timeout 
-TIMEOUT = 0.5
+TIMEOUT = 4
 SEED = 42
 #How many different values of M
 I_MAX = 30
@@ -14,7 +16,7 @@ I_MAX = 30
 M = 5
 
 rng = np.random.default_rng(SEED)
-NS: List[int] = [int(150* 1.37**i) \
+NS: List[int] = [int(1250* 1.39**i) \
     for i in range(I_MAX)]
 
 def run_java(jar: str, arg: str, input: str)->str:
@@ -33,6 +35,18 @@ INPUT_DATA: Dict[int, List[List[int]]] = {
 for n in NS
 }
 
+letters = string.ascii_lowercase
+
+def generateRandomLetters():
+    output = ""
+    length = rng.integers(1,20)
+    output = [letters[rng.integers(0, 26)] for _ in range(length)] 
+    return ''.join(output)
+
+INPUT_DATA_STRINGS: Dict[int, List[List[str]]] = {
+    n: [generateRandomLetters() for _ in range(M)] for n in NS
+}
+
 def measure(algorithm: str, jar: str, 
     input: List[int])->float:
     input_string: str = f'{len(input)}\n' + \
@@ -41,10 +55,9 @@ def measure(algorithm: str, jar: str,
     result_string: str = run_java(jar, algorithm, 
         input_string)
     end: float = time.time()
-    # assert result_string.strip() == 'null'
     return end - start, result_string
     
-def benchmark(algorithm: str, jar: str)-> \
+def benchmark(algorithm: str, jar: str, integers: bool)-> \
     List[Tuple[int,float, int]]:
     results: List[Tuple[int,float,int]] = list()
 
@@ -52,10 +65,13 @@ def benchmark(algorithm: str, jar: str)-> \
         try: 
             result_n: List[Tuple[int,float, int]] = list()
             for i in range(M):
-                input: List[int] = INPUT_DATA[n][i]
+                if integers:
+                    input: List[int] = INPUT_DATA[n][i]
+                else:
+                    input: List[str] = INPUT_DATA_STRINGS[n][i]
                 diff, comp = measure(algorithm,jar,
                     input)
-                result_n.append((float(n),float(diff), float(comp)))
+                result_n.append((float(n),float(diff),float(comp)))
             results += result_n
         except subprocess.TimeoutExpired:
             break
@@ -67,8 +83,10 @@ def benchmark(algorithm: str, jar: str)-> \
 
 
 INSTANCES_C: List[Tuple[str,str]]= {
-    # ("IterativeMergeSort Cutoff", "SortingVariations/app/build/libs/app.jar"),
-    ("insertionMergeSort Cutoff", "SortingVariations/app/build/libs/app.jar")
+    ("IterativeMergeSort cutoff", "SortingVariations/app/build/libs/app.jar"),
+    ("insertionMergeSort cutoff", "SortingVariations/app/build/libs/app.jar"),
+    ("BinomialSortAdaptive cutoff", "SortingVariations/app/build/libs/app.jar"),
+    ("BinomialSortNonAdaptive cutoff", "SortingVariations/app/build/libs/app.jar")
 }
 
 LIST_OF_CUTOFFVALUES: list[int] = {
@@ -90,8 +108,7 @@ if __name__ == '__main__':
         for algorithm, jar in INSTANCES_C:
             results: List[Tuple[int,float]] = []
             for cutoff in LIST_OF_CUTOFFVALUES:
-                # print(f"{algorithm} {cutoff}",jar)
-                for n,t,c in benchmark(f"{algorithm} {cutoff}",jar):
+                for n,t,c in benchmark(f"{algorithm} {cutoff}",jar, True):
                     writer.writerow({ 
                         'algorithm' : algorithm,
                         'n' : n,
@@ -99,3 +116,18 @@ if __name__ == '__main__':
                         'comparisons' : c,
                         'cutoff' : cutoff
                     })
+    # with open("resultsCutOffValuesString.csv", "w") as f:
+    #     writer = csv.DictWriter(f, 
+    #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
+    #     writer.writeheader()
+    #     for algorithm, jar in INSTANCES_C:
+    #         results: List[Tuple[int,float]] = []
+    #         for cutoff in LIST_OF_CUTOFFVALUES:
+    #             for n,t,c in benchmark(f"{algorithm} {cutoff}",jar, False):
+    #                 writer.writerow({ 
+    #                     'algorithm' : algorithm,
+    #                     'n' : n,
+    #                     'time' : t,
+    #                     'comparisons' : c,
+    #                     'cutoff' : cutoff
+    #                 })
