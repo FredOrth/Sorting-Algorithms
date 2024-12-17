@@ -96,18 +96,20 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
         if (j == a.length - 1) {
             return 1;
         }
-
         if (a[j].compareTo(a[j + 1]) <= 0) {
             j++;
             counter++;
             while (j < a.length - 1) {
                 counter++;
-                if (a[j].compareTo(a[j + 1]) < 0) {
+                if (a[j].compareTo(a[j + 1]) <= 0) {
                     j++;
                 } else {
                     j++;
                     break;
                 }
+            }
+            if (j == a.length - 1 && a[j - 1].compareTo(a[j]) <= 0) {
+                j++;
             }
         } else {
             j++;
@@ -117,17 +119,24 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
                 if (a[j].compareTo(a[j + 1]) > 0) {
                     j++;
                 } else {
+                    j++;
                     break;
                 }
             }
-            j++;
-            for (int k = 0; k < (j - i) / 2; k++) {
-                T temp = a[i + k];
-                a[i + k] = a[j - k - 1];
-                a[j - k - 1] = temp;
+            if (j == a.length - 1 && a[j - 1].compareTo(a[j]) > 0) {
+                j++;
+            }
+            if (j >= cutoff) {
+                for (int k = 0; k < (j - i) / 2; k++) {
+                    T smallElm = a[i + k];
+                    a[i + k] = a[j - k - 1];
+                    a[j - k - 1] = smallElm;
+                }
             }
         }
+
         return j - i;
+
     }
 
     private void merge(T[] a, T[] aux, int low, int mid, int high) {
