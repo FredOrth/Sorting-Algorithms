@@ -54,7 +54,7 @@ public class ParallelRecursiveMergeSortTest {
         System.arraycopy(testingArray1, 0, sortedArray, 0, k);
 
         Arrays.sort(sortedArray);
-        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(10,false);
+        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(10,false,0);
 
 
         parallelSort.sort(testingArray1);
@@ -121,13 +121,22 @@ public class ParallelRecursiveMergeSortTest {
         System.arraycopy(testingArray3, 0, sortedArray, 0, k);
 
         Arrays.sort(sortedArray);
-        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(1,true);
+        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(1,true,0);
 
 
         System.out.println(parallelSort.sort(testingArray3));
 
         assertArrayEquals(sortedArray, testingArray3);
 
+    }
+
+    @Test
+    public void testWithPythonArray() {
+        // simulate random array from Python
+        Integer[] inputArray = new Integer[]{76, 3, 16, 3, 1, 94, 1, 6, 34, 4, 4, 4, 4, 4, 5};
+
+        // threshold = 10, Number of threads = 4
+        ParallelRecursiveMergeSort.benchmarkSortingWithSetup(inputArray,100,0);
     }
 
 

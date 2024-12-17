@@ -1,6 +1,7 @@
 package SortingVariations;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -14,20 +15,24 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
 
     private final int threshold;
     private final boolean useParallelMerging;
+    private final int numberOfThreads;
 
-    public ParallelRecursiveMergeSort(int threshold, boolean useParallelMerging){
+    public ParallelRecursiveMergeSort(int threshold, boolean useParallelMerging, int numberOfThreads) {
         this.threshold=threshold;
         this.useParallelMerging=useParallelMerging;
+        this.numberOfThreads=numberOfThreads;
     }
 
 
     @Override
     public Integer sort(T[] a) {
-        ForkJoinPool pool = new ForkJoinPool();
+        ForkJoinPool pool = (numberOfThreads > 0)
+                ? new ForkJoinPool(numberOfThreads) // Custom number of threads
+                : new ForkJoinPool(); // Use default parallelism (available cores)
         AtomicInteger comparisonCounter = new AtomicInteger(0);
         // invoke sort task
         T[] sorted = pool.invoke(new MergeSortTask<>(a, 0, a.length - 1, threshold,comparisonCounter,useParallelMerging));
-
+        pool.shutdown();
         // copy it back to the original array.
         System.arraycopy(sorted, 0, a, 0, a.length);
 
@@ -59,7 +64,9 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
                 // Sequential sort for small subarrays
                 // we can play which sequential algorithm we use here
                 T[] sorted = java.util.Arrays.copyOfRange(array, low, high + 1);
-                RecursiveMergeSort<T> sequentialSorter = new RecursiveMergeSort<>();
+
+               /* RecursiveMergeSort<T> sequentialSorter = new RecursiveMergeSort<>();*/
+                InsertionSort sequentialSorter = new InsertionSort();
 
                 comparisonCounter.addAndGet(sequentialSorter.sort(sorted));
                 return sorted;
@@ -164,6 +171,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
         }
 
 
+
     }
 
 
@@ -199,6 +207,56 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
                     }
                 }
         );
+    }
+
+    public static void benchmarkSortingWithSetup(Integer[] inputArray, int threshold, int numberOfThreads) {
+        int n = inputArray.length;
+
+        // Benchmark ParallelRecursiveMergeSort
+        Benchmark.Mark8Setup("ParallelRecursiveMergeSort", "n=" + n + ", threshold=" + threshold,
+                new Benchmarkable() {
+                    private Integer[] arrayCopy;
+
+                    @Override
+                    public void setup() {
+                        // Reset the array before each iteration
+                        arrayCopy = inputArray.clone();
+                    }
+
+                    @Override
+                    public double applyAsDouble(int i) {
+                        ForkJoinPool pool = (numberOfThreads > 0)
+                                ? new ForkJoinPool(numberOfThreads) // Custom number of threads
+                                : new ForkJoinPool(); // Use default parallelism (available cores)
+                        try {
+                            ParallelRecursiveMergeSort<Integer> parallelSort =
+                                    new ParallelRecursiveMergeSort<>(threshold, false, numberOfThreads);
+                            pool.invoke(new ParallelRecursiveMergeSort.MergeSortTask<>(
+                                    arrayCopy, 0, arrayCopy.length - 1, threshold, new AtomicInteger(0), false));
+                        } finally {
+                            pool.shutdown(); // Cleanup ForkJoinPool threads
+                        }
+                        return 0.0; // Dummy return value
+                    }
+                });
+
+        // Benchmark Arrays.parallelSort
+        Benchmark.Mark8Setup("Arrays.parallelSort", "n=" + n + ", threshold=" + threshold,
+                new Benchmarkable() {
+                    private Integer[] arrayCopy;
+
+                    @Override
+                    public void setup() {
+                        // Reset the array before each iteration
+                        arrayCopy = inputArray.clone();
+                    }
+
+                    @Override
+                    public double applyAsDouble(int i) {
+                        Arrays.parallelSort(arrayCopy);
+                        return 0.0; // Dummy return value
+                    }
+                });
     }
 
 }

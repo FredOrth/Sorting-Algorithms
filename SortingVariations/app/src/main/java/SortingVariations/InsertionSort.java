@@ -4,16 +4,18 @@ public class InsertionSort<T extends Comparable<T>> {
 
 
     public Integer sort(T[] a) {
+        int comparisonCounter = 0;
         int n = a.length;
         for (int i = 1; i < n; i++) {
             for (int j = i; j > 0 && (a[j].compareTo(a[j-1])<0); j--) {
+                comparisonCounter++;
                 exch(a, j, j-1);
             }
             assert isSorted(a, 0, i);
         }
-        assert isSorted(a);
-        int dummy = 0;
-        return 0;
+        /*assert isSorted(a);*/
+
+        return comparisonCounter;
     }
     
 

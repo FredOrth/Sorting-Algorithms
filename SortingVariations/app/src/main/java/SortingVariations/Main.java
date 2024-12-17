@@ -19,7 +19,7 @@ public class Main {
         // int n = 0;
 
         if(args.length == 1){
-            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,1,false);
+            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,1,false,0);
             int n = scanner.nextInt();
             Integer[] arr = new Integer[n];
             for(int i = 0; i<n; i++){
@@ -30,7 +30,7 @@ public class Main {
 
         else if(args[1].equals("cutoff")){
             int cutoff = Integer.parseInt(args[2]);
-            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false);
+            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,0);
             while(scanner.hasNext()){
                 int n = scanner.nextInt();
                 Integer[] arr = new Integer[n];
