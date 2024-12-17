@@ -18,14 +18,23 @@ public class Main {
         // Integer[] arr = null;
         // int n = 0;
 
-        if(args.length == 1){
+        if(args[0].equals("recursiveMergeSort")){
+            if(args[1].equals("INTEGERS")){
             Sorter<Integer> sorter = SorterFactory.getSorter(sortType,1,false,0);
             int n = scanner.nextInt();
             Integer[] arr = new Integer[n];
             for(int i = 0; i<n; i++){
                 arr[i] = scanner.nextInt();
             }
-            System.out.println(sorter.sort(arr));
+            System.out.print(sorter.sort(arr));
+        }
+            else{
+                Sorter<String> sorter = SorterFactory.getSorter(sortType,1,false,0);
+            int n = scanner.nextInt();
+            scanner.nextLine();
+            String[] arr = scanner.nextLine().split(" ");
+            System.out.print(sorter.sort(arr));
+            }
         }
 
         else if(args[1].equals("cutoff")){

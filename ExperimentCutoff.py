@@ -19,30 +19,35 @@ def run_java(jar: str, arg: str, input: str)->str:
     return output.decode('utf-8') 
 
 csv.field_size_limit(100000000)
-INPUT_DATA: Dict[int, List[List[int]]] ={}
+INPUT_DATA_INTEGER: Dict[int, List[List[int]]] ={}
+INPUT_DATA_STRING: Dict[int, List[List[str]]] ={}
+INPUT_DATA_PREFIX: Dict[int, List[List[str]]] ={}
 
-with open("RandomInput.csv", "r") as r:
+with open("RandomInputIntegers.csv", "r") as r:
     reader = csv.DictReader(r)
     
     for row in reader:
-        print(row["n"])
         n = int(row["n"])
         values = list(map(int, row["values"].split()))
-        if n not in INPUT_DATA:
-                INPUT_DATA[n] = []
-        INPUT_DATA[n].append(values)
-
-letters = string.ascii_lowercase
-
-# def generateRandomLetters():
-#     output = ""
-#     length = rng.integers(1,20)
-#     output = [letters[rng.integers(0, 26)] for _ in range(length)] 
-#     return ''.join(output)
-
-# INPUT_DATA_STRINGS: Dict[int, List[List[str]]] = {
-#     n: [generateRandomLetters() for _ in range(M)] for n in NS
-# }
+        if n not in INPUT_DATA_INTEGER:
+                INPUT_DATA_INTEGER[n] = []
+        INPUT_DATA_INTEGER[n].append(values)
+        
+with open("RandomInputString.csv", "r") as r:
+    reader = csv.DictReader(r)
+    
+    for row in reader:
+        n = int(row["n"])
+        prefix = "algos"
+        values = row["values"].split()
+        if n not in INPUT_DATA_STRING:
+                INPUT_DATA_STRING[n] = []
+        INPUT_DATA_STRING[n].append(values)
+        if n not in INPUT_DATA_PREFIX:
+            INPUT_DATA_PREFIX[n] = []
+        prefixed_values = [prefix + str(value) for value in values]
+        INPUT_DATA_PREFIX[n].append(prefixed_values)
+print("done")
 
 def measure(algorithm: str, jar: str, 
     input: List[int])->float:
@@ -59,8 +64,14 @@ def measure(algorithm: str, jar: str,
 def benchmark(algorithm: str, jar: str)-> \
     List[Tuple[int,float, int]]:
     results: List[Tuple[int,float,int]] = list()
+    if(algorithm.split()[1] == "INTEGERS"):
+        data = INPUT_DATA_INTEGER
+    elif(algorithm.split()[1] == "STRINGS"):
+        data = INPUT_DATA_STRING
+    else:
+        data = INPUT_DATA_PREFIX
 
-    for key, valueList in INPUT_DATA.items():
+    for key, valueList in data.items():
         for value in valueList:
             try: 
                 diff, comp = measure(algorithm,jar,
@@ -83,7 +94,9 @@ INSTANCES_C: List[Tuple[str,str]]= {
 }
 
 INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
-    ("recursiveMergeSort", "SortingVariations/app/build/libs/app.jar")
+    # ("recursiveMergeSort INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort STRINGS", "SortingVariations/app/build/libs/app.jar"),
+    # ("recursiveMergeSort PREFIX", "SortingVariations/app/build/libs/app.jar"),
 }
 
 LIST_OF_CUTOFFVALUES: list[int] = {
@@ -104,6 +117,7 @@ if __name__ == '__main__':
         writer.writeheader()
         for algorithm, jar in INSTANCES_MERGESORT_BASECASE:
             results: List[Tuple[int,float]] = []
+            print("done")
             for n,t,c in benchmark(f"{algorithm}",jar):
                 writer.writerow({ 
                     'algorithm' : algorithm,
