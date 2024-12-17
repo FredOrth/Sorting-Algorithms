@@ -21,10 +21,10 @@ public class Main {
         String[] testArray3 = {"f","a","l","k","e","n"}; // a, e, f, k, l, n
         String[] testArray4 = { "n", "l", "a", "k", "e", "f" }; // a, e, f, k, l, n
 
-        System.out.println("Starting new sorting: testArray1");
-        LevelSort<Integer> sorterAdaptive = new LevelSort<>(LevelSort.sortMode.adaptive, 4);
-        sorterAdaptive.sort(testArray1);
-        System.out.println("ADAPTIVE sorted: " + Arrays.toString(testArray1));
+        // System.out.println("Starting new sorting: testArray1");
+        // LevelSort<Integer> sorterAdaptive = new LevelSort<>(LevelSort.sortMode.adaptive, 4);
+        // sorterAdaptive.sort(testArray1);
+        // System.out.println("ADAPTIVE sorted: " + Arrays.toString(testArray1));
         
         // System.out.println("Starting new sorting: ...");
         // LevelSort<Integer> sorterNonAdaptive = new LevelSort<>(LevelSort.sortMode.nonAdaptive, 4);
@@ -62,13 +62,40 @@ public class Main {
         // sorterAdaptive2.sort(testArray4);
         // System.out.println("ADAPTIVE sorted: " + Arrays.toString(testArray4));
 
+        System.out.println("\n" + "Starting new sorting: testArray1");
+        LevelSortIndex<Integer> indexSorterAdaptive2 = new LevelSortIndex<>(4, true);
+        indexSorterAdaptive2.sort(testArray1);
+        System.out.println("ADAPTIVE sorted: " + Arrays.toString(testArray1));
+
+        System.out.println("\n" + "Starting new sorting: testArray1");
+        LevelSortIndex<Integer> indexSorterNonAdaptive2 = new LevelSortIndex<>(4, true);
+        indexSorterNonAdaptive2.sort(testArray1);
+        System.out.println("NONADAPTIVE sorted: " + Arrays.toString(testArray1));
+
+        System.out.println("\n" + "Starting new sorting: testArray2");
+        indexSorterAdaptive2.sort(testArray2);
+        System.out.println("ADAPTIVE sorted: " + Arrays.toString(testArray2));
+
+        System.out.println("\n" + "Starting new sorting: testArray2");
+        indexSorterNonAdaptive2.sort(testArray2);
+        System.out.println("NONADAPTIVE sorted: " + Arrays.toString(testArray2));
+
         System.out.println("\n" + //
-                "Starting new sorting: TestArray4");
+                "Starting new sorting: testArray4");
         indexSorterNonadaptive.sort(testArray4);
         System.out.println("Index-NON-ADAPTIVE sorted: " + Arrays.toString(testArray4));
 
-        System.out.println("Starting new sorting: ...");
+        System.out.println("Starting new sorting: testArray4");
         indexSorterAdaptive.sort(testArray4);
         System.out.println("Inxed-ADAPTIVE sorted: " + Arrays.toString(testArray4));
+
+        System.out.println("\n" + //
+                "Starting new sorting: testArray3");
+        indexSorterNonadaptive.sort(testArray3);
+        System.out.println("Index-NON-ADAPTIVE sorted: " + Arrays.toString(testArray3));
+
+        System.out.println("Starting new sorting: testArray3");
+        indexSorterAdaptive.sort(testArray3);
+        System.out.println("Inxed-ADAPTIVE sorted: " + Arrays.toString(testArray3));
     }
 }
