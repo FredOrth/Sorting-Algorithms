@@ -78,6 +78,10 @@ public class BinomialSortingIndexTest {
         BinomialSortIndex<Integer> bioAdaptive = new BinomialSortIndex<>(2, true);
 
         bioAdaptive.sort(testingArray1);
+
+        for(int i = 0; i<testingArray1.length; i++){
+            System.out.println(testingArray1[i]);
+        }
         
         assertArrayEquals(sortedArray, testingArray1);
 
