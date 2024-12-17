@@ -16,10 +16,13 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
     public Integer sort(T[] a) {
         T[] aux = a.clone();
         counter = 0;
+        int test = 0;
 
         Stack<Integer[]> stack = new Stack<>();
         int i = 0;
         while(i<a.length){
+            test++;
+            System.out.println(test);
             Integer[] arr = new Integer[2];
             arr[0] = i; 
 
@@ -27,7 +30,7 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
                 int sequence = findSequence(i, a);
                 if(sequence >= cutoff){
                 arr[1] = i + sequence-1;
-                i += sequence-1;
+                i += sequence;
                 }else{
                     if(i + cutoff >= a.length){
                         arr[1] = a.length-1;
@@ -36,7 +39,7 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
                     }else{
                     arr[1] = i + cutoff-1;
                     insertionSort(a, i, i+cutoff-1);
-                    i+=cutoff-1;
+                    i+=cutoff;
                 }
                 }
             }else{
@@ -50,8 +53,6 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
                     i+=cutoff-1;
                 }
                 }
-
-            i++;
             
             while(!stack.isEmpty()){
                 Integer[] topStack = stack.peek();
@@ -99,12 +100,15 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
             counter++;
             while(j<a.length-1){
                 counter++;
-                if(a[j].compareTo(a[j+1])<0){
+                if(a[j].compareTo(a[j+1])<=0){
                     j++;
                 }else{
                     j++;
                     break;
                 }
+            }
+            if(j == a.length-1 && a[j-1].compareTo(a[j])<=0){
+                j++;
             }
         }else{
             j++;
@@ -114,16 +118,22 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
                 if(a[j].compareTo(a[j+1])> 0){
                     j++;
                 }else{
+                    j++;
                     break;
                 }
             }
-            j++;
+            if(j == a.length-1 && a[j-1].compareTo(a[j])> 0){
+                    j++;
+                }
+            if(j>= cutoff){
             for(int k= 0; k<(j-i)/2; k++){
                 T smallElm = a[i+k];
                 a[i+k] = a[j-k-1];
                 a[j-k-1] = smallElm; 
             }
         }
+        }
+        
         return j-i;
         
     }

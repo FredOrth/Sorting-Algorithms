@@ -5,6 +5,7 @@
 // import java.util.Stack;
 
 // import org.checkerframework.checker.units.qual.s;
+// import org.checkerframework.checker.units.qual.s;
 
 
 // public class LevelSort<T extends Comparable<T>> implements Sorter<T> {
@@ -36,7 +37,20 @@
 
 //         //With current knowledge, to also keep a stack of levels, which corresponds to each run, if we don't use a Run class atm.
 //         Stack<Integer> stackOfLevels = new Stack<>();
+//         //With current knowledge, to also keep a stack of levels, which corresponds to each run, if we don't use a Run class atm.
+//         Stack<Integer> stackOfLevels = new Stack<>();
 
+//         //looking for pre-sorted runs
+//         int start = 0;
+//         // for (int i = 1; i <= a.length; i++) {
+//         //     //a run end is found if we reach the end of the array, or the next element(run) is smaller.
+//         //     if (i == a.length || a[i].compareTo(a[i-1]) < -0) {
+//         //         stackOfRuns.push(new int[] {start, i});
+//         //         stackOfLevels.push(-1); //placeholder level
+//         //     }
+//         //     //next run start set to i
+//         //     start = i;
+//         // }
 //         //looking for pre-sorted runs
 //         int start = 0;
 //         // for (int i = 1; i <= a.length; i++) {
@@ -230,6 +244,8 @@
 //         //boundary determination
 //         int level = 64 - Long.numberOfLeadingZeros(xor);
 
+//         return level;
+//     }
 //         return level;
 //     }
     
