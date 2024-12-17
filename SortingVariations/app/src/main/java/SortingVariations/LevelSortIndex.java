@@ -13,7 +13,7 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
     }
 
     @Override
-    public void sort(T[] a) {
+    public Integer sort(T[] a) {
         T[] aux = a.clone();
         counter = 0;
 
@@ -88,6 +88,7 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
             merge(a, aux, stack.peek()[0], run[0] - 1, run[1]);
             stack.peek()[1] = run[1];
         }
+        return counter;
     }
 
     private int findSequence(int i, T[] a) {
