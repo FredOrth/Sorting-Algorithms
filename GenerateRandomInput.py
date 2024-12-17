@@ -1,0 +1,27 @@
+from typing import List
+import numpy as np  # type: ignore
+import csv
+
+# Timeout for subprocesses
+TIMEOUT = 60
+# Seed for reproducibility
+SEED = 42
+# Maximum iterations for scaling `NS`
+I_MAX = 35
+# Number of repetitions per value of `n`
+M = 3
+
+rng = np.random.default_rng(SEED)
+
+NS: List[int] = [int(30 * 1.41**i) for i in range(I_MAX)]
+
+with open('RandomInput.csv', 'w', newline='') as f:
+    writer = csv.writer(f) 
+
+    #Header
+    writer.writerow(["n", "values"])
+
+    # I_MAX M times per value and create a random input of ints
+    for i in range(I_MAX):
+        for _ in range(M):  
+            writer.writerow([NS[i], " ".join(str(rng.integers(1, 2**28)) for _ in range(NS[i]))])

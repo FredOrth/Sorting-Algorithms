@@ -6,16 +6,10 @@ import csv
 
 import subprocess
 # Timeout
-TIMEOUT = 35
-SEED = 42
-# How many different values of M
-I_MAX = 30
-# How many repetitions per m
-M = 5
+TIMEOUT = 45
 
-rng = np.random.default_rng(SEED)
-NS: List[int] = [int(850 * 1.45**i) \
-    for i in range(I_MAX)]
+# NS: List[int] = [int(850 * 1.45**i) \
+#     for i in range(I_MAX)]
 
 def run_java(jar: str, arg: str, input: str)->str:
     p = subprocess.Popen(['java','-Xmx8g', '-jar',jar,arg], 
@@ -25,12 +19,23 @@ def run_java(jar: str, arg: str, input: str)->str:
         timeout=TIMEOUT)
     return output.decode('utf-8') 
 
+csv.field_size_limit(100000000)
+INPUT_DATA: Dict[int, List[List[int]]] ={}
 
-INPUT_DATA: Dict[int, List[List[int]]] = {
-    n : [rng.integers(1, 2**28, n) \
-        for _ in range(M)] \
-for n in NS
-}
+
+with open("RandomInput.csv", "r") as r:
+    reader = csv.DictReader(r)
+    #Make sure size limit for csv is big enough
+    
+    for row in reader:
+        print(row["n"])
+        n = int(row["n"])
+        values = list(map(int, row["values"].split()))
+        if n not in INPUT_DATA:
+                INPUT_DATA[n] = []
+        INPUT_DATA[n].append(values)
+
+
 
 def measure(algorithm: str, jar: str, 
     input: List[int])->float:
@@ -47,17 +52,14 @@ def benchmark(algorithm: str, jar: str)-> \
     List[Tuple[int,float, int]]:
     results: List[Tuple[int,float,int]] = list()
 
-    for n in NS:
-        try: 
-            result_n: List[Tuple[int,float, int]] = list()
-            for i in range(M):
-                input: List[int] = INPUT_DATA[n][i]
+    for key, valueList in INPUT_DATA.items():
+        for value in valueList:
+            try: 
                 diff, comp = measure(algorithm,jar,
-                    input)
-                result_n.append((n,diff, comp))
-            results += result_n
-        except subprocess.TimeoutExpired:
-            break
+                        value)
+                results.append((key,diff, comp))
+            except subprocess.TimeoutExpired:
+                break
     return results
 
 # def build_java_project():
@@ -94,19 +96,19 @@ if __name__ == '__main__':
                     'time' : t,
                     'comparisons' : c
                 })
-    with open('resultsCutoffValues.csv','w') as f:
-        writer = csv.DictWriter(f, 
-            fieldnames = ['algorithm','n','time', 'comparisons'])
-        writer.writeheader()
-        for algorithm, jar in INSTANCES:
-            results: List[Tuple[int,float]] = \
-                benchmark(algorithm,jar)
-            for (n,t,c,cu) in results:
-                # print(f"This is n: {n}, this is the time {t}, this is number of comparisons {c}")
-                writer.writerow({ 
-                    'algorithm' : algorithm,
-                    'n' : n,
-                    'time' : t,
-                    'comparisons' : c,
-                    'cutofff' : cu
-                })
+    # with open('resultsCutoffValues.csv','w') as f:
+    #     writer = csv.DictWriter(f, 
+    #         fieldnames = ['algorithm','n','time', 'comparisons'])
+    #     writer.writeheader()
+    #     for algorithm, jar in INSTANCES:
+    #         results: List[Tuple[int,float]] = \
+    #             benchmark(algorithm,jar)
+    #         for (n,t,c,cu) in results:
+    #             # print(f"This is n: {n}, this is the time {t}, this is number of comparisons {c}")
+    #             writer.writerow({ 
+    #                 'algorithm' : algorithm,
+    #                 'n' : n,
+    #                 'time' : t,
+    #                 'comparisons' : c,
+    #                 'cutofff' : cu
+    #             })

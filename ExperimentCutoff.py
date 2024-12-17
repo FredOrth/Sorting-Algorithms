@@ -4,20 +4,10 @@ from typing import List
 import time
 import csv
 import string
-import random
 
 import subprocess
 #Timeout 
-TIMEOUT = 30
-SEED = 42
-#How many different values of M
-I_MAX = 60
-#How many repetitions per m
-M = 5
-
-rng = np.random.default_rng(SEED)
-NS: List[int] = [int(30 * 1.41**i) \
-    for i in range(I_MAX)]
+TIMEOUT = 60
 
 def run_java(jar: str, arg: str, input: str)->str:
     args = arg.split()
@@ -28,24 +18,31 @@ def run_java(jar: str, arg: str, input: str)->str:
         timeout=TIMEOUT)
     return output.decode('utf-8') 
 
+csv.field_size_limit(100000000)
+INPUT_DATA: Dict[int, List[List[int]]] ={}
 
-INPUT_DATA: Dict[int, List[List[int]]] = {
-    n : [rng.integers(1, 2**28, n) \
-        for _ in range(M)] \
-for n in NS
-}
+with open("RandomInput.csv", "r") as r:
+    reader = csv.DictReader(r)
+    
+    for row in reader:
+        print(row["n"])
+        n = int(row["n"])
+        values = list(map(int, row["values"].split()))
+        if n not in INPUT_DATA:
+                INPUT_DATA[n] = []
+        INPUT_DATA[n].append(values)
 
 letters = string.ascii_lowercase
 
-def generateRandomLetters():
-    output = ""
-    length = rng.integers(1,20)
-    output = [letters[rng.integers(0, 26)] for _ in range(length)] 
-    return ''.join(output)
+# def generateRandomLetters():
+#     output = ""
+#     length = rng.integers(1,20)
+#     output = [letters[rng.integers(0, 26)] for _ in range(length)] 
+#     return ''.join(output)
 
-INPUT_DATA_STRINGS: Dict[int, List[List[str]]] = {
-    n: [generateRandomLetters() for _ in range(M)] for n in NS
-}
+# INPUT_DATA_STRINGS: Dict[int, List[List[str]]] = {
+#     n: [generateRandomLetters() for _ in range(M)] for n in NS
+# }
 
 def measure(algorithm: str, jar: str, 
     input: List[int])->float:
@@ -57,25 +54,20 @@ def measure(algorithm: str, jar: str,
     end: float = time.time()
     return end - start, result_string
     
-def benchmark(algorithm: str, jar: str, integers: bool)-> \
+
+
+def benchmark(algorithm: str, jar: str)-> \
     List[Tuple[int,float, int]]:
     results: List[Tuple[int,float,int]] = list()
 
-    for n in NS:
-        try: 
-            result_n: List[Tuple[int,float, int]] = list()
-            for i in range(M):
-                if integers:
-                    input: List[int] = INPUT_DATA[n][i]
-                else:
-                    input: List[str] = INPUT_DATA_STRINGS[n][i]
-                
+    for key, valueList in INPUT_DATA.items():
+        for value in valueList:
+            try: 
                 diff, comp = measure(algorithm,jar,
-                    input)
-                result_n.append((float(n),float(diff),float(comp)))
-            results += result_n
-        except subprocess.TimeoutExpired:
-            break
+                        value)
+                results.append((int(key), float(diff), int(comp)))
+            except subprocess.TimeoutExpired:
+                break
     return results
 
 # def build_java_project():
@@ -112,7 +104,7 @@ if __name__ == '__main__':
         writer.writeheader()
         for algorithm, jar in INSTANCES_MERGESORT_BASECASE:
             results: List[Tuple[int,float]] = []
-            for n,t,c in benchmark(f"{algorithm}",jar, True):
+            for n,t,c in benchmark(f"{algorithm}",jar):
                 writer.writerow({ 
                     'algorithm' : algorithm,
                     'n' : n,
