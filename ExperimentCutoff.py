@@ -94,9 +94,9 @@ INSTANCES_C: List[Tuple[str,str]]= {
 }
 
 INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
-    # ("recursiveMergeSort INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort INTEGERS", "SortingVariations/app/build/libs/app.jar"),
     ("recursiveMergeSort STRINGS", "SortingVariations/app/build/libs/app.jar"),
-    # ("recursiveMergeSort PREFIX", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort PREFIX", "SortingVariations/app/build/libs/app.jar"),
 }
 
 LIST_OF_CUTOFFVALUES: list[int] = {
