@@ -2,8 +2,6 @@ package SortingVariations;
 
 import java.util.Arrays;
 import java.util.Scanner;
-
-import SortingVariations.LevelSort.sortMode;
 import SortingVariations.Util.StableTestClass;
 
 public class Main {
