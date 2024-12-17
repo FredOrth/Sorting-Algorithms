@@ -1,8 +1,6 @@
 package SortingVariations;
 
-import java.util.Arrays;
 import java.util.Scanner;
-import SortingVariations.Util.StableTestClass;
 
 public class Main {
 
@@ -20,7 +18,17 @@ public class Main {
         // Integer[] arr = null;
         // int n = 0;
 
-        if(args[1].equals("cutoff")){
+        if(args.length == 1){
+            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,1,false);
+            int n = scanner.nextInt();
+            Integer[] arr = new Integer[n];
+            for(int i = 0; i<n; i++){
+                arr[i] = scanner.nextInt();
+            }
+            System.out.println(sorter.sort(arr));
+        }
+
+        else if(args[1].equals("cutoff")){
             int cutoff = Integer.parseInt(args[2]);
             Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false);
             while(scanner.hasNext()){
