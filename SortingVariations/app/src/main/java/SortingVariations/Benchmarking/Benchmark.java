@@ -366,6 +366,37 @@ public class Benchmark {
     return dummy / totalCount;
   }
 
+  public static double[] runMark8WithStats(String msg, Benchmarkable f, int n, double minTime) {
+    int count = 1, totalCount = 0;
+    double st = 0.0;
+    double sst = 0.0;
+    double runningTime = 0.0;
+    double dummy = 0.0;
+
+    do {
+      count *= 2;
+      st = sst = 0.0;
+      for (int j = 0; j < n; j++) {
+        Timer t = new Timer();
+        for (int i = 0; i < count; i++) {
+          t.pause();
+          f.setup();
+          t.play();
+          dummy += f.applyAsDouble(i);
+        }
+        runningTime = t.check();
+        double time = runningTime * 1e9 / count; // Time in nanoseconds
+        st += time;
+        sst += time * time;
+        totalCount += count;
+      }
+    } while (runningTime < minTime && count < Integer.MAX_VALUE / 2);
+
+    double mean = st / n;
+    double sdev = Math.sqrt((sst - mean * mean * n) / (n - 1));
+    return new double[]{mean, sdev}; // Return mean and standard deviation
+  }
+
   public static double Mark8Setup(String msg, Benchmarkable f) {
     return Mark8Setup(msg, "", f, 10, 0.25);
   }
