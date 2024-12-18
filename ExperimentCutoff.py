@@ -39,12 +39,17 @@ with open("RandomInputString.csv", "r") as r:
         n = str(row["n"])
         prefix = "algos"
         values = row["values"].split()
-        INPUT_DATA_STRING += n
+        INPUT_DATA_STRING += f"{n}\n"
         INPUT_DATA_STRING += " ".join(values) + "\n"
         
         prefixed_values = [prefix + str(value)[5:] for value in values]
-        INPUT_DATA_PREFIX += n
-        INPUT_DATA_PREFIX += " ".join(prefixed_values)
+        INPUT_DATA_PREFIX += f"{n}\n"
+        INPUT_DATA_PREFIX += " ".join(prefixed_values) + "\n"
+        # if INPUT_DATA_STRING.endswith("\n"):
+        #     INPUT_DATA_STRING = INPUT_DATA_STRING.rstrip("\n")
+
+        # if INPUT_DATA_PREFIX.endswith("\n"):
+        #    INPUT_DATA_PREFIX = INPUT_DATA_PREFIX.rstrip("\n")
 print("done")
 
 def measure(algorithm: str, jar: str, 
@@ -84,7 +89,7 @@ def benchmark(algorithm: str, jar: str)-> \
     results: List[Tuple[int,float,int]] = list()
     if(algorithm.split()[2] == "INTEGERS"):
         data = INPUT_DATA_INTEGER
-    elif(algorithm.split()[2] == "STRINGS"):
+    elif(algorithm.split()[2] == "STRINGS" or algorithm.split()[2] == "OBJECTS"):
         data = INPUT_DATA_STRING
     else:
         data = INPUT_DATA_PREFIX
@@ -110,8 +115,9 @@ INSTANCES_C: List[Tuple[str,str]]= {
 
 INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
     ("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-    # ("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
-    # ("recursiveMergeSort BaseCase PREFIX", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort BaseCase PREFIX", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort BaseCase OBJECT", "SortingVariations/app/build/libs/app.jar"),
 }
 
 LIST_OF_CUTOFFVALUES: list[int] = {
