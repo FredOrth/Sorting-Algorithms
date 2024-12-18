@@ -7,7 +7,7 @@ import string
 
 import subprocess
 #Timeout 
-TIMEOUT = 60
+TIMEOUT = 10000
 
 def run_java(jar: str, arg: str, input: str)->str:
     args = arg.split()
@@ -19,38 +19,36 @@ def run_java(jar: str, arg: str, input: str)->str:
     return output.decode('utf-8') 
 
 csv.field_size_limit(100000000)
-INPUT_DATA_INTEGER: Dict[int, List[List[int]]] ={}
-INPUT_DATA_STRING: Dict[int, List[List[str]]] ={}
-INPUT_DATA_PREFIX: Dict[int, List[List[str]]] ={}
+INPUT_DATA_INTEGER: str = ""
+INPUT_DATA_STRING: str = ""
+INPUT_DATA_PREFIX: str = ""
 
 with open("RandomInputIntegers.csv", "r") as r:
     reader = csv.DictReader(r)
     
     for row in reader:
-        n = int(row["n"])
-        values = list(map(int, row["values"].split()))
-        if n not in INPUT_DATA_INTEGER:
-                INPUT_DATA_INTEGER[n] = []
-        INPUT_DATA_INTEGER[n].append(values)
+        n = str(row["n"])
+        values = list(map(str, row["values"].split()))
+        INPUT_DATA_INTEGER += f"{n}\n"
+        INPUT_DATA_INTEGER += " ".join(values) + "\n"
         
 with open("RandomInputString.csv", "r") as r:
     reader = csv.DictReader(r)
     
     for row in reader:
-        n = int(row["n"])
+        n = str(row["n"])
         prefix = "algos"
         values = row["values"].split()
-        if n not in INPUT_DATA_STRING:
-                INPUT_DATA_STRING[n] = []
-        INPUT_DATA_STRING[n].append(values)
-        if n not in INPUT_DATA_PREFIX:
-            INPUT_DATA_PREFIX[n] = []
-        prefixed_values = [prefix + str(value) for value in values]
-        INPUT_DATA_PREFIX[n].append(prefixed_values)
+        INPUT_DATA_STRING += n
+        INPUT_DATA_STRING += " ".join(values) + "\n"
+        
+        prefixed_values = [prefix + str(value)[5:] for value in values]
+        INPUT_DATA_PREFIX += n
+        INPUT_DATA_PREFIX += " ".join(prefixed_values)
 print("done")
 
 def measure(algorithm: str, jar: str, 
-    input: List[int])->float:
+    input: List[int]):
     input_string: str = f'{len(input)}\n' + \
         ' '.join(map(str,input))
     start: float = time.time()
@@ -61,24 +59,41 @@ def measure(algorithm: str, jar: str,
     
 
 
+# def benchmark(algorithm: str, jar: str)-> \
+#     List[Tuple[int,float, int]]:
+#     results: List[Tuple[int,float,int]] = list()
+#     if(algorithm.split()[2] == "INTEGERS"):
+#         data = INPUT_DATA_INTEGER
+#     elif(algorithm.split()[2] == "STRINGS"):
+#         data = INPUT_DATA_STRING
+#     else:
+#         data = INPUT_DATA_PREFIX
+
+#     for key, valueList in data.items():
+#         for value in valueList:
+#             try: 
+#                 diff, comp = measure(algorithm,jar,
+#                         value)
+#                 results.append((int(key), float(diff), int(comp)))
+#             except subprocess.TimeoutExpired:
+#                 break
+#     return results
+
 def benchmark(algorithm: str, jar: str)-> \
     List[Tuple[int,float, int]]:
     results: List[Tuple[int,float,int]] = list()
-    if(algorithm.split()[1] == "INTEGERS"):
+    if(algorithm.split()[2] == "INTEGERS"):
         data = INPUT_DATA_INTEGER
-    elif(algorithm.split()[1] == "STRINGS"):
+    elif(algorithm.split()[2] == "STRINGS"):
         data = INPUT_DATA_STRING
     else:
         data = INPUT_DATA_PREFIX
-
-    for key, valueList in data.items():
-        for value in valueList:
-            try: 
-                diff, comp = measure(algorithm,jar,
-                        value)
-                results.append((int(key), float(diff), int(comp)))
-            except subprocess.TimeoutExpired:
-                break
+    result_string = run_java(jar,algorithm,
+            data)
+    for line in result_string.split("\n"):
+        split = line.strip().split()
+        if len(split) == 3:
+            results.append((int(split[0]), float(split[1]), int(split[2])))
     return results
 
 # def build_java_project():
@@ -87,16 +102,16 @@ def benchmark(algorithm: str, jar: str)-> \
 
 
 INSTANCES_C: List[Tuple[str,str]]= {
-    ("IterativeMergeSort cutoff", "SortingVariations/app/build/libs/app.jar"),
-    ("insertionMergeSort cutoff", "SortingVariations/app/build/libs/app.jar"),
-    ("BinomialSortAdaptive cutoff", "SortingVariations/app/build/libs/app.jar"),
-    ("BinomialSortNonAdaptive cutoff", "SortingVariations/app/build/libs/app.jar")
+    ("IterativeMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar"),
+    ("IterativeMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+    ("insertionMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+    ("insertionMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar")
 }
 
 INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
-    ("recursiveMergeSort INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-    ("recursiveMergeSort STRINGS", "SortingVariations/app/build/libs/app.jar"),
-    ("recursiveMergeSort PREFIX", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+    # ("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
+    # ("recursiveMergeSort BaseCase PREFIX", "SortingVariations/app/build/libs/app.jar"),
 }
 
 LIST_OF_CUTOFFVALUES: list[int] = {
@@ -109,31 +124,29 @@ LIST_OF_CUTOFFVALUES: list[int] = {
 
 if __name__ == '__main__':
     
-    #build_java_project
-    
     with open('MergeSortBaseCase.csv','w') as f:
         writer = csv.DictWriter(f, 
             fieldnames = ['algorithm','n','time', 'comparisons'])
         writer.writeheader()
         for algorithm, jar in INSTANCES_MERGESORT_BASECASE:
             results: List[Tuple[int,float]] = []
-            print("done")
-            for n,t,c in benchmark(f"{algorithm}",jar):
+            for value in benchmark(f"{algorithm}",jar):
                 writer.writerow({ 
                     'algorithm' : algorithm,
-                    'n' : n,
-                    'time' : t,
-                    'comparisons' : c
+                    'n' : value[0],
+                    'time' : value[1],
+                    'comparisons' : value[2]
                 })
     
     # with open('resultsCutoffValues.csv','w') as f:
+    #     print("Done done")
     #     writer = csv.DictWriter(f, 
     #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
     #     writer.writeheader()
     #     for algorithm, jar in INSTANCES_C:
     #         results: List[Tuple[int,float]] = []
     #         for cutoff in LIST_OF_CUTOFFVALUES:
-    #             for n,t,c in benchmark(f"{algorithm} {cutoff}",jar, True):
+    #             for n,t,c in benchmark(f"{algorithm} {cutoff}",jar):
     #                 writer.writerow({ 
     #                     'algorithm' : algorithm,
     #                     'n' : n,

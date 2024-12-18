@@ -18,41 +18,58 @@ public class Main {
         // Integer[] arr = null;
         // int n = 0;
 
-        if(args[0].equals("recursiveMergeSort")){
-            if(args[1].equals("INTEGERS")){
+        if(args[1].equals("BaseCase")){
+            if(args[2].equals("INTEGERS")){
             Sorter<Integer> sorter = SorterFactory.getSorter(sortType,1,false,0);
-            int n = scanner.nextInt();
-            Integer[] arr = new Integer[n];
-            for(int i = 0; i<n; i++){
-                arr[i] = scanner.nextInt();
+            while(scanner.hasNext()){
+                int n = scanner.nextInt();
+                scanner.nextLine();
+                Integer[] arr = new Integer[n];
+                    for(int i = 0; i<n; i++){
+                        arr[i] = scanner.nextInt();
+                    }
+                    Long start = System.nanoTime();
+                    int comp = sorter.sort(arr);
+                    Long end = System.nanoTime();
+                    System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
+                    scanner.nextLine();
             }
-            System.out.print(sorter.sort(arr));
         }
             else{
                 Sorter<String> sorter = SorterFactory.getSorter(sortType,1,false,0);
-            int n = scanner.nextInt();
-            scanner.nextLine();
-            String[] arr = scanner.nextLine().split(" ");
-            System.out.print(sorter.sort(arr));
-            }
-        }
+                while(scanner.hasNext()){
+                int n = scanner.nextInt();
+                scanner.nextLine();
+                String[] arr = scanner.nextLine().split(" ");
 
-        else if(args[1].equals("cutoff")){
-            int cutoff = Integer.parseInt(args[2]);
+                Long start = System.nanoTime();
+                int comp = sorter.sort(arr);
+                Long end = System.nanoTime();
+                System.out.println(n + " " + (end-start)/1_000_000_000 + " " + comp);
+                }
+                }
+            }
+        
+
+        else if(args[1].equals("Cutoff")){
+            int cutoff = Integer.parseInt(args[3]);
+            if(args[2].equals("INTEGERS")){
             Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,0);
-            while(scanner.hasNext()){
+
                 int n = scanner.nextInt();
                 Integer[] arr = new Integer[n];
                 for(int i = 0; i<n; i++){
                     arr[i] = scanner.nextInt();
                 }
-                Long start = System.nanoTime();
-
-                Integer comparisons = sorter.sort(arr);
-
-                Long end = scanner.nextLong();
-                System.out.println(n + " " + (end-start)/ 1_000_000_000.0 + comparisons);
+                    System.out.println(sorter.sort(arr));
             }
+           else{
+                Sorter<String> sorter = SorterFactory.getSorter(sortType,cutoff,false,0);
+                    int n = scanner.nextInt();
+                    scanner.nextLine();
+                    String[] arr = scanner.nextLine().split(" ");
+                    System.out.println(sorter.sort(arr));
+                }
             
         }
 

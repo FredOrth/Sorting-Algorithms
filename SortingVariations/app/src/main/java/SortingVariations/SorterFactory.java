@@ -19,6 +19,11 @@ public class SorterFactory {
                     throw new IllegalArgumentException("Cutoff value required for parallelRecursiveMergeSort.");
                 }
                 return new ParallelRecursiveMergeSort<>(cutoff,useParallelMergesort,numberOfThreads);
+            case "IterativeMergeSort": 
+            if (cutoff < 0) {
+                throw new IllegalArgumentException("Cutoff value required for insertion sort.");
+            }
+            return new IterativeMergeSortIndex<>(cutoff);
             //for eksempel:
             // case "iterative":
             //     return new IterativeMergeSort<>();

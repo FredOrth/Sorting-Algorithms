@@ -14,6 +14,7 @@ public class IterativeMergeSortIndex<T extends Comparable<T>> implements Sorter<
 
     @Override
     public Integer sort(T[] a){
+        counter = 0;
         T[] aux = a.clone();
         Stack<Integer[]> stack = new Stack<>();
         int i = 0;
@@ -82,7 +83,6 @@ public class IterativeMergeSortIndex<T extends Comparable<T>> implements Sorter<
             counter++;}
             
         }
-        System.out.println(counter);
     }
 
     private void insertionSort(T[] a, int low, int high) {
