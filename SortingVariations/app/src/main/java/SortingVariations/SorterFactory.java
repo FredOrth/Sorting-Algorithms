@@ -1,7 +1,7 @@
 package SortingVariations;
 
 public class SorterFactory {
-    public static <T extends Comparable<T>> Sorter<T> getSorter(String type, int cutoff,boolean useParallelMergesort,int numberOfThreads) {
+    public static <T extends Comparable<T>> Sorter<T> getSorter(String type, int cutoff, boolean isAdaptive, boolean useParallelMergesort,int numberOfThreads) {
         // We could pass a cutoff or something to this ,ethod
         switch (type) {
             case "recursiveMergeSort":
@@ -13,6 +13,24 @@ public class SorterFactory {
                     throw new IllegalArgumentException("Cutoff value required for insertion sort.");
                 }
                 return new InsertionMergeSort<>(cutoff);
+
+            case "iterativeMergeSort":
+                if (cutoff < 0) {
+                    throw new IllegalArgumentException("Cutoff value required for insertion sort.");
+                }
+                return new IterativeMergeSortIndex<>(cutoff);
+
+            case "binomialSort":
+                if (cutoff < 0) {
+                    throw new IllegalArgumentException("Cutoff value required for insertion sort.");
+                }
+                return new BinomialSortIndex<>(cutoff, isAdaptive);
+
+            case "levelSort":
+                if (cutoff < 0) {
+                    throw new IllegalArgumentException("Cutoff value required for insertion sort.");
+                }
+                return new LevelSortIndex<>(cutoff, isAdaptive);
 
             case "parallelRecursiveMergeSort":
                 if (cutoff < 0) {
@@ -34,4 +52,14 @@ public class SorterFactory {
                 throw new IllegalArgumentException("Unknown sorting type: " + type);
         }
     }
+
+    public static String[] getAvailableAlgorithms() {
+    return new String[] {
+        "recursiveMergeSort",
+        "insertionMergeSort",
+        "iterativeMergeSort",
+        "binomialSort",
+        "levelSort"
+    };
+}
 }

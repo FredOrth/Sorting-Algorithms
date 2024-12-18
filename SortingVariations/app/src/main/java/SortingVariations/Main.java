@@ -10,8 +10,6 @@ public class Main {
         // int cutoff = args.length > 1 ? Integer.parseInt(args[1]) : 10;
 
         //Default cutoff
-      
-       
 
         String sortType = args[0];
         Scanner scanner = new Scanner(System.in);
@@ -20,7 +18,7 @@ public class Main {
 
         if(args[1].equals("BaseCase")){
             if(args[2].equals("INTEGERS")){
-            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,1,false,0);
+            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,1,true, false,0);
             while(scanner.hasNext()){
                 int n = scanner.nextInt();
                 scanner.nextLine();
@@ -36,7 +34,7 @@ public class Main {
             }
         }
             else{
-                Sorter<String> sorter = SorterFactory.getSorter(sortType,1,false,0);
+                Sorter<String> sorter = SorterFactory.getSorter(sortType,1, true, false,0);
                 while(scanner.hasNext()){
                 int n = scanner.nextInt();
                 scanner.nextLine();
@@ -54,7 +52,7 @@ public class Main {
         else if(args[1].equals("Cutoff")){
             int cutoff = Integer.parseInt(args[3]);
             if(args[2].equals("INTEGERS")){
-            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,0);
+            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff, true, false,0);
 
                 int n = scanner.nextInt();
                 Integer[] arr = new Integer[n];
@@ -63,8 +61,8 @@ public class Main {
                 }
                     System.out.println(sorter.sort(arr));
             }
-           else{
-                Sorter<String> sorter = SorterFactory.getSorter(sortType,cutoff,false,0);
+        else{
+                Sorter<String> sorter = SorterFactory.getSorter(sortType,cutoff,true, false,0);
                     int n = scanner.nextInt();
                     scanner.nextLine();
                     String[] arr = scanner.nextLine().split(" ");
