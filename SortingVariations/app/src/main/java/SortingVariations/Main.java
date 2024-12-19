@@ -30,7 +30,7 @@ public class Main {
                         scanner.nextLine();
                 }
             }else if(args[3].equals("NonAdaptive")){
-            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,30,false,false,0);
+            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,20,false,false,0);
             while(scanner.hasNextLine()){
                 int n = scanner.nextInt();
                 scanner.nextLine();
@@ -44,23 +44,40 @@ public class Main {
                     System.out.println(n + " " + (end-start)/1_000_000_000.0);
                     scanner.nextLine();
             }
-            }else{
-                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,30,true,false,0);
-            while(scanner.hasNextLine()){
-                int n = scanner.nextInt();
-                scanner.nextLine();
-                Integer[] arr = new Integer[n];
-                    for(int i = 0; i<n; i++){
-                        arr[i] = scanner.nextInt();
-                    }
-                    Long start = System.nanoTime();
-                    sorter.sort(arr);
-                    Long end = System.nanoTime();
-                    System.out.println(n + " " + (end-start)/1_000_000_000.0);
+            }else if (args[3].equals("Adaptive")) {
+                Sorter<Integer> sorter = SorterFactory.getSorter(sortType, 20,true,false,0);
+                while(scanner.hasNextLine()){
+                    int n = scanner.nextInt();
                     scanner.nextLine();
+                    Integer[] arr = new Integer[n];
+                        for(int i = 0; i<n; i++){
+                            arr[i] = scanner.nextInt();
+                        }
+                        Long start = System.nanoTime();
+                        sorter.sort(arr);
+                        Long end = System.nanoTime();
+                        System.out.println(n + " " + (end-start)/1_000_000_000.0);
+                        scanner.nextLine();
+            }
+            }else{
+                if(args[4].equals("Parrallel")){
+                Sorter<Integer> sorter = SorterFactory.getSorter(sortType, 20,false,true,0);
+                while(scanner.hasNextLine()){
+                    int n = scanner.nextInt();
+                    scanner.nextLine();
+                    Integer[] arr = new Integer[n];
+                        for(int i = 0; i<n; i++){
+                            arr[i] = scanner.nextInt();
+                        }
+                        Long start = System.nanoTime();
+                        sorter.sort(arr);
+                        Long end = System.nanoTime();
+                        System.out.println(n + " " + (end-start)/1_000_000_000.0);
+                        scanner.nextLine();
             }
             }
         }
+    }
         else if(args[1].equals("BaseCase")){
             if(args[2].equals("INTEGERS")){
             Sorter<Integer> sorter = SorterFactory.getSorter(sortType,0,false,false,0);
