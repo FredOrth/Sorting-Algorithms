@@ -42,7 +42,7 @@ with open("RandomInputString.csv", "r") as r:
         INPUT_DATA_PREFIX += f"{n}\n"
         INPUT_DATA_PREFIX += " ".join(prefixed_values) + "\n"
 print("done")
-#n,presortedness,values
+
 # with open("PresortedRandomInput.csv", "r") as r:
 #     reader = csv.DictReader(r)
 
@@ -51,9 +51,7 @@ print("done")
 #         presortedness = str(row["presortedness"])  # The degree of presortedness 
 #         values = row["values"].split()
         
-#         INPUT_DATA_INTEGER_W_PRESORTED += f"{n}\n"
-#         INPUT_DATA_INTEGER_W_PRESORTED += f"{presortedness}" + "\n"
-#         INPUT_DATA_INTEGER_W_PRESORTED += " ".join(values) + "\n"
+#         INPUT_DATA_INTEGER_W_PRESORTED += f"{n} " + f"{presortedness} " + " ".join(values) + "\n"
 # print("Presorted done")
 
 def benchmark(algorithm: str, jar: str)-> \
@@ -69,23 +67,20 @@ def benchmark(algorithm: str, jar: str)-> \
         data = INPUT_DATA_PREFIX
     result_string = run_java(jar,algorithm,
             data)
-    print(result_string)
-    # for line in result_string.split("\n"):
-    #     split = line.strip().split()
-    #     if len(split) == 2:
-    #         results.append((int(split[0]), float(split[1])))
-    #     if len(split) == 3:
-    #         results.append((int(split[0]), float(split[1]), int(split[2])))
-    #     if len(split) == 4:
-    #         results.append((int(split[0]), float(split[1]), int(split[2]), str(split[3])))
-    # return results
+    for line in result_string.split("\n"):
+        split = line.strip().split()
+        if len(split) == 2:
+            results.append((int(split[0]), float(split[1])))
+        if len(split) == 3:
+            results.append((int(split[0]), float(split[1]), int(split[2])))
+        if len(split) == 4:
+            results.append((int(split[0]), float(split[1]), int(split[2]), str(split[3])))
+    return results
 
 
 INSTANCES_C: List[Tuple[str, str]] = {
     ("iterativeMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar"),
-    # ("iterativeMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-    # ("insertionMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-    # ("insertionMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar")
+    ("insertionMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar")
 }
 
 INSTANCES_PRESORTED : List[Tuple[str, str]] = {
@@ -101,27 +96,30 @@ INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
 }
 
 INSTANCES_HORSERACE: List[Tuple[str,str]]= {
-    ("recursiveMergeSort HorseRace INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
     #We unfortunately have to keep a placeholder to keep our architecture in main
     ("recursiveMergeSort HorseRace INTEGERS Arrays.sort", "SortingVariations/app/build/libs/app.jar"),
-    ("levelSort HorseRace INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-    ("binomialSort HorseRace INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-    ("insertionMergeSort HorseRace INTEGERS", "SortingVariations/app/build/libs/app.jar")
+    ("levelSort HorseRace INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
+    ("binomialSort HorseRace INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
+    ("levelSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+    ("binomialSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+    ("insertionMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar")
 }
 
 LIST_OF_CUTOFFVALUES: list[int] = {
     1,#Cutoff-value 1 is equal to the normal sorting algorithms. We should probably just refactor the other experiment to take this as well... oh well...
-    # 2,
-    # 4,
-    # 8,
-    # 16,
-    # 20,
-    # 32,
-    # 64
+    2,
+    4,
+    8,
+    16,
+    20,
+    32,
+    64
 }
 
 if __name__ == '__main__':
 
+    #This is for running the BaseCase test for recursive mergesort
     # with open('MergeSortBaseCase.csv','w') as f:
     #     writer = csv.DictWriter(f,
     #         fieldnames = ['algorithm','n','time', 'comparisons'])
@@ -136,6 +134,7 @@ if __name__ == '__main__':
     #                 'comparisons' : value[2]
     #             })
 
+    #This is for testing cutoff values with strings 
     with open("resultsCutoffValues.csv", "w") as f:  ##'resultsCutoffValues.csv'
         print("Done done")
         writer = csv.DictWriter(f, 
@@ -153,6 +152,7 @@ if __name__ == '__main__':
                         'cutoff' : cutoff
                     })
 
+    #Test for presorted testing
     # with open("IteraInsertPresortedResults.csv", "w") as f:
     #     print("Done done")
     #     writer = csv.DictWriter(
@@ -177,13 +177,15 @@ if __name__ == '__main__':
     #                         "presortedDegree": value[3],
     #                         "time": value[1],
     #                         "comparisons": value[2],
-    #                         "cutoff": cutoff,
+    #                         "cutoff": cutoff
     #                     }
     #                 )
+    
+    #HorseRace test
     # with open("HorseRace.csv", "w") as f:  ##'resultsCutoffValues.csv'
     #     print("Done done")
     #     writer = csv.DictWriter(f, 
-    #         fieldnames = ['algorithm','n','time', 'cutoff'])
+    #         fieldnames = ['algorithm','n','time'])
     #     writer.writeheader()
     #     for algorithm, jar in INSTANCES_HORSERACE:
     #             for value in benchmark(f"{algorithm}",jar):

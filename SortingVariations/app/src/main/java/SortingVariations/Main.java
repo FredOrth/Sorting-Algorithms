@@ -29,8 +29,23 @@ public class Main {
                         System.out.println(n + " " + (end-start)/1_000_000_000.0);
                         scanner.nextLine();
                 }
-            }else{
+            }else if(args[3].equals("NonAdaptive")){
             Sorter<Integer> sorter = SorterFactory.getSorter(sortType,30,false,false,0);
+            while(scanner.hasNextLine()){
+                int n = scanner.nextInt();
+                scanner.nextLine();
+                Integer[] arr = new Integer[n];
+                    for(int i = 0; i<n; i++){
+                        arr[i] = scanner.nextInt();
+                    }
+                    Long start = System.nanoTime();
+                    sorter.sort(arr);
+                    Long end = System.nanoTime();
+                    System.out.println(n + " " + (end-start)/1_000_000_000.0);
+                    scanner.nextLine();
+            }
+            }else{
+                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,30,true,false,0);
             while(scanner.hasNextLine()){
                 int n = scanner.nextInt();
                 scanner.nextLine();
@@ -128,27 +143,62 @@ public class Main {
             else if(args[2].equals("PRESORTED")){
             Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
             while(scanner.hasNextLine()){
-                String nStr = scanner.nextLine();
-                int n = Integer.parseInt(nStr);
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
+                // System.out.println(scanner.nextInt());
 
-                String presortedness = scanner.nextLine();
+
+
                 String[] strArr = scanner.nextLine().split(" ");
-
-                if(strArr.length != n){
-                    for(int i = 0; i<strArr.length; i++){
-                        System.out.print(strArr[i] + " ");
-                    }
-                    System.out.println("This is n " + n );
-                }
+                int n = Integer.parseInt(strArr[0]);
+                int sortedNess = Integer.parseInt(strArr[1]);
 
                 Integer[] arr = new Integer[n];
                 for(int i = 0; i<n; i++){
                     arr[i] = Integer.parseInt(strArr[i]);
                 }
-                    // Long start = System.nanoTime();
-                    // int comp = sorter.sort(arr);
-                    // Long end = System.nanoTime();
-                    // System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp + " " + presortedNess);
+
+                
+                // int n = scanner.nextInt();
+                // int presortedNess = scanner.nextInt();
+                // Integer[] arr = new Integer[n];
+
+                // for(int i = 0; i<n; i++){
+                //     arr[i] = scanner.nextInt();
+                // }
+                // Long start = System.nanoTime();
+                // int comp = sorter.sort(arr);
+                // Long end = System.nanoTime();
+                // System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp + " " + presortedNess);
             }
             }
            else{
