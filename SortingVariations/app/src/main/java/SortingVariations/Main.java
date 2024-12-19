@@ -106,9 +106,50 @@ public class Main {
                 }
                 }
             }
-        
-            //String sorted = scanner.nextLine();
 
+            //String sorted = scanner.nextLine();
+        else if(args[1].equals("PRESORTED")) {
+            if (args[3].equals("Adaptive")){
+                int cutoff = Integer.parseInt(args[3]);
+                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,true,false,0);
+                while(scanner.hasNextLine()){
+                    int n = Integer.parseInt(scanner.nextLine());
+                    int presortedness = Integer.parseInt(scanner.nextLine());
+                    String[] strArr = scanner.nextLine().split(" ");
+
+                    Integer[] arr = new Integer[n];
+                    for (int i = 0; i < n; i++) {
+                        arr[i] = Integer.parseInt(strArr[i]);
+                    }
+
+                    long start = System.nanoTime();
+                    int comparisons = sorter.sort(arr);
+                    long end = System.nanoTime();
+                    double time = (end - start) / 1_000_000_000.0;
+                    System.out.println();
+                    System.out.printf("%d,%d,%.3f,%d,%d,%d%n", n, time, presortedness, comparisons, cutoff);
+                }
+                } else {
+                        int cutoff = Integer.parseInt(args[4]);
+                        Sorter<Integer> sorter = SorterFactory.getSorter(sortType, cutoff, true, false, 0);
+                        while (scanner.hasNextLine()) {
+                            int n = Integer.parseInt(scanner.nextLine());
+                            int presortedness = Integer.parseInt(scanner.nextLine());
+                            String[] strArr = scanner.nextLine().split(" ");
+
+                            Integer[] arr = new Integer[n];
+                            for (int i = 0; i < n; i++) {
+                                arr[i] = Integer.parseInt(strArr[i]);
+                            }
+
+                            long start = System.nanoTime();
+                            int comparisons = sorter.sort(arr);
+                            long end = System.nanoTime();
+                            double time = (end - start) / 1_000_000_000.0;
+                            System.out.printf("%s,%d,%.3f,%d,%d,%d%n", n, time, presortedness, comparisons, cutoff);
+                            }
+                        }
+                }
         else if(args[1].equals("Cutoff")){
             if(args[2].equals("INTEGERS")){
                 int cutoff = Integer.parseInt(args[3]);
@@ -139,35 +180,16 @@ public class Main {
                 Long end = System.nanoTime();
                 System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
             }
-            } else if(args[2].equals("PRESORTED")){
-                int cutoff = Integer.parseInt(args[3]);
-            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
-            while(scanner.hasNextLine()){
-                int n = Integer.parseInt(scanner.nextLine());
-                int presortedness = Integer.parseInt(scanner.nextLine());
-                String[] strArr = scanner.nextLine().split(" ");
-
-                Integer[] arr = new Integer[n];
-                for (int i = 0; i < n; i++) {
-                    arr[i] = Integer.parseInt(strArr[i]);
-                }
-
-                long start = System.nanoTime();
-                int comparisons = sorter.sort(arr);
-                long end = System.nanoTime();
-                double time = (end - start) / 1_000_000_000.0;
-                System.out.printf("%d,%d,%.3f,%d,%d%n", n, presortedness, time, comparisons, cutoff);
             }
-            }else{
-                int cutoff = Integer.parseInt(args[3]);
+            else{
+                int cutoff = Integer.parseInt(args[4]);
                 Sorter<String> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
                     int n = scanner.nextInt();
                     scanner.nextLine();
                     String[] arr = scanner.nextLine().split(" ");
                     System.out.println(sorter.sort(arr));
                 }
-            
-        }
-        scanner.close();
+            }
+            scanner.close();
     }
 }
