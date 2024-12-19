@@ -16,13 +16,10 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
     public Integer sort(T[] a) {
         T[] aux = a.clone();
         counter = 0;
-        int test = 0;
 
         Stack<Integer[]> stack = new Stack<>();
         int i = 0;
         while(i<a.length){
-            test++;
-            System.out.println(test);
             Integer[] arr = new Integer[2];
             arr[0] = i; 
 
@@ -50,7 +47,7 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
                     }else{
                     arr[1] = i + cutoff-1;
                     insertionSort(a, i, i+cutoff-1);
-                    i+=cutoff-1;
+                    i+=cutoff;
                 }
                 }
             
