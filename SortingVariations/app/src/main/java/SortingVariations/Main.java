@@ -1,4 +1,5 @@
 package SortingVariations;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import SortingVariations.Util.ObjectClass;
@@ -13,7 +14,39 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         // Integer[] arr = null;
         // int n = 0;
-        if(args[1].equals("BaseCase")){
+        if(args[1].equals("HorseRace")){
+            if(args[3].equals("Arrays.sort")){
+                while(scanner.hasNextLine()){
+                    int n = scanner.nextInt();
+                    scanner.nextLine();
+                    Integer[] arr = new Integer[n];
+                        for(int i = 0; i<n; i++){
+                            arr[i] = scanner.nextInt();
+                        }
+                        Long start = System.nanoTime();
+                        Arrays.sort(arr);
+                        Long end = System.nanoTime();
+                        System.out.println(n + " " + (end-start)/1_000_000_000.0);
+                        scanner.nextLine();
+                }
+            }else{
+            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,30,false,false,0);
+            while(scanner.hasNextLine()){
+                int n = scanner.nextInt();
+                scanner.nextLine();
+                Integer[] arr = new Integer[n];
+                    for(int i = 0; i<n; i++){
+                        arr[i] = scanner.nextInt();
+                    }
+                    Long start = System.nanoTime();
+                    sorter.sort(arr);
+                    Long end = System.nanoTime();
+                    System.out.println(n + " " + (end-start)/1_000_000_000.0);
+                    scanner.nextLine();
+            }
+            }
+        }
+        else if(args[1].equals("BaseCase")){
             if(args[2].equals("INTEGERS")){
             Sorter<Integer> sorter = SorterFactory.getSorter(sortType,0,false,false,0);
             while(scanner.hasNextLine()){

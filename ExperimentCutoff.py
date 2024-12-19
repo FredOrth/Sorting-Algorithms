@@ -73,6 +73,8 @@ def benchmark(algorithm: str, jar: str)-> \
             data)
     for line in result_string.split("\n"):
         split = line.strip().split()
+        if len(split) == 2:
+            results.append((int(split[0]), float(split[1])))
         if len(split) == 3:
             results.append((int(split[0]), float(split[1]), int(split[2])))
         if len(split) == 4:
@@ -97,6 +99,15 @@ INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
     ("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
     ("recursiveMergeSort BaseCase PREFIX", "SortingVariations/app/build/libs/app.jar"),
     ("recursiveMergeSort BaseCase OBJECT", "SortingVariations/app/build/libs/app.jar"),
+}
+
+INSTANCES_HORSERACE: List[Tuple[str,str]]= {
+    ("recursiveMergeSort HorseRace INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+    #We unfortunately have to keep a placeholder to keep our architecture in main
+    ("recursiveMergeSort HorseRace INTEGERS Arrays.sort", "SortingVariations/app/build/libs/app.jar"),
+    ("levelSort HorseRace INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+    ("binomialSort HorseRace INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+    ("insertionMergeSort HorseRace INTEGERS", "SortingVariations/app/build/libs/app.jar")
 }
 
 LIST_OF_CUTOFFVALUES: list[int] = {
@@ -126,22 +137,22 @@ if __name__ == '__main__':
     #                 'comparisons' : value[2]
     #             })
 
-    with open("resultsCutoffValues.csv", "w") as f:  ##'resultsCutoffValues.csv'
-        print("Done done")
-        writer = csv.DictWriter(f, 
-            fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
-        writer.writeheader()
-        for algorithm, jar in INSTANCES_C:
-            results: List[Tuple[int,float]] = []
-            for cutoff in LIST_OF_CUTOFFVALUES:
-                for value in benchmark(f"{algorithm} {cutoff}",jar):
-                    writer.writerow({ 
-                        'algorithm' : algorithm,
-                        'n' : value[0],
-                        'time' : value[1],
-                        'comparisons' : value[2],
-                        'cutoff' : cutoff
-                    })
+    # with open("resultsCutoffValues.csv", "w") as f:  ##'resultsCutoffValues.csv'
+    #     print("Done done")
+    #     writer = csv.DictWriter(f, 
+    #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
+    #     writer.writeheader()
+    #     for algorithm, jar in INSTANCES_C:
+    #         results: List[Tuple[int,float]] = []
+    #         for cutoff in LIST_OF_CUTOFFVALUES:
+    #             for value in benchmark(f"{algorithm} {cutoff}",jar):
+    #                 writer.writerow({ 
+    #                     'algorithm' : algorithm,
+    #                     'n' : value[0],
+    #                     'time' : value[1],
+    #                     'comparisons' : value[2],
+    #                     'cutoff' : cutoff
+    #                 })
 
     # with open("IteraInsertPresortedResults.csv", "w") as f:
     #     print("Done done")
@@ -170,18 +181,15 @@ if __name__ == '__main__':
     #                         "cutoff": cutoff,
     #                     }
     #                 )
-    # with open("resultsCutOffValuesString.csv", "w") as f:
-    #     writer = csv.DictWriter(f,
-    #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
-    #     writer.writeheader()
-    #     for algorithm, jar in INSTANCES_C:
-    #         results: List[Tuple[int,float]] = []
-    #         for cutoff in LIST_OF_CUTOFFVALUES:
-    #             for n,t,c in benchmark(f"{algorithm} {cutoff}",jar, False):
-    #                 writer.writerow({
-    #                     'algorithm' : algorithm,
-    #                     'n' : n,
-    #                     'time' : t,
-    #                     'comparisons' : c,
-    #                     'cutoff' : cutoff
-    #                 })
+    with open("HorseRace.csv", "w") as f:  ##'resultsCutoffValues.csv'
+        print("Done done")
+        writer = csv.DictWriter(f, 
+            fieldnames = ['algorithm','n','time', 'cutoff'])
+        writer.writeheader()
+        for algorithm, jar in INSTANCES_HORSERACE:
+                for value in benchmark(f"{algorithm}",jar):
+                    writer.writerow({ 
+                        'algorithm' : algorithm,
+                        'n' : value[0],
+                        'time' : value[1],
+                    })
