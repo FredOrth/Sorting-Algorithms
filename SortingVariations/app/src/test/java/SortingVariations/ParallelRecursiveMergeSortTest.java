@@ -56,7 +56,7 @@ public class ParallelRecursiveMergeSortTest {
         System.arraycopy(testingArray1, 0, sortedArray, 0, k);
 
         Arrays.sort(sortedArray);
-        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(10,false,0);
+        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(10,true,0);
 
 
         parallelSort.sort(testingArray1);
@@ -74,7 +74,7 @@ public class ParallelRecursiveMergeSortTest {
         System.arraycopy(testingArray2, 0, sortedArray, 0, k);
 
         Arrays.sort(sortedArray);
-        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(10,false,0);
+        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(10,true,0);
 
 
         parallelSort.sort(testingArray2);
@@ -92,7 +92,7 @@ public class ParallelRecursiveMergeSortTest {
         System.arraycopy(testingArray3, 0, sortedArray, 0, k);
 
         Arrays.sort(sortedArray);
-        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(10,false,0);
+        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(10,true,0);
 
 
         parallelSort.sort(testingArray3);
@@ -110,7 +110,7 @@ public class ParallelRecursiveMergeSortTest {
         System.arraycopy(unevenNumber, 0, sortedArray, 0, k);
 
         Arrays.sort(sortedArray);
-        ParallelRecursiveMergeSort<String> parallelSort = new ParallelRecursiveMergeSort<>(10,false,0);
+        ParallelRecursiveMergeSort<String> parallelSort = new ParallelRecursiveMergeSort<>(10,true,0);
 
 
         parallelSort.sort(unevenNumber);
@@ -128,7 +128,7 @@ public class ParallelRecursiveMergeSortTest {
         System.arraycopy(stableTest1, 0, sortedArray, 0, k);
 
         Arrays.sort(sortedArray);
-        ParallelRecursiveMergeSort<StableTestClass> parallelSort = new ParallelRecursiveMergeSort<>(10,false,0);
+        ParallelRecursiveMergeSort<StableTestClass> parallelSort = new ParallelRecursiveMergeSort<>(10,true,0);
 
 
         parallelSort.sort(stableTest1);
@@ -136,6 +136,29 @@ public class ParallelRecursiveMergeSortTest {
         assertArrayEquals(sortedArray, stableTest1);
 
     }
+
+    @Test
+    public void parallelTestComparisonAmounts() {
+
+        int k = testingArray1.length;
+        Integer[] sortedArray = new Integer[k];
+
+        System.arraycopy(testingArray1, 0, sortedArray, 0, k);
+
+        RecursiveMergeSort<Integer> recursiveSorting = new RecursiveMergeSort<>();
+        int recursiveCounter = recursiveSorting.sort(sortedArray);
+
+        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(10,false,0);
+
+
+        int parallelRecursiveComparisons = parallelSort.sort(testingArray1);
+
+        assertEquals(recursiveCounter, parallelRecursiveComparisons);
+
+    }
+
+
+
 
 
 
@@ -187,6 +210,170 @@ public class ParallelRecursiveMergeSortTest {
         Assert.assertEquals((Integer)13,kthElement);
 
     }
+
+    @Test
+    public void twoSequenceSelectEmptyArrayTest() {
+        int k = 3; // Convert 1-indexed to 0-indexed
+        int[] aibi = TwoSequenceSelect.twoSequenceSelect(new Integer[]{}, new Integer[]{1, 2, 3}, k);
+
+        int ja = aibi[0];
+        int jb = aibi[1];
+
+        Integer[] a = new Integer[]{};
+        Integer[] b = new Integer[]{1, 2, 3};
+
+        // Safely determine the k-th element
+        Integer kthElement;
+        if (ja == 0) { // If a is empty or all elements from a are used
+            kthElement = b[jb - 1];
+        } else { // This branch won't be reached, but keeping it for symmetry
+            kthElement = a[ja - 1];
+        }
+
+        Assert.assertEquals((Integer)3, kthElement);
+    }
+
+    @Test
+    public void twoSequenceSelectAllInFirstArrayTest() {
+        int k = 3; // Convert 1-indexed to 0-indexed
+        int[] aibi = TwoSequenceSelect.twoSequenceSelect(new Integer[]{1, 2, 3, 4, 5}, new Integer[]{}, k);
+
+        int ja = aibi[0];
+        int jb = aibi[1];
+
+        Integer[] a = new Integer[]{1, 2, 3, 4, 5};
+        Integer[] b = new Integer[]{};
+
+        // Safely determine the k-th element
+        Integer kthElement;
+        if (jb == 0) { // If b is empty or all elements from b are used
+            kthElement = a[ja - 1];
+        } else { // This branch won't be reached, but keeping it for symmetry
+            kthElement = b[jb - 1];
+        }
+
+        Assert.assertEquals((Integer)3, kthElement);
+    }
+
+    @Test
+    public void twoSequenceSelectAllInSecondArrayTest() {
+        int k = 4; // Convert 1-indexed to 0-indexed
+        int[] aibi = TwoSequenceSelect.twoSequenceSelect(new Integer[]{}, new Integer[]{1, 2, 3, 4, 5}, k);
+
+        int ja = aibi[0];
+        int jb = aibi[1];
+
+        Integer[] a = new Integer[]{};
+        Integer[] b = new Integer[]{1, 2, 3, 4, 5};
+
+        // Safely determine the k-th element
+        Integer kthElement;
+        if (ja == 0) { // If a is empty or all elements from a are used
+            kthElement = b[jb - 1];
+        } else if (jb == 0) { // If b is empty or all elements from b are used
+            kthElement = a[ja - 1];
+        } else if (a[ja - 1] <= b[jb - 1]) { // Compare valid elements
+            kthElement = a[ja - 1];
+        } else {
+            kthElement = b[jb - 1];
+        }
+
+        Assert.assertEquals((Integer)4, kthElement);
+    }
+
+
+    @Test
+    public void twoSequenceSelectRepeatedElementsTest() {
+        int[] aibi = TwoSequenceSelect.twoSequenceSelect(new Integer[]{1, 1, 1, 1}, new Integer[]{1, 1, 1, 1}, 6);
+
+        int ja = aibi[0];
+        int jb = aibi[1];
+
+        Integer[] a = new Integer[]{1, 1, 1, 1};
+        Integer[] b = new Integer[]{1, 1, 1, 1};
+
+        Integer kthElement;
+        if (ja > 0 && (jb == 0 || a[ja - 1] <= b[jb - 1])) {
+            kthElement = b[jb - 1];
+        } else {
+            kthElement = a[ja - 1];
+        }
+
+        Assert.assertEquals((Integer)1, kthElement);
+    }
+
+    @Test
+    public void twoSequenceSelectEndOfMergeTest() {
+        int[] aibi = TwoSequenceSelect.twoSequenceSelect(new Integer[]{1, 3, 5}, new Integer[]{2, 4, 6}, 5);
+
+        int ja = aibi[0];
+        int jb = aibi[1];
+
+        Integer[] a = new Integer[]{1, 3, 5};
+        Integer[] b = new Integer[]{2, 4, 6};
+
+        // Safely determine the k-th element
+        Integer kthElement;
+        if (ja == 0) {
+            kthElement = b[jb - 1]; // Take from b
+        } else if (jb == 0) {
+            kthElement = a[ja - 1]; // Take from a
+        } else if (a[ja - 1] <= b[jb - 1]) {
+            kthElement = b[jb - 1];
+        } else {
+            kthElement = a[ja - 1];
+        }
+
+        Assert.assertEquals((Integer)5, kthElement);
+    }
+
+
+    @Test
+    public void compareComparisonsWithParallelMerge() {
+        // Create a testing array
+        Integer[] testingArray = new Integer[]{10, 8, 6, 4, 2, 1, 3, 5, 7, 9}; // Example unsorted array
+        int arraySize = testingArray.length;
+
+        // Sequential merge sort for comparison
+        Integer[] sequentialSortedArray = new Integer[arraySize];
+        System.arraycopy(testingArray, 0, sequentialSortedArray, 0, arraySize);
+        RecursiveMergeSort<Integer> sequentialSort = new RecursiveMergeSort<>();
+        int sequentialComparisons = sequentialSort.sort(sequentialSortedArray);
+
+        // Parallel merge sort with parallel merging enabled
+        Integer[] parallelSortedArray = new Integer[arraySize];
+        System.arraycopy(testingArray, 0, parallelSortedArray, 0, arraySize);
+        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(10, true, 0);
+        int parallelComparisons = parallelSort.sort(parallelSortedArray);
+
+        // Ensure the arrays are sorted correctly
+        assertArrayEquals(sequentialSortedArray, parallelSortedArray);
+
+        // Compare the number of comparisons
+        assertEquals(sequentialComparisons, parallelComparisons);
+    }
+
+
+    @Test
+    public void parallelTestWithParallelMergeSort() {
+
+        int k = testingArray3.length;
+        Integer[] sortedArray = new Integer[k];
+
+        System.arraycopy(testingArray3, 0, sortedArray, 0, k);
+
+        Arrays.sort(sortedArray);
+        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(1,true,0);
+
+
+        System.out.println(parallelSort.sort(testingArray3));
+
+        assertArrayEquals(sortedArray, testingArray3);
+
+    }
+
+
+    /* ************************ BENCHMARKING TESTS WITH RESULTS BELOW *********************** */
 
     /*
     * This test Is to generate a benchmark for task 12. The aim is to test ParallelRecursiveMergesort without parallelMerging
@@ -314,24 +501,6 @@ public class ParallelRecursiveMergeSortTest {
     }
 
 
-    @Test
-    public void parallelTestWithParallelMergeSort() {
-
-        int k = testingArray3.length;
-        Integer[] sortedArray = new Integer[k];
-
-        System.arraycopy(testingArray3, 0, sortedArray, 0, k);
-
-        Arrays.sort(sortedArray);
-        ParallelRecursiveMergeSort<Integer> parallelSort = new ParallelRecursiveMergeSort<>(1,true,0);
-
-
-        System.out.println(parallelSort.sort(testingArray3));
-
-        assertArrayEquals(sortedArray, testingArray3);
-
-    }
-
     @Ignore
     @Test
     public void testWithPythonArray() {
@@ -341,6 +510,12 @@ public class ParallelRecursiveMergeSortTest {
         // threshold = 10, Number of threads = 4
         ParallelRecursiveMergeSort.benchmarkSortingWithSetup(inputArray,1000,0);
     }
+
+
+
+    /*
+     * The following tests are to generate a benchmark for task 16 with varying thread availability
+     * */
 
     @Ignore
     @Test
@@ -480,6 +655,8 @@ public class ParallelRecursiveMergeSortTest {
                 Arrays.parallelSort       n=1000000, threshold=20000     70264340,1 ns 3003806,42          8
 */
 
+
+        /* These are combined values that we use for our plot:*/
         /*
         * 1600 cutoff:
             ParallelRecursiveMergeSort n=10000, threshold=1600, threads=1      1156392,2 ns    3288,01        256

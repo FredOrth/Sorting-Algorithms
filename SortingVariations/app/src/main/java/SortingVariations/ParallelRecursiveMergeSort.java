@@ -122,7 +122,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
 
             // A simple heuristic could be something like:
             // p grows slowly with size, but not beyond availableThreads.
-            // For example, p = min(availableThreads, 1 + (int)Math.log10(size))
+            // for example, p = min(availableThreads, 1 + (int)Math.log10(size)). we go wit hthat
 
                         int p = Math.min(availableThreads, 1 + (int)Math.log10(size));
             // Ensure at least 1 partition and never exceed the number of threads
@@ -138,7 +138,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
                 int start = i * chunkSize;
                 int end = Math.min(start + chunkSize - 1, size - 1);
 
-                // Find indices for this chunk using twoSequenceSelect
+                // Find indices forthe chunk with twoSequenceSelect
                 int[] startIndices = TwoSequenceSelect.twoSequenceSelect(left, right, start);
                 int[] endIndices = TwoSequenceSelect.twoSequenceSelect(left, right, end + 1);
 
@@ -147,7 +147,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
                 int iaEnd = endIndices[0];
                 int ibEnd = endIndices[1];
 
-                // Create a task to merge this chunk
+                // adding the task to merge this chunk
                 tasks.add(new RecursiveAction() {
 
                     @Override
@@ -181,6 +181,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
 
 
     }
+
 
 
 
