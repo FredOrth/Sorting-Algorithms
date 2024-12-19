@@ -60,7 +60,8 @@ public class SorterFactory {
         "insertionMergeSort",
         "iterativeMergeSort",
         "binomialSort",
-        "levelSort"
+        "levelSort",
+        "parallelRecursiveMergeSort",
     };
 }
 }
