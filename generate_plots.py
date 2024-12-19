@@ -16,6 +16,26 @@ def simplify_algorithm_name(algorithm: str) -> str:
         return algorithm.replace("recursiveMergeSort BaseCase", "MergeSort")
     return algorithm
 
+def rename_algorithm(row):
+    """
+    Rename the algorithm field to fix the Arrays.sort bug and distinguish between different variants.
+    """
+    if "recursiveMergeSort" in row["algorithm"] and "Arrays.sort" in row["algorithm"]:
+        return "Arrays.sort"
+    elif "recursiveMergeSort" in row["algorithm"] and "Arrays.sort" not in row["algorithm"]:
+        return "recursiveMergeSort"
+    if "binomialSort" in row["algorithm"] and "NonAdaptive" in row["algorithm"]:
+        return "Binomial Sort Non-Adaptive"
+    if "binomialSort" in row["algorithm"] and "Adaptive" in row["algorithm"]:
+        return "Binomial Sort Adaptive"
+    if "insertionMergeSort" in row["algorithm"]:
+        return "Insertion Merge Sort"
+    if "levelSort" in row["algorithm"] and "NonAdaptive" in row["algorithm"]:
+        return "Level Sort Non-Adaptive"
+    if "levelSort" in row["algorithm"] and "Adaptive" in row["algorithm"]:
+        return "Level Sort Adaptive"
+
+    return row["algorithm"]
 
 def generate_basecase_plot(
     csv_file: str,
@@ -94,6 +114,66 @@ def generate_scatter_plot(csv_file: str, title: str, x_label: str, y_label: str)
     plt.show()
 
 
+def horseracePlotter(
+        csv_file: str, title: str, x_label: str, y_label: str, log_y: bool = False
+):
+    """
+    Generate a comparison plot for all algorithms based on runtime.
+    """
+    # Load the CSV file
+    data = pd.read_csv(csv_file)
+
+    # Fix algorithm names
+    data["algorithm"] = data.apply(rename_algorithm, axis=1)
+
+    # Ensure columns are properly formatted
+    data["n"] = pd.to_numeric(data["n"], errors="coerce")
+    data["time"] = pd.to_numeric(data["time"], errors="coerce")
+
+    # Drop rows with invalid numeric values
+    data = data.dropna(subset=["n", "time"])
+
+    # Group data by algorithm and size
+    grouped = data.groupby(["algorithm", "n"])["time"].median().reset_index()
+
+    # Debug: Print grouped data
+    print("Grouped Data:\n", grouped)
+
+    # Create the plot
+    plt.figure(figsize=(12, 6))
+
+    # Iterate over unique algorithms
+    for algorithm in grouped["algorithm"].unique():
+        # Filter data for the current algorithm
+        algo_data = grouped[grouped["algorithm"] == algorithm]
+
+        # Plot data for the current algorithm
+        plt.plot(
+            algo_data["n"],
+            algo_data["time"],
+            label=algorithm,
+            marker="o",
+            alpha=0.8,
+        )
+
+    # Log-transform the y-axis if enabled
+    if log_y:
+        plt.yscale("log")
+        y_label += " (Log Scale)"
+
+    # Add labels, title, legend, and grid
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.title(title)
+    plt.legend(title="Algorithm")
+    plt.grid(True)
+
+    # Save and display the plot
+    plt.savefig(f"{title.replace(' ', '_')}.png")
+    plt.show()
+    plt.show()
+
+
 def generate_plot(
     csv_file: str,
     title: str,
@@ -156,7 +236,7 @@ def generate_scatter_plot2(csv_file: str, title: str, x_label: str, y_label: str
         print(f"Data for {algorithm}:\n", mean_data)
 
         # Scatter plot for the current algorithm
-        plt.scatter(mean_data["cutoff"], mean_data["time"], label=algorithm, alpha=0.7)
+        plt.scatter(mean_data["algorithm"], mean_data["time"], label=algorithm, alpha=0.7)
 
     # Add labels, title, and grid
     plt.xlabel(x_label)
@@ -178,18 +258,33 @@ if __name__ == "__main__":
     #     "Time (seconds)",
     # )
 
-    generate_scatter_plot(
-        "resultsCutoffValues.csv",
-        "C vs comparisons",
-        "cutoff",
-        "Number of Comparisons",
-    )
+    # generate_scatter_plot(
+    #     "resultsCutoffValues.csv",
+    #     "C vs comparisons",
+    #     "cutoff",
+    #     "Number of Comparisons",
+    # )
 
-    generate_scatter_plot2(
-        "resultsCutoffValues.csv",
-        "C vs time",
-        "cutoff",
-        "time",
+    # generate_scatter_plot2(
+    #     "resultsCutoffValues.csv",
+    #     "C vs time",
+    #     "cutoff",
+    #     "time",
+    # )
+
+    # generate_scatter_plot2(
+    #     "HorseRace.csv",
+    #     "Horse Race",
+    #     "Size",
+    #     "Time",
+    # )
+
+    horseracePlotter(
+        "HorseRace.csv",
+        "Horse Race: Algorithm Comparison",
+        "Input Size (n)",
+        "Runtime (seconds)",
+        # log_y=True,  # Set to True for a log-transformed y-axis
     )
 
     # generate_scatter_plot(
