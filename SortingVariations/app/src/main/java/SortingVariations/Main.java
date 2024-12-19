@@ -60,6 +60,8 @@ public class Main {
                 }
             }
         
+            //String sorted = scanner.nextLine();
+
         else if(args[1].equals("Cutoff")){
             int cutoff = Integer.parseInt(args[3]);
             if(args[2].equals("INTEGERS")){
@@ -71,6 +73,24 @@ public class Main {
                     for(int i = 0; i<n; i++){
                         arr[i] = scanner.nextInt();
                     }
+                    Long start = System.nanoTime();
+                    int comp = sorter.sort(arr);
+                    Long end = System.nanoTime();
+                    System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
+                    scanner.nextLine();
+            }
+            }
+            else if(args[2].equals("PRESORTED")){
+            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
+            while(scanner.hasNext()){
+                String line = scanner.nextLine();
+                String[] arrstr = line.split(" ");
+                int n = Integer.parseInt(arrstr[0]);
+                String presortedCat = arrstr[1];
+                Integer[] arr = new Integer[n];
+                for (int i = 0; i < n; i++) {
+                    arr[i] = Integer.parseInt(arrstr[i+2]); //Integer.parseInt() didn't work, assuming it is already an int
+                }
                     Long start = System.nanoTime();
                     int comp = sorter.sort(arr);
                     Long end = System.nanoTime();
