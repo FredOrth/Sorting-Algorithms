@@ -1,5 +1,6 @@
 package SortingVariations.Util;
 
+//Class for testing in experiment 2
 public class ObjectClass implements Comparable<ObjectClass> {
     private String comp;
     private boolean bool;

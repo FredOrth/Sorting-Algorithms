@@ -18,7 +18,7 @@ public class IterativeMergeSortIndex<T extends Comparable<T>> implements Sorter<
         T[] aux = a.clone();
         Stack<Integer[]> stack = new Stack<>();
         int i = 0;
-
+        //Check whether i + cutoff is larger than array size
         while(i<a.length){
             Integer[] arr = new Integer[2];
 
@@ -35,6 +35,7 @@ public class IterativeMergeSortIndex<T extends Comparable<T>> implements Sorter<
                 i++;
             }
 
+            //Use insertionsort
             insertionSort(a, arr[0], arr[1]);
 
             while(stack.size()> 0){
@@ -50,7 +51,7 @@ public class IterativeMergeSortIndex<T extends Comparable<T>> implements Sorter<
             stack.add(arr);
 
         }
-
+        //While more than one run merge two runs on top of the stack
         while(stack.size()>1){
             Integer[] arr = stack.pop();
             merge(a,aux,stack.peek()[0], arr[0]-1, arr[1]);

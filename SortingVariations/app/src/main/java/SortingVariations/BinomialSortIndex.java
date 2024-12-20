@@ -23,12 +23,15 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
             Integer[] arr = new Integer[2];
             arr[0] = i; 
 
+            //Check whether adaptive
             if(adaptive){
                 int sequence = findSequence(i, a);
+                //Check if sequence is greater than or equal to cutoff
                 if(sequence >= cutoff){
                 arr[1] = i + sequence-1;
                 i += sequence;
                 }else{
+                    //Check if i + cutoff is greater than length
                     if(i + cutoff >= a.length){
                         arr[1] = a.length-1;
                         insertionSort(a, i, arr[1]);
@@ -51,6 +54,7 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
                 }
                 }
             
+            //Checking whether new input is at least the size of the run on top of the stack
             while(!stack.isEmpty()){
                 Integer[] topStack = stack.peek();
                 if(topStack[1]-topStack[0] + 1 < arr[1] - arr[0] + 1){
@@ -62,6 +66,7 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
                 }
             }
 
+            //Checking whether the new run has half the length of the run on top of the stack
             while(!stack.isEmpty()){
                 Integer[] topStack = stack.peek();
                 if(topStack[1]-topStack[0] +1 < (arr[1] - arr[0] + 1) * 2){
@@ -73,11 +78,13 @@ public class BinomialSortIndex<T extends Comparable<T>> implements Sorter<T> {
             }
         }
 
+        //Assert statement for testing
         assert stack.isEmpty() ||stack.peek()[1]-stack.peek()[0]+1 >= (arr[1]-arr[0]+1)*2;
         stack.add(arr);
 
     }
 
+    //While more than one run merge two runs on top of the stack
     while(stack.size()>1){
         Integer[] arr = stack.pop();
         merge(a,aux,stack.peek()[0], arr[0]-1, arr[1]);
