@@ -291,12 +291,16 @@ public class LevelSortTest {
     public void testNaturalRuns() {
         Integer[] input = { 1, 2, 3, 8, 7, 6, 5 }; // Ascending then descending
         LevelSortIndex<Integer> lvlAdaptive = new LevelSortIndex<>(4, true);
+        System.out.println("Before Sorting: " + Arrays.toString(input));
         lvlAdaptive.sort(input);
-        assertArrayEquals(new Integer[] { 1, 2, 3, 5, 6, 7, 8 }, input);
+        System.out.println("After Sorting: " + Arrays.toString(input));
+        assertArrayEquals( input, new Integer[] { 1, 2, 3, 5, 6, 7, 8 });
 
         Integer[] input2 = { 1, 2, 3, 8, 7, 6, 5 }; // Ascending then descending
         LevelSortIndex<Integer> lvlNonAdaptive = new LevelSortIndex<>(4, false);
+        System.out.println("Before Sorting: " + Arrays.toString(input));
         lvlNonAdaptive.sort(input2);
+        System.out.println("After Sorting: " + Arrays.toString(input));
         assertArrayEquals(new Integer[] { 1, 2, 3, 5, 6, 7, 8 }, input2);
     }
 

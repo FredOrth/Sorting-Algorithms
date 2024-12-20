@@ -139,18 +139,29 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
 
     }
 
-    private void merge(T[] a, T[] aux, int low, int mid, int high) {
-        for (int k = low; k <= high; k++) {
+    private void merge(T[] a, T[] aux, int ia, int ib, int ic) {
+        for (int k = ia; k <= ic; k++) {
             aux[k] = a[k];
         }
 
-        int i = low;
-        int j = mid + 1;
+        long ml = ia + ib;
+        long mr = ib + ic;
+        long mlHalf = ml / 2;
+        long mrHalf = mr / 2;
 
-        for (int k = low; k <= high; k++) {
-            if (i > mid) {
+        // Calculate the "level" based on the most significant bit where ml and mr
+        // differ
+        int level = 64 - Long.numberOfLeadingZeros(mlHalf ^ mrHalf); // Correct usage
+
+        // Print the calculated midpoints and level for debugging (optional)
+        System.out.println("ml = " + ml + ", mr = " + mr + ", level = " + level);
+
+        int i = ia, j = ib;
+
+        for (int k = ia; k <= ic; k++) {
+            if (i > ib) {
                 a[k] = aux[j++];
-            } else if (j > high) {
+            } else if (j > ic) {
                 a[k] = aux[i++];
             } else if ((aux[j].compareTo(aux[i])) < 0) {
                 a[k] = aux[j++];

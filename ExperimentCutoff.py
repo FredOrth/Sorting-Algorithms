@@ -13,20 +13,20 @@ def run_java(jar: str, arg: str, input: str)->str:
     (output,_) = p.communicate(input.encode('utf-8'))
     return output.decode('utf-8') 
 
-csv.field_size_limit(100000000)
+csv.field_size_limit(1000000000)
 INPUT_DATA_INTEGER: str = ""
 INPUT_DATA_STRING: str = ""
 INPUT_DATA_PREFIX: str = ""
 INPUT_DATA_INTEGER_W_PRESORTED: str = ""
 
-# with open("RandomInputIntegers.csv", "r") as r:
-#     reader = csv.DictReader(r)
+with open("RandomInputIntegers.csv", "r") as r:
+    reader = csv.DictReader(r)
 
-#     for row in reader:
-#         n = str(row["n"])
-#         values = list(map(str, row["values"].split()))
-#         INPUT_DATA_INTEGER += f"{n}\n"
-#         INPUT_DATA_INTEGER += " ".join(values) + "\n"
+    for row in reader:
+        n = str(row["n"])
+        values = list(map(str, row["values"].split()))
+        INPUT_DATA_INTEGER += f"{n}\n"
+        INPUT_DATA_INTEGER += " ".join(values) + "\n"
 
 # with open("RandomInputString.csv", "r") as r:
 #     reader = csv.DictReader(r)
@@ -57,19 +57,19 @@ INPUT_DATA_INTEGER_W_PRESORTED: str = ""
 #         INPUT_DATA_PREFIX += f"{n}\n"
 #         INPUT_DATA_PREFIX += " ".join(prefixed_values) + "\n"
 # print("done")
-# # n,presortedness,values
-with open("PresortedRandomInput.csv", "r") as r:
-    reader = csv.DictReader(r)
+# n,presortedness,values
+# with open("PresortedRandomInput.csv", "r") as r:
+#     reader = csv.DictReader(r)
 
-    for row in reader:
-        n = str(row["n"]) 
-        presortedness = str(row["presortedness"])  # The degree of presortedness 
-        values = row["values"].split()
-        # INPUT_DATA_INTEGER_W_PRESORTED += f"{n}\n"
-        # INPUT_DATA_INTEGER_W_PRESORTED += f"{presortedness}" + "\n"
-        # INPUT_DATA_INTEGER_W_PRESORTED += " ".join(values) + "\n"
-        INPUT_DATA_INTEGER_W_PRESORTED += f"{n}\n{presortedness}\n{' '.join(values)}\n"
-print("Presorted done")
+#     for row in reader:
+#         n = str(row["n"]) 
+#         presortedness = str(row["presortedness"])  # The degree of presortedness 
+#         values = row["values"].split()
+#         # INPUT_DATA_INTEGER_W_PRESORTED += f"{n}\n"
+#         # INPUT_DATA_INTEGER_W_PRESORTED += f"{presortedness}" + "\n"
+#         # INPUT_DATA_INTEGER_W_PRESORTED += " ".join(values) + "\n"
+#         INPUT_DATA_INTEGER_W_PRESORTED += f"{n}\n{presortedness}\n{' '.join(values)}\n"
+# print("Presorted done")
 
 def benchmark(algorithm: str, jar: str)-> \
     List[Tuple[int,float, int]]: ## remove extra int if needed
@@ -84,9 +84,9 @@ def benchmark(algorithm: str, jar: str)-> \
     else:
         data = INPUT_DATA_PREFIX
 
-    command = f"java -Xmx8g -jar {jar} {algorithm}"
-    if cutoff:
-        command += f" {cutoff}"
+    # command = f"java -Xmx8g -jar {jar} {algorithm}"
+    # if cutoff:
+    #     command += f" {cutoff}"
 
     results_strings = run_java(jar, algorithm, data)
     print(results_strings)
@@ -142,10 +142,14 @@ def benchmark(algorithm: str, jar: str)-> \
 
 
 INSTANCES_C: List[Tuple[str, str]] = {
-    ("iterativeMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar"),
+    # ("iterativeMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar"),
     # ("iterativeMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
     # ("insertionMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-    ("insertionMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar")
+    # ("insertionMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar")
+    ("binomialSort Cutoff Adaptive", "SortingVariations/app/build/libs/app.jar"),
+    ("levelSort Cutoff NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+    ("binomialSort Cutoff NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+    ("insertionMergeSort Cutoff NonAdaptive", "SortingVariations/app/build/libs/app.jar")
 }
 
 INSTANCES_PRESORTED : List[Tuple[str, str]] = {
@@ -170,7 +174,8 @@ INSTANCES_HORSERACE: List[Tuple[str,str]]= {
     ("binomialSort HorseRace INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
     ("levelSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
     ("binomialSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
-    ("insertionMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar")
+    ("insertionMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+    ("parallelRecursiveMergeSort HorseRace INTEGERS NonAdaptive Parrallel", "SortingVariations/app/build/libs/app.jar")
 }
 
 LIST_OF_CUTOFFVALUES: list[int] = {
@@ -187,7 +192,7 @@ LIST_OF_CUTOFFVALUES: list[int] = {
 
 if __name__ == '__main__':
 
-    # This is for running the BaseCase test for recursive mergesort
+    #This is for running the BaseCase test for recursive mergesort
     # with open('MergeSortBaseCase.csv','w') as f:
     #     writer = csv.DictWriter(f,
     #         fieldnames = ['algorithm','n','time', 'comparisons'])
@@ -202,26 +207,8 @@ if __name__ == '__main__':
     #                 'comparisons' : value[2]
     #             })
 
-    # This is for testing cutoff values with strings
-    # with open("resultsCutoffValues.csv", "w") as f:  ##'resultsCutoffValues.csv'
-    #     print("Done done")
-    #     writer = csv.DictWriter(f, 
-    #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
-    #     writer.writeheader()
-    #     for algorithm, jar in INSTANCES_C:
-    #         results: List[Tuple[int,float]] = []
-    #         for cutoff in LIST_OF_CUTOFFVALUES:
-    #             for value in benchmark(f"{algorithm} {cutoff}",jar):
-    #                 writer.writerow({ 
-    #                     'algorithm' : algorithm,
-    #                     'n' : value[0],
-    #                     'time' : value[1],
-    #                     'comparisons' : value[2],
-    #                     'cutoff' : cutoff
-    #                 })
-
-    # Test for presorted testing
-    # with open("IteraInsertPresortedResults.csv", "w") as f:
+    #This is for testing cutoff values with strings
+    # with open("resultsCutoffValuesbiolvl.csv", "w") as f:  ##'resultsCutoffValues.csv'
     #     print("Done done")
     #     writer = csv.DictWriter(f,
     #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
@@ -238,62 +225,87 @@ if __name__ == '__main__':
     #                     'cutoff' : cutoff
     #                 })
 
-    with open("BiolvlPresortedResults.csv", "w", newline='') as f:
-        print("Starting CSV write...")
-        writer = csv.DictWriter(
-            f,
-            fieldnames=[
-                "algorithm",
-                "n",
-                "time",
-                "presortedDegree",
-                "comparisons",
-                "cutoff",
-            ],)
-        writer.writeheader() 
-
-        for algorithm, jar in INSTANCES_PRESORTED:
-            for cutoff in LIST_OF_CUTOFFVALUES:
-                # Build the full command to run the Java program
-                command = f"java -jar {jar} {algorithm} {cutoff}"
-
-                # result = subprocess.run(command, shell=True, capture_output=True, text=True)
-                # print(f"Java command output: {result.stdout}")
-
-                # Execute the Java command using os.system (this runs the Java program)
-                print(f"Running command: {command}")
-                result_string = subprocess.run(command)  # Captures the output of the command
-                print(f"Result from command:\n{result_string}")
-
-                for line in result_string.strip().split("\n"):
-                    values = (line.split(''))
-                    n = int(values[0])  # 'n' value
-                    time = float(values[1])  # Time value
-                    presortedDegree = int(values[2]) # Presorted degree
-                    comparisons = int(values[3])  # Comparisons value
-                    cutoff = int(values[4]) # cutoff
-
-                    # Write the result row into the CSV file
-                    writer.writerow(
-                        {
-                            "algorithm": algorithm,
-                            "n": n,
-                            "time": time,
-                            "presortedDegree": presortedDegree,
-                            "comparisons": comparisons,
-                            "cutoff": cutoff,
-                        }
-                    )
-
-    # with open("HorseRace.csv", "w") as f:  ##'resultsCutoffValues.csv'
-    #     print("Done done")
-    #     writer = csv.DictWriter(f,
-    #         fieldnames = ['algorithm','n','time'])
+    # with open("resultsCutoffValuesbiolvl.csv", "w", newline='') as f:
+    #     print("Starting cutoff experiments...")
+    #     writer = csv.DictWriter(
+    #         f,
+    #         fieldnames=['algorithm', 'n', 'time', 'comparisons', 'cutoff']
+    #     )
     #     writer.writeheader()
-    #     for algorithm, jar in INSTANCES_HORSERACE:
-    #             for value in benchmark(f"{algorithm}",jar):
+
+    #     for algorithm, jar in INSTANCES_C:
+    #         for cutoff in LIST_OF_CUTOFFVALUES:
+    #             print(f"Running: {algorithm} with cutoff {cutoff}")
+    #             results = benchmark(f"{algorithm} {cutoff}", jar)
+    #             for value in results:
     #                 writer.writerow({
-    #                     'algorithm' : algorithm,
-    #                     'n' : value[0],
-    #                     'time' : value[1],
+    #                     'algorithm': algorithm,
+    #                     'n': value[0],
+    #                     'time': value[1],
+    #                     'comparisons': value[2],
+    #                     'cutoff': cutoff
     #                 })
+    #     print("Cutoff experiments completed.")
+
+    ##this was for trying to run presortedness via. our python pipeline
+    # with open("BiolvlPresortedResults.csv", "w", newline='') as f:
+    #     print("Starting CSV write...")
+    #     writer = csv.DictWriter(
+    #         f,
+    #         fieldnames=[
+    #             "algorithm",
+    #             "n",
+    #             "time",
+    #             "presortedDegree",
+    #             "comparisons",
+    #             "cutoff",
+    #         ],)
+    #     writer.writeheader() 
+
+    #     for algorithm, jar in INSTANCES_PRESORTED:
+    #         for cutoff in LIST_OF_CUTOFFVALUES:
+    #             # Build the full command to run the Java program
+    #             command = f"java -jar {jar} {algorithm} {cutoff}"
+
+    #             # result = subprocess.run(command, shell=True, capture_output=True, text=True)
+    #             # print(f"Java command output: {result.stdout}")
+
+    #             # Execute the Java command using os.system (this runs the Java program)
+    #             print(f"Running command: {command}")
+    #             result_string = os.popen(command).read() # Captures the output of the command
+    #             print(f"Result from command:\n{result_string}")
+
+    #             for line in result_string.strip().split("\n"):
+    #                 values = (line.split(''))
+    #                 n = int(values[0])  # 'n' value
+    #                 time = float(values[1])  # Time value
+    #                 presortedDegree = int(values[2]) # Presorted degree
+    #                 comparisons = int(values[3])  # Comparisons value
+    #                 # cutoff = int(values[4]) # cutoff
+
+    #                 # Write the result row into the CSV file
+    #                 writer.writerow(
+    #                     {
+    #                         "algorithm": algorithm,
+    #                         "n": n,
+    #                         "time": time,
+    #                         "presortedDegree": presortedDegree,
+    #                         "comparisons": comparisons,
+    #                         "cutoff": cutoff,
+    #                     }
+    #                 )
+
+    #this is for running horserace and writing results to a csv
+    with open("HorseRace.csv", "w") as f: 
+        print("Done done")
+        writer = csv.DictWriter(f,
+            fieldnames = ['algorithm','n','time'])
+        writer.writeheader()
+        for algorithm, jar in INSTANCES_HORSERACE:
+                for value in benchmark(f"{algorithm}",jar):
+                    writer.writerow({
+                        'algorithm' : algorithm,
+                        'n' : value[0],
+                        'time' : value[1],
+                        'comparisons': value[2]
+                    })

@@ -1,5 +1,8 @@
 package SortingVariations;
+//import static org.junit.Assert.*;
+
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import SortingVariations.Util.ObjectClass;
@@ -8,8 +11,13 @@ public class Main {
     public static void main(String[] args) {
         // int cutoff = args.length > 1 ? Integer.parseInt(args[1]) : 10;
         //Default cutoff
-      
-       
+        Integer[] input = { 1, 2, 3, 8, 7, 6, 5 }; // Ascending then descending
+        LevelSortIndex<Integer> lvlAdaptive = new LevelSortIndex<>(4, true);
+        System.out.println("Before Sorting: " + Arrays.toString(input));
+        lvlAdaptive.sort(input);
+        System.out.println("After Sorting: " + Arrays.toString(input));
+
+        
         String sortType = args[0];
         Scanner scanner = new Scanner(System.in);
         // Integer[] arr = null;
@@ -167,38 +175,96 @@ public class Main {
                             }
                         }
                 }
-        else if(args[1].equals("Cutoff")){
-            if(args[2].equals("INTEGERS")){
-                int cutoff = Integer.parseInt(args[3]);
-                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
-                while(scanner.hasNextLine()){
+        else if (args[1].equals("Cutoff")) {
+    if (args[2].equals("INTEGERS")) {
+        int cutoff = Integer.parseInt(args[3]);
+        Sorter<Integer> sorter = SorterFactory.getSorter(sortType, cutoff, false, false, 0);
+        while (scanner.hasNextLine()) {
+            try {
+                if (scanner.hasNextInt()) {
                     int n = scanner.nextInt();
-                    scanner.nextLine();
                     Integer[] arr = new Integer[n];
-                        for(int i = 0; i<n; i++){
+                    for (int i = 0; i < n; i++) {
+                        if (scanner.hasNextInt()) {
                             arr[i] = scanner.nextInt();
+                        } else {
+                            throw new InputMismatchException("Expected integer for array element");
                         }
-                        Long start = System.nanoTime();
-                        int comp = sorter.sort(arr);
-                        Long end = System.nanoTime();
-                        System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
-                        scanner.nextLine();
+                    }
+                    scanner.nextLine(); // Consume the rest of the line
+                    Long start = System.nanoTime();
+                    int comp = sorter.sort(arr);
+                    Long end = System.nanoTime();
+                    System.out.println(n + " " + (end - start) / 1_000_000_000.0 + " " + comp);
+                } else {
+                    System.out.println("Invalid input. Skipping...");
+                    scanner.nextLine(); // Skip invalid input
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error processing input: " + e.getMessage());
+                scanner.nextLine(); // Clear the invalid input
             }
+        }
+    } else if (args[2].equals("NonAdaptive")) {
+        int cutoff = Integer.parseInt(args[3]);
+        Sorter<Integer> sorter = SorterFactory.getSorter(sortType, cutoff, false, false, 0);
+        while (scanner.hasNextLine()) {
+            try {
+                if (scanner.hasNextInt()) {
+                    int n = scanner.nextInt();
+                    Integer[] arr = new Integer[n];
+                    for (int i = 0; i < n; i++) {
+                        if (scanner.hasNextInt()) {
+                            arr[i] = scanner.nextInt();
+                        } else {
+                            throw new InputMismatchException("Expected integer for array element");
+                        }
+                    }
+                    scanner.nextLine(); // Consume the rest of the line
+                    Long start = System.nanoTime();
+                    sorter.sort(arr);
+                    Long end = System.nanoTime();
+                    System.out.println(n + " " + (end - start) / 1_000_000_000.0);
+                } else {
+                    System.out.println("Invalid input. Skipping...");
+                    scanner.nextLine(); // Skip invalid input
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error processing input: " + e.getMessage());
+                scanner.nextLine(); // Clear the invalid input
             }
-            else if(args[2].equals("STRINGS")){
-                int cutoff = Integer.parseInt(args[3]);
-                Sorter<String> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
-                while(scanner.hasNextLine()){ 
-                int n = scanner.nextInt();
-                scanner.nextLine();
-                String[] arr = scanner.nextLine().split(" ");
-                Long start = System.nanoTime();
-                int comp = sorter.sort(arr);
-                Long end = System.nanoTime();
-                System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
+        }
+    } else { // Adaptive
+        int cutoff = Integer.parseInt(args[3]);
+        Sorter<Integer> sorter = SorterFactory.getSorter(sortType, cutoff, true, false, 0);
+        while (scanner.hasNextLine()) {
+            try {
+                if (scanner.hasNextInt()) {
+                    int n = scanner.nextInt();
+                    Integer[] arr = new Integer[n];
+                    for (int i = 0; i < n; i++) {
+                        if (scanner.hasNextInt()) {
+                            arr[i] = scanner.nextInt();
+                        } else {
+                            throw new InputMismatchException("Expected integer for array element");
+                        }
+                    }
+                    scanner.nextLine(); // Consume the rest of the line
+                    Long start = System.nanoTime();
+                    sorter.sort(arr);
+                    Long end = System.nanoTime();
+                    System.out.println(n + " " + (end - start) / 1_000_000_000.0);
+                } else {
+                    System.out.println("Invalid input. Skipping...");
+                    scanner.nextLine(); // Skip invalid input
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error processing input: " + e.getMessage());
+                scanner.nextLine(); // Clear the invalid input
             }
-            }
-            else{
+        }
+    }
+            }else{
                 int cutoff = Integer.parseInt(args[4]);
                 Sorter<String> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
                     int n = scanner.nextInt();
@@ -206,7 +272,6 @@ public class Main {
                     String[] arr = scanner.nextLine().split(" ");
                     System.out.println(sorter.sort(arr));
                 }
+                scanner.close();
             }
-            scanner.close();
-    }
 }
