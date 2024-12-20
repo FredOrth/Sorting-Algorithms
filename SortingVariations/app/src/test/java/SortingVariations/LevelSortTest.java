@@ -165,7 +165,6 @@ public class LevelSortTest {
         }
     }
 
-    @Ignore
     @Test
     public void stressTest(){
         LevelSortIndex<Integer> lvlAdaptive = new LevelSortIndex<>(8, true);
@@ -188,7 +187,6 @@ public class LevelSortTest {
         assertArrayEquals(stress1Test2, arr10000);
     }
 
-    @Ignore
     @Test
     public void stressTest2(){
         LevelSortIndex<Integer> lvlAdaptive = new LevelSortIndex<>(8, true);

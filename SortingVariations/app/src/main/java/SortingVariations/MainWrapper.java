@@ -47,7 +47,7 @@ public class MainWrapper {
 
                     // args[] for the main: (example based on your previous format)
                     String[] simulatedArgs = {
-                            "binomialSort",
+                            "levelSort",
                             "PRESORTED",
                             "",
                             "Adaptive",
