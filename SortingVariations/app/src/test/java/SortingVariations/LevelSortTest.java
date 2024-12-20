@@ -209,28 +209,28 @@ public class LevelSortTest {
         assertArrayEquals(stress1Test2, arr100000);
     }
 
-    @Ignore
-    @Test
-    public void stressTest3(){
-        LevelSortIndex<Integer> lvlAdaptive = new LevelSortIndex<>(8, true);
+    // @Ignore
+    // @Test
+    // public void stressTest3(){
+    //     LevelSortIndex<Integer> lvlAdaptive = new LevelSortIndex<>(8, true);
 
-        Integer[] stress1Test = Arrays.copyOf(arr1000000, arr1000000.length);
-        lvlAdaptive.sort(arr1000000);
-        Arrays.sort(stress1Test);
+    //     Integer[] stress1Test = Arrays.copyOf(arr1000000, arr1000000.length);
+    //     lvlAdaptive.sort(arr1000000);
+    //     Arrays.sort(stress1Test);
 
-        assertArrayEquals(stress1Test, arr1000000);
+    //     assertArrayEquals(stress1Test, arr1000000);
 
-        // Reset
-        setupStressTest();
+    //     // Reset
+    //     setupStressTest();
 
-        LevelSortIndex<Integer> lvlNonAdaptive = new LevelSortIndex<>(8, false);
+    //     LevelSortIndex<Integer> lvlNonAdaptive = new LevelSortIndex<>(8, false);
 
-        Integer[] stress1Test2 = Arrays.copyOf(arr1000000, arr1000000.length);
-        lvlNonAdaptive.sort(arr1000000);
-        Arrays.sort(stress1Test2);
+    //     Integer[] stress1Test2 = Arrays.copyOf(arr1000000, arr1000000.length);
+    //     lvlNonAdaptive.sort(arr1000000);
+    //     Arrays.sort(stress1Test2);
 
-        assertArrayEquals(stress1Test2, arr1000000);
-    }
+    //     assertArrayEquals(stress1Test2, arr1000000);
+    // }
 
     /* Niche tests for levelSort specifically.
      *  Adherence to lvls etc.

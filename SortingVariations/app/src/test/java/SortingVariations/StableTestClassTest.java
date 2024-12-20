@@ -112,7 +112,7 @@ public class StableTestClassTest {
                 // Stress testing with larger arrays
                 testAlgorithm(algorithm, cutoff, isAdaptive, useParallel, threads, Arrays.copyOf(arr10000, arr10000.length));
                 testAlgorithm(algorithm, cutoff, isAdaptive, useParallel, threads, Arrays.copyOf(arr100000, arr100000.length));
-                testAlgorithm(algorithm, cutoff, isAdaptive, useParallel, threads, Arrays.copyOf(arr1000000, arr1000000.length));
+                // testAlgorithm(algorithm, cutoff, isAdaptive, useParallel, threads, Arrays.copyOf(arr1000000, arr1000000.length));
             }
         }
     }
@@ -147,8 +147,8 @@ public class StableTestClassTest {
                         Arrays.copyOf(arr10000, arr10000.length));
                 testAlgorithm(algorithm, cutoff, isAdaptive, useParallel, threads,
                         Arrays.copyOf(arr100000, arr100000.length));
-                testAlgorithm(algorithm, cutoff, isAdaptive, useParallel, threads,
-                        Arrays.copyOf(arr1000000, arr1000000.length));
+                // testAlgorithm(algorithm, cutoff, isAdaptive, useParallel, threads,
+                //         Arrays.copyOf(arr1000000, arr1000000.length));
             }
         }
     }

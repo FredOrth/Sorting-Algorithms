@@ -8,13 +8,13 @@ import string
 # Seed for reproducibility
 SEED = 42
 # Maximum iterations for scaling `NS`
-I_MAX = 10
+I_MAX = 15
 # Number of repetitions per value of `n`
 M = 50
 
 rng = np.random.default_rng(SEED)
 
-NS: List[int] = [int(1600*1.90**i) for i in range(I_MAX)]
+NS: List[int] = [int(1600*1.55**i) for i in range(I_MAX)]
 
 letters = string.ascii_lowercase
 
@@ -52,27 +52,27 @@ def generatePresortedArray(array_size: int, presortedness: int) -> List[int]:
     return array
 
 
-# with open('RandomInputString.csv', 'w', newline='') as f:
-#     writer = csv.writer(f)
+with open('RandomInputString.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
 
-#     #Header
-#     writer.writerow(["n", "values"])
+    #Header
+    writer.writerow(["n", "values"])
 
-#     # I_MAX M times per value and create a random input of ints
-#     for i in range(I_MAX):
-#         for _ in range(M):
-#             writer.writerow([NS[i], " ".join(str(generateRandomLetters()) for _ in range(NS[i]))])
+    # I_MAX M times per value and create a random input of ints
+    for i in range(I_MAX):
+        for _ in range(M):
+            writer.writerow([NS[i], " ".join(str(generateRandomLetters()) for _ in range(NS[i]))])
 
-# with open('RandomInputIntegers.csv', 'w', newline='') as f:
-#     writer = csv.writer(f)
+with open('RandomInputIntegers.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
 
-#     # Header
-#     writer.writerow(["n", "values"])
+    # Header
+    writer.writerow(["n", "values"])
 
-#     # I_MAX M times per value and create a random input of ints
-#     for i in range(I_MAX):
-#         for _ in range(M):
-#             writer.writerow([NS[i], " ".join(str(rng.integers(1, 2**28)) for _ in range(NS[i]))])
+    # I_MAX M times per value and create a random input of ints
+    for i in range(I_MAX):
+        for _ in range(M):
+            writer.writerow([NS[i], " ".join(str(rng.integers(1, 2**28)) for _ in range(NS[i]))])
 
 with open("PresortedRandomInput.csv", "w", newline='') as f:
     writer = csv.writer(f)
