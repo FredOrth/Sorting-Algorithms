@@ -34,6 +34,8 @@ def rename_algorithm(row):
         return "Level Sort Non-Adaptive"
     if "levelSort" in row["algorithm"] and "Adaptive" in row["algorithm"]:
         return "Level Sort Adaptive"
+    if "parallelRecursiveMergeSort" in row["algorithm"]:
+        return "Parallel MergeSort Parallel Merging"
 
     return row["algorithm"]
 
@@ -281,7 +283,7 @@ if __name__ == "__main__":
 
     horseracePlotter(
         "HorseRace.csv",
-        "Horse Race: Algorithm Comparison",
+        "Horse Race: Algorithm Comparison With Parallel",
         "Input Size (n)",
         "Runtime (seconds)",
         # log_y=True,  # Set to True for a log-transformed y-axis
