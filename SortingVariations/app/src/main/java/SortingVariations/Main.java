@@ -173,10 +173,8 @@ public class Main {
         else if(args[1].equals("Cutoff")){
             if(args[2].equals("INTEGERS")){
                 int cutoff = Integer.parseInt(args[3]);
-                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
-                while(scanner.hasNextLine()){
+                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,true,false,0);
                     int n = scanner.nextInt();
-                    scanner.nextLine();
                     Integer[] arr = new Integer[n];
                         for(int i = 0; i<n; i++){
                             arr[i] = scanner.nextInt();
@@ -185,8 +183,6 @@ public class Main {
                         int comp = sorter.sort(arr);
                         Long end = System.nanoTime();
                         System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
-                        scanner.nextLine();
-            }
             }
             else if(args[2].equals("STRINGS")){
                 int cutoff = Integer.parseInt(args[3]);
