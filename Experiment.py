@@ -21,7 +21,7 @@ csv.field_size_limit(100000000)
 
 integer_data: Dict[int,List[List[int]]] = {}
 
-with open("RandomInputIntegers10000000.csv", "r") as r:
+with open("HorseRaceData.csv", "r") as r:
     reader = csv.DictReader(r)
 
     for row in reader:
