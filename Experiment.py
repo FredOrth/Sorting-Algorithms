@@ -14,144 +14,50 @@ def run_java(jar: str, arg: str, input: str)->str:
     return output.decode('utf-8') 
 
 csv.field_size_limit(100000000)
-# INPUT_DATA_INTEGER: str = ""
-# INPUT_DATA_STRING: str = ""
-# INPUT_DATA_PREFIX: str = ""
-# INPUT_DATA_INTEGER_W_PRESORTED: str = ""
 
-integer_data: Dict[int,List[List[int]]] = {}
-
-with open("HorseRaceData.csv", "r") as r:
-    reader = csv.DictReader(r)
-
-    for row in reader:
-        n = row["n"]  # Keep n as a string
-        values = list(map(int, row["values"].split()))
-        if n not in integer_data:
-            integer_data[n] = []
-        integer_data[n].append(values)
-print("done")
-
-
-# with open("RandomInputString.csv", "r") as r:
-#     reader = csv.DictReader(r)
-
-#     for row in reader:
-#         n = str(row["n"])
-#         prefix = "algos"
-#         values = row["values"].split()
-#         INPUT_DATA_STRING += f"{n}\n"
-#         INPUT_DATA_STRING += " ".join(values) + "\n"
-
-#         prefixed_values = [prefix + str(value)[5:] for value in values]
-#         INPUT_DATA_PREFIX += f"{n}\n"
-#         INPUT_DATA_PREFIX += " ".join(prefixed_values) + "\n"
-# print("done")
-
-# # n,presortedness,values
-# with open("PresortedRandomInput.csv", "r") as r:
-#     reader = csv.DictReader(r)
-
-#     for row in reader:
-#         n = str(row["n"]) 
-#         presortedness = str(row["presortedness"])  # The degree of presortedness 
-#         values = row["values"].split()
-#         # INPUT_DATA_INTEGER_W_PRESORTED += f"{n}\n"
-#         # INPUT_DATA_INTEGER_W_PRESORTED += f"{presortedness}" + "\n"
-#         # INPUT_DATA_INTEGER_W_PRESORTED += " ".join(values) + "\n"
-#         INPUT_DATA_INTEGER_W_PRESORTED += f"{n}\n{presortedness}\n{' '.join(values)}\n"
-# print("Presorted done")
-
-# def benchmark(algorithm: str, jar: str)-> \
-#     List[Tuple[int,float, int]]: ## remove extra int if needed
-#     results: List[Tuple[int,float,int, int]] = []
-
-#     if "INTEGERS" in algorithm:
-#         data = INPUT_DATA_INTEGER
-#     elif "STRINGS" in algorithm or "OBJECTS" in algorithm:
-#         data = INPUT_DATA_STRING
-#     elif "PRESORTED" in algorithm:
-#         data = INPUT_DATA_INTEGER_W_PRESORTED
-#     else:
-#         data = INPUT_DATA_PREFIX
-#     results_strings = run_java(jar, algorithm, data)
-#     print(results_strings)
-
-#     ##output parsing
-#     for line in results_strings.strip().split("\n"):
-#         split = line.strip().split()
-#         if len(split) == 2:  # n and time only
-#             n, time = int(split[0]), float(split[1])
-#             results.append((n, time, -1, -1))  # Default -1 for unused values
-#         elif len(split) == 3:  # n, time, comparisons
-#             n, time, comparisons = int(split[0]), float(split[1]), int(split[2])
-#             results.append((n, time, comparisons, -1))  # Default -1 for presortedness
-#         elif len(split) == 4:  # n, time, comparisons, presortedness, cutoff
-#             n, time, comparisons, presortedness = (
-#                 int(split[0]),
-#                 float(split[1]),
-#                 int(split[2]),
-#                 int(split[3]),
-#             )
-#             results.append((n, time, comparisons, presortedness))
-#         elif len(split) == 5:  # n, time, presortedness, comparisons, cutoff
-#             n, time, presortedness, comparisons, cutoff = (
-#                 int(split[0]),
-#                 float(split[1]),
-#                 int(split[2]),
-#                 int(split[3]),
-#                 int(split[4]),
-#             )
-#             results.append((n, presortedness, time, comparisons, cutoff))
-#     return results
-
-
-def benchmark(algorithm: str, jar: str)-> \
-    List[Tuple[int,float, int]]: ## remove extra int if needed
-    results: List[Tuple[int,float,int, int]] = []
-
-    if "INTEGERS" in algorithm:
-        data = integer_data
-        print("Hello")
-    elif "STRINGS" in algorithm or "OBJECTS" in algorithm:
-        data = INPUT_DATA_STRING
-    elif "PRESORTED" in algorithm:
-        data = INPUT_DATA_INTEGER_W_PRESORTED
-    else:
-        data = INPUT_DATA_PREFIX
-    for n in data.keys():
-        print(n)
-        for integers in data[n]:
-            input_string = str(n) + " " + " ".join(map(str, integers)).strip()
-            print(f"Running algorithm {algorithm}")
-            results_string = run_java(jar, algorithm, input_string)
-            split = results_string.strip().split()
-            if len(split) == 2:  # n and time only
-                n, time = int(split[0]), float(split[1])
-                results.append((n, time, -1, -1))  # Default -1 for unused values
-            elif len(split) == 3:  # n, time, comparisons
-                n, time, comparisons = int(split[0]), float(split[1]), int(split[2])
-                results.append((n, time, comparisons, -1))  # Default -1 for presortedness
-            elif len(split) == 4:  # n, time, comparisons, presortedness, cutoff
-                n, time, comparisons, presortedness = (
-                    int(split[0]),
-                    float(split[1]),
-                    int(split[2]),
-                    int(split[3]),
-                )
-                results.append((n, time, comparisons, presortedness))
-            elif len(split) == 5:  # n, time, presortedness, comparisons, cutoff
-                n, time, presortedness, comparisons, cutoff = (
-                    int(split[0]),
-                    float(split[1]),
-                    int(split[2]),
-                    int(split[3]),
-                    int(split[4]),
-                )
-                results.append((n, presortedness, time, comparisons, cutoff))
-    return results
-
+#Benchmark method
+def benchmark(algorithm: str, jar: str, data: str)-> \
+    List[List]: #List[Tuple[int,float, int]]
+    results: List[List] = []
     
+    for n in data.keys():
+            for integers in data[n]:
+                input_string = str(n) + " " + " ".join(map(str, integers)).strip()
+                print(f"Running algorithm {algorithm}")
+                results_string = run_java(jar, algorithm, input_string)
+                print(results_string)
+                split = results_string.strip().split()
+                listOfElms = []
+                for elm in split:
+                    listOfElms.append(elm)
+                results.append(listOfElms)
+    return results   
+
+def generatePlots(plotName: str) -> Dict[int, List[List]]:
+    with open(plotName, "r") as r:
+        reader = csv.DictReader(r)
+        
+        dictToReturn: Dict[int,List[List]] = {}
+        
+        for row in reader:
+            n = row["n"]
+            values = list(map(str, row["values"].split()))
+            if n not in dictToReturn:
+                dictToReturn[n] = []
+            dictToReturn[n].append(values)
+    return dictToReturn
+        
+def createPrefix(dataset):
+    prefix = "algos"
+    prefixDataSet = dataset
+    for key, outerList in prefixDataSet.items():
+        for innerList in outerList:
+            for string in innerList:
+                string = prefix + string[:-5]
+    return prefixDataSet
+    
+    
+#Test N*Log(N), DataTypes-test, c-value
 
 INSTANCES_C: List[Tuple[str, str]] = {
     ("iterativeMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar"),
@@ -172,13 +78,6 @@ INSTANCES_PRESORTED : List[Tuple[str, str]] = {
     # ("insertionMergeSort Cutoff PRESORTED NonAdaptive", "SortingVariations/app/build/libs/app.jar")
 }
 
-INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
-    ("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-    ("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
-    ("recursiveMergeSort BaseCase PREFIX", "SortingVariations/app/build/libs/app.jar"),
-    ("recursiveMergeSort BaseCase OBJECT", "SortingVariations/app/build/libs/app.jar"),
-}
-
 INSTANCES_HORSERACE: List[Tuple[str,str]]= {
     ("recursiveMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
     #We unfortunately have to keep a placeholder to keep our architecture in main
@@ -190,6 +89,9 @@ INSTANCES_HORSERACE: List[Tuple[str,str]]= {
     ("insertionMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
     ("parallelRecursiveMergeSort HorseRace INTEGERS NonAdaptive Parallel", "SortingVariations/app/build/libs/app.jar")
 }
+
+#Instances:
+
 
 LIST_OF_CUTOFFVALUES: list[int] = {
     1,#Cutoff-value 1 is equal to the normal sorting algorithms. We should probably just refactor the other experiment to take this as well... oh well...
@@ -203,22 +105,43 @@ LIST_OF_CUTOFFVALUES: list[int] = {
 }
 
 
+    #Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done
 if __name__ == '__main__':
-
-    # This is for running the BaseCase test for recursive mergesort
-    # with open('MergeSortBaseCase.csv','w') as f:
-    #     writer = csv.DictWriter(f,
-    #         fieldnames = ['algorithm','n','time', 'comparisons'])
-    #     writer.writeheader()
-    #     for algorithm, jar in INSTANCES_MERGESORT_BASECASE:
-    #         results: List[Tuple[int,float]] = []
-    #         for value in benchmark(f"{algorithm}",jar):
-    #             writer.writerow({
-    #                 'algorithm' : algorithm,
-    #                 'n' : value[0],
-    #                 'time' : value[1],
-    #                 'comparisons' : value[2]
-    #             })
+    INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
+    ("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort BaseCase PREFIX", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort BaseCase OBJECT", "SortingVariations/app/build/libs/app.jar"),
+}
+    #Datasets for Basecase datasets
+    listOfDatasets = [
+    generatePlots("RandomInputString.csv"),\
+    generatePlots("RandomInputIntegers.csv"), \
+    createPrefix(generatePlots("RandomInputString.csv"))
+    ]
+    
+    dictOfDataSets = {
+        "INTEGERS" : listOfDatasets[1],
+        "STRINGS" : listOfDatasets[0],
+        "OBJECT" : listOfDatasets[0],
+        "PREFIX" : listOfDatasets[2]
+    }
+    
+    #Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done
+    #BaseCase for n*log(n) test of MergeSort
+    with open('MergeSortBaseCase.csv','w') as f:
+        writer = csv.DictWriter(f,
+            fieldnames = ['algorithm','n','time', 'comparisons'])
+        writer.writeheader()
+        for algorithm, jar in INSTANCES_MERGESORT_BASECASE:
+            results: List[Tuple[int,float]] = []
+            for value in benchmark(f"{algorithm}",jar, dictOfDataSets[algorithm.split()[2]]):
+                writer.writerow({
+                    'algorithm' : algorithm,
+                    'n' : value[0],
+                    'time' : value[1],
+                    'comparisons' : value[2]
+                })
 
     # This is for testing cutoff values with strings
     # with open("resultsCutoffValues.csv", "w") as f:  ##'resultsCutoffValues.csv'
@@ -237,22 +160,22 @@ if __name__ == '__main__':
     #                     'comparisons' : value[2],
     #                     'cutoff' : cutoff
     #                 })
-    with open("resultsCutoffValues_LevelBSort2.csv", "w") as f:  ##'resultsCutoffValues.csv'
-        print("Done done")
-        writer = csv.DictWriter(f, 
-            fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
-        writer.writeheader()
-        for algorithm, jar in INSTANCES_C_LevelSort_BSort:
-            results: List[Tuple[int,float]] = []
-            for cutoff in LIST_OF_CUTOFFVALUES:
-                for value in benchmark(f"{algorithm} {cutoff}",jar):
-                    writer.writerow({ 
-                        'algorithm' : algorithm,
-                        'n' : value[0],
-                        'time' : value[1],
-                        'comparisons' : value[2],
-                        'cutoff' : cutoff
-                    })
+    # with open("resultsCutoffValues_LevelBSort2.csv", "w") as f:  ##'resultsCutoffValues.csv'
+    #     print("Done done")
+    #     writer = csv.DictWriter(f, 
+    #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
+    #     writer.writeheader()
+    #     for algorithm, jar in INSTANCES_C_LevelSort_BSort:
+    #         results: List[Tuple[int,float]] = []
+    #         for cutoff in LIST_OF_CUTOFFVALUES:
+    #             for value in benchmark(f"{algorithm} {cutoff}",jar):
+    #                 writer.writerow({ 
+    #                     'algorithm' : algorithm,
+    #                     'n' : value[0],
+    #                     'time' : value[1],
+    #                     'comparisons' : value[2],
+    #                     'cutoff' : cutoff
+    #                 })
 
     # with open("BiolvlPresortedResults.csv", "w", newline='') as f:
     #     print("Starting CSV write...")

@@ -83,7 +83,6 @@ public class Main {
             Sorter<Integer> sorter = SorterFactory.getSorter(sortType,0,false,false,0);
             while(scanner.hasNextLine()){
                 int n = scanner.nextInt();
-                scanner.nextLine();
                 Integer[] arr = new Integer[n];
                     for(int i = 0; i<n; i++){
                         arr[i] = scanner.nextInt();
@@ -92,13 +91,11 @@ public class Main {
                     int comp = sorter.sort(arr);
                     Long end = System.nanoTime();
                     System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
-                    scanner.nextLine();
             }
         } else if(args[2].equals("OBJECT")){
             Sorter<ObjectClass> sorter = SorterFactory.getSorter(sortType,0,false,false,0);
             while(scanner.hasNextLine()){
                 int n = scanner.nextInt();
-                scanner.nextLine();
                 ObjectClass[] arr = new ObjectClass[n];
                 String[] strings = scanner.nextLine().split(" ");
                 for(int i = 0; i<n; i++){
@@ -110,11 +107,11 @@ public class Main {
                 System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
         }
     }
-            else{ // String
+            else{ //Strings
                 Sorter<String> sorter = SorterFactory.getSorter(sortType,0,false,false,0);
                 while(scanner.hasNextLine()){ 
                 int n = scanner.nextInt();
-                scanner.nextLine();
+                int number = 0;
                 String[] arr = scanner.nextLine().split(" ");
                 Long start = System.nanoTime();
                 int comp = sorter.sort(arr);
