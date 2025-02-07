@@ -59,25 +59,6 @@ def createPrefix(dataset):
     
 #Test N*Log(N), DataTypes-test, c-value
 
-INSTANCES_C: List[Tuple[str, str]] = {
-    ("iterativeMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar"),
-    # ("iterativeMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-    # ("insertionMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-    ("insertionMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar")
-}
-
-INSTANCES_C_LevelSort_BSort: List[Tuple[str, str]] = {
-    ("levelSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-    # ("binomialSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar")
-}
-
-INSTANCES_PRESORTED : List[Tuple[str, str]] = {
-    ("binomialSort Cutoff PRESORTED Adaptive", "SortingVariations/app/build/libs/app.jar"),
-    # ("levelSort Cutoff PRESORTED NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
-    # ("binomialSort Cutoff PRESORTED NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
-    # ("insertionMergeSort Cutoff PRESORTED NonAdaptive", "SortingVariations/app/build/libs/app.jar")
-}
-
 INSTANCES_HORSERACE: List[Tuple[str,str]]= {
     ("recursiveMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
     #We unfortunately have to keep a placeholder to keep our architecture in main
@@ -90,9 +71,32 @@ INSTANCES_HORSERACE: List[Tuple[str,str]]= {
     ("parallelRecursiveMergeSort HorseRace INTEGERS NonAdaptive Parallel", "SortingVariations/app/build/libs/app.jar")
 }
 
-#Instances:
+#Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done
+#Tests for mergesort base case with the types: Integers, Strings, Objects and prefix Strings
+INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
+("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
+("recursiveMergeSort BaseCase PREFIX", "SortingVariations/app/build/libs/app.jar"),
+("recursiveMergeSort BaseCase OBJECT", "SortingVariations/app/build/libs/app.jar"),
+}
 
+#Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done
+#Initial test for testing c-values for iterative and insertion mergesort
+INSTANCES_C: List[Tuple[str, str]] = {
+    # ("iterativeMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar"),
+    ("iterativeMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+    ("insertionMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+    # ("insertionMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar")
+}
 
+#Tests for levelsort and binomial sort on diffrently sorted input
+INSTANCES_PRESORTED : List[Tuple[str, str]] = {
+    ("levelSort Cutoff PRESORTED NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+    ("levelSort Cutoff INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
+    ("binomialSort Cutoff PRESORTED Adaptive", "SortingVariations/app/build/libs/app.jar"),
+    ("binomialSort Cutoff PRESORTED NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+}
+#Cutoff values:
 LIST_OF_CUTOFFVALUES: list[int] = {
     1,#Cutoff-value 1 is equal to the normal sorting algorithms. We should probably just refactor the other experiment to take this as well... oh well...
     2,
@@ -103,16 +107,9 @@ LIST_OF_CUTOFFVALUES: list[int] = {
     32,
     64
 }
-
-
-    #Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done
+    
 if __name__ == '__main__':
-    INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
-    ("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-    ("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
-    ("recursiveMergeSort BaseCase PREFIX", "SortingVariations/app/build/libs/app.jar"),
-    ("recursiveMergeSort BaseCase OBJECT", "SortingVariations/app/build/libs/app.jar"),
-}
+    
     #Datasets for Basecase datasets
     listOfDatasets = [
     generatePlots("RandomInputString.csv"),\
@@ -142,24 +139,29 @@ if __name__ == '__main__':
                     'time' : value[1],
                     'comparisons' : value[2]
                 })
-
-    # This is for testing cutoff values with strings
-    # with open("resultsCutoffValues.csv", "w") as f:  ##'resultsCutoffValues.csv'
-    #     print("Done done")
-    #     writer = csv.DictWriter(f, 
-    #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
-    #     writer.writeheader()
-    #     for algorithm, jar in INSTANCES_C:
-    #         results: List[Tuple[int,float]] = []
-    #         for cutoff in LIST_OF_CUTOFFVALUES:
-    #             for value in benchmark(f"{algorithm} {cutoff}",jar):
-    #                 writer.writerow({ 
-    #                     'algorithm' : algorithm,
-    #                     'n' : value[0],
-    #                     'time' : value[1],
-    #                     'comparisons' : value[2],
-    #                     'cutoff' : cutoff
-    #                 })
+                
+    
+    #Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done
+    # Experiment for testing different cutoff values for recursive mergesort
+    with open("cutoffValues.csv", "w") as f:
+        writer = csv.DictWriter(f, 
+            fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
+        writer.writeheader()
+        for algorithm, jar in INSTANCES_C:
+            results: List[Tuple[int,float]] = []
+            for cutoff in LIST_OF_CUTOFFVALUES:
+                for value in benchmark(f"{algorithm} {cutoff}",jar, dictOfDataSets[algorithm.split()[2]]):
+                    writer.writerow(
+                    { 
+                        'algorithm' : algorithm,
+                        'n' : value[0],
+                        'time' : value[1],
+                        'comparisons' : value[2],
+                        'cutoff' : cutoff
+                    }
+                        )
+    
+    
     # with open("resultsCutoffValues_LevelBSort2.csv", "w") as f:  ##'resultsCutoffValues.csv'
     #     print("Done done")
     #     writer = csv.DictWriter(f, 

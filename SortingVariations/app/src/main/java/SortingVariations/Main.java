@@ -79,48 +79,9 @@ public class Main {
         }
     }
         else if(args[1].equals("BaseCase")){
-            if(args[2].equals("INTEGERS")){
-            Sorter<Integer> sorter = SorterFactory.getSorter(sortType,0,false,false,0);
-            while(scanner.hasNextLine()){
-                int n = scanner.nextInt();
-                Integer[] arr = new Integer[n];
-                    for(int i = 0; i<n; i++){
-                        arr[i] = scanner.nextInt();
-                    }
-                    Long start = System.nanoTime();
-                    int comp = sorter.sort(arr);
-                    Long end = System.nanoTime();
-                    System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
+                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,0,false,false,0);
+                sorterMethod(sorter, reader(args[2]));
             }
-        } else if(args[2].equals("OBJECT")){
-            Sorter<ObjectClass> sorter = SorterFactory.getSorter(sortType,0,false,false,0);
-            while(scanner.hasNextLine()){
-                int n = scanner.nextInt();
-                ObjectClass[] arr = new ObjectClass[n];
-                String[] strings = scanner.nextLine().split(" ");
-                for(int i = 0; i<n; i++){
-                    arr[i] = new ObjectClass(strings[i]);
-                }
-                Long start = System.nanoTime();
-                int comp = sorter.sort(arr);
-                Long end = System.nanoTime();
-                System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
-        }
-    }
-            else{ //Strings
-                Sorter<String> sorter = SorterFactory.getSorter(sortType,0,false,false,0);
-                while(scanner.hasNextLine()){ 
-                int n = scanner.nextInt();
-                int number = 0;
-                String[] arr = scanner.nextLine().split(" ");
-                Long start = System.nanoTime();
-                int comp = sorter.sort(arr);
-                Long end = System.nanoTime();
-                System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
-                }
-                }
-            }
-
             //String sorted = scanner.nextLine();
         else if(args[1].equals("PRESORTED")) {
             if (args[3].equals("Adaptive")){
@@ -168,41 +129,52 @@ public class Main {
                         }
                 }
         else if(args[1].equals("Cutoff")){
-            if(args[2].equals("INTEGERS")){
                 int cutoff = Integer.parseInt(args[3]);
-                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,true,false,0);
-                    int n = scanner.nextInt();
-                    Integer[] arr = new Integer[n];
-                        for(int i = 0; i<n; i++){
-                            arr[i] = scanner.nextInt();
-                        }
-                        Long start = System.nanoTime();
-                        int comp = sorter.sort(arr);
-                        Long end = System.nanoTime();
-                        System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
-            }
-            else if(args[2].equals("STRINGS")){
-                int cutoff = Integer.parseInt(args[3]);
-                Sorter<String> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
-                while(scanner.hasNextLine()){ 
-                int n = scanner.nextInt();
-                scanner.nextLine();
-                String[] arr = scanner.nextLine().split(" ");
-                Long start = System.nanoTime();
-                int comp = sorter.sort(arr);
-                Long end = System.nanoTime();
-                System.out.println(n + " " + (end-start)/1_000_000_000.0 + " " + comp);
-            }
-            }
-            else{
-                int cutoff = Integer.parseInt(args[4]);
-                Sorter<String> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
-                    int n = scanner.nextInt();
-                    scanner.nextLine();
-                    String[] arr = scanner.nextLine().split(" ");
-                    System.out.println(sorter.sort(arr));
-                }
+                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
+                sorterMethod(sorter, reader(args[2]));
             }
             scanner.close();
+    }
+
+
+
+
+
+
+    public static Object[] reader(String inputType){
+        Scanner scanner = new Scanner(System.in);
+
+        if(inputType.equals("INTEGERS")){
+            int n = scanner.nextInt();
+                Integer[] arr = new Integer[n];
+                    for(int i = 0; i<n; i++){
+                        arr[i] = scanner.nextInt();
+                    }
+            // System.out.println("This is n: " + n + " this is array length" + arr.length);
+            return arr;
+        }else if(inputType.equals("OBJECT")){
+            int n = scanner.nextInt();
+                ObjectClass[] arr = new ObjectClass[n];
+                String[] strings = scanner.nextLine().split(" ");
+                for(int i = 0; i<n; i++){
+                    arr[i] = new ObjectClass(strings[i]);
+                }
+            System.out.println("This is n: " + n + " this is array length" + arr.length);
+            return arr;
+        }else{
+            int n = scanner.nextInt();
+            scanner.next();
+            String[] arr = scanner.nextLine().split(" ");
+            System.out.println("This is n: " + n + " this is array length" + arr.length);
+            return arr;
+        }
+    }
+
+    public static <T extends Comparable<T>> void sorterMethod(Sorter sorter, Object[] arr){
+            Long start = System.nanoTime();
+                int comp = sorter.sort((Comparable[]) arr);
+                Long end = System.nanoTime();
+                System.out.println("Array type: " + arr.getClass().getComponentType());
+                System.out.println(arr.length + " " + (end-start)/1_000_000_000.0 + " " + comp);
     }
 }
