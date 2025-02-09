@@ -9,31 +9,31 @@ public class SorterFactory {
             // Lav flere cases nednefor, skal bare returne den classe vi vil nbruge
 
             case "insertionMergeSort":
-                if (cutoff < 0) {
+                if (cutoff <= 0) {
                     throw new IllegalArgumentException("Cutoff value required for insertion sort.");
                 }
                 return new InsertionMergeSort<>(cutoff);
 
             case "iterativeMergeSort":
-                if (cutoff < 0) {
+                if (cutoff <= 0) {
                     throw new IllegalArgumentException("Cutoff value required for insertion sort.");
                 }
                 return new IterativeMergeSortIndex<>(cutoff);
 
             case "binomialSort":
-                if (cutoff < 0) {
+                if (cutoff <= 0) {
                     throw new IllegalArgumentException("Cutoff value required for insertion sort.");
                 }
                 return new BinomialSortIndex<>(cutoff, isAdaptive);
 
             case "levelSort":
-                if (cutoff < 0) {
+                if (cutoff <= 0) {
                     throw new IllegalArgumentException("Cutoff value required for insertion sort.");
                 }
                 return new LevelSortIndex<>(cutoff, isAdaptive);
 
             case "parallelRecursiveMergeSort":
-                if (cutoff < 0) {
+                if (cutoff <= 0) {
                     throw new IllegalArgumentException("Cutoff value required for parallelRecursiveMergeSort.");
                 }
                 return new ParallelRecursiveMergeSort<>(cutoff,useParallelMergesort,numberOfThreads);
