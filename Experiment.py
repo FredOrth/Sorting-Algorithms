@@ -131,82 +131,80 @@ LIST_OF_CUTOFFVALUES: list[int] = {
 if __name__ == '__main__':
     
     #Datasets for Basecase datasets
-    # listOfDatasets = [
-    # generatePlots("RandomInputString.csv"),\
-    # generatePlots("RandomInputIntegers.csv"), \
-    # createPrefix(generatePlots("RandomInputString.csv"))
-    # ]
+    listOfDatasets = [
+    generatePlots("RandomInputString.csv"),\
+    generatePlots("RandomInputIntegers.csv"), \
+    createPrefix(generatePlots("RandomInputString.csv"))
+    ]
     
-    # dictOfDataSets = {
-    #     "INTEGERS" : listOfDatasets[1],
-    #     "STRINGS" : listOfDatasets[0],
-    #     "OBJECT" : listOfDatasets[0],
-    #     "PREFIX" : listOfDatasets[2]
-    # }
+    dictOfDataSets = {
+        "INTEGERS" : listOfDatasets[1],
+        "STRINGS" : listOfDatasets[0],
+        "OBJECT" : listOfDatasets[0],
+        "PREFIX" : listOfDatasets[2]
+    }
     
-    #Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done
-    #BaseCase for n*log(n) test of MergeSort
-    # with open('MergeSortBaseCase.csv','w') as f:
-    #     writer = csv.DictWriter(f,
-    #         fieldnames = ['algorithm','n','time', 'comparisons'])
-    #     writer.writeheader()
-    #     for algorithm, jar in INSTANCES_MERGESORT_BASECASE:
-    #         results: List[Tuple[int,float]] = []
-    #         for value in benchmark(f"{algorithm}",jar, dictOfDataSets[algorithm.split()[2]]):
-    #             writer.writerow({
-    #                 'algorithm' : algorithm,
-    #                 'n' : value[0],
-    #                 'time' : value[1],
-    #                 'comparisons' : value[2]
-    #             })
-                
-    
-    # #Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done Done
-    # # Experiment for testing different cutoff values for recursive mergesort
-    # with open("cutoffValues.csv", "w") as f:
-    #     writer = csv.DictWriter(f, 
-    #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
-    #     writer.writeheader()
-    #     for algorithm, jar in INSTANCES_C:
-    #         results: List[Tuple[int,float]] = []
-    #         for cutoff in LIST_OF_CUTOFFVALUES:
-    #             for value in benchmark(f"{algorithm} {cutoff}",jar, dictOfDataSets[algorithm.split()[2]]):
-    #                 writer.writerow(
-    #                 { 
-    #                     'algorithm' : algorithm,
-    #                     'n' : value[0],
-    #                     'time' : value[1],
-    #                     'comparisons' : value[2],
-    #                     'cutoff' : cutoff
-    #                 }
-    #                     )
-        
-    # listOfDatasets = [
-    # generatePresortedPlots()
-    # ]
-    
-    #Experiment for testing binomial sort and level sort with different cutoff values
-    # with open("LevelAndBioSort.csv", "w") as f:
-    #     writer = csv.DictWriter(f, 
-    #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff', 'degree of presortedness'])
-    #     writer.writeheader()
-    #     for algorithm, jar in INSTANCES_preSorted_Adaptive:
-    #         results: List[Tuple[int,float]] = []
-    #         for cutoff in LIST_OF_CUTOFFVALUES:
-    #             for presortedness, dict in listOfDatasets[0].items():
-    #                 for value in benchmark(f"{algorithm} {cutoff}",jar, dict):
-    #                     writer.writerow(
-    #                     { 
-    #                         'algorithm' : algorithm,
-    #                         'n' : value[0],
-    #                         'time' : value[1],
-    #                         'comparisons' : value[2],
-    #                         'cutoff' : cutoff,
-    #                         'degree of presortedness' : presortedness
-    #                     }
-    #                         )
+    # BaseCase for n*log(n) test of MergeSort
+    with open('MergeSortBaseCase.csv','w') as f:
+        writer = csv.DictWriter(f,
+            fieldnames = ['algorithm','n','time', 'comparisons'])
+        writer.writeheader()
+        for algorithm, jar in INSTANCES_MERGESORT_BASECASE:
+            results: List[Tuple[int,float]] = []
+            for value in benchmark(f"{algorithm}",jar, dictOfDataSets[algorithm.split()[2]]):
+                writer.writerow({
+                    'algorithm' : algorithm,
+                    'n' : value[0],
+                    'time' : value[1],
+                    'comparisons' : value[2]
+                })
                 
 
+    # Experiment for testing different cutoff values for recursive mergesort
+    with open("cutoffValues.csv", "w") as f:
+        writer = csv.DictWriter(f, 
+            fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
+        writer.writeheader()
+        for algorithm, jar in INSTANCES_C:
+            results: List[Tuple[int,float]] = []
+            for cutoff in LIST_OF_CUTOFFVALUES:
+                for value in benchmark(f"{algorithm} {cutoff}",jar, dictOfDataSets[algorithm.split()[2]]):
+                    writer.writerow(
+                    { 
+                        'algorithm' : algorithm,
+                        'n' : value[0],
+                        'time' : value[1],
+                        'comparisons' : value[2],
+                        'cutoff' : cutoff
+                    }
+                        )
+        
+    listOfDatasets = [
+    generatePresortedPlots()
+    ]
+    
+    # Experiment for testing binomial sort and level sort with different cutoff values
+    with open("LevelAndBioSort.csv", "w") as f:
+        writer = csv.DictWriter(f, 
+            fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff', 'degree of presortedness'])
+        writer.writeheader()
+        for algorithm, jar in INSTANCES_preSorted_Adaptive:
+            results: List[Tuple[int,float]] = []
+            for cutoff in LIST_OF_CUTOFFVALUES:
+                for presortedness, dict in listOfDatasets[0].items():
+                    for value in benchmark(f"{algorithm} {cutoff}",jar, dict):
+                        writer.writerow(
+                        { 
+                            'algorithm' : algorithm,
+                            'n' : value[0],
+                            'time' : value[1],
+                            'comparisons' : value[2],
+                            'cutoff' : cutoff,
+                            'degree of presortedness' : presortedness
+                        }
+                            )
+                
+    #List of datasets used in horserace experiment
     listOfDatasets = [
     generatePlots("HorseRace.csv")
     ]
