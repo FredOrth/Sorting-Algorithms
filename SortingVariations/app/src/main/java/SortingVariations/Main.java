@@ -94,7 +94,7 @@ public class Main {
     }
 
     public static <T extends Comparable<T>> void sorterMethod(Sorter sorter, Object[] arr){
-            Long start = System.nanoTime();
+                Long start = System.nanoTime();
                 int comp = sorter.sort((Comparable[]) arr);
                 Long end = System.nanoTime();
                 System.out.println("Array type: " + arr.getClass().getComponentType());

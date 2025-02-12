@@ -55,7 +55,7 @@ def generatePresortedArray(array_size: int, presortedness: int) -> List[int]:
             idx1 = rng.integers(0, array_size)
             idx2 = rng.integers(0, array_size)
             array[idx1], array[idx2] = array[idx2], array[idx1]
-    elif presortedness == 3:  ## "sorted"
+    elif presortedness == 3:  # "sorted"
         array.sort()
     return array
 

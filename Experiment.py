@@ -16,7 +16,7 @@ def run_java(jar: str, arg: str, input: str)->str:
 csv.field_size_limit(100000000)
 
 #Benchmark method
-def benchmark(algorithm: str, jar: str, data: str)-> \
+def benchmark(algorithm: str, jar: str, data)-> \
     List[List]: #List[Tuple[int,float, int]]
     results: List[List] = []
     
@@ -49,6 +49,17 @@ def generatePlots(plotName: str) -> Dict[int, List[int]]:
             dictToReturn[n].append(values)
     return dictToReturn
 
+#Method for creating strings with a prefix of "algos"
+#The method will 
+def createPrefix(dataset):
+    prefix = "algos"
+    prefixDataSet = dataset
+    for key, outerList in prefixDataSet.items():
+        for innerList in outerList:
+            for string in innerList:
+                string = prefix + string[:-5]
+    return prefixDataSet
+
 def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
     with open("PresortedRandomInput.csv", "r") as r:
         reader = csv.DictReader(r)
@@ -66,17 +77,7 @@ def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
             dictToReturn[x] = data
     return dictToReturn 
     
-        
-#Method for creating strings with a prefix of "algos"
-#The method will 
-def createPrefix(dataset):
-    prefix = "algos"
-    prefixDataSet = dataset
-    for key, outerList in prefixDataSet.items():
-        for innerList in outerList:
-            for string in innerList:
-                string = prefix + string[:-5]
-    return prefixDataSet
+
     
 
     
