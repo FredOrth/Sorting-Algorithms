@@ -2,7 +2,7 @@ package SortingVariations;
 
 public class SorterFactory {
     public static <T extends Comparable<T>> Sorter<T> getSorter(String type, int cutoff, boolean isAdaptive, boolean useParallelMergesort,int numberOfThreads) {
-        // We could pass a cutoff or something to this ,ethod
+        // We could pass a cutoff or something to this, method
         switch (type) {
             case "recursiveMergeSort":
                 return new RecursiveMergeSort<>();
