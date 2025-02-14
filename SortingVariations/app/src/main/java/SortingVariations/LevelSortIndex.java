@@ -57,7 +57,7 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
             // Merge runs from the stack
             while (!stack.isEmpty()) {
                 Integer[] topRun = stack.peek();
-                if (topRun[1] - topRun[0] + 1 < run[1] - run[0] + 1) {
+                if (topRun[1] - topRun[0] + 1 < run[1] - run[0] + 1) { //same as below.
                     merge(a, aux, topRun[0], run[0] - 1, run[1]);
                     stack.pop();
                     run[0] = topRun[0];
@@ -69,7 +69,7 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
             // Continue merging based on level size
             while (!stack.isEmpty()) {
                 Integer[] topRun = stack.peek();
-                if (topRun[1] - topRun[0] + 1 < (run[1] - run[0] + 1) * 2) {
+                if (topRun[1] - topRun[0] + 1 < (run[1] - run[0] + 1) * 2) { // this is the condition where we wanna incorporate the levelboundary calculation
                     merge(a, aux, topRun[0], run[0] - 1, run[1]);
                     run[0] = topRun[0];
                     stack.pop();
@@ -139,18 +139,35 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
 
     }
 
-    private void merge(T[] a, T[] aux, int low, int mid, int high) {
-        for (int k = low; k <= high; k++) {
-            aux[k] = a[k];
+
+    private void computeLevel(int ia, int ib, int ic) {
+        /* 
+         * Takes 3 int arguments ia, ib and ic.
+         * returns an int level
+        */
+        long ml = (ia + (ib-1))/2
+        long mr = (ib + ic-1)/2
+
+        long xor = ml ^ mr // find the differing parts
+
+        int level = 64 - Long.numberOfLeadingZeros(xor)
+
+        return level
+    }
+
+    private void merge(T[] a, T[] aux, int ia, int ib, int ic) { // if a[1, 2 ,3], then aux = [1, 2, 3]
+        for (int k = ia; k <= ic; k++) {
+            aux[k] = a[k]; // do the same for a and aux
         }
 
-        int i = low;
-        int j = mid + 1;
+        int i = ia;
+        //int j = ib + 1; // need calc level here?
+        int j = computeLevel(ia, ib, ic)
 
-        for (int k = low; k <= high; k++) {
-            if (i > mid) {
+        for (int k = ia; k <= ic; k++) {
+            if (i > ib) {
                 a[k] = aux[j++];
-            } else if (j > high) {
+            } else if (j > ic) { // so l instead of j here?
                 a[k] = aux[i++];
             } else if ((aux[j].compareTo(aux[i])) < 0) {
                 a[k] = aux[j++];
@@ -162,18 +179,18 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
         }
     }
 
-    private void insertionSort(T[] a, int low, int high) {
-        for (int i = low + 1; i <= high; i++) {
+    private void insertionSort(T[] a, int ia, int ic) {
+        for (int i = ia + 1; i <= ic; i++) {
             T key = a[i];
             int j = i - 1;
 
-            while (j >= low && a[j].compareTo(key) > 0) {
+            while (j >= ia && a[j].compareTo(key) > 0) {
                 counter++; // Count comparison
                 a[j + 1] = a[j];
                 j--;
             }
 
-            if (j >= low) {
+            if (j >= ia) {
                 counter++; // Count final comparison
             }
 
