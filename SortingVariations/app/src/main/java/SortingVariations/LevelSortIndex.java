@@ -18,6 +18,7 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
         counter = 0;
 
         Stack<Integer[]> stack = new Stack<>();
+        Stack<integer[]> stackLvl = new Stack<>(); // This is where I think implementing a run class, that can have an attribute level.
         int i = 0;
 
         while (i < a.length) {
@@ -69,7 +70,8 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
             // Continue merging based on level size
             while (!stack.isEmpty()) {
                 Integer[] topRun = stack.peek();
-                if (topRun[1] - topRun[0] + 1 < (run[1] - run[0] + 1) * 2) { // this is the condition where we wanna incorporate the levelboundary calculation
+                Integer[] topRunLvl = stack.peek();
+                if (topRun[1] - topRun[0] + 1 < (run[1] - run[0] + 1) * 2 && topRunLvl[0] <= topRunLvl[1]) { // this is the condition where we wanna incorporate the levelboundary calculation
                     merge(a, aux, topRun[0], run[0] - 1, run[1]);
                     run[0] = topRun[0];
                     stack.pop();
