@@ -54,19 +54,27 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
             }
             i++;
 
+            //Is this check supposed to be there? Im not sure where
+            //in the description it says that runs neccesarily should increas in size
             // Merge runs from the stack
-            while (!stack.isEmpty()) {
-                Integer[] topRun = stack.peek();
-                if (topRun[1] - topRun[0] + 1 < run[1] - run[0] + 1) {
-                    merge(a, aux, topRun[0], run[0] - 1, run[1]);
-                    stack.pop();
-                    run[0] = topRun[0];
-                } else {
-                    break;
-                }
-            }
+            // while (!stack.isEmpty()) {
+            //     Integer[] topRun = stack.peek();
+            //     int check = topRun[1] - topRun[0] + 1;
+            //     int check2 =  run[1] - run[0] + 1;
+            //     if (topRun[1] - topRun[0] + 1 < run[1] - run[0] + 1) {
+            //         merge(a, aux, topRun[0], run[0] - 1, run[1]);
+            //         stack.pop();
+            //         run[0] = topRun[0];
+            //     } else {
+            //         break;
+            //     }
+            // }
 
             // Continue merging based on level size
+            //Maybe i misunderstand the code but do we really find the difference in most significant bit here?
+            //Example arr1[9] and arr[5] =  9/2 = 4 = (3 bits) and 5/2 = 2 (2 bits), meaning no merge should happen 
+            //In the code we say 0-8+1 = 9 and (8-12+1)*2 = 10 so a merge does happen. 
+            //Maybe I dont understand the code, but it seems the calculation is not correct for MST here 
             while (!stack.isEmpty()) {
                 Integer[] topRun = stack.peek();
                 if (topRun[1] - topRun[0] + 1 < (run[1] - run[0] + 1) * 2) {
