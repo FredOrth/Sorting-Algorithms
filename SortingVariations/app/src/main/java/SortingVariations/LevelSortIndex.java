@@ -32,6 +32,7 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
 
             int k = validateSequence(nextRun, i, cutoff, adaptive, a);
             i += k;
+            nextRun[1]= i;
 
             int lvl = computeLevel(run[0], run[1], nextRun[1]);
 
