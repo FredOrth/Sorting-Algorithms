@@ -21,18 +21,17 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
         Stack<Integer> stackLvl = new Stack<>(); // This is where I think implementing a run class, that can have an attribute level.
         int i = 0;
 
-        int kSequence = findSequence(i, a);
-        Integer[] run = new Integer[kSequence];
+        Integer[] run = new Integer[2];
         run[0] = 0;
         run[1] = validateSequence(run, i, cutoff, adaptive, a);
         while (i < a.length) {
             Integer[] nextRun = new Integer[2];
             nextRun[0] = i;
-            nextRun[1] = validateSequence(run, findSequence(i, a), cutoff, adaptive, a);
+            nextRun[1] = validateSequence(run, i, cutoff, adaptive, a);
 
-            int k = validateSequence(nextRun, i, cutoff, adaptive, a);
-            i += k;
-            nextRun[1]= i;
+            // int k = validateSequence(nextRun, i, cutoff, adaptive, a);
+            // i += k;
+            // nextRun[1]= i;
 
             int lvl = computeLevel(run[0], run[1], nextRun[1]);
 
@@ -41,7 +40,7 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
                 int topRunLvl = stackLvl.peek();
                 if (topRunLvl < lvl) { // i.e run1 (4) <= run(6)
                     Integer[] topRun = stack.pop(); //run 1
-                    int topLvl = stackLvl.pop(); // 4
+                    stackLvl.pop(); // 4
                     merge(a, aux, topRun[0], topRun[0]-1, run[1]); //run 1 and run
                     run[0] = topRun[0]; // start of run = run1
                     //topLvl = lvl // toplvl is now lvl otherwise recompute lvl of run1 + run to nextRun
@@ -151,8 +150,8 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
          * Takes 3 int arguments ia, ib and ic.
          * returns an int level
         */
-        long ml = (ia + (ib-1))/2; // -1 or no?
-        long mr = (ib + ic-1)/2;
+        long ml = (ia + ib)/2; // -1 or no?
+        long mr = (ib + ic)/2;
 
         long xor = ml ^ mr; // find the differing parts
 
