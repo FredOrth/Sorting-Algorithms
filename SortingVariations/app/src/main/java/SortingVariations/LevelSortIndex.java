@@ -23,15 +23,16 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
 
         Integer[] run = new Integer[2];
         run[0] = 0;
-        run[1] = validateSequence(run, i, cutoff, adaptive, a);
+        int y = validateSequence(run, i, cutoff, adaptive, a);
+        i += y;
+        run[1] = i; 
         while (i < a.length) {
             Integer[] nextRun = new Integer[2];
             nextRun[0] = i;
-            nextRun[1] = validateSequence(run, i, cutoff, adaptive, a);
 
-            // int k = validateSequence(nextRun, i, cutoff, adaptive, a);
-            // i += k;
-            // nextRun[1]= i;
+            int k = validateSequence(nextRun, i, cutoff, adaptive, a);
+            i += k;
+            nextRun[1]= i;
 
             int lvl = computeLevel(run[0], run[1], nextRun[1]);
 
@@ -41,7 +42,7 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
                 if (topRunLvl < lvl) { // i.e run1 (4) <= run(6)
                     Integer[] topRun = stack.pop(); //run 1
                     stackLvl.pop(); // 4
-                    merge(a, aux, topRun[0], topRun[0]-1, run[1]); //run 1 and run
+                    merge(a, aux, topRun[0], topRun[1], run[1]); //run 1 and run
                     run[0] = topRun[0]; // start of run = run1
                     //topLvl = lvl // toplvl is now lvl otherwise recompute lvl of run1 + run to nextRun
                     // just add lvl to lvlstack and throw toplvl out?
@@ -58,7 +59,7 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
         // Final merging phase
         while (stack.size() > 1) {
             Integer[] newRun = stack.pop();
-            merge(a, aux, stack.peek()[0], newRun[0]-1, newRun[1]);
+            merge(a, aux, stack.peek()[0], newRun[0], newRun[1]);
             stack.peek()[1] = newRun[1];
         }
         return counter;
