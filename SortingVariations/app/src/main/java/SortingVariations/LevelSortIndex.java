@@ -23,10 +23,12 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
 
         int kSequence = findSequence(i, a);
         Integer[] run = new Integer[kSequence];
+        run[0] = 0;
+        run[1] = validateSequence(run, i, cutoff, adaptive, a);
         while (i < a.length) {
             Integer[] nextRun = new Integer[2];
             nextRun[0] = i;
-            run[0] = i;
+            nextRun[1] = validateSequence(run, findSequence(i, a), cutoff, adaptive, a);
 
             int k = validateSequence(nextRun, i, cutoff, adaptive, a);
             i += k;
