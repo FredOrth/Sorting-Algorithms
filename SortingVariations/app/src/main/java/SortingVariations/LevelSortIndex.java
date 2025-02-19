@@ -14,6 +14,11 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
 
     @Override
     public Integer sort(T[] a) {
+
+        if(a.length == 0){
+            return 0;
+        }
+
         T[] aux = a.clone();
         counter = 0;
 
@@ -24,15 +29,22 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
         Integer[] run = new Integer[2];
         run[0] = 0;
         int y = validateSequence(run, i, cutoff, adaptive, a);
-        i += y;
-        run[1] = i; 
+        // for(int j = 0; j<a.length; j++){
+        //     System.out.print(a[j]);
+        // }
+        i = y;
+        run[1] = i-1; 
         while (i < a.length) {
             Integer[] nextRun = new Integer[2];
             nextRun[0] = i;
 
             int k = validateSequence(nextRun, i, cutoff, adaptive, a);
-            i += k;
-            nextRun[1]= i;
+            i = k;
+            nextRun[1]= i-1;
+
+            // for(int j = 0; j<a.length; j++){
+            //     System.out.print(a[j]);
+            // }
 
             int lvl = computeLevel(run[0], run[1], nextRun[1]);
 
@@ -56,10 +68,11 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
             stackLvl.add(lvl);
             run = nextRun;
         }
+        stack.add(run);//add last stack before merging last runs
         // Final merging phase
         while (stack.size() > 1) {
             Integer[] newRun = stack.pop();
-            merge(a, aux, stack.peek()[0], newRun[0], newRun[1]);
+            merge(a, aux, stack.peek()[0], newRun[0]-1, newRun[1]);
             stack.peek()[1] = newRun[1];
         }
         return counter;
@@ -118,26 +131,26 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
             if (adaptive) {
                 int sequence = findSequence(i, a);
                 if (sequence >= cutoff) {
-                    run[1] = i + sequence - 1;
+                    // run[1] = i + sequence - 1;
                     i += sequence - 1;
                 } else {
                     if (i + cutoff >= a.length) {
-                        run[1] = a.length - 1;
-                        insertionSort(a, i, run[1]);
-                        i = a.length;
+                        // run[1] = a.length - 1;
+                        insertionSort(a, i, a.length-1);
+                        i = a.length-1;
                     } else {
-                        run[1] = i + cutoff - 1;
+                        // run[1] = i + cutoff - 1;
                         insertionSort(a, i, i + cutoff - 1);
                         i += cutoff - 1;
                     }
                 }
             } else {
                 if (i + cutoff >= a.length) {
-                    run[1] = a.length - 1;
-                    insertionSort(a, i, run[1]);
-                    i = a.length;
+                    // run[1] = a.length - 1;
+                    insertionSort(a, i, a.length-1);
+                    i = a.length-1;
                 } else {
-                    run[1] = i + cutoff - 1;
+                    // run[1] = i + cutoff - 1;
                     insertionSort(a, i, i + cutoff - 1);
                     i += cutoff - 1;
                 }

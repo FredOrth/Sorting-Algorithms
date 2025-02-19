@@ -3,13 +3,13 @@ package SortingVariations;
 import java.util.Arrays;
 import java.util.Random;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import SortingVariations.Util.StableTestClass;
-
-import static org.junit.Assert.*;
 
 public class LevelSortTest {
     private Integer[] testingArray1;
@@ -79,7 +79,8 @@ public class LevelSortTest {
 
     @Test
     public void LevelSortAdaptiveTest2() {
-        Integer[] testingArray1 = new Integer[]{76, 3, 16, 3, 1, 94, 1, 6, 34, 4, 4, 4, 4, 4, 5};
+        // Integer[] testingArray1 = new Integer[]{76, 3, 16, 3, 1, 94, 1, 6, 34, 4, 4, 4, 4, 4, 5};
+        Integer[] testingArray1 = new Integer[]{76, 3, 16, 3, 1, 94, 1, 6, 4, 4, 4, 4, 4, 5,6,7,8,9};
         Integer[] sortedArray = Arrays.copyOf(testingArray1, testingArray1.length);
         Arrays.sort(sortedArray);
 
@@ -210,27 +211,27 @@ public class LevelSortTest {
     }
 
     // @Ignore
-    // @Test
-    // public void stressTest3(){
-    //     LevelSortIndex<Integer> lvlAdaptive = new LevelSortIndex<>(8, true);
+    @Test
+    public void stressTest3(){
+        LevelSortIndex<Integer> lvlAdaptive = new LevelSortIndex<>(8, true);
 
-    //     Integer[] stress1Test = Arrays.copyOf(arr1000000, arr1000000.length);
-    //     lvlAdaptive.sort(arr1000000);
-    //     Arrays.sort(stress1Test);
+        Integer[] stress1Test = Arrays.copyOf(arr1000000, arr1000000.length);
+        lvlAdaptive.sort(arr1000000);
+        Arrays.sort(stress1Test);
 
-    //     assertArrayEquals(stress1Test, arr1000000);
+        assertArrayEquals(stress1Test, arr1000000);
 
-    //     // Reset
-    //     setupStressTest();
+        // Reset
+        setupStressTest();
 
-    //     LevelSortIndex<Integer> lvlNonAdaptive = new LevelSortIndex<>(8, false);
+        LevelSortIndex<Integer> lvlNonAdaptive = new LevelSortIndex<>(8, false);
 
-    //     Integer[] stress1Test2 = Arrays.copyOf(arr1000000, arr1000000.length);
-    //     lvlNonAdaptive.sort(arr1000000);
-    //     Arrays.sort(stress1Test2);
+        Integer[] stress1Test2 = Arrays.copyOf(arr1000000, arr1000000.length);
+        lvlNonAdaptive.sort(arr1000000);
+        Arrays.sort(stress1Test2);
 
-    //     assertArrayEquals(stress1Test2, arr1000000);
-    // }
+        assertArrayEquals(stress1Test2, arr1000000);
+    }
 
     /* Niche tests for levelSort specifically.
      *  Adherence to lvls etc.
