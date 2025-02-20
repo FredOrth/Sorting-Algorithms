@@ -13,6 +13,7 @@ import SortingVariations.Util.StableTestClass;
 
 public class LevelSortTest {
     private Integer[] testingArray1;
+    private Integer[] testingArray2;
     private String[] emptyArray;
     private String[] unevenNumber;
     private StableTestClass[] stableTest1;
@@ -24,6 +25,7 @@ public class LevelSortTest {
     @Before
     public void setup(){
         testingArray1 = new Integer[]{76,3,16,3,1,94,1,6,34,4,4,4,4,4,5};
+        testingArray2 = new Integer[]{1,2,1,2,3,9,5,4,3,9};
         emptyArray = new String[]{};
         unevenNumber = new String[] {"Hello", "Heyo", "And", "Anders", "Polution", "And", "Pull"};
         stableTest1 = new StableTestClass[10];
@@ -274,6 +276,31 @@ public class LevelSortTest {
         LevelSortIndex<Integer> lvlNonAdaptive = new LevelSortIndex<>(4, false);
         lvlNonAdaptive.sort(input2);
         assertArrayEquals(new Integer[] {2, 4, 5}, input2);
+    }
+
+    @Test
+    public void secondTestLevel() {
+        LevelSortIndex<Integer> lvlAdaptive = new LevelSortIndex<>(2, true);
+        Integer result = lvlAdaptive.sort(testingArray2);
+        assertEquals((Integer) 29, result);
+
+        setup();
+
+        LevelSortIndex<Integer> lvlNonAdaptive = new LevelSortIndex<>(3, false);
+        Integer result2 = lvlNonAdaptive.sort(testingArray2);
+        assertEquals((Integer) 25, result2);
+
+        setup();
+
+        LevelSortIndex<Integer> lvlAdaptive2 = new LevelSortIndex<>(2, true);
+        Integer result3 = lvlAdaptive2.sort(testingArray2);
+        assertEquals((Integer) 24, result3);
+
+        setup();
+
+        LevelSortIndex<Integer> lvlNonAdaptive2 = new LevelSortIndex<>(3, false);
+        Integer result4 = lvlNonAdaptive2.sort(testingArray2);
+        assertEquals((Integer) 24, result4);
     }
 
     @Test
