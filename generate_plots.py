@@ -253,6 +253,15 @@ def generate_scatter_plot2(csv_file: str, title: str, x_label: str, y_label: str
 
 
 if __name__ == "__main__":
+    # generate_basecase_plot(
+    #     "MergeSortBaseCase.csv",
+    #     "Mergesort DataType Performance",
+    #     "Comparisons",
+    #     "Time",
+    #     "comparisons",
+    #     "time",
+    # )
+
     # generate_plot(
     #     "resultsMergesort.csv",
     #     "Mergesort Performance (Comparisons)",
@@ -261,14 +270,14 @@ if __name__ == "__main__":
     # )
 
     # generate_scatter_plot(
-    #     "resultsCutoffValues.csv",
+    #     "cutoffValues.csv",
     #     "C vs comparisons",
     #     "cutoff",
     #     "Number of Comparisons",
     # )
 
     # generate_scatter_plot2(
-    #     "resultsCutoffValues.csv",
+    #     "cutoffValues.csv",
     #     "C vs time",
     #     "cutoff",
     #     "time",
@@ -281,28 +290,19 @@ if __name__ == "__main__":
     #     "Time",
     # )
 
-    horseracePlotter(
-        "HorseRace.csv",
-        "Horse Race: Algorithm Comparison With Parallel",
-        "Input Size (n)",
-        "Runtime (seconds)",
-        # log_y=True,  # Set to True for a log-transformed y-axis
+    # horseracePlotter(
+    #     "HorseRace.csv",
+    #     "Horse Race: Algorithm Comparison With Parallel",
+    #     "Input Size (n)",
+    #     "Runtime (seconds)",
+    #     # log_y=True,  # Set to True for a log-transformed y-axis
+    # )
+
+    generate_plot(
+        "CutoffValues.csv",
+        "C vs comparisons2",
+        "cutoff",
+        "comparisons",
+        "cutoff",
+        "comparisons",
     )
-
-    # generate_scatter_plot(
-    #     "resultsCutoffValues.csv",
-    #     "C vs time",
-    #     "cutoff",
-    #     "time",
-    #     "cutoff",
-    #     "time",
-    # )
-
-    # generate_basecase_plot(
-    #     "MergeSortBaseCase.csv",
-    #     "Mergesort DataType Performance",
-    #     "Comparisons",
-    #     "Time",
-    #     "comparisons",
-    #     "time",
-    # )
