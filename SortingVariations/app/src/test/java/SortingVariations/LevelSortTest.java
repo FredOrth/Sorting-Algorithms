@@ -286,21 +286,21 @@ public class LevelSortTest {
 
         setup();
 
-        LevelSortIndex<Integer> lvlNonAdaptive = new LevelSortIndex<>(3, false);
+        LevelSortIndex<Integer> lvlNonAdaptive = new LevelSortIndex<>(2, false);
         Integer result2 = lvlNonAdaptive.sort(testingArray2);
-        assertEquals((Integer) 25, result2);
+        assertEquals((Integer) 24, result2);
 
         setup();
 
-        LevelSortIndex<Integer> lvlAdaptive2 = new LevelSortIndex<>(2, true);
+        LevelSortIndex<Integer> lvlAdaptive2 = new LevelSortIndex<>(3, true);
         Integer result3 = lvlAdaptive2.sort(testingArray2);
-        assertEquals((Integer) 24, result3);
+        assertEquals((Integer) 28, result3);
 
         setup();
 
         LevelSortIndex<Integer> lvlNonAdaptive2 = new LevelSortIndex<>(3, false);
         Integer result4 = lvlNonAdaptive2.sort(testingArray2);
-        assertEquals((Integer) 24, result4);
+        assertEquals((Integer) 25, result4);
     }
 
     @Test
