@@ -15,7 +15,7 @@ def run_java(jar: str, arg: str, input: str)->str:
 
 csv.field_size_limit(100000000)
 
-#Benchmark method
+# Benchmark method
 def benchmark(algorithm: str, jar: str, data)-> \
     List[List]: #List[Tuple[int,float, int]]
     results: List[List] = []
@@ -34,7 +34,6 @@ def benchmark(algorithm: str, jar: str, data)-> \
     return results
 
 
-
 def generatePlots(plotName: str) -> Dict[int, List[int]]:
     with open(plotName, "r") as r:
         reader = csv.DictReader(r)
@@ -49,7 +48,7 @@ def generatePlots(plotName: str) -> Dict[int, List[int]]:
             dictToReturn[n].append(values)
     return dictToReturn
 
-#Method for creating strings with a prefix of "algos"
+# Method for creating strings with a prefix of "algos"
 def createPrefix(dataset):
     prefix = "algos"
     prefixDataSet = dataset
@@ -83,8 +82,8 @@ def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
 
     return dictToReturn
 
-    
-#Tests for mergesort base case with the types: Integers, Strings, Objects and prefix Strings
+
+# Tests for mergesort base case with the types: Integers, Strings, Objects and prefix Strings
 INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
 ("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
 ("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
@@ -92,7 +91,7 @@ INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
 ("recursiveMergeSort BaseCase OBJECT", "SortingVariations/app/build/libs/app.jar"),
 }
 
-#Initial test for testing c-values for iterative and insertion mergesort
+# Initial test for testing c-values for iterative and insertion mergesort
 INSTANCES_C: List[Tuple[str, str]] = {
     # ("iterativeMergeSort Cutoff STRINGS", "SortingVariations/app/build/libs/app.jar"),
     ("iterativeMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
@@ -104,7 +103,7 @@ INSTANCES_C: List[Tuple[str, str]] = {
     ("binomialSort Presort INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar")
 }
 
-#Tests for levelsort and binomial sort on diffrently sorted input for adaptive and non-adaptive algorithms
+# Tests for levelsort and binomial sort on diffrently sorted input for adaptive and non-adaptive algorithms
 INSTANCES_preSorted_Adaptive: List[Tuple[str, str]] = {
     ("levelSort Presort INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
     ("binomialSort Presort INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
@@ -112,7 +111,7 @@ INSTANCES_preSorted_Adaptive: List[Tuple[str, str]] = {
     ("binomialSort Presort INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar")
 }
 
-# #Horse race 
+# #Horse race
 # INSTANCES_HORSERACE: List[Tuple[str,str]]= {
 #     ("recursiveMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
 #     #We unfortunately have to keep a placeholder to keep our architecture in main
@@ -124,18 +123,22 @@ INSTANCES_preSorted_Adaptive: List[Tuple[str, str]] = {
 #     ("insertionMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
 #     ("parallelRecursiveMergeSort HorseRace INTEGERS NonAdaptive Parallel", "SortingVariations/app/build/libs/app.jar")
 # }
-#Cutoff values:
+# Cutoff values:
 LIST_OF_CUTOFFVALUES: list[int] = {
-    1,#Cutoff-value 1 is equal to the normal sorting algorithms. We should probably just refactor the other experiment to take this as well... oh well...
+    1,  # Cutoff-value 1 is equal to the normal sorting algorithms. We should probably just refactor the other experiment to take this as well... oh well...
     2,
     4,
     8,
     16,
     20,
+    22,
+    24,
+    26,
+    28,
     32,
-    64
+    64,
 }
-    
+
 if __name__ == '__main__':
     
     # Datasets for Basecase datasets
