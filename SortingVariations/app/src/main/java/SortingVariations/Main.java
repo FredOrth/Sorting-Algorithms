@@ -53,7 +53,7 @@ public class Main {
                 sorterMethod(sorter, reader(args[2]));
             }else{
                 int cutoff = Integer.parseInt(args[4]);
-                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,true,false,0);
+                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
                 sorterMethod(sorter, reader(args[2]));
             }
                 }
