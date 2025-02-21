@@ -50,14 +50,13 @@ def generatePlots(plotName: str) -> Dict[int, List[int]]:
     return dictToReturn
 
 #Method for creating strings with a prefix of "algos"
-#The method will 
 def createPrefix(dataset):
     prefix = "algos"
     prefixDataSet = dataset
     for key, outerList in prefixDataSet.items():
         for innerList in outerList:
-            for string in innerList:
-                string = prefix + string[:-5]
+            for i in range(len(innerList)):
+                innerList[i] = prefix + innerList[i][:-5]  # Modify the element in the list
     return prefixDataSet
 
 def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
