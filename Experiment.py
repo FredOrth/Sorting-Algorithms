@@ -59,25 +59,29 @@ def createPrefix(dataset):
                 innerList[i] = prefix + innerList[i][:-5]  # Modify the element in the list
     return prefixDataSet
 
+import csv
+from typing import Dict, List
+
 def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
+    dictToReturn: Dict[int, Dict[int, List[List[int]]]] = {}
+
     with open("PresortedRandomInput.csv", "r") as r:
         reader = csv.DictReader(r)
-        dictToReturn: Dict[int , Dict[List [List]]] = {}
 
-        for x in range(0,4):
-            data = {}
-            for row in reader:
-                if int(row["presortedness"]) == x:
-                    n = row["n"]
-                    values = list(map(str, row["values"].split()))
-                    if n not in data:
-                        data[n] = []
-                    data[n].append(values)
-            dictToReturn[x] = data
-    return dictToReturn 
-    
+        for row in reader:
+            x = int(row["presortedness"])
+            n = int(row["n"])
+            values = list(map(int, row["values"].split()))
 
-    
+            if x not in dictToReturn:
+                dictToReturn[x] = {}
+
+            if n not in dictToReturn[x]:
+                dictToReturn[x][n] = []
+
+            dictToReturn[x][n].append(values)
+
+    return dictToReturn
 
     
 #Tests for mergesort base case with the types: Integers, Strings, Objects and prefix Strings
@@ -134,7 +138,7 @@ LIST_OF_CUTOFFVALUES: list[int] = {
     
 if __name__ == '__main__':
     
-    #Datasets for Basecase datasets
+    # Datasets for Basecase datasets
     listOfDatasets = [
     generatePlots("RandomInputString.csv"),\
     generatePlots("RandomInputIntegers.csv"), \
