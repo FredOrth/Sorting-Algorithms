@@ -97,7 +97,7 @@ public class Main {
                 Long start = System.nanoTime();
                 int comp = sorter.sort((Comparable[]) arr);
                 Long end = System.nanoTime();
-                // System.out.println("Array type: " + arr.getClass().getComponentType());
                 System.out.println(arr.length + " " + (end-start)/1_000_000_000.0 + " " + comp);
+                // System.out.println("Array type: " + arr.getClass().getComponentType());
     }
 }
