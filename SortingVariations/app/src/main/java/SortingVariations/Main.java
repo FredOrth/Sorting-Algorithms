@@ -1,30 +1,36 @@
 package SortingVariations;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Scanner;
 
 import SortingVariations.Util.ObjectClass;
 public class Main {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
        
         String sortType = args[0];
-        Scanner scanner = new Scanner(System.in);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
 
         //Horse race
         if(args[1].equals("HorseRace")){
             if(args[3].equals("Arrays.sort")){
-                while(scanner.hasNextLine()){
-                    int n = scanner.nextInt();
-                    scanner.nextLine();
-                    Integer[] arr = new Integer[n];
-                        for(int i = 0; i<n; i++){
-                            arr[i] = scanner.nextInt();
-                        }
+                String input;
+                while((input = reader.readLine()) != null){
+                    int n = Integer.parseInt(input);
+
+                    String[] stringArray = reader.readLine().split(" ");
+                    int[] arr = Arrays.stream(stringArray)
+                            .mapToInt(Integer::parseInt)
+                            .toArray();
+
                         Long start = System.nanoTime();
                         Arrays.sort(arr);
                         Long end = System.nanoTime();
                         System.out.println(n + " " + (end-start)/1_000_000_000.0);
-                        scanner.nextLine();
+
                 }
             }else if(args[3].equals("NonAdaptive")){
                 Sorter<Integer> sorter = SorterFactory.getSorter(sortType,20,false,false,0);
@@ -63,33 +69,33 @@ public class Main {
                 Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
                 sorterMethod(sorter, reader(args[2]));
             }
-            scanner.close();
+
     }
 
 
-    public static Object[] reader(String inputType){
-        Scanner scanner = new Scanner(System.in);
+    public static Object[] reader(String inputType) throws IOException {
+        // Scanner scanner = new Scanner(System.in);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(reader.readLine());
 
         if(inputType.equals("INTEGERS")){
-            int n = scanner.nextInt(); 
-                Integer[] arr = new Integer[n];
-                    for(int i = 0; i<n; i++){
-                        arr[i] = scanner.nextInt();
-                    }
-            return arr;
+                String[] stringArray = reader.readLine().split(" ");
+                return Arrays.stream(stringArray)
+                        .map(Integer::parseInt)
+                        .toArray(Integer[]::new);
+
         }else if(inputType.equals("OBJECT")){
-            int n = scanner.nextInt();
+
                 ObjectClass[] arr = new ObjectClass[n];
-                String[] strings = scanner.nextLine().split(" ");
+                String[] strings = reader.readLine().split(" ");
                 for(int i = 0; i<n; i++){
                     arr[i] = new ObjectClass(strings[i]);
                 }
             return arr;
         }else{
-            int n = scanner.nextInt();
-            scanner.next();
-            String[] arr = scanner.nextLine().split(" ");
-            return arr;
+
+            return reader.readLine().split(" ");
+
         }
     }
 
