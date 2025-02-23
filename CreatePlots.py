@@ -34,9 +34,6 @@ plt.grid(True)
 plt.show()
 
 
-
-
-
 #Generate plot for level- and biosort 
 df = pd.read_csv("LevelAndBioSort.csv")
 
@@ -65,3 +62,31 @@ plt.legend()
 plt.grid(True)
 plt.savefig("Plot for presortedness", dpi=300, bbox_inches="tight")
 
+#Horse race plot
+
+
+# Load the CSV file
+df = pd.read_csv("HorseRaceResults.csv")
+
+# Compute the median time for each algorithm at each n
+median_times = df.groupby(["n", "algorithm"])["time"].median().reset_index()
+
+# Get the list of unique algorithms
+algorithms = median_times["algorithm"].unique()
+
+# Plot
+plt.figure(figsize=(10, 6))
+
+for algo in algorithms:
+    subset = median_times[median_times["algorithm"] == algo]
+    plt.plot(subset["n"], subset["time"], marker="o", label=algo)
+
+# Labels and title
+plt.xlabel("n")
+plt.ylabel("Median Time")
+plt.title("Algorithm Performance Comparison")
+plt.legend(title="Algorithm")
+plt.grid(True)
+
+# Show plot
+plt.show()
