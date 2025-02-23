@@ -86,7 +86,7 @@ def generatePresortedArray(array_size: int, presortedness: int) -> List[int]:
 #Specifics for generating random input with 10 million elements
 I_MAX3 = 5
 # Number of repetitions per value of `n`
-M3 = 4
+M3 = 10
 
 
 

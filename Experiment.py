@@ -104,15 +104,15 @@ INSTANCES_preSorted_Adaptive: List[Tuple[str, str]] = {
 
 # #Horse race
 INSTANCES_HORSERACE: List[Tuple[str,str]]= {
-    ("recursiveMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+    # ("recursiveMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
     #We unfortunately have to keep a placeholder to keep our architecture in main
     ("recursiveMergeSort HorseRace INTEGERS Arrays.sort", "SortingVariations/app/build/libs/app.jar"),
-    ("levelSort HorseRace INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
-    ("binomialSort HorseRace INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
-    ("levelSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
-    ("binomialSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
-    ("insertionMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
-    ("parallelRecursiveMergeSort HorseRace INTEGERS NonAdaptive Parallel", "SortingVariations/app/build/libs/app.jar")
+    # ("levelSort HorseRace INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
+    # ("binomialSort HorseRace INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
+    # ("levelSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+    # ("binomialSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+    # ("insertionMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+    # ("parallelRecursiveMergeSort HorseRace INTEGERS NonAdaptive Parallel", "SortingVariations/app/build/libs/app.jar")
 }
 
 # Cutoff values:

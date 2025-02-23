@@ -18,17 +18,15 @@ public class Main {
             if(args[3].equals("Arrays.sort")){
                 String input;
                 while((input = reader.readLine()) != null){
-                    int n = Integer.parseInt(input);
-
                     String[] stringArray = reader.readLine().split(" ");
-                    int[] arr = Arrays.stream(stringArray)
-                            .mapToInt(Integer::parseInt)
-                            .toArray();
+                    Integer[] arr = Arrays.stream(stringArray)
+                        .map(Integer::parseInt)
+                        .toArray(Integer[]::new);
 
                         Long start = System.nanoTime();
                         Arrays.sort(arr);
                         Long end = System.nanoTime();
-                        System.out.println(n + " " + (end-start)/1_000_000_000.0);
+                        System.out.println(arr.length + " " + (end-start)/1_000_000_000.0);
 
                 }
             }else if(args[3].equals("NonAdaptive")){
