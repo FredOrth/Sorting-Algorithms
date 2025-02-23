@@ -22,7 +22,7 @@ def benchmark(algorithm: str, jar: str, data)-> \
     
     for n in data.keys():
             for integers in data[n]:
-                input_string = str(n) + " " + " ".join(map(str, integers)).strip()
+                input_string = str(n) + "\n" + " ".join(map(str, integers)).strip()
                 print(f"Running algorithm {algorithm}")
                 results_string = run_java(jar, algorithm, input_string)
                 print(results_string)
@@ -58,9 +58,6 @@ def createPrefix(dataset):
                 innerList[i] = prefix + innerList[i][:-5]  # Modify the element in the list
     return prefixDataSet
 
-import csv
-from typing import Dict, List
-
 def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
     dictToReturn: Dict[int, Dict[int, List[List[int]]]] = {}
 
@@ -85,7 +82,7 @@ def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
 
 # Tests for mergesort base case with the types: Integers, Strings, Objects and prefix Strings
 INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
-("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+# ("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
 ("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
 ("recursiveMergeSort BaseCase PREFIX", "SortingVariations/app/build/libs/app.jar"),
 ("recursiveMergeSort BaseCase OBJECT", "SortingVariations/app/build/libs/app.jar"),
@@ -142,27 +139,27 @@ if __name__ == '__main__':
     createPrefix(generatePlots("RandomInputString.csv"))
     ]
     
-    # dictOfDataSets = {
-    #     "INTEGERS" : listOfDatasets[1],
-    #     "STRINGS" : listOfDatasets[0],
-    #     "OBJECT" : listOfDatasets[0],
-    #     "PREFIX" : listOfDatasets[2]
-    # }
+    dictOfDataSets = {
+        "INTEGERS" : listOfDatasets[1],
+        "STRINGS" : listOfDatasets[0],
+        "OBJECT" : listOfDatasets[0],
+        "PREFIX" : listOfDatasets[2]
+    }
     
-    # # BaseCase for n*log(n) test of MergeSort
-    # with open('MergeSortBaseCase.csv','w') as f:
-    #     writer = csv.DictWriter(f,
-    #         fieldnames = ['algorithm','n','time', 'comparisons'])
-    #     writer.writeheader()
-    #     for algorithm, jar in INSTANCES_MERGESORT_BASECASE:
-    #         results: List[Tuple[int,float]] = []
-    #         for value in benchmark(f"{algorithm}",jar, dictOfDataSets[algorithm.split()[2]]):
-    #             writer.writerow({
-    #                 'algorithm' : algorithm,
-    #                 'n' : value[0],
-    #                 'time' : value[1],
-    #                 'comparisons' : value[2]
-    #             })
+    # BaseCase for n*log(n) test of MergeSort
+    with open('MergeSortBaseCase.csv','w') as f:
+        writer = csv.DictWriter(f,
+            fieldnames = ['algorithm','n','time', 'comparisons'])
+        writer.writeheader()
+        for algorithm, jar in INSTANCES_MERGESORT_BASECASE:
+            results: List[Tuple[int,float]] = []
+            for value in benchmark(f"{algorithm}",jar, dictOfDataSets[algorithm.split()[2]]):
+                writer.writerow({
+                    'algorithm' : algorithm,
+                    'n' : value[0],
+                    'time' : value[1],
+                    'comparisons' : value[2]
+                })
        
     listOfDatasets = [
     generatePresortedPlots()
@@ -190,28 +187,28 @@ if __name__ == '__main__':
                             }
                                 )
     
-    # # Experiment for testing binomial sort and level sort with different cutoff values
-    # with open("LevelAndBioSort.csv", "w") as f:
-    #     writer = csv.DictWriter(f, 
-    #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff', 'degree of presortedness'])
-    #     writer.writeheader()
-    #     for algorithm, jar in INSTANCES_preSorted_Adaptive:
-    #         results: List[Tuple[int,float]] = []
-    #         for cutoff in LIST_OF_CUTOFFVALUES:
-    #             for presortedness, dict in listOfDatasets[0].items():
-    #                 for value in benchmark(f"{algorithm} {cutoff}",jar, dict):
-    #                     writer.writerow(
-    #                     { 
-    #                         'algorithm' : algorithm,
-    #                         'n' : value[0],
-    #                         'time' : value[1],
-    #                         'comparisons' : value[2],
-    #                         'cutoff' : cutoff,
-    #                         'degree of presortedness' : presortedness
-    #                     }
-    #                         )
+    # Experiment for testing binomial sort and level sort with different cutoff values
+    with open("LevelAndBioSort.csv", "w") as f:
+        writer = csv.DictWriter(f, 
+            fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff', 'degree of presortedness'])
+        writer.writeheader()
+        for algorithm, jar in INSTANCES_preSorted_Adaptive:
+            results: List[Tuple[int,float]] = []
+            for cutoff in LIST_OF_CUTOFFVALUES:
+                for presortedness, dict in listOfDatasets[0].items():
+                    for value in benchmark(f"{algorithm} {cutoff}",jar, dict):
+                        writer.writerow(
+                        { 
+                            'algorithm' : algorithm,
+                            'n' : value[0],
+                            'time' : value[1],
+                            'comparisons' : value[2],
+                            'cutoff' : cutoff,
+                            'degree of presortedness' : presortedness
+                        }
+                            )
                 
-    # #List of datasets used in horserace experiment
+    #List of datasets used in horserace experiment
     # listOfDatasets = [
     # generatePlots("HorseRace.csv")
     # ]
