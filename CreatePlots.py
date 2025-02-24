@@ -8,7 +8,6 @@ def load_data(filename):
     return pd.read_csv(filename)
 
 # Generate plot for mergesort basecase and different types
-
 def plot_merge_sort_base_case(df, output_file=None):
 
     plt.figure(figsize=(10, 6))
@@ -33,18 +32,16 @@ def plot_merge_sort_base_case(df, output_file=None):
 
     # Plot the theoretical runtime curve
     plt.plot(n_values, theoretical_scaled, label='n log n (theoretical, scaled)',
-             linestyle='--', color='red')
+            linestyle='--', color='red')
 
     plt.xlabel('n')
     plt.ylabel('Median Time (s)')
-    plt.title('Empirical Median Time vs n for MergeSort Base Case')
+    title = "Empirical Median Time vs n for MergeSort Base Case"
+    plt.title(title)
     plt.legend()
     plt.grid(True)
-
-    if output_file:
-        plt.savefig(output_file, dpi=300, bbox_inches="tight")
-    else:
-        plt.show()
+    #plt.savefig(dpi=300, bbox_inches="tight")
+    plt.savefig(f"{title}.png")
 
 
 # Generate plots for cutoff values for insertion and recursive mergesort
@@ -59,11 +56,13 @@ def plot_cutoff_values(df, output_file=None):
         plt.plot(subset.index, subset.values, label=f'Algorithm {algorithm}', marker='o')
     plt.xlabel('Cutoff')
     plt.ylabel('Median Time')
-    plt.title('Median Time vs Cutoff for Various Algorithms')
+    title = "Median Time vs Cutoff for Various Algorithms"
+    plt.title(title)
     plt.legend()
     # Show the plot
     plt.grid(True)
-    plt.savefig(output_file, dpi=300, bbox_inches="tight")
+    # plt.savefig(output_file, dpi=300, bbox_inches="tight")
+    plt.savefig(f"{title}.png")
 
 def plot_level_biosort(df, output_file=None):
     """Plot algorithm performance by presortedness and cutoff (median comparisons)."""
@@ -82,15 +81,13 @@ def plot_level_biosort(df, output_file=None):
         plt.plot(group["degree of presortedness"], group["comparisons"], marker="o", label=label)
     plt.xlabel("Degree of Presortedness")
     plt.ylabel("Median Comparisons")
-    plt.title("Algorithm Performance by Presortedness and Cutoff (Median Comparisons)")
+    title = "Algorithm Performance by Presortedness and Cutoff (Median Comparisons)"
+    plt.title(title)
     plt.xticks([0, 1, 2, 3])
     plt.legend()
     plt.grid(True)
-    if output_file:
-        plt.savefig(output_file, dpi=300, bbox_inches="tight")
-    else:
-        plt.show()
-
+    #plt.savefig(output_file, dpi=300, bbox_inches="tight")
+    plt.savefig(f"{title}.png")
 
 # Horse race plot
 def plot_horse_race(df, output_file=None):
@@ -110,26 +107,24 @@ def plot_horse_race(df, output_file=None):
     # Labels and title
     plt.xlabel("n")
     plt.ylabel("Median Time")
-    plt.title("Algorithm Performance Comparison")
+    title = "Algorithm Performance Comparison"
+    plt.title(title)
     plt.legend(title="Algorithm")
     plt.grid(True)
-    if output_file:
-        plt.savefig(output_file, dpi=300, bbox_inches="tight")
-    else:
-        plt.show()
+    #plt.savefig(output_file, dpi=300, bbox_inches="tight")
+    plt.savefig(f"{title}.png")
 
 
 if __name__ == "__main__":
     # Load the CSV data (assuming 'MergeSortBaseCase.csv' is in your working directory)
-    df_merge = pd.read_csv('MergeSortBaseCase.csv')
-    plot_merge_sort_base_case(df_merge)
+    # df_merge = load_data('MergeSortBaseCase.csv')
+    # plot_merge_sort_base_case(df_merge)
 
     # df_cutoff = load_data('CutoffValues.csv')
     # plot_cutoff_values(df_cutoff)
 
-    # df_lvlbio = load_data('LevelAndBioSort.csv')
-    # plot_level_biosort(df_lvlbio)
+    df_lvlbio = load_data('LevelAndBioSort.csv')
+    plot_level_biosort(df_lvlbio)
 
     # df_horse_race = load_data('HorseRaceResults.csv')
     # plot_horse_race(df_horse_race)
-
