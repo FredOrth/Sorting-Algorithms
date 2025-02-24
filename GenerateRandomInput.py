@@ -4,7 +4,7 @@ from typing import List
 import csv
 import string
 
-#Specifics for generating random input with increasing n 
+# Specifics for generating random input with increasing n
 # Seed for reproducibility
 SEED = 42
 # Maximum iterations for scaling `NS`
@@ -17,12 +17,19 @@ rng = np.random.default_rng(SEED)
 NS: List[int] = [int(10000*1.45**i) for i in range(I_MAX)]
 
 
-#Specifics for generating random input with 10 million elements
-I_MAX2 = 10
+# Specifics for generating random input with 10 million elements
+I_MAX2 = 1
 # Number of repetitions per value of `n`
-M2 = 10
+M2 = 5
 
-NS2: List[int] = [int(10000000*i) for i in range(I_MAX2)]
+NS2: List[int] = [int(10000000*1**i) for i in range(I_MAX2)]
+
+# Specifics for generating random input with 10 million elements
+I_MAX3 = 5
+# Number of repetitions per value of `n`
+M3 = 10
+
+NS3: List[int] = [int(2000000*i+1) for i in range(I_MAX3)]
 
 letters = string.ascii_lowercase
 
@@ -60,18 +67,19 @@ def generatePresortedArray(array_size: int, presortedness: int) -> List[int]:
     return array
 
 
-# with open('RandomInputString.csv', 'w', newline='') as f:
-#     writer = csv.writer(f)
+with open('RandomInputString.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
 
-#     #Header
-#     writer.writerow(["n", "values"])
+    # Header
+    writer.writerow(["n", "values"])
 
-#     # I_MAX M times per value and create a random input of ints
-#     for i in range(I_MAX):
-#         for _ in range(M):
-#             writer.writerow([NS[i], " ".join(str(generateRandomLetters()) for _ in range(NS[i]))])
+    # I_MAX M times per value and create a random input of ints
+    for i in range(I_MAX):
+        for _ in range(M):
+            writer.writerow([NS[i], " ".join(str(generateRandomLetters()) for _ in range(NS[i]))])
+    print("Done generating Random Input Strings")
 
-            
+
 # with open('RandomInputIntegers.csv', 'w', newline='') as f:
 #     writer = csv.writer(f)
 
@@ -79,18 +87,11 @@ def generatePresortedArray(array_size: int, presortedness: int) -> List[int]:
 #     writer.writerow(["n", "values"])
 
 #     # I_MAX M times per value and create a random input of ints
-#     for i in range(I_MAX):
-#         for _ in range(M):
-#             writer.writerow([NS[i], " ".join(str(rng.integers(1, 2**28)) for _ in range(NS[i]))])  
+#     for i in range(I_MAX2):
+#         for _ in range(M2):
+#             writer.writerow([NS2[i], " ".join(str(rng.integers(1, 2**28)) for _ in range(NS2[i]))])
+#     print("Done generating Random Input Integers")
 
-#Specifics for generating random input with 10 million elements
-I_MAX3 = 5
-# Number of repetitions per value of `n`
-M3 = 10
-
-
-
-NS3: List[int] = [int(2000000*i+1) for i in range(I_MAX3)]
 
 with open('HorseRace.csv', 'w', newline='') as f:
     writer = csv.writer(f)
@@ -102,23 +103,24 @@ with open('HorseRace.csv', 'w', newline='') as f:
     for i in range(I_MAX3):
         for _ in range(M3):
             writer.writerow([NS3[i], " ".join(str(rng.integers(1, 2**28)) for _ in range(NS3[i]))])
+    print("Done generating the Horserace")
 
 
+with open("PresortedRandomInput.csv", "w", newline='') as f:
+    writer = csv.writer(f)
 
-# with open("PresortedRandomInput.csv", "w", newline='') as f:
-#     writer = csv.writer(f)
+    # Header including presortedness level
+    writer.writerow(["presortedness","n", "values"])
 
-#     # Header including presortedness level
-#     writer.writerow(["presortedness","n", "values"])
-
-#     for i in range(I_MAX2):
-#         for _ in range(M2):
-#             # Generate inputs with varying presortedness
-#             for presortedness in [
-#                 0, 
-#                 1,
-#                 2,
-#                 3,
-#             ]:
-#                 array = generatePresortedArray(NS2[i], presortedness)
-#                 writer.writerow([presortedness, NS2[i], " ".join(map(str, array))])
+    for i in range(I_MAX2):
+        for _ in range(M2):
+            # Generate inputs with varying presortedness
+            for presortedness in [
+                0, 
+                1,
+                2,
+                3,
+            ]:
+                array = generatePresortedArray(NS2[i], presortedness)
+                writer.writerow([presortedness, NS2[i], " ".join(map(str, array))])
+    print("Done generating Random Presorted Input")
