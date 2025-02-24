@@ -65,6 +65,40 @@ plot_merge_sort_base_case(df, "merge_sort_comparison.png")  # This will save the
 
 
 
+def plot_time_vs_comparisons(df, output_file=None):
+    """
+    Plot median time vs median number of comparisons to investigate
+    if running time is proportional to the number of comparisons.
+
+    Parameters:
+      df: A pandas DataFrame with columns ['n', 'time', 'comparisons', 'algorithm'].
+      output_file: Optional file path to save the figure.
+    """
+    # Group by 'n' and compute the median values
+    median_df = df.groupby('n').agg({'time': 'median', 'comparisons': 'median'}).reset_index()
+
+    plt.figure(figsize=(10, 6))
+    plt.scatter(median_df['comparisons'], median_df['time'], color='blue', marker='o')
+    plt.xlabel("Median Comparisons")
+    plt.ylabel("Median Time (s)")
+    plt.title("Empirical Running Time vs. Number of Comparisons")
+    plt.grid(True)
+
+    # Optionally, add a linear regression line to see the proportionality trend
+    coeffs = np.polyfit(median_df['comparisons'], median_df['time'], 1)
+    poly_eqn = np.poly1d(coeffs)
+    plt.plot(median_df['comparisons'], poly_eqn(median_df['comparisons']),
+             color='red', linestyle='--', label=f'Fit: y={coeffs[0]:.2e}x + {coeffs[1]:.2e}')
+    plt.legend()
+
+    if output_file:
+        plt.savefig(output_file, dpi=300, bbox_inches="tight")
+        print(f"Plot saved as {output_file}")
+    else:
+        plt.show()
+
+
+
 # Generate plots for cutoff values for insertion and recursive mergesort
 def plot_cutoff_values(df, output_file=None):
     """Plot median time vs cutoff for various algorithms."""
@@ -138,14 +172,17 @@ def plot_horse_race(df, output_file=None):
 
 if __name__ == "__main__":
     # Load the CSV data (assuming 'MergeSortBaseCase.csv' is in your working directory)
-    df_merge = load_data('MergeSortBaseCase.csv')
-    plot_merge_sort_base_case(df_merge)
+    # df_merge = load_data('MergeSortBaseCase.csv')
+    # plot_merge_sort_base_case(df_merge)
 
     # df_cutoff = load_data('CutoffValues.csv')
     # plot_cutoff_values(df_cutoff)
 
-    df_lvlbio = load_data('LevelAndBioSort.csv')
-    plot_level_biosort(df_lvlbio)
+    # df_lvlbio = load_data('LevelAndBioSort.csv')
+    # plot_level_biosort(df_lvlbio)
 
     # df_horse_race = load_data('HorseRaceResults.csv')
     # plot_horse_race(df_horse_race)
+
+    df_merge = pd.read_csv("MergeSortBaseCase.csv")
+    plot_time_vs_comparisons(df_merge, "time_vs_comparisons.png")
