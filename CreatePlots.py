@@ -65,31 +65,44 @@ plot_merge_sort_base_case(df, "merge_sort_comparison.png")  # This will save the
 
 
 
-def plot_time_vs_comparisons(df, output_file=None):
+def plot_time_vs_comparisons_by_type(df, output_file=None):
     """
-    Plot median time vs median number of comparisons to investigate
-    if running time is proportional to the number of comparisons.
-
-    Parameters:
-      df: A pandas DataFrame with columns ['n', 'time', 'comparisons', 'algorithm'].
-      output_file: Optional file path to save the figure.
+    Plot median time vs. median comparisons for each algorithm type.
+    Each algorithm (e.g., INTEGERS, STRINGS, OBJECT, PREFIX) is plotted with a distinct marker/color.
     """
-    # Group by 'n' and compute the median values
-    median_df = df.groupby('n').agg({'time': 'median', 'comparisons': 'median'}).reset_index()
-
     plt.figure(figsize=(10, 6))
-    plt.scatter(median_df['comparisons'], median_df['time'], color='blue', marker='o')
+
+    # Define marker and color options for variety
+    markers = ['o', 's', '^', 'D', 'v', 'P', '*']
+    colors = ['blue', 'red', 'green', 'purple', 'orange', 'cyan', 'magenta']
+
+    # Get the unique algorithm types
+    unique_algorithms = df['algorithm'].unique()
+
+    # For each algorithm type, group by n and compute the median values
+    for idx, algorithm in enumerate(unique_algorithms):
+        df_algo = df[df['algorithm'] == algorithm]
+        median_df = df_algo.groupby('n').agg({'time': 'median', 'comparisons': 'median'}).reset_index()
+
+        # Scatter plot: x-axis is median comparisons, y-axis is median time
+        plt.scatter(median_df['comparisons'], median_df['time'],
+                    label=algorithm,
+                    marker=markers[idx % len(markers)],
+                    color=colors[idx % len(colors)])
+
+        # Optionally, add a linear fit line for this algorithm type
+        coeffs = np.polyfit(median_df['comparisons'], median_df['time'], 1)
+        poly_eqn = np.poly1d(coeffs)
+        x_vals = np.linspace(median_df['comparisons'].min(), median_df['comparisons'].max(), 100)
+        plt.plot(x_vals, poly_eqn(x_vals),
+                 linestyle='--', color=colors[idx % len(colors)],
+                 alpha=0.7)
+
     plt.xlabel("Median Comparisons")
     plt.ylabel("Median Time (s)")
-    plt.title("Empirical Running Time vs. Number of Comparisons")
+    plt.title("Empirical Running Time vs. Number of Comparisons by Algorithm Type")
+    plt.legend(title="Algorithm")
     plt.grid(True)
-
-    # Optionally, add a linear regression line to see the proportionality trend
-    coeffs = np.polyfit(median_df['comparisons'], median_df['time'], 1)
-    poly_eqn = np.poly1d(coeffs)
-    plt.plot(median_df['comparisons'], poly_eqn(median_df['comparisons']),
-             color='red', linestyle='--', label=f'Fit: y={coeffs[0]:.2e}x + {coeffs[1]:.2e}')
-    plt.legend()
 
     if output_file:
         plt.savefig(output_file, dpi=300, bbox_inches="tight")
@@ -184,5 +197,5 @@ if __name__ == "__main__":
     # df_horse_race = load_data('HorseRaceResults.csv')
     # plot_horse_race(df_horse_race)
 
-    df_merge = pd.read_csv("MergeSortBaseCase.csv")
-    plot_time_vs_comparisons(df_merge, "time_vs_comparisons.png")
+    df = pd.read_csv("mergeSortBaseCase.csv")
+    plot_time_vs_comparisons_by_type(df)
