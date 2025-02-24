@@ -193,20 +193,20 @@ def plot_horse_race(df, output_file=None):
 
 
 if __name__ == "__main__":
-    df_merge = load_data('MergeSortBaseCase.csv')
-    plot_merge_sort_base_case(df_merge)
+    # df_merge = load_data('MergeSortBaseCase.csv')
+    # plot_merge_sort_base_case(df_merge)
 
-    df_comp = pd.read_csv("mergeSortBaseCase.csv")
-    plot_time_vs_comparisons_by_type(df_comp)
+    # df_comp = pd.read_csv("mergeSortBaseCase.csv")
+    # plot_time_vs_comparisons_by_type(df_comp)
 
-    df_cutoff = load_data('CutoffValues.csv')
-    plot_cutoff_values(df_cutoff)
+    # df_cutoff = load_data('CutoffValues.csv')
+    # plot_cutoff_values(df_cutoff)
 
     df_lvlbio_presort = load_data('LevelAndBioSort.csv')
     plot_level_biosort_subplots(df_lvlbio_presort)
 
-    df_lvlbio_cutoff= load_data("LevelAndBioSort.csv")
-    plot_level_biosort_by_cutoff(df_lvlbio_cutoff)
+    # df_lvlbio_cutoff= load_data("LevelAndBioSort.csv") #useless now that we have the other one. Convert to c based on presortedness
+    # plot_level_biosort_by_cutoff(df_lvlbio_cutoff)
 
     # df_horse_race = load_data('HorseRaceResults.csv')
     # plot_horse_race(df_horse_race)
