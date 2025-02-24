@@ -81,39 +81,43 @@ def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
 
 
 # Tests for mergesort base case with the types: Integers, Strings, Objects and prefix Strings
-INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
-# ("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
-("recursiveMergeSort BaseCase PREFIX", "SortingVariations/app/build/libs/app.jar"),
-("recursiveMergeSort BaseCase OBJECT", "SortingVariations/app/build/libs/app.jar"),
-}
+# INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
+# # ("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+# ("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
+# ("recursiveMergeSort BaseCase PREFIX", "SortingVariations/app/build/libs/app.jar"),
+# ("recursiveMergeSort BaseCase OBJECT", "SortingVariations/app/build/libs/app.jar"),
+# }
 
-# Initial test for testing c-values for iterative and insertion mergesort
+# # Initial test for testing c-values for iterative and insertion mergesort
 INSTANCES_C: List[Tuple[str, str]] = {
     ("iterativeMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
     ("insertionMergeSort Cutoff INTEGERS", "SortingVariations/app/build/libs/app.jar"),
-}
-
-# Tests for levelsort and binomial sort on diffrently sorted input for adaptive and non-adaptive algorithms
-INSTANCES_preSorted_Adaptive: List[Tuple[str, str]] = {
     ("levelSort Presort INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
     ("binomialSort Presort INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
     ("levelSort Presort INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
     ("binomialSort Presort INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar")
 }
 
+# # Tests for levelsort and binomial sort on diffrently sorted input for adaptive and non-adaptive algorithms
+# INSTANCES_preSorted_Adaptive: List[Tuple[str, str]] = {
+#     ("levelSort Presort INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
+#     ("binomialSort Presort INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
+#     ("levelSort Presort INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+#     ("binomialSort Presort INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar")
+# }
+
 # #Horse race
-INSTANCES_HORSERACE: List[Tuple[str,str]]= {
-    # ("recursiveMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
-    #We unfortunately have to keep a placeholder to keep our architecture in main
-    ("recursiveMergeSort HorseRace INTEGERS Arrays.sort", "SortingVariations/app/build/libs/app.jar"),
-    # ("levelSort HorseRace INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
-    # ("binomialSort HorseRace INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
-    # ("levelSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
-    # ("binomialSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
-    # ("insertionMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
-    # ("parallelRecursiveMergeSort HorseRace INTEGERS NonAdaptive Parallel", "SortingVariations/app/build/libs/app.jar")
-}
+# INSTANCES_HORSERACE: List[Tuple[str,str]]= {
+#     ("recursiveMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+#     #We unfortunately have to keep a placeohlder to keep our architecture in main
+#     ("recursiveMergeSort HorseRace INTEGERS Arrays.sort", "SortingVariations/app/build/libs/app.jar"),
+#     ("levelSort HorseRace INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
+#     ("binomialSort HorseRace INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),
+#     ("levelSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+#     ("binomialSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+#     ("insertionMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+#     ("parallelRecursiveMergeSort HorseRace INTEGERS NonAdaptive Parallel", "SortingVariations/app/build/libs/app.jar")
+# }
 
 # Cutoff values:
 LIST_OF_CUTOFFVALUES: list[int] = {
@@ -123,12 +127,9 @@ LIST_OF_CUTOFFVALUES: list[int] = {
     8,
     16,
     20,
-    22,
     24,
-    26,
     28,
     32,
-    64,
 }
 
 if __name__ == '__main__':
@@ -161,34 +162,33 @@ if __name__ == '__main__':
     #                 'time' : value[1],
     #                 'comparisons' : value[2]
     #             })
-       
-    # listOfDatasets = [
-    # generatePresortedPlots()
-    # ]
-    # print("done")         
+    listOfDatasets = [
+    generatePresortedPlots()
+    ]
+    print("done")         
 
-    # # Experiment for testing different cutoff values for recursive mergesort
-    # with open("cutoffValues.csv", "w") as f:
-    #     writer = csv.DictWriter(f, 
-    #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
-    #     writer.writeheader()
-    #     for algorithm, jar in INSTANCES_C:
-    #         results: List[Tuple[int,float]] = []
-    #         for cutoff in LIST_OF_CUTOFFVALUES:
-    #             for presortedness, dict in listOfDatasets[0].items():
-    #                 if presortedness == 0: #Here we will only use the not-sorted values
-    #                     for value in benchmark(f"{algorithm} {cutoff}",jar, dict):
-    #                         writer.writerow(
-    #                         { 
-    #                             'algorithm' : algorithm,
-    #                             'n' : value[0],
-    #                             'time' : value[1],
-    #                             'comparisons' : value[2],
-    #                             'cutoff' : cutoff,
-    #                         }
-    #                             )
+    # Experiment for testing different cutoff values for recursive mergesort
+    with open("cutoffValues.csv", "w") as f:
+        writer = csv.DictWriter(f, 
+            fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff'])
+        writer.writeheader()
+        for algorithm, jar in INSTANCES_C:
+            results: List[Tuple[int,float]] = []
+            for cutoff in LIST_OF_CUTOFFVALUES:
+                for presortedness, dict in listOfDatasets[0].items():
+                    if presortedness == 0: #Here we will only use the not-sorted values
+                        for value in benchmark(f"{algorithm} {cutoff}",jar, dict):
+                            writer.writerow(
+                            { 
+                                'algorithm' : algorithm,
+                                'n' : value[0],
+                                'time' : value[1],
+                                'comparisons' : value[2],
+                                'cutoff' : cutoff,
+                            }
+                                )
     
-    # # Experiment for testing binomial sort and level sort with different cutoff values
+    # Experiment for testing binomial sort and level sort with different cutoff values
     # with open("LevelAndBioSort.csv", "w") as f:
     #     writer = csv.DictWriter(f, 
     #         fieldnames = ['algorithm','n','time', 'comparisons', 'cutoff', 'degree of presortedness'])
@@ -209,19 +209,19 @@ if __name__ == '__main__':
     #                     }
     #                         )
                 
-    #List of datasets used in horserace experiment
-    listOfDatasets = [
-    generatePlots("HorseRace.csv")
-    ]
-    #Experiment for horse race
-    with open("HorseRaceResults.csv", "w") as f:
-        writer = csv.DictWriter(f,
-            fieldnames = ['algorithm','n','time'])
-        writer.writeheader()
-        for algorithm, jar in INSTANCES_HORSERACE:
-                for value in benchmark(f"{algorithm}",jar, listOfDatasets[0]):
-                    writer.writerow({
-                        'algorithm' : algorithm,
-                        'n' : value[0],
-                        'time' : value[1],
-                    })
+    # #List of datasets used in horserace experiment
+    # listOfDatasets = [
+    # generatePlots("HorseRace.csv")
+    # ]
+    # #Experiment for horse race
+    # with open("HorseRaceResults.csv", "w") as f:
+    #     writer = csv.DictWriter(f,
+    #         fieldnames = ['algorithm','n','time'])
+    #     writer.writeheader()
+    #     for algorithm, jar in INSTANCES_HORSERACE:
+    #             for value in benchmark(f"{algorithm}",jar, listOfDatasets[0]):
+    #                 writer.writerow({
+    #                     'algorithm' : algorithm,
+    #                     'n' : value[0],
+    #                     'time' : value[1],
+    #                 })
