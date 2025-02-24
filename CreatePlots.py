@@ -89,28 +89,82 @@ def plot_cutoff_values(df, output_file=None):
     # plt.savefig(output_file, dpi=300, bbox_inches="tight")
     plt.savefig(f"{title}.png")
 
-def plot_level_biosort(df, output_file=None):
-    """Plot algorithm performance by presortedness and cutoff (median comparisons)."""
-    # Generate plot for level- and biosort
+
+def plot_level_biosort_subplots(df, output_file=None):
+    """Create two subplots stacked vertically:
+    1. Degree of presortedness vs. average comparisons
+    2. Degree of presortedness vs. median time
+    """
+    # Sort data
     df = df.sort_values(by=["degree of presortedness"])
-    # Algorithm + cutoff
-    df["label"] = df["algorithm"] + " (cutoff=" + df["cutoff"].astype(str) + ")"
 
-    # Median
-    median_df = df.groupby(["label", "degree of presortedness"])["comparisons"].median().reset_index()
+    # Group by label and degree of presortedness
+    avg_comparisons_df = (
+        df.groupby(["algorithm", "degree of presortedness"])["comparisons"]
+        .mean()
+        .reset_index()
+    )
+    median_time_df = (
+        df.groupby(["algorithm", "degree of presortedness"])["time"]
+        .median()
+        .reset_index()
+    )
+    # Create subplots (stacked vertically)
+    fig, axes = plt.subplots(2, 1, figsize=(10, 12)) ## (2, 1) vertical (1, 2) for side by side
+
+    for algorithm, group in avg_comparisons_df.groupby("algorithm"):
+        axes[0].plot(
+            group["degree of presortedness"],
+            group["comparisons"],
+            marker="o",
+            label=algorithm.replace("_", " ").title(),
+        )
+    axes[0].set_xlabel("Degree of Presortedness")
+    axes[0].set_ylabel("Average Comparisons")
+    axes[0].set_title("Average Comparisons vs. Degree of Presortedness")
+    axes[0].set_xticks([0, 1, 2, 3])
+    axes[0].grid(True)
+    axes[0].legend()
+
+    for algorithm, group in median_time_df.groupby("algorithm"):
+        axes[1].plot(
+            group["degree of presortedness"],
+            group["time"],
+            marker="o",
+            label=algorithm.replace("_", " ").title(),
+        )
+    axes[1].set_xlabel("Degree of Presortedness")
+    axes[1].set_ylabel("Median Time")
+    axes[1].set_title("Median Time vs. Degree of Presortedness")
+    axes[1].set_xticks([0, 1, 2, 3])
+    axes[1].grid(True)
+    axes[1].legend()
+    plt.savefig("presortedness.png")
+
+
+def plot_level_biosort_by_cutoff(df, output_file=None):
+    """Plot algorithm performance with cutoff on the x-axis and median time on the y-axis,
+    showing only four lines for level and bionomial sort (adaptive and non-adaptive)."""
+    df = df.sort_values(by=["cutoff"])
+    median_df = df.groupby(["algorithm", "cutoff"])["time"].median().reset_index()
+
     plt.figure(figsize=(10, 6))
+    for algorithm, group in median_df.groupby("algorithm"):
+        plt.plot(
+            group["cutoff"],
+            group["time"],
+            marker="o",
+            label=algorithm.replace("_", " ").title(),
+        )
 
-    for label, group in median_df.groupby("label"):
-        plt.plot(group["degree of presortedness"], group["comparisons"], marker="o", label=label)
-    plt.xlabel("Degree of Presortedness")
-    plt.ylabel("Median Comparisons")
-    title = "Algorithm Performance by Presortedness and Cutoff (Median Comparisons)"
+    plt.xlabel("Cutoff")
+    plt.ylabel("Median Time")
+    title = "Level and Bionomial Sort Performance (Median Time)"
     plt.title(title)
-    plt.xticks([0, 1, 2, 3])
     plt.legend()
     plt.grid(True)
-    #plt.savefig(output_file, dpi=300, bbox_inches="tight")
     plt.savefig(f"{title}.png")
+
 
 # Horse race plot
 def plot_horse_race(df, output_file=None):
@@ -139,18 +193,20 @@ def plot_horse_race(df, output_file=None):
 
 
 if __name__ == "__main__":
-    # df_merge = load_data('MergeSortBaseCase.csv')
-    # plot_merge_sort_base_case(df_merge)
-    
+    df_merge = load_data('MergeSortBaseCase.csv')
+    plot_merge_sort_base_case(df_merge)
+
     df_comp = pd.read_csv("mergeSortBaseCase.csv")
     plot_time_vs_comparisons_by_type(df_comp)
 
-    # df_cutoff = load_data('CutoffValues.csv')
-    # plot_cutoff_values(df_cutoff)
+    df_cutoff = load_data('CutoffValues.csv')
+    plot_cutoff_values(df_cutoff)
 
-    # df_lvlbio = load_data('LevelAndBioSort.csv')
-    # plot_level_biosort(df_lvlbio)
+    df_lvlbio_presort = load_data('LevelAndBioSort.csv')
+    plot_level_biosort_subplots(df_lvlbio_presort)
+
+    df_lvlbio_cutoff= load_data("LevelAndBioSort.csv")
+    plot_level_biosort_by_cutoff(df_lvlbio_cutoff)
 
     # df_horse_race = load_data('HorseRaceResults.csv')
     # plot_horse_race(df_horse_race)
-
