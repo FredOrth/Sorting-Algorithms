@@ -8,40 +8,61 @@ def load_data(filename):
     return pd.read_csv(filename)
 
 # Generate plot for mergesort basecase and different types
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
 def plot_merge_sort_base_case(df, output_file=None):
 
+    # Set up the plot
     plt.figure(figsize=(10, 6))
 
-    # Group by 'n' and calculate the median time
-    median_times = df.groupby('n')['time'].median()
+    # Get unique algorithms
+    algorithms = df['algorithm'].unique()
 
-    # Plot empirical median times
-    plt.plot(median_times.index, median_times.values, label='Empirical Time', marker='o')
+    # Plot each algorithm's empirical data
+    for algorithm in algorithms:
+        # Group by 'n' and calculate the median time for each algorithm
+        median_times = df[df['algorithm'] == algorithm].groupby('n')['time'].median()
 
-    # Calculate the theoretical n*log(n) values for the given n-values.
-    n_values = np.array(median_times.index, dtype=float)
+        # Plot empirical median times for the current algorithm
+        plt.plot(median_times.index, median_times.values, label=f'{algorithm} (Empirical)', marker='o')
+
+    # Calculate the theoretical n*log(n) values for the given n-values (same for all algorithms)
+    n_values = np.array(df['n'].unique(), dtype=float)
     theoretical = n_values * np.log(n_values)
 
     # Scale the theoretical curve to match the empirical data.
     # Here we scale it so the first value of the theoretical curve equals the first empirical median time.
-    if theoretical[0] != 0:
-        scaling_factor = median_times.values[0] / theoretical[0]
-    else:
-        scaling_factor = 1
+    scaling_factor = df.groupby('n')['time'].median().values[0] / theoretical[0]
     theoretical_scaled = theoretical * scaling_factor
 
-    # Plot the theoretical runtime curve
-    plt.plot(n_values, theoretical_scaled, label='n log n (theoretical, scaled)',
-            linestyle='--', color='red')
+    # Plot the single theoretical runtime curve
+    plt.plot(n_values, theoretical_scaled, label='n log n (theoretical, scaled)', linestyle='--', color='red')
 
+    # Labels and title
     plt.xlabel('n')
     plt.ylabel('Median Time (s)')
-    title = "Empirical Median Time vs n for MergeSort Base Case"
-    plt.title(title)
+    plt.title("Empirical Median Time vs n for MergeSort Base Case (By Algorithm)")
     plt.legend()
     plt.grid(True)
-    #plt.savefig(dpi=300, bbox_inches="tight")
-    plt.savefig(f"{title}.png")
+
+    # Save the plot if an output file is provided, otherwise show it
+    if output_file:
+        plt.savefig(output_file, dpi=300, bbox_inches="tight")
+        print(f"Plot saved as {output_file}")
+    else:
+        plt.show()  # Display the plot if no output file is given
+
+# Example usage:
+df = pd.read_csv("mergeSortBaseCase.csv")
+plot_merge_sort_base_case(df)  # This will display the plot
+plot_merge_sort_base_case(df, "merge_sort_comparison.png")  # This will save the plot as 'merge_sort_comparison.png'
+
 
 
 # Generate plots for cutoff values for insertion and recursive mergesort
@@ -117,8 +138,8 @@ def plot_horse_race(df, output_file=None):
 
 if __name__ == "__main__":
     # Load the CSV data (assuming 'MergeSortBaseCase.csv' is in your working directory)
-    # df_merge = load_data('MergeSortBaseCase.csv')
-    # plot_merge_sort_base_case(df_merge)
+    df_merge = load_data('MergeSortBaseCase.csv')
+    plot_merge_sort_base_case(df_merge)
 
     # df_cutoff = load_data('CutoffValues.csv')
     # plot_cutoff_values(df_cutoff)
