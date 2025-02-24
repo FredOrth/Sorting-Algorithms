@@ -108,7 +108,7 @@ def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
 
 # #Horse race
 INSTANCES_HORSERACE: List[Tuple[str,str]]= {
-    ("recursiveMergeSort HorseRace INTEGERS NonAdaptive", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort HorseRace INTEGERS NonAdaptive (HER TOBIAS)", "SortingVariations/app/build/libs/app.jar"),
     #We unfortunately have to keep a placeohlder to keep our architecture in main
     ("recursiveMergeSort HorseRace INTEGERS Arrays.sort", "SortingVariations/app/build/libs/app.jar"),
     ("levelSort HorseRace INTEGERS Adaptive", "SortingVariations/app/build/libs/app.jar"),

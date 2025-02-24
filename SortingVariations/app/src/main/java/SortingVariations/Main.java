@@ -30,10 +30,12 @@ public class Main {
 
                 }
             }else if(args[3].equals("NonAdaptive")){
-                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,20,false,false,0);
+                int cutoff = Integer.parseInt(args[4]);
+                Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
                 sorterMethod(sorter, reader(args[2]));
             }else if (args[3].equals("Adaptive")) {
-                Sorter<Integer> sorter = SorterFactory.getSorter(sortType, 20,true,false,0);
+                int cutoff = Integer.parseInt(args[4]);
+                Sorter<Integer> sorter = SorterFactory.getSorter(sortType, cutoff,true,false,0);
                 sorterMethod(sorter, reader(args[2]));
             }else{
                 if(args[4].equals("Parrallel")){
