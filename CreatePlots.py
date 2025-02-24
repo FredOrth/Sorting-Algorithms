@@ -9,6 +9,43 @@ def load_data(filename):
 
 # Generate plot for mergesort basecase and different types
 
+def plot_merge_sort_base_case(df, output_file=None):
+
+    plt.figure(figsize=(10, 6))
+
+    # Group by 'n' and calculate the median time
+    median_times = df.groupby('n')['time'].median()
+
+    # Plot empirical median times
+    plt.plot(median_times.index, median_times.values, label='Empirical Time', marker='o')
+
+    # Calculate the theoretical n*log(n) values for the given n-values.
+    n_values = np.array(median_times.index, dtype=float)
+    theoretical = n_values * np.log(n_values)
+
+    # Scale the theoretical curve to match the empirical data.
+    # Here we scale it so the first value of the theoretical curve equals the first empirical median time.
+    if theoretical[0] != 0:
+        scaling_factor = median_times.values[0] / theoretical[0]
+    else:
+        scaling_factor = 1
+    theoretical_scaled = theoretical * scaling_factor
+
+    # Plot the theoretical runtime curve
+    plt.plot(n_values, theoretical_scaled, label='n log n (theoretical, scaled)',
+             linestyle='--', color='red')
+
+    plt.xlabel('n')
+    plt.ylabel('Median Time (s)')
+    plt.title('Empirical Median Time vs n for MergeSort Base Case')
+    plt.legend()
+    plt.grid(True)
+
+    if output_file:
+        plt.savefig(output_file, dpi=300, bbox_inches="tight")
+    else:
+        plt.show()
+
 
 # Generate plots for cutoff values for insertion and recursive mergesort
 def plot_cutoff_values(df, output_file=None):
@@ -83,8 +120,12 @@ def plot_horse_race(df, output_file=None):
 
 
 if __name__ == "__main__":
-    df_cutoff = load_data('CutoffValues.csv')
-    plot_cutoff_values(df_cutoff)
+    # Load the CSV data (assuming 'MergeSortBaseCase.csv' is in your working directory)
+    df_merge = pd.read_csv('MergeSortBaseCase.csv')
+    plot_merge_sort_base_case(df_merge)
+
+    # df_cutoff = load_data('CutoffValues.csv')
+    # plot_cutoff_values(df_cutoff)
 
     # df_lvlbio = load_data('LevelAndBioSort.csv')
     # plot_level_biosort(df_lvlbio)
