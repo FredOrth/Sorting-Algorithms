@@ -104,11 +104,9 @@ def plot_time_vs_comparisons_by_type(df, output_file=None):
     plt.legend(title="Algorithm")
     plt.grid(True)
 
-    if output_file:
-        plt.savefig(output_file, dpi=300, bbox_inches="tight")
-        print(f"Plot saved as {output_file}")
-    else:
-        plt.show()
+    
+    plt.savefig("Comparisons vs time MergeSort", dpi=300, bbox_inches="tight")
+    print(f"Plot saved as {output_file}")
 
 
 
