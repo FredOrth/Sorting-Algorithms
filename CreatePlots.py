@@ -188,8 +188,43 @@ def plot_horse_race(df, output_file=None):
     plt.title(title)
     plt.legend(title="Algorithm")
     plt.grid(True)
-    #plt.savefig(output_file, dpi=300, bbox_inches="tight")
     plt.savefig(f"{title}.png")
+
+def plot_presortedness(df, output_file = None):
+
+
+    df["cutoff"] = df["cutoff"]
+    df["time"] = df["time"]
+
+    median_times = df.groupby(["algorithm", "degree of presortedness", "cutoff"])["time"].median().reset_index()
+
+    group_1 = ["binomialSort Presort INTEGERS Adaptive", "binomialSort Presort INTEGERS NonAdaptive"]
+    group_2 = ["levelSort Presort INTEGERS NonAdaptive", "levelSort Presort INTEGERS Adaptive"]
+
+    fig, axes = plt.subplots(1, 2, figsize=(16, 8), sharey=True)
+
+    # Plot for group 1
+    ax = axes[0]
+    for (algorithm, presortedness), group in median_times[median_times["algorithm"].isin(group_1)].groupby(["algorithm", "degree of presortedness"]):
+        ax.plot(group["cutoff"], group["time"], marker='o', linestyle='-', label=f"{algorithm}, {presortedness}")
+    ax.set_xlabel("Cutoff")
+    ax.set_ylabel("Median Time")
+    ax.set_title("BinomialSort Algorithms")
+    ax.legend()
+    ax.grid(True)
+
+    # Plot for group 2
+    ax = axes[1]
+    for (algorithm, presortedness), group in median_times[median_times["algorithm"].isin(group_2)].groupby(["algorithm", "degree of presortedness"]):
+        ax.plot(group["cutoff"], group["time"], marker='o', linestyle='-', label=f"{algorithm}, {presortedness}")
+    ax.set_xlabel("Cutoff")
+    ax.set_title("LevelSort Algorithms")
+    ax.legend()
+    ax.grid(True)
+
+    plt.tight_layout()
+    plt.savefig("PresortednessLevelAndBioSort.png")
+
 
 
 if __name__ == "__main__":
@@ -202,8 +237,11 @@ if __name__ == "__main__":
     # df_cutoff = load_data('CutoffValues.csv')
     # plot_cutoff_values(df_cutoff)
 
+    # df_lvlbio_presort = load_data('LevelAndBioSort.csv')
+    # plot_level_biosort_subplots(df_lvlbio_presort)
+    
     df_lvlbio_presort = load_data('LevelAndBioSort.csv')
-    plot_level_biosort_subplots(df_lvlbio_presort)
+    plot_presortedness(df_lvlbio_presort)
 
     # df_lvlbio_cutoff= load_data("LevelAndBioSort.csv") #useless now that we have the other one. Convert to c based on presortedness
     # plot_level_biosort_by_cutoff(df_lvlbio_cutoff)

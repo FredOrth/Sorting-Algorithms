@@ -38,6 +38,7 @@ public class Main {
                 sorterMethod(sorter, reader(args[2]));
             }else{
                 if(args[4].equals("Parrallel")){
+                int cutoff = Integer.parseInt(args[4]);
                 Sorter<Integer> sorter = SorterFactory.getSorter(sortType, 20,false,true,0);
                 sorterMethod(sorter, reader(args[2]));
             }
