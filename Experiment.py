@@ -234,12 +234,11 @@ if __name__ == '__main__':
         writer.writeheader()
         for algorithm, jar in INSTANCES_HORSERACE:
                 for value in benchmark(f"{algorithm}",jar, listOfDatasets[0]):
-                    print(value)
-                    # writer.writerow({
-                    #     'algorithm' : algorithm,
-                    #     'n' : value[0],
-                    #     'time' : value[1],
-                    # })
+                    writer.writerow({
+                        'algorithm' : algorithm,
+                        'n' : value[0],
+                        'time' : value[1],
+                    })
 
     # #parallelTesting   
     # for algorithm, jar in INSTANCES_PARALLEL:
