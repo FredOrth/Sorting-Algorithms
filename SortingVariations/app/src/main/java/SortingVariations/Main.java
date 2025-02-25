@@ -68,6 +68,12 @@ public class Main {
                 Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
                 sorterMethod(sorter, reader(args[2]));
             }
+        else if(args[1].equals("parallelTesting")){
+            if(args[2].equals("Testing")){
+            System.out.println(10 + " " + 20 + " " + 30);}
+            else if(args[2].equals("Testing2")){
+            System.out.println(20 + " " + 20 + " " + 30);}
+        }
 
     }
 

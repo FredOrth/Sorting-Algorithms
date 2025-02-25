@@ -108,7 +108,7 @@ def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
 
 # #Horse race
 INSTANCES_HORSERACE: List[Tuple[str,str]]= {
-    ("recursiveMergeSort HorseRace INTEGERS NonAdaptive (HER TOBIAS)", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
     #We unfortunately have to keep a placeohlder to keep our architecture in main
     ("recursiveMergeSort HorseRace INTEGERS Arrays.sort", "SortingVariations/app/build/libs/app.jar"),
     ("levelSort HorseRace INTEGERS Adaptive 24", "SortingVariations/app/build/libs/app.jar"),
@@ -118,6 +118,13 @@ INSTANCES_HORSERACE: List[Tuple[str,str]]= {
     ("iterativeMergeSort HorseRace INTEGERS NonAdaptive 24", "SortingVariations/app/build/libs/app.jar"),
     ("insertionMergeSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
     ("parallelRecursiveMergeSort HorseRace INTEGERS Parallel 100", "SortingVariations/app/build/libs/app.jar")
+}
+
+#Parallel plots
+INSTANCES_PARALLEL: List[Tuple[str,str]]= {
+    ("FirstTest parallelTesting Testing", "SortingVariations/app/build/libs/app.jar"),
+    ("FirstTest parallelTesting Testing2", "SortingVariations/app/build/libs/app.jar")
+    
 }
 
 # Cutoff values:
@@ -211,19 +218,36 @@ if __name__ == '__main__':
     #                     }
     #                         )
                         
-    #List of datasets used in horserace experiment
-    listOfDatasets = [
-    generatePlots("HorseRace.csv")
-    ]
-    #Experiment for horse race
-    with open("HorseRaceResults.csv", "w") as f:
-        writer = csv.DictWriter(f,
-            fieldnames = ['algorithm','n','time'])
-        writer.writeheader()
-        for algorithm, jar in INSTANCES_HORSERACE:
-                for value in benchmark(f"{algorithm}",jar, listOfDatasets[0]):
-                    writer.writerow({
-                        'algorithm' : algorithm,
-                        'n' : value[0],
-                        'time' : value[1],
-                    })
+    # #List of datasets used in horserace experiment
+    # listOfDatasets = [
+    # generatePlots("HorseRace.csv")
+    # ]
+    # #Experiment for horse race
+    # with open("HorseRaceResults.csv", "w") as f:
+    #     writer = csv.DictWriter(f,
+    #         fieldnames = ['algorithm','n','time'])
+    #     writer.writeheader()
+    #     for algorithm, jar in INSTANCES_HORSERACE:
+    #             for value in benchmark(f"{algorithm}",jar, listOfDatasets[0]):
+    #                 writer.writerow({
+    #                     'algorithm' : algorithm,
+    #                     'n' : value[0],
+    #                     'time' : value[1],
+    #                 })
+         
+    for algorithm, jar in INSTANCES_PARALLEL:   
+        with open(f"Parallel_testing_{algorithm}.csv", "w") as f:
+            writer = csv.DictWriter(f,
+                fieldnames = ['cutoff','time','value'])
+            writer.writeheader()
+            # print(run_java(jar, algorithm, "ParralesTest"))
+            # for line in run_java(jar, algorithm, "ParralesTest"):
+            # print(run_java(jar, algorithm, "ParralesTest"))
+            for line in run_java(jar, algorithm, "ParralesTest").strip().split('\n'):
+                cutoff, time, value = line.split()
+                writer.writerow({
+                    'cutoff' : cutoff,
+                    'time' : time,
+                    'value' : value,
+                })
+#parallelTesting
