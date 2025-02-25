@@ -124,8 +124,7 @@ INSTANCES_HORSERACE: List[Tuple[str,str]]= {
 INSTANCES_PARALLEL: List[Tuple[str,str]]= {
     ("FirstTest parallelTesting ParallelCutoff100k", "SortingVariations/app/build/libs/app.jar"),
     ("FirstTest parallelTesting ParallelCutoff1M", "SortingVariations/app/build/libs/app.jar"),
-    ("FirstTest parallelTesting ParallelCutoff10M", "SortingVariations/app/build/libs/app.jar"),
-    ("FirstTest parallelTesting ParallelScalingTest", "SortingVariations/app/build/libs/app.jar") 
+    ("FirstTest parallelTesting ParallelCutoff10M", "SortingVariations/app/build/libs/app.jar")
 }
 
 INSTANCES_PARALLELTHREADSCALING: List[Tuple[str,str]]= {
@@ -240,8 +239,9 @@ if __name__ == '__main__':
     #                     'n' : value[0],
     #                     'time' : value[1],
     #                 })
+
     # #parallelTesting   
-    # for algorithm, jar in INSTANCES_PARALLEL:   
+    # for algorithm, jar in INSTANCES_PARALLEL:
     #     with open(f"Parallel_testing_{algorithm}.csv", "w") as f:
     #         writer = csv.DictWriter(f,
     #             fieldnames = ['cutoff','time','variation'])
@@ -254,7 +254,7 @@ if __name__ == '__main__':
     #                 'variation' : variation,
     #             })
                 
-    for algorithm, jar in INSTANCES_PARALLELTHREADSCALING:   
+    for algorithm, jar in INSTANCES_PARALLELTHREADSCALING:
         with open(f"Parallel_Thread_Scaling_{algorithm}.csv", "w") as f:
             writer = csv.DictWriter(f,
                 fieldnames = ['name','n','threshold', 'threads', 'nanoseconds', 'variance', 'amount of runs'])
