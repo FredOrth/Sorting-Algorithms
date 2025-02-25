@@ -357,8 +357,8 @@ if __name__ == "__main__":
     # df_lvlbio_cutoff= load_data("LevelAndBioSort.csv") #useless now that we have the other one. Convert to c based on presortedness
     # plot_level_biosort_by_cutoff(df_lvlbio_cutoff)
 
-    # df_horse_race = load_data('HorseRaceResults.csv')
-    # plot_horse_race(df_horse_race)
+    df_horse_race = load_data('HorseRaceResults.csv')
+    plot_horse_race(df_horse_race)
 
     # file_list = [
     #     'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling100K.csv',

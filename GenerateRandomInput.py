@@ -25,11 +25,11 @@ M2 = 5
 NS2: List[int] = [int(10000000*1**i) for i in range(I_MAX2)]
 
 # Specifics for generating random input with 10 million elements
-I_MAX3 = 1
+I_MAX3 = 5
 # Number of repetitions per value of `n`
-M3 = 2
+M3 = 5
 
-NS3: List[int] = [int(2000000*i+1) for i in range(I_MAX3)]
+NS3: List[int] = [int(2000000*(i+1)) for i in range(I_MAX3)]
 
 letters = string.ascii_lowercase
 
