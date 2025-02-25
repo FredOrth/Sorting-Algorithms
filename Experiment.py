@@ -111,7 +111,7 @@ INSTANCES_HORSERACE: List[Tuple[str,str]]= {
     # ("recursiveMergeSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
     #We unfortunately have to keep a placeohlder to keep our architecture in main
     # ("recursiveMergeSort HorseRace INTEGERS Arrays.sort", "SortingVariations/app/build/libs/app.jar"),
-    # ("levelSort HorseRace INTEGERS Adaptive 24", "SortingVariations/app/build/libs/app.jar"),
+    # ("levelSort HorseRace INTEGERS Adaptive 20", "SortingVariations/app/build/libs/app.jar"),
     # ("binomialSort HorseRace INTEGERS Adaptive 20", "SortingVariations/app/build/libs/app.jar"),
     # ("levelSort HorseRace INTEGERS NonAdaptive 24", "SortingVariations/app/build/libs/app.jar"),
     # ("binomialSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),

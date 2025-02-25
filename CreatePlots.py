@@ -159,7 +159,7 @@ def plot_horse_race(df, output_file=None):
     # Get the list of unique algorithms
     algorithms = median_times["algorithm"].unique()
 
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(12, 8))
     for algo in algorithms:
         subset = median_times[median_times["algorithm"] == algo]
         plt.plot(subset["n"], subset["time"], marker="o", label=algo)
@@ -339,23 +339,23 @@ def plot_all_parallel_scaling(file_list, labels, output_file="parallel_thread_sc
 
 if __name__ == "__main__":
     
-    # df_comp = pd.read_csv("mergeSortBaseCase.csv")
-    # plotMergeSortBaseCase(df_comp)
+    df_comp = pd.read_csv("mergeSortBaseCase.csv")
+    plotMergeSortBaseCase(df_comp)
 
     df_cutoff = load_data('CutoffValues.csv')
     plot_cutoff_values(df_cutoff)
 
-    # df_lvlbio_presort = load_data('LevelAndBioSort.csv')
-    # plot_level_biosort_subplots(df_lvlbio_presort)
+    df_lvlbio_presort = load_data('LevelAndBioSort.csv')
+    plot_level_biosort_subplots(df_lvlbio_presort)
     
-    # df_lvlbio_presort = load_data('LevelAndBioSort.csv')
-    # plot_presortedness(df_lvlbio_presort)
+    df_lvlbio_presort = load_data('LevelAndBioSort.csv')
+    plot_presortedness(df_lvlbio_presort)
     
-    # df_lvlbio_presort = load_data('LevelAndBioSort.csv')
-    # plot_presortednessComparisons(df_lvlbio_presort)
+    df_lvlbio_presort = load_data('LevelAndBioSort.csv')
+    plot_presortednessComparisons(df_lvlbio_presort)
 
-    # df_lvlbio_cutoff= load_data("LevelAndBioSort.csv") #useless now that we have the other one. Convert to c based on presortedness
-    # plot_level_biosort_by_cutoff(df_lvlbio_cutoff)
+    df_lvlbio_cutoff= load_data("LevelAndBioSort.csv") #useless now that we have the other one. Convert to c based on presortedness
+    plot_level_biosort_by_cutoff(df_lvlbio_cutoff)
 
     df_horse_race = load_data('HorseRaceResults.csv')
     plot_horse_race(df_horse_race)
