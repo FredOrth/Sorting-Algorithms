@@ -108,15 +108,15 @@ def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
 
 # #Horse race
 INSTANCES_HORSERACE: List[Tuple[str,str]]= {
-    ("recursiveMergeSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
+    # ("recursiveMergeSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
     #We unfortunately have to keep a placeohlder to keep our architecture in main
-    ("recursiveMergeSort HorseRace INTEGERS Arrays.sort", "SortingVariations/app/build/libs/app.jar"),
-    ("levelSort HorseRace INTEGERS Adaptive 24", "SortingVariations/app/build/libs/app.jar"),
-    ("binomialSort HorseRace INTEGERS Adaptive 20", "SortingVariations/app/build/libs/app.jar"),
-    ("levelSort HorseRace INTEGERS NonAdaptive 24", "SortingVariations/app/build/libs/app.jar"),
-    ("binomialSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
-    ("iterativeMergeSort HorseRace INTEGERS NonAdaptive 24", "SortingVariations/app/build/libs/app.jar"),
-    ("insertionMergeSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
+    # ("recursiveMergeSort HorseRace INTEGERS Arrays.sort", "SortingVariations/app/build/libs/app.jar"),
+    # ("levelSort HorseRace INTEGERS Adaptive 24", "SortingVariations/app/build/libs/app.jar"),
+    # ("binomialSort HorseRace INTEGERS Adaptive 20", "SortingVariations/app/build/libs/app.jar"),
+    # ("levelSort HorseRace INTEGERS NonAdaptive 24", "SortingVariations/app/build/libs/app.jar"),
+    # ("binomialSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
+    # ("iterativeMergeSort HorseRace INTEGERS NonAdaptive 24", "SortingVariations/app/build/libs/app.jar"),
+    # ("insertionMergeSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
     ("parallelRecursiveMergeSort HorseRace INTEGERS Parallel 100", "SortingVariations/app/build/libs/app.jar")
 }
 
@@ -223,22 +223,23 @@ if __name__ == '__main__':
     #                     }
     #                         )
                         
-    # #List of datasets used in horserace experiment
-    # listOfDatasets = [
-    # generatePlots("HorseRace.csv")
-    # ]
-    # #Experiment for horse race
-    # with open("HorseRaceResults.csv", "w") as f:
-    #     writer = csv.DictWriter(f,
-    #         fieldnames = ['algorithm','n','time'])
-    #     writer.writeheader()
-    #     for algorithm, jar in INSTANCES_HORSERACE:
-    #             for value in benchmark(f"{algorithm}",jar, listOfDatasets[0]):
-    #                 writer.writerow({
-    #                     'algorithm' : algorithm,
-    #                     'n' : value[0],
-    #                     'time' : value[1],
-    #                 })
+    #List of datasets used in horserace experiment
+    listOfDatasets = [
+    generatePlots("HorseRace.csv")
+    ]
+    #Experiment for horse race
+    with open("HorseRaceResults.csv", "w") as f:
+        writer = csv.DictWriter(f,
+            fieldnames = ['algorithm','n','time'])
+        writer.writeheader()
+        for algorithm, jar in INSTANCES_HORSERACE:
+                for value in benchmark(f"{algorithm}",jar, listOfDatasets[0]):
+                    print(value)
+                    # writer.writerow({
+                    #     'algorithm' : algorithm,
+                    #     'n' : value[0],
+                    #     'time' : value[1],
+                    # })
 
     # #parallelTesting   
     # for algorithm, jar in INSTANCES_PARALLEL:
@@ -254,20 +255,20 @@ if __name__ == '__main__':
     #                 'variation' : variation,
     #             })
                 
-    for algorithm, jar in INSTANCES_PARALLELTHREADSCALING:
-        with open(f"Parallel_Thread_Scaling_{algorithm}.csv", "w") as f:
-            writer = csv.DictWriter(f,
-                fieldnames = ['name','n','threshold', 'threads', 'nanoseconds', 'variance', 'amount of runs'])
-            writer.writeheader()
-            # print(run_java(jar, algorithm, "ParallelTest"))
-            for line in run_java(jar, algorithm, "ParallelTest").strip().split('\n'):
-                name, n, threshold, threads, nanoseconds, variance, runs = line.split()
-                writer.writerow({
-                    'name' : name,
-                    'n' : n,
-                    'threshold' : threshold,
-                    'threads' : threads,
-                    'nanoseconds' : nanoseconds,
-                    'variance' : variance,
-                    'amount of runs' : runs
-                })
+    # for algorithm, jar in INSTANCES_PARALLELTHREADSCALING:
+    #     with open(f"Parallel_Thread_Scaling_{algorithm}.csv", "w") as f:
+    #         writer = csv.DictWriter(f,
+    #             fieldnames = ['name','n','threshold', 'threads', 'nanoseconds', 'variance', 'amount of runs'])
+    #         writer.writeheader()
+    #         # print(run_java(jar, algorithm, "ParallelTest"))
+    #         for line in run_java(jar, algorithm, "ParallelTest").strip().split('\n'):
+    #             name, n, threshold, threads, nanoseconds, variance, runs = line.split()
+    #             writer.writerow({
+    #                 'name' : name,
+    #                 'n' : n,
+    #                 'threshold' : threshold,
+    #                 'threads' : threads,
+    #                 'nanoseconds' : nanoseconds,
+    #                 'variance' : variance,
+    #                 'amount of runs' : runs
+    #             })

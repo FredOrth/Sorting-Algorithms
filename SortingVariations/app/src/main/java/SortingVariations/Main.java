@@ -8,7 +8,7 @@ import SortingVariations.Util.ObjectClass;
 public class Main {
     
     public static void main(String[] args) throws IOException {
-       
+
         String sortType = args[0];
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -37,9 +37,10 @@ public class Main {
                 Sorter<Integer> sorter = SorterFactory.getSorter(sortType, cutoff,true,false,0);
                 sorterMethod(sorter, reader(args[2]));
             }else{
-                if(args[4].equals("Parrallel")){
+                if(args[4].equals("Parallel")){
                 int cutoff = Integer.parseInt(args[4]);
-                Sorter<Integer> sorter = SorterFactory.getSorter(sortType, 20,false,true,0);
+                System.out.println("Hello");
+                Sorter<Integer> sorter = SorterFactory.getSorter(sortType, cutoff,false,true,0);
                 sorterMethod(sorter, reader(args[2]));
             }
         }

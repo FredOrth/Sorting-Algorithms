@@ -342,15 +342,15 @@ if __name__ == "__main__":
     # df_comp = pd.read_csv("mergeSortBaseCase.csv")
     # plotMergeSortBaseCase(df_comp)
 
-    # df_cutoff = load_data('CutoffValues.csv')
-    # plot_cutoff_values(df_cutoff)
+    df_cutoff = load_data('CutoffValues.csv')
+    plot_cutoff_values(df_cutoff)
 
     # df_lvlbio_presort = load_data('LevelAndBioSort.csv')
     # plot_level_biosort_subplots(df_lvlbio_presort)
     
     # df_lvlbio_presort = load_data('LevelAndBioSort.csv')
     # plot_presortedness(df_lvlbio_presort)
-    #
+    
     # df_lvlbio_presort = load_data('LevelAndBioSort.csv')
     # plot_presortednessComparisons(df_lvlbio_presort)
 
@@ -360,14 +360,14 @@ if __name__ == "__main__":
     # df_horse_race = load_data('HorseRaceResults.csv')
     # plot_horse_race(df_horse_race)
 
-    file_list = [
-        'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling100K.csv',
-        'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling1M.csv',
-        'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling10M.csv'
-    ]
-    labels = ['100k', '1M', '10M']
-    plot_all_parallel_scaling(file_list, labels)
+    # file_list = [
+    #     'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling100K.csv',
+    #     'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling1M.csv',
+    #     'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling10M.csv'
+    # ]
+    # labels = ['100k', '1M', '10M']
+    # plot_all_parallel_scaling(file_list, labels)
 
-    file_list = ['Parallel_testing_FirstTest parallelTesting ParallelCutoff100k.csv', 'Parallel_testing_FirstTest parallelTesting ParallelCutoff1M.csv', 'Parallel_testing_FirstTest parallelTesting ParallelCutoff10M.csv']
-    labels = ['100k', '1M', '10M']
-    plot_all_cutoff_data(file_list, labels)
+    # file_list = ['Parallel_testing_FirstTest parallelTesting ParallelCutoff100k.csv', 'Parallel_testing_FirstTest parallelTesting ParallelCutoff1M.csv', 'Parallel_testing_FirstTest parallelTesting ParallelCutoff10M.csv']
+    # labels = ['100k', '1M', '10M']
+    # plot_all_cutoff_data(file_list, labels)
