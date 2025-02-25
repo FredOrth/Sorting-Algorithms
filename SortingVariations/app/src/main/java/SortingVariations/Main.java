@@ -83,6 +83,9 @@ public class Main {
                 runner.testThreadScaling();
             }
         }
+        else if (args[1].equals("ThreadScaling")){
+            System.out.println("DinMor " + 10 + " " + 20 + " " + 2 + " " + 5 + " " + 5 + " " + 7);
+        }
 
     }
 
