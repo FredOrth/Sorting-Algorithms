@@ -29,9 +29,6 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
         Integer[] run = new Integer[2];
         run[0] = 0;
         int y = validateSequence(run, i, cutoff, adaptive, a);
-        // for(int j = 0; j<a.length; j++){
-        //     System.out.print(a[j]);
-        // }
         i = y;
         run[1] = i-1; 
         while (i < a.length) {
@@ -42,15 +39,12 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
             i = k;
             nextRun[1]= i-1;
 
-            // for(int j = 0; j<a.length; j++){
-            //     System.out.print(a[j]);
-            // }
-
-            int lvl = computeLevel(run[0], run[1], nextRun[1]);
+            int lvl = computeLevel(run[0], nextRun[0]-1, nextRun[1]+1);
 
             // Continue merging based on level size [run 1 on stack, run, nextRun]
             while (!stack.isEmpty()) {
                 int topRunLvl = stackLvl.peek();
+                assert topRunLvl != lvl;
                 if (topRunLvl < lvl) { // i.e run1 (4) <= run(6)
                     Integer[] topRun = stack.pop(); //run 1
                     stackLvl.pop(); // 4
@@ -164,7 +158,7 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
          * Takes 3 int arguments ia, ib and ic.
          * returns an int level
         */
-        long ml = (ia + ib)/2; // -1 or no?
+        long ml = (ia + ib)/2; 
         long mr = (ib + ic)/2;
 
         long xor = ml ^ mr; // find the differing parts
