@@ -129,7 +129,9 @@ INSTANCES_PARALLEL: List[Tuple[str,str]]= {
 }
 
 INSTANCES_PARALLELTHREADSCALING: List[Tuple[str,str]]= {
-    ("FirstTest ThreadScaling (GIVE NAME HERE FREDERIK)", "SortingVariations/app/build/libs/app.jar"),
+    ("FirstTest ThreadScaling threadScaling100K", "SortingVariations/app/build/libs/app.jar"),
+    ("FirstTest ThreadScaling threadScaling1M", "SortingVariations/app/build/libs/app.jar"),
+    ("FirstTest ThreadScaling threadScaling10M", "SortingVariations/app/build/libs/app.jar")
 }
 # Cutoff values:
 # Cutoff-value 1 is equal to the normal sorting algorithms.
@@ -257,7 +259,8 @@ if __name__ == '__main__':
             writer = csv.DictWriter(f,
                 fieldnames = ['name','n','threshold', 'threads', 'nanoseconds', 'variance', 'amount of runs'])
             writer.writeheader()
-            for line in run_java(jar, algorithm, "ParralesTest").strip().split('\n'):
+            # print(run_java(jar, algorithm, "ParallelTest"))
+            for line in run_java(jar, algorithm, "ParallelTest").strip().split('\n'):
                 name, n, threshold, threads, nanoseconds, variance, runs = line.split()
                 writer.writerow({
                     'name' : name,

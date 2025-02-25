@@ -64,18 +64,36 @@ public class ParallelRunner {
     }
 
 
-
-    public void testThreadScaling() {
-        int[] threadCounts = {1, 2, 4,6, 8, 16};
-        int[] arraySizes = {100000, 1000000, 10000000};
+    public void testThreadScaling100K() {
+        int[] threadCounts = {1, 2, 4, 6, 8, 16};
+        int arraySize = 1000000;
         int threshold = 50000;
 
-        for (int size : arraySizes) {
-            Integer[] inputArray = ParallelRecursiveMergeSort.generateRandomArray(size, 100000);
-            ParallelRecursiveMergeSort.benchmarkSortingWithThreads(inputArray, threshold, threadCounts);
-        }
+
+        Integer[] inputArray = ParallelRecursiveMergeSort.generateRandomArray(arraySize, 1000000);
+        ParallelRecursiveMergeSort.benchmarkSortingWithThreads(inputArray, threshold, threadCounts);
+
+    }
+
+    public void testThreadScaling1M() {
+        int[] threadCounts = {1, 2, 4, 6, 8, 16};
+        int arraySize = 1000000;
+        int threshold = 50000;
 
 
+        Integer[] inputArray = ParallelRecursiveMergeSort.generateRandomArray(arraySize, 1000000);
+        ParallelRecursiveMergeSort.benchmarkSortingWithThreads(inputArray, threshold, threadCounts);
+
+    }
+
+    public void testThreadScaling10M() {
+        int[] threadCounts = {1, 2, 4, 6, 8, 16};
+        int arraySize = 10000000;
+        int threshold = 50000;
+
+
+        Integer[] inputArray = ParallelRecursiveMergeSort.generateRandomArray(arraySize, 1000000);
+        ParallelRecursiveMergeSort.benchmarkSortingWithThreads(inputArray, threshold, threadCounts);
 
     }
 

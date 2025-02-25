@@ -79,12 +79,20 @@ public class Main {
             if(args[2].equals("ParallelCutoff10M")){
                 runner.benchmarkParallelCutoffThresholdsSize10M();
             }
-            else if(args[2].equals("ParallelScalingTest")){
-                runner.testThreadScaling();
-            }
+
         }
         else if (args[1].equals("ThreadScaling")){
-            System.out.println("DinMor " + 10 + " " + 20 + " " + 2 + " " + 5 + " " + 5 + " " + 7);
+            if(args[2].equals("threadScaling100K")){
+                ParallelRunner runner = new ParallelRunner();
+                runner.testThreadScaling100K();
+            } else if(args[2].equals("threadScaling1M")){
+                ParallelRunner runner = new ParallelRunner();
+                runner.testThreadScaling1M();
+            } else if(args[2].equals("threadScaling10M")){
+                ParallelRunner runner = new ParallelRunner();
+                runner.testThreadScaling10M();
+            }
+
         }
 
     }

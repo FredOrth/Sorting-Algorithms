@@ -285,7 +285,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
 
         for (int threadCount : threadCounts) {
             // Benchmark ParallelRecursiveMergeSort
-            Benchmark.Mark8Setup("ParallelRecursiveMergeSort", "n=" + n + ", threshold=" + threshold + ", threads=" + threadCount,
+            Benchmark.Mark8Setup("ParallelRecursiveMergeSort", n + " " + threshold + " " + threadCount,
                     new Benchmarkable() {
                         private Integer[] arrayCopy;
 
@@ -314,7 +314,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
         }
 
         // Benchmark Arrays.parallelSort
-        Benchmark.Mark8Setup("Arrays.parallelSort", "n=" + n + ", threshold=" + threshold,
+        Benchmark.Mark8Setup("Arrays.parallelSort", n + " " + threshold + " " + "threadCount",
                 new Benchmarkable() {
                     private Integer[] arrayCopy;
 
