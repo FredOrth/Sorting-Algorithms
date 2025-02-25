@@ -261,6 +261,55 @@ def plot_presortednessComparisons(df, output_file = None):
     plt.savefig("PresortednessLevelAndBioSortComparisons.png")
 
 
+
+# def plot_parallel_Cut_off(df, output_file = None):
+
+
+def load_parallel_data(filename):
+    df = pd.read_csv(filename)
+    # Convert numeric columns; replace commas with dots for proper float conversion.
+    df['nanoseconds'] = df['nanoseconds'].apply(lambda x: float(str(x).replace(',', '.')))
+    df['variance'] = df['variance'].apply(lambda x: float(str(x).replace(',', '.')))
+
+    # For Arrays.parallelSort, assign a fixed thread count of 1 (or any convenient value)
+    df['threads'] = df.apply(lambda row: 1 if row['name'] == 'Arrays.parallelSort'
+    else pd.to_numeric(row['threads'], errors='coerce'), axis=1)
+    return df
+
+
+def plot_parallel_Scaling(df, output_file="parallel_thread_scaling.png"):
+    plt.figure(figsize=(10, 6))
+    # plt.yscale('log')  # optional: use log scale if the range is large
+
+    # Determine an x-range based on thread counts from non-baseline algorithms
+    max_threads = df[df['name'] != 'Arrays.parallelSort']['threads'].max()
+
+    # Get unique algorithms
+    algorithms = df['name'].unique()
+    for alg in algorithms:
+        sub = df[df['name'] == alg].copy()
+        if alg == 'Arrays.parallelSort':
+            # Get the baseline time (assumes one row)
+            baseline_value = sub['nanoseconds'].iloc[0]
+            # Draw a horizontal dotted line from x=1 to max_threads
+            plt.hlines(baseline_value, xmin=1, xmax=max_threads,
+                       colors='black', linestyles='dotted', label=alg)
+        else:
+            sub = sub.dropna(subset=['threads'])
+            sub = sub.sort_values('threads')
+            plt.plot(sub['threads'], sub['nanoseconds'], marker='o', label=alg)
+
+    plt.xlabel('Number of Threads')
+    plt.ylabel('Execution Time (ns)')
+    plt.title('Parallel Thread Scaling Performance')
+    plt.legend(title='Algorithm')
+    plt.grid(True)
+    plt.savefig(output_file)
+    plt.show()
+
+
+
+
 if __name__ == "__main__":
     # df_merge = load_data('MergeSortBaseCase.csv')
     # plot_merge_sort_base_case(df_merge)
@@ -274,14 +323,18 @@ if __name__ == "__main__":
     # df_lvlbio_presort = load_data('LevelAndBioSort.csv')
     # plot_level_biosort_subplots(df_lvlbio_presort)
     
-    df_lvlbio_presort = load_data('LevelAndBioSort.csv')
-    plot_presortedness(df_lvlbio_presort)
-    
-    df_lvlbio_presort = load_data('LevelAndBioSort.csv')
-    plot_presortednessComparisons(df_lvlbio_presort)
+    # df_lvlbio_presort = load_data('LevelAndBioSort.csv')
+    # plot_presortedness(df_lvlbio_presort)
+    #
+    # df_lvlbio_presort = load_data('LevelAndBioSort.csv')
+    # plot_presortednessComparisons(df_lvlbio_presort)
 
     # df_lvlbio_cutoff= load_data("LevelAndBioSort.csv") #useless now that we have the other one. Convert to c based on presortedness
     # plot_level_biosort_by_cutoff(df_lvlbio_cutoff)
 
     # df_horse_race = load_data('HorseRaceResults.csv')
     # plot_horse_race(df_horse_race)
+
+    filename = 'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling100K.csv'
+    df = load_parallel_data(filename)
+    plot_parallel_Scaling(df)
