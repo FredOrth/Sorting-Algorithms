@@ -3,29 +3,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Random;
 
 import SortingVariations.Util.ObjectClass;
 public class Main {
     
     public static void main(String[] args) throws IOException {
-
-        // Integer[] arr2 = new Integer[]{11,27,10,18,12,5,7,12,23,24,19,29,6,28,4,28,3,16,15,10,14,5,25,8,22,19,6,22,28,30
-        // };
-        Random random = new Random();
-        for(int j = 0; j<10; j++){
-        Integer[] arr2 = new Integer[10000000];
-        System.out.println(j);
-        for(int i = 0; i<arr2.length; i++){
-            arr2[i] = random.nextInt();
-        }
-        LevelSortIndex<Integer> sort = new LevelSortIndex<>(j, true);
-        System.out.println(sort.sort(arr2));}
-        System.out.println("Done");
        
         String sortType = args[0];
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
 
         //Horse race
         if(args[1].equals("HorseRace")){
