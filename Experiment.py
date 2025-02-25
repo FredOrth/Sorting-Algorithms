@@ -234,20 +234,19 @@ if __name__ == '__main__':
     #                     'n' : value[0],
     #                     'time' : value[1],
     #                 })
-         
+    #parallelTesting   
     for algorithm, jar in INSTANCES_PARALLEL:   
         with open(f"Parallel_testing_{algorithm}.csv", "w") as f:
             writer = csv.DictWriter(f,
-                fieldnames = ['cutoff','time','value'])
+                fieldnames = ['cutoff','time','variation'])
             writer.writeheader()
             # print(run_java(jar, algorithm, "ParralesTest"))
             # for line in run_java(jar, algorithm, "ParralesTest"):
             # print(run_java(jar, algorithm, "ParralesTest"))
             for line in run_java(jar, algorithm, "ParralesTest").strip().split('\n'):
-                cutoff, time, value = line.split()
+                cutoff, time, variation = line.split()
                 writer.writerow({
                     'cutoff' : cutoff,
                     'time' : time,
-                    'value' : value,
+                    'variation' : variation,
                 })
-#parallelTesting
