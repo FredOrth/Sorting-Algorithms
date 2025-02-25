@@ -108,15 +108,15 @@ def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
 
 # #Horse race
 INSTANCES_HORSERACE: List[Tuple[str,str]]= {
-    # ("recursiveMergeSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
-    #We unfortunately have to keep a placeohlder to keep our architecture in main
-    # ("recursiveMergeSort HorseRace INTEGERS Arrays.sort", "SortingVariations/app/build/libs/app.jar"),
-    # ("levelSort HorseRace INTEGERS Adaptive 20", "SortingVariations/app/build/libs/app.jar"),
-    # ("binomialSort HorseRace INTEGERS Adaptive 20", "SortingVariations/app/build/libs/app.jar"),
-    # ("levelSort HorseRace INTEGERS NonAdaptive 24", "SortingVariations/app/build/libs/app.jar"),
-    # ("binomialSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
-    # ("iterativeMergeSort HorseRace INTEGERS NonAdaptive 24", "SortingVariations/app/build/libs/app.jar"),
-    # ("insertionMergeSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
+    ("recursiveMergeSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
+    # We unfortunately have to keep a placeohlder to keep our architecture in main
+    ("recursiveMergeSort HorseRace INTEGERS Arrays.sort", "SortingVariations/app/build/libs/app.jar"),
+    ("levelSort HorseRace INTEGERS Adaptive 20", "SortingVariations/app/build/libs/app.jar"),
+    ("binomialSort HorseRace INTEGERS Adaptive 20", "SortingVariations/app/build/libs/app.jar"),
+    ("levelSort HorseRace INTEGERS NonAdaptive 24", "SortingVariations/app/build/libs/app.jar"),
+    ("binomialSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
+    ("iterativeMergeSort HorseRace INTEGERS NonAdaptive 24", "SortingVariations/app/build/libs/app.jar"),
+    ("insertionMergeSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
     ("parallelRecursiveMergeSort HorseRace INTEGERS Parallel 100", "SortingVariations/app/build/libs/app.jar")
 }
 
@@ -135,7 +135,7 @@ INSTANCES_PARALLELTHREADSCALING: List[Tuple[str,str]]= {
 # Cutoff values:
 # Cutoff-value 1 is equal to the normal sorting algorithms.
 # LIST_OF_CUTOFFVALUES: list[int] = {
-#     # 1,
+#     1,
 #     2,
 #     4,
 #     8,
