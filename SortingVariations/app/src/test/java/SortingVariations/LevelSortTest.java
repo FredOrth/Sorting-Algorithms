@@ -278,30 +278,30 @@ public class LevelSortTest {
         assertArrayEquals(new Integer[] {2, 4, 5}, input2);
     }
 
-    // @Test
-    // public void secondTestLevel() {
-    //     LevelSortIndex<Integer> lvlAdaptive = new LevelSortIndex<>(2, true);
-    //     Integer result = lvlAdaptive.sort(testingArray2);
-    //     assertEquals((Integer) 29, result);
+    @Test
+    public void secondTestLevel() {
+        LevelSortIndex<Integer> lvlAdaptive = new LevelSortIndex<>(2, true);
+        Integer result = lvlAdaptive.sort(testingArray2);
+        assertEquals((Integer) 29, result);
 
-    //     setup();
+        setup();
 
-    //     LevelSortIndex<Integer> lvlNonAdaptive = new LevelSortIndex<>(2, false);
-    //     Integer result2 = lvlNonAdaptive.sort(testingArray2);
-    //     assertEquals((Integer) 24, result2);
+        LevelSortIndex<Integer> lvlNonAdaptive = new LevelSortIndex<>(2, false);
+        Integer result2 = lvlNonAdaptive.sort(testingArray2);
+        assertEquals((Integer) 24, result2);
 
-    //     setup();
+        setup();
 
-    //     LevelSortIndex<Integer> lvlAdaptive2 = new LevelSortIndex<>(3, true);
-    //     Integer result3 = lvlAdaptive2.sort(testingArray2);
-    //     assertEquals((Integer) 28, result3);
+        LevelSortIndex<Integer> lvlAdaptive2 = new LevelSortIndex<>(3, true);
+        Integer result3 = lvlAdaptive2.sort(testingArray2);
+        assertEquals((Integer) 28, result3);
 
-    //     setup();
+        setup();
 
-    //     LevelSortIndex<Integer> lvlNonAdaptive2 = new LevelSortIndex<>(3, false);
-    //     Integer result4 = lvlNonAdaptive2.sort(testingArray2);
-    //     assertEquals((Integer) 25, result4);
-    // }
+        LevelSortIndex<Integer> lvlNonAdaptive2 = new LevelSortIndex<>(3, false);
+        Integer result4 = lvlNonAdaptive2.sort(testingArray2);
+        assertEquals((Integer) 25, result4);
+    }
 
     @Test
     public void testSingleElementRuns() { // single element runs
