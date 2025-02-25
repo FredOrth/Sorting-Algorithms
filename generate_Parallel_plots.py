@@ -23,17 +23,16 @@ def generate_plot(csv_files: list, labels: list, title: str, x_label: str, y_lab
             data["Time (ns)"],
             label=label,
             marker="o",
-            linestyle="-",  # Line style for connecting the dots
+            linestyle="-",
         )
 
-        # Add error bars
         plt.errorbar(
             data["Cutoff"],
             data["Time (ns)"],
-            yerr=data["Variation (ns)"],  # Use standardized column
-            fmt="none",  # No markers for error bars
-            capsize=5,  # Size of the error bar caps
-            color=plt.gca().lines[-1].get_color(),  # Match line color
+            yerr=data["Variation (ns)"], 
+            fmt="none", 
+            capsize=5,  
+            color=plt.gca().lines[-1].get_color(), 
         )
 
     plt.xlabel(x_label)
@@ -43,9 +42,9 @@ def generate_plot(csv_files: list, labels: list, title: str, x_label: str, y_lab
     plt.grid(True)
 
     if log_x:
-        plt.xscale("log")  # Apply logarithmic scale to x-axis
+        plt.xscale("log") 
     if log_y:
-        plt.yscale("log")  # Apply logarithmic scale to y-axis
+        plt.yscale("log") 
 
     # Save and show the plot
     plt.savefig(f"{title}.png")
