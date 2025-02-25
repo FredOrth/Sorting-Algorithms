@@ -192,7 +192,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
     public static void runCutoffBenchmark(ForkJoinPool pool, int pSize, int[] thresholds, int n,boolean useParallelMerging,int numberOfThreads) {
 
 
-        System.out.printf("%-15s %-15s %-15s%n", "Cutoff", "Time (ns)", "Variation (ns)"); // Print table headers
+        // System.out.printf("%-15s %-15s %-15s%n", "Cutoff", "Time (ns)", "Variation (ns)"); // Print table headers
 
         final Integer[] intArray = new Integer[pSize];
         for (int i = 0; i < pSize; i++) {

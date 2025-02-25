@@ -122,8 +122,11 @@ INSTANCES_HORSERACE: List[Tuple[str,str]]= {
 
 #Parallel plots
 INSTANCES_PARALLEL: List[Tuple[str,str]]= {
-    ("FirstTest parallelTesting Testing", "SortingVariations/app/build/libs/app.jar"),
-    ("FirstTest parallelTesting Testing2", "SortingVariations/app/build/libs/app.jar")
+    ("FirstTest parallelTesting ParallelCutoff100k", "SortingVariations/app/build/libs/app.jar"),
+    ("FirstTest parallelTesting ParallelCutoff1M", "SortingVariations/app/build/libs/app.jar"),
+    ("FirstTest parallelTesting ParallelCutoff10M", "SortingVariations/app/build/libs/app.jar"),
+    ("FirstTest parallelTesting ParallelScalingTest", "SortingVariations/app/build/libs/app.jar")
+
     
 }
 
@@ -243,7 +246,7 @@ if __name__ == '__main__':
             # print(run_java(jar, algorithm, "ParralesTest"))
             # for line in run_java(jar, algorithm, "ParralesTest"):
             # print(run_java(jar, algorithm, "ParralesTest"))
-            for line in run_java(jar, algorithm, "ParralesTest").strip().split('\n'):
+            for line in run_java(jar, algorithm, "ParallelTest").strip().split('\n'):
                 cutoff, time, variation = line.split()
                 writer.writerow({
                     'cutoff' : cutoff,

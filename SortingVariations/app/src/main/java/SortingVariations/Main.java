@@ -69,10 +69,19 @@ public class Main {
                 sorterMethod(sorter, reader(args[2]));
             }
         else if(args[1].equals("parallelTesting")){
-            if(args[2].equals("Testing")){
-            System.out.println(10 + " " + 20 + " " + 30);}
-            else if(args[2].equals("Testing2")){
-            System.out.println(20 + " " + 20 + " " + 30);}
+            ParallelRunner runner = new ParallelRunner();
+            if(args[2].equals("ParallelCutoff100k")){
+                runner.benchmarkParallelCutoffThresholdsSize100k();
+            }
+            if(args[2].equals("ParallelCutoff1M")){
+                runner.benchmarkParallelCutoffThresholdsSize1M();
+            }
+            if(args[2].equals("ParallelCutoff10M")){
+                runner.benchmarkParallelCutoffThresholdsSize10M();
+            }
+            else if(args[2].equals("ParallelScalingTest")){
+                runner.testThreadScaling();
+            }
         }
 
     }

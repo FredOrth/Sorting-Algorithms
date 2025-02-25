@@ -512,7 +512,6 @@ public class ParallelRecursiveMergeSortTest {
     }
 
 
-
     /*
      * The following tests are to generate a benchmark for task 16 with varying thread availability
      * */
