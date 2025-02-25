@@ -7,67 +7,50 @@ def load_data(filename):
     df = pd.read_csv("CutoffValues.csv")
     return pd.read_csv(filename)
 
-def plot_merge_sort_base_case(df, output_file=None):
-    plt.figure(figsize=(10, 6))
-    # Get unique algorithms
+def plotMergeSortBaseCase(df, output_file=None):
+    fig, axes = plt.subplots(2, 1, figsize=(10, 12))
+
+    # Plot median time vs n
+    ax1 = axes[0]
     algorithms = df['algorithm'].unique()
     for algorithm in algorithms:
         median_times = df[df['algorithm'] == algorithm].groupby('n')['time'].median()
-        # Plot empirical median times for the current algorithm
-        plt.plot(median_times.index, median_times.values, label=f'{algorithm} (Empirical)', marker='o')
-    # Calculate the theoretical n*log(n) values for the given n-values (same for all algorithms)
+        ax1.plot(median_times.index, median_times.values, label=f'{algorithm} (Empirical)', marker='o')
+
     n_values = np.array(df['n'].unique(), dtype=float)
     theoretical = n_values * np.log(n_values)
-
-    # Scale the theoretical curve to match the empirical data.
-    # Here we scale it so the first value of the theoretical curve equals the first empirical median time.
     scaling_factor = df.groupby('n')['time'].median().values[0] / theoretical[0]
     theoretical_scaled = theoretical * scaling_factor
-    # Plot the single theoretical runtime curve
-    plt.plot(n_values, theoretical_scaled, label='n log n (theoretical, scaled)', linestyle='--', color='red')
+    ax1.plot(n_values, theoretical_scaled, label='n log n (theoretical, scaled)', linestyle='--', color='red')
+    ax1.set_xlabel('n')
+    ax1.set_ylabel('Median Time (s)')
+    ax1.set_title("Empirical Median Time vs n for MergeSort Base Case (By Algorithm)")
+    ax1.legend()
+    ax1.grid(True)
 
-    plt.xlabel('n')
-    plt.ylabel('Median Time (s)')
-    title = "Empirical Median Time vs n for MergeSort Base Case (By Algorithm)"
-    plt.title(title)
-    plt.legend()
-    plt.grid(True)
-    plt.savefig(f"{title}.png")
-
-
-def plot_time_vs_comparisons_by_type(df, output_file=None):
-    """
-    Plot median time vs. median comparisons for each algorithm type.
-    Each algorithm (e.g., INTEGERS, STRINGS, OBJECT, PREFIX) is plotted with a distinct marker/color.
-    """
-    plt.figure(figsize=(10, 6))
-    # Define marker and color options for variety
+    # Plot time and comparisons
+    ax2 = axes[1]
     markers = ['o', 's', '^', 'D', 'v', 'P', '*']
     colors = ['blue', 'red', 'green', 'purple', 'orange', 'cyan', 'magenta']
-    unique_algorithms = df['algorithm'].unique()
-    for idx, algorithm in enumerate(unique_algorithms):
+
+    for idx, algorithm in enumerate(algorithms):
         df_algo = df[df['algorithm'] == algorithm]
         median_df = df_algo.groupby('n').agg({'time': 'median', 'comparisons': 'median'}).reset_index()
-        #x-axis is median comparisons, y-axis is median time
-        plt.scatter(median_df['comparisons'], median_df['time'],
-                    label=algorithm,
-                    marker=markers[idx % len(markers)],
-                    color=colors[idx % len(colors)])
-        # add a linear fit line for this algorithm type
+        ax2.scatter(median_df['comparisons'], median_df['time'],
+                    label=algorithm, marker=markers[idx % len(markers)], color=colors[idx % len(colors)])
         coeffs = np.polyfit(median_df['comparisons'], median_df['time'], 1)
         poly_eqn = np.poly1d(coeffs)
         x_vals = np.linspace(median_df['comparisons'].min(), median_df['comparisons'].max(), 100)
-        plt.plot(x_vals, poly_eqn(x_vals),
-                linestyle='--', color=colors[idx % len(colors)],
-                alpha=0.7)
-    plt.xlabel("Median Comparisons")
-    plt.ylabel("Median Time (s)")
-    title2 = "Empirical Running Time vs. Number of Comparisons by Algorithm Type"
-    plt.title(title2)
-    plt.legend(title="Algorithm")
-    plt.grid(True)
-    #plt.savefig("Comparisons vs time MergeSort", dpi=300, bbox_inches="tight")
-    plt.savefig(f"{title2}.png")
+        ax2.plot(x_vals, poly_eqn(x_vals), linestyle='--', color=colors[idx % len(colors)], alpha=0.7)
+
+    ax2.set_xlabel("Median Comparisons")
+    ax2.set_ylabel("Median Time (s)")
+    ax2.set_title("Empirical Running Time vs. Number of Comparisons by Algorithm Type")
+    ax2.legend(title="Algorithm")
+    ax2.grid(True)
+
+    plt.tight_layout()
+    plt.savefig(f"MergeSortBaseCasePic.png")
 
 
 # Generate plots for cutoff values for insertion and recursive mergesort
@@ -311,11 +294,9 @@ def plot_parallel_Scaling(df, output_file="parallel_thread_scaling.png"):
 
 
 if __name__ == "__main__":
-    # df_merge = load_data('MergeSortBaseCase.csv')
-    # plot_merge_sort_base_case(df_merge)
-
-    # df_comp = pd.read_csv("mergeSortBaseCase.csv")
-    # plot_time_vs_comparisons_by_type(df_comp)
+    
+    df_comp = pd.read_csv("mergeSortBaseCase.csv")
+    plotMergeSortBaseCase(df_comp)
 
     # df_cutoff = load_data('CutoffValues.csv')
     # plot_cutoff_values(df_cutoff)
@@ -335,6 +316,6 @@ if __name__ == "__main__":
     # df_horse_race = load_data('HorseRaceResults.csv')
     # plot_horse_race(df_horse_race)
 
-    filename = 'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling100K.csv'
-    df = load_parallel_data(filename)
-    plot_parallel_Scaling(df)
+    # filename = 'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling100K.csv'
+    # df = load_parallel_data(filename)
+    # plot_parallel_Scaling(df)
