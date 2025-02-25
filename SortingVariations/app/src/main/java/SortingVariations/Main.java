@@ -37,7 +37,7 @@ public class Main {
                 Sorter<Integer> sorter = SorterFactory.getSorter(sortType, cutoff,true,false,0);
                 sorterMethod(sorter, reader(args[2]));
             }else{
-                if(args[4].equals("Parallel")){
+                if(args[3].equals("Parallel")){
                 int cutoff = Integer.parseInt(args[4]);
                 System.out.println("Hello");
                 Sorter<Integer> sorter = SorterFactory.getSorter(sortType, cutoff,false,true,0);
