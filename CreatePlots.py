@@ -225,6 +225,40 @@ def plot_presortedness(df, output_file = None):
     plt.tight_layout()
     plt.savefig("PresortednessLevelAndBioSort.png")
 
+def plot_presortednessComparisons(df, output_file = None):
+
+
+    df["cutoff"] = df["cutoff"]
+    df["time"] = df["time"]
+
+    median_times = df.groupby(["algorithm", "degree of presortedness", "cutoff"])["comparisons"].median().reset_index()
+
+    group_1 = ["binomialSort Presort INTEGERS Adaptive", "binomialSort Presort INTEGERS NonAdaptive"]
+    group_2 = ["levelSort Presort INTEGERS NonAdaptive", "levelSort Presort INTEGERS Adaptive"]
+
+    fig, axes = plt.subplots(1, 2, figsize=(16, 8), sharey=True)
+
+    # Plot for group 1
+    ax = axes[0]
+    for (algorithm, presortedness), group in median_times[median_times["algorithm"].isin(group_1)].groupby(["algorithm", "degree of presortedness"]):
+        ax.plot(group["cutoff"], group["comparisons"], marker='o', linestyle='-', label=f"{algorithm}, {presortedness}")
+    ax.set_xlabel("Cutoff")
+    ax.set_ylabel("Median Time")
+    ax.set_title("BinomialSort Algorithms")
+    ax.legend()
+    ax.grid(True)
+
+    # Plot for group 2
+    ax = axes[1]
+    for (algorithm, presortedness), group in median_times[median_times["algorithm"].isin(group_2)].groupby(["algorithm", "degree of presortedness"]):
+        ax.plot(group["cutoff"], group["comparisons"], marker='o', linestyle='-', label=f"{algorithm}, {presortedness}")
+    ax.set_xlabel("Cutoff")
+    ax.set_title("LevelSort Algorithms comparisons")
+    ax.legend()
+    ax.grid(True)
+
+    plt.tight_layout()
+    plt.savefig("PresortednessLevelAndBioSortComparisons.png")
 
 
 if __name__ == "__main__":
@@ -242,6 +276,9 @@ if __name__ == "__main__":
     
     df_lvlbio_presort = load_data('LevelAndBioSort.csv')
     plot_presortedness(df_lvlbio_presort)
+    
+    df_lvlbio_presort = load_data('LevelAndBioSort.csv')
+    plot_presortednessComparisons(df_lvlbio_presort)
 
     # df_lvlbio_cutoff= load_data("LevelAndBioSort.csv") #useless now that we have the other one. Convert to c based on presortedness
     # plot_level_biosort_by_cutoff(df_lvlbio_cutoff)

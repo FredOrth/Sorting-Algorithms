@@ -117,7 +117,7 @@ INSTANCES_HORSERACE: List[Tuple[str,str]]= {
     ("binomialSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
     ("iterativeMergeSort HorseRace INTEGERS NonAdaptive 24", "SortingVariations/app/build/libs/app.jar"),
     ("insertionMergeSort HorseRace INTEGERS NonAdaptive 20", "SortingVariations/app/build/libs/app.jar"),
-    ("parallelRecursiveMergeSort HorseRace INTEGERS Parallel 20", "SortingVariations/app/build/libs/app.jar")
+    ("parallelRecursiveMergeSort HorseRace INTEGERS Parallel 100", "SortingVariations/app/build/libs/app.jar")
 }
 
 # Cutoff values:
