@@ -246,20 +246,15 @@ def plot_presortednessComparisons(df, output_file = None):
 
 # Parallel Cutoff plots
 def load_cutoff_data(filename):
-    """
-    Load a CSV file with columns 'cutoff', 'time', and 'variation'.
-    Convert the 'time' and 'variation' columns from strings that use commas as decimal separators into floats.
-    """
+
     df = pd.read_csv(filename)
     # Replace commas with dots and convert to float
     df['time'] = df['time'].apply(lambda x: float(str(x).replace(',', '.')))
     df['variation'] = df['variation'].apply(lambda x: float(str(x).replace(',', '.')))
     return df
 
-def plot_all_cutoff_data(file_list, labels, output_file='all_cutoff_plots.png'):
-    """
-    Plot each CSV file's cutoff vs. time data in its own subplot arranged side by side.
-    """
+def plot_all_cutoff_data(file_list, labels, output_file='parallel_cutoff_plots.png'):
+
     n_plots = len(file_list)
     # Reduce height for less squashed appearance (e.g., height set to 3 instead of 6)
     fig, axes = plt.subplots(1, n_plots, figsize=(6 * n_plots + 6, 3), constrained_layout=True)
@@ -305,12 +300,7 @@ def load_parallel_data(filename):
     return df
 
 def plot_all_parallel_scaling(file_list, labels, output_file="parallel_thread_scaling_all.png"):
-    """
-    For each CSV file in file_list (with corresponding label from labels), load the data and plot:
-      - For non-baseline algorithms, plot execution time vs. thread count.
-      - For Arrays.parallelSort, draw a horizontal dotted line (baseline).
-    Plots are arranged side by side.
-    """
+
     n_plots = len(file_list)
     # Increase width; adjust height to make plots less tall.
     fig, axes = plt.subplots(1, n_plots, figsize=(6 * n_plots + 2, 3), constrained_layout=True)
