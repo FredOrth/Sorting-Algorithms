@@ -84,9 +84,9 @@ with open('RandomInputIntegers.csv', 'w', newline='') as f:
     writer.writerow(["n", "values"])
 
     # I_MAX M times per value and create a random input of ints
-    for i in range(I_MAX2):
-        for _ in range(M2):
-            writer.writerow([NS2[i], " ".join(str(rng.integers(1, 2**28)) for _ in range(NS2[i]))])
+    for i in range(I_MAX):
+        for _ in range(M):
+            writer.writerow([NS[i], " ".join(str(rng.integers(1, 2**28)) for _ in range(NS[i]))])
     print("Done generating Random Input Integers")
 
 
