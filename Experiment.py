@@ -87,7 +87,7 @@ def generatePresortedPlots() -> Dict[int, Dict[int, List[List[int]]]]:
 
 # Tests for mergesort base case with the types: Integers, Strings, Objects and prefix Strings
 INSTANCES_MERGESORT_BASECASE: List[Tuple[str,str]]= {
-# ("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
+("recursiveMergeSort BaseCase INTEGERS", "SortingVariations/app/build/libs/app.jar"),
 ("recursiveMergeSort BaseCase STRINGS", "SortingVariations/app/build/libs/app.jar"),
 ("recursiveMergeSort BaseCase PREFIX", "SortingVariations/app/build/libs/app.jar"),
 ("recursiveMergeSort BaseCase OBJECT", "SortingVariations/app/build/libs/app.jar"),
@@ -244,7 +244,7 @@ if __name__ == '__main__':
                         'time' : value[1],
                     })
 
-    # #parallelTesting   
+    #parallelTesting   
     for algorithm, jar in INSTANCES_PARALLEL:
         with open(f"Parallel_testing_{algorithm}.csv", "w") as f:
             writer = csv.DictWriter(f,
@@ -257,7 +257,7 @@ if __name__ == '__main__':
                     'time' : time,
                     'variation' : variation,
                 })
-                
+    #Parallel thread testing
     for algorithm, jar in INSTANCES_PARALLELTHREADSCALING:
         with open(f"Parallel_Thread_Scaling_{algorithm}.csv", "w") as f:
             writer = csv.DictWriter(f,
