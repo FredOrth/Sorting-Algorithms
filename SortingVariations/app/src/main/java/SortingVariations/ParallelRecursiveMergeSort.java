@@ -25,18 +25,18 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
     @Override
     public Integer sort(T[] a) {
         ForkJoinPool pool = (numberOfThreads > 0)
-                ? new ForkJoinPool(numberOfThreads) // Custom number of threads
-                : new ForkJoinPool(); // Use default parallelism (available cores)
+                ? new ForkJoinPool(numberOfThreads)
+                : new ForkJoinPool();
         AtomicInteger comparisonCounter = new AtomicInteger(0);
         // invoke sort task
         T[] sorted = pool.invoke(new MergeSortTask<>(a, 0, a.length - 1, threshold,comparisonCounter,useParallelMerging,numberOfThreads));
         pool.shutdown();
-        // copy it back to the original array.
+
         System.arraycopy(sorted, 0, a, 0, a.length);
 
-        // Here we need to get the number of comparisons out to python somehow. Integer return instead of void?
+
         return comparisonCounter.get();
-        // or just print?
+
 
     }
 
@@ -61,8 +61,8 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
         @Override
         protected T[] compute() {
             if (high - low + 1 <= threshold) {
-                // Sequential sort for small subarrays
-                // we can play which sequential algorithm we use here
+
+                // we can modify which sequential algorithm we use here
                 T[] sorted = java.util.Arrays.copyOfRange(array, low, high + 1);
 
                 RecursiveMergeSort<T> sequentialSorter = new RecursiveMergeSort<>();
@@ -72,19 +72,18 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
                 return sorted;
             }
 
-            // Split
+            // Splitting
             int mid = low + (high - low) / 2;
 
-            // make subtasks
             MergeSortTask<T> leftTask = new MergeSortTask<>(array, low, mid, threshold,comparisonCounter,useParallelMerging,numberOfThreads);
             MergeSortTask<T> rightTask = new MergeSortTask<>(array, mid + 1, high, threshold,comparisonCounter,useParallelMerging,numberOfThreads);
 
-            // fork and compute subtasks
-            leftTask.fork();
-            T[] rightResult = rightTask.compute(); // Compute the right half directly
-            T[] leftResult = leftTask.join();      // Wait for the left half to finish
 
-            // merge
+            leftTask.fork();
+            T[] rightResult = rightTask.compute();
+            T[] leftResult = leftTask.join();
+
+
             if (useParallelMerging) {
                 return parallelMerge(leftResult, rightResult);
             } else {
@@ -92,7 +91,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
             }
         }
 
-        // MErge method, without lo mid and high, could maybe use the same one as the recursive MergeSort but this was easier
+        // Sequential Merge method
         private T[] sequentialMerge(T[] left, T[] right) {
 
             T[] merged = java.util.Arrays.copyOf(left, left.length + right.length);
@@ -120,17 +119,12 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
 
             int availableThreads = (numberOfThreads > 0) ? numberOfThreads : Runtime.getRuntime().availableProcessors();
 
-            // A simple heuristic could be something like:
-            // p grows slowly with size, but not beyond availableThreads.
-            // for example, p = min(availableThreads, 1 + (int)Math.log10(size)). we go wit hthat
+            int p = Math.min(availableThreads, 1 + (int)Math.log10(size));
 
-                        int p = Math.min(availableThreads, 1 + (int)Math.log10(size));
-            // Ensure at least 1 partition and never exceed the number of threads
             p = Math.max(1, p);
-            // I believe this is a good way to find p, the getParallelism shoudl return the number of threads available
-            int chunkSize = (merged.length + p - 1) / p; // i think we ahve to be rounding up when dividing the tasks (i think, check this)
 
-            // ForkJoinPool pool = new ForkJoinPool();
+            int chunkSize = (merged.length + p - 1) / p;
+
             List<RecursiveAction> tasks = new ArrayList<>();
 
 
@@ -184,15 +178,12 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
 
 
 
-
-
-
-    // Benchmarking below:
+    // Benchmarking methods below:
 
     public static void runCutoffBenchmark(ForkJoinPool pool, int pSize, int[] thresholds, int n,boolean useParallelMerging,int numberOfThreads) {
 
 
-        // System.out.printf("%-15s %-15s %-15s%n", "Cutoff", "Time (ns)", "Variation (ns)"); // Print table headers
+
 
         final Integer[] intArray = new Integer[pSize];
         for (int i = 0; i < pSize; i++) {
@@ -239,24 +230,24 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
 
                     @Override
                     public void setup() {
-                        // Reset the array before each iteration
+                        // Resetting the array before each iteration
                         arrayCopy = inputArray.clone();
                     }
 
                     @Override
                     public double applyAsDouble(int i) {
                         ForkJoinPool pool = (numberOfThreads > 0)
-                                ? new ForkJoinPool(numberOfThreads) // Custom number of threads
-                                : new ForkJoinPool(); // Use default parallelism (available cores)
+                                ? new ForkJoinPool(numberOfThreads)
+                                : new ForkJoinPool();
                         try {
                             ParallelRecursiveMergeSort<Integer> parallelSort =
                                     new ParallelRecursiveMergeSort<>(threshold, false, numberOfThreads);
                             pool.invoke(new ParallelRecursiveMergeSort.MergeSortTask<>(
                                     arrayCopy, 0, arrayCopy.length - 1, threshold, new AtomicInteger(0), false,numberOfThreads));
                         } finally {
-                            pool.shutdown(); // Cleanup ForkJoinPool threads
+                            pool.shutdown();
                         }
-                        return 0.0; // Dummy return value
+                        return 0.0;
                     }
                 });
 
@@ -298,17 +289,17 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
                         @Override
                         public double applyAsDouble(int i) {
                             ForkJoinPool pool = (threadCount > 0)
-                                    ? new ForkJoinPool(threadCount) // Custom number of threads
-                                    : new ForkJoinPool(); // Use default parallelism (available cores)
+                                    ? new ForkJoinPool(threadCount)
+                                    : new ForkJoinPool();
                             try {
                                 ParallelRecursiveMergeSort<Integer> parallelSort =
                                         new ParallelRecursiveMergeSort<>(threshold, true, threadCount);
                                 pool.invoke(new ParallelRecursiveMergeSort.MergeSortTask<>(
                                         arrayCopy, 0, arrayCopy.length - 1, threshold, new AtomicInteger(0), true,threadCount));
                             } finally {
-                                pool.shutdown(); // Cleanup ForkJoinPool threads
+                                pool.shutdown();
                             }
-                            return 0.0; // Dummy return value
+                            return 0.0;
                         }
                     });
         }
@@ -327,7 +318,7 @@ public class ParallelRecursiveMergeSort<T extends Comparable<T>> implements Sort
                     @Override
                     public double applyAsDouble(int i) {
                         Arrays.parallelSort(arrayCopy);
-                        return 0.0; // Dummy return value
+                        return 0.0;
                     }
                 });
     }
