@@ -3,14 +3,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def load_data(filename):
-    # Load the data from CSV file
     df = pd.read_csv("CutoffValues.csv")
     return pd.read_csv(filename)
 
 def plotMergeSortBaseCase(df, output_file=None):
     fig, axes = plt.subplots(2, 1, figsize=(10, 12))
 
-    # Plot median time vs n
     ax1 = axes[0]
     algorithms = df['algorithm'].unique()
     for algorithm in algorithms:
@@ -24,11 +22,10 @@ def plotMergeSortBaseCase(df, output_file=None):
     ax1.plot(n_values, theoretical_scaled, label='n log n (theoretical, scaled)', linestyle='--', color='red')
     ax1.set_xlabel('n')
     ax1.set_ylabel('Median Time (s)')
-    ax1.set_title("Empirical Median Time vs n for MergeSort Base Case (By Algorithm)")
+    ax1.set_title("Empirical Median Time vs n for MergeSort Base Case (By DataType)")
     ax1.legend()
     ax1.grid(True)
 
-    # Plot time and comparisons
     ax2 = axes[1]
     markers = ['o', 's', '^', 'D', 'v', 'P', '*']
     colors = ['blue', 'red', 'green', 'purple', 'orange', 'cyan', 'magenta']
@@ -45,7 +42,7 @@ def plotMergeSortBaseCase(df, output_file=None):
 
     ax2.set_xlabel("Median Comparisons")
     ax2.set_ylabel("Median Time (s)")
-    ax2.set_title("Empirical Running Time vs. Number of Comparisons by Algorithm Type")
+    ax2.set_title("Empirical Running Time vs. Number of Comparisons (By DataType)")
     ax2.legend(title="Algorithm")
     ax2.grid(True)
 
@@ -148,8 +145,6 @@ def plot_level_biosort_by_cutoff(df, output_file=None):
 
 # Horse race plot
 def plot_horse_race(df, output_file=None):
-    #df = pd.read_csv("HorseRaceResults.csv")
-
     median_times = df.groupby(["n", "algorithm"])["time"].median().reset_index()
     algorithms = median_times["algorithm"].unique()
 
@@ -234,7 +229,6 @@ def plot_presortednessComparisons(df, output_file = None):
 
 # Parallel Cutoff plots
 def load_parallel_data(filename):
-
     df = pd.read_csv(filename)
     # Replace commas with dots and convert to float
     df['time'] = df['time'].apply(lambda x: float(str(x).replace(',', '.')))
@@ -242,12 +236,9 @@ def load_parallel_data(filename):
     return df
 
 def plot_all_cutoff_parallel(file_list, labels, output_file='parallel_cutoff_plots.png'):
-
     n_plots = len(file_list)
-    # Reduce height for less squashed appearance (e.g., height set to 3 instead of 6)
     fig, axes = plt.subplots(1, n_plots, figsize=(6 * n_plots + 6, 3), constrained_layout=True)
 
-    # Ensure axes is a list even if there's only one subplot
     if n_plots == 1:
         axes = [axes]
 
@@ -255,11 +246,10 @@ def plot_all_cutoff_parallel(file_list, labels, output_file='parallel_cutoff_plo
         df = load_parallel_data(filename)
         df.sort_values('cutoff', inplace=True)
 
-        # Plot cutoff vs. time with error bars (variation)
         ax.errorbar(df['cutoff'], df['time'], yerr=df['variation'],
                     fmt='-o', capsize=5, label=f'Array size: {label}')
 
-        # Identify and mark the best cutoff (minimum time)
+        # find and mark the best cutoff (minimum time)
         best_idx = df['time'].idxmin()
         best_cutoff = df.loc[best_idx, 'cutoff']
         best_time = df.loc[best_idx, 'time']
@@ -282,13 +272,12 @@ def load_parallel_data(filename):
     # 'nanoseconds' and 'variance' from comma decimals to floats.
     df['nanoseconds'] = df['nanoseconds'].apply(lambda x: float(str(x).replace(',', '.')))
     df['variance'] = df['variance'].apply(lambda x: float(str(x).replace(',', '.')))
-    # assign thread count as 1 otherwise, convert normally.
+    # assigning thread count as 1, else convert normally.
     df['threads'] = df.apply(lambda row: 1 if row['name'] == 'Arrays.parallelSort'
     else pd.to_numeric(row['threads'], errors='coerce'), axis=1)
     return df
 
 def plot_all_parallel_scaling(file_list, labels, output_file="parallel_thread_scaling_all.png"):
-
     n_plots = len(file_list)
     fig, axes = plt.subplots(1, n_plots, figsize=(6 * n_plots + 2, 3), constrained_layout=True)
 
@@ -310,7 +299,6 @@ def plot_all_parallel_scaling(file_list, labels, output_file="parallel_thread_sc
                 sub = sub.dropna(subset=['threads'])
                 sub = sub.sort_values('threads')
                 ax.plot(sub['threads'], sub['nanoseconds'], marker='o', label=alg)
-
         ax.set_xlabel('Number of Threads')
         ax.set_ylabel('Execution Time (ns)')
         ax.set_title(f'Array Size: {label}')
