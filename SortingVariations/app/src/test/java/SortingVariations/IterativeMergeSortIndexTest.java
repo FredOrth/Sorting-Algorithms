@@ -78,7 +78,6 @@ public class IterativeMergeSortIndexTest {
         IterativeMergeSortIndex<Integer> bioAdaptive = new IterativeMergeSortIndex<>(2);
 
         bioAdaptive.sort(testingArray1);
-        System.out.println(Arrays.toString(testingArray1));
         
         assertArrayEquals(sortedArray, testingArray1);
     }

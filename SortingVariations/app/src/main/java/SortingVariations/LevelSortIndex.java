@@ -23,7 +23,7 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
         counter = 0;
 
         Stack<Integer[]> stack = new Stack<>();
-        Stack<Integer> stackLvl = new Stack<>(); // This is where I think implementing a run class, that can have an attribute level.
+        Stack<Integer> stackLvl = new Stack<>(); 
         int i = 0;
 
         Integer[] run = new Integer[2];
@@ -50,15 +50,14 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
                     stackLvl.pop(); // 4
                     merge(a, aux, topRun[0], topRun[1], run[1]); //run 1 and run
                     run[0] = topRun[0]; // start of run = run1
-                    //topLvl = lvl // toplvl is now lvl otherwise recompute lvl of run1 + run to nextRun
-                    // just add lvl to lvlstack and throw toplvl out?
+                    
                 } else {
                     break;
                 }
             }
-            //assert stack.isEmpty() || stack.peek()[1] - stack.peek()[0] + 1 >= (run[1] - run[0] + 1) * 2;
+            
             stack.add(run);
-            //smarter way than this?
+            
             stackLvl.add(lvl);
             run = nextRun;
         }
@@ -125,26 +124,21 @@ public class LevelSortIndex<T extends Comparable<T>> implements Sorter<T> {
             if (adaptive) {
                 int sequence = findSequence(i, a);
                 if (sequence >= cutoff) {
-                    // run[1] = i + sequence - 1;
                     i += sequence - 1;
                 } else {
                     if (i + cutoff >= a.length) {
-                        // run[1] = a.length - 1;
                         insertionSort(a, i, a.length-1);
                         i = a.length-1;
                     } else {
-                        // run[1] = i + cutoff - 1;
                         insertionSort(a, i, i + cutoff - 1);
                         i += cutoff - 1;
                     }
                 }
             } else {
                 if (i + cutoff >= a.length) {
-                    // run[1] = a.length - 1;
                     insertionSort(a, i, a.length-1);
                     i = a.length-1;
                 } else {
-                    // run[1] = i + cutoff - 1;
                     insertionSort(a, i, i + cutoff - 1);
                     i += cutoff - 1;
                 }

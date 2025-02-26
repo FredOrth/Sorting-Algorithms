@@ -12,8 +12,9 @@ public class Main {
         String sortType = args[0];
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        //Horse race
+        //Horse race experiment
         if(args[1].equals("HorseRace")){
+            //Arrays.sort
             if(args[3].equals("Arrays.sort")){
                 String input;
                 while((input = reader.readLine()) != null){
@@ -28,14 +29,19 @@ public class Main {
                         System.out.println(arr.length + " " + (end-start)/1_000_000_000.0);
 
                 }
+                //Non-adaptive algorithms
             }else if(args[3].equals("NonAdaptive")){
                 int cutoff = Integer.parseInt(args[4]);
                 Sorter<Integer> sorter = SorterFactory.getSorter(sortType,cutoff,false,false,0);
                 sorterMethod(sorter, reader(args[2]));
+
+                //Adaptive algorithms
             }else if (args[3].equals("Adaptive")) {
                 int cutoff = Integer.parseInt(args[4]);
                 Sorter<Integer> sorter = SorterFactory.getSorter(sortType, cutoff,true,false,0);
                 sorterMethod(sorter, reader(args[2]));
+
+            //Parallel implementation
             }else{
                 if(args[3].equals("Parallel")){
                 int cutoff = Integer.parseInt(args[4]);
