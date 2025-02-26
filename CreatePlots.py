@@ -228,7 +228,7 @@ def plot_presortednessComparisons(df, output_file = None):
 
 
 # Parallel Cutoff plots
-def load_parallel_data(filename):
+def load_parallel_data_cutoff(filename):
     df = pd.read_csv(filename)
     # Replace commas with dots and convert to float
     df['time'] = df['time'].apply(lambda x: float(str(x).replace(',', '.')))
@@ -243,7 +243,7 @@ def plot_all_cutoff_parallel(file_list, labels, output_file='parallel_cutoff_plo
         axes = [axes]
 
     for ax, filename, label in zip(axes, file_list, labels):
-        df = load_parallel_data(filename)
+        df = load_parallel_data_cutoff(filename)
         df.sort_values('cutoff', inplace=True)
 
         ax.errorbar(df['cutoff'], df['time'], yerr=df['variation'],
