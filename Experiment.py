@@ -5,10 +5,6 @@ import csv
 import os
 import subprocess
 
-#In order to run this experiment one would run GenerateRandomInput.py first for all the relevant csv files.
-#This file can now be run
-#At last the createPlots.py can be run creating plots for the different experiments
-#With this project all relevant files are submitted, but feel free to run experiments again if you like
 
 def run_java(jar: str, arg: str, input: str)->str:
     args = arg.split()
