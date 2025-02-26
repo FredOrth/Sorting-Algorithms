@@ -258,7 +258,6 @@ if __name__ == '__main__':
             writer = csv.DictWriter(f,
                 fieldnames = ['name','n','threshold', 'threads', 'nanoseconds', 'variance', 'amount of runs'])
             writer.writeheader()
-            # print(run_java(jar, algorithm, "ParallelTest"))
             for line in run_java(jar, algorithm, "ParallelTest").strip().split('\n'):
                 name, n, threshold, threads, nanoseconds, variance, runs = line.split()
                 writer.writerow({
