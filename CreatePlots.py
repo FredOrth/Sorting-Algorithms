@@ -333,14 +333,14 @@ if __name__ == "__main__":
     )
     plot_horse_race(df_horse_race)
 
-    # file_list = [
-    #     'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling100K.csv',
-    #     'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling1M.csv',
-    #     'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling10M.csv'
-    # ]
-    # labels = ['100k', '1M', '10M']
-    # plot_all_parallel_scaling(file_list, labels)
+    file_list = [
+        'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling100K.csv',
+        'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling1M.csv',
+        'Parallel_Thread_Scaling_FirstTest ThreadScaling threadScaling10M.csv'
+    ]
+    labels = ['100k', '1M', '10M']
+    plot_all_parallel_scaling(file_list, labels)
 
-    # file_list = ['Parallel_testing_FirstTest parallelTesting ParallelCutoff100k.csv', 'Parallel_testing_FirstTest parallelTesting ParallelCutoff1M.csv', 'Parallel_testing_FirstTest parallelTesting ParallelCutoff10M.csv']
-    # labels = ['100k', '1M', '10M']
-    # plot_all_cutoff_parallel(file_list, labels)
+    file_list = ['Parallel_testing_FirstTest parallelTesting ParallelCutoff100k.csv', 'Parallel_testing_FirstTest parallelTesting ParallelCutoff1M.csv', 'Parallel_testing_FirstTest parallelTesting ParallelCutoff10M.csv']
+    labels = ['100k', '1M', '10M']
+    plot_all_cutoff_parallel(file_list, labels)
