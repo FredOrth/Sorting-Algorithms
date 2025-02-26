@@ -328,6 +328,9 @@ if __name__ == "__main__":
     plot_level_biosort_by_cutoff(df_lvlbio_cutoff)
 
     df_horse_race = load_data('HorseRaceResults.csv')
+    df_horse_race = df_horse_race.replace(
+        {"recursiveMergeSort HorseRace INTEGERS Arrays.sort": "Arrays.sort"}
+    )
     plot_horse_race(df_horse_race)
 
     # file_list = [
