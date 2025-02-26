@@ -53,15 +53,13 @@ def plotMergeSortBaseCase(df, output_file=None):
     plt.savefig(f"MergeSortBaseCasePic.png")
 
 
-# Generate plots for cutoff values for insertion and recursive mergesort
+# Generate plots for cutoff values
 def plot_cutoff_values(df, output_file=None):
     """Plot median time vs cutoff for various algorithms."""
+    df["time"] = pd.to_numeric(df["time"], errors="coerce")
     plt.figure(figsize=(10, 6))
-    # Loop through each algorithm and plot its median time for each cutoff
     for algorithm in df['algorithm'].unique():
-        # Group the data by 'cutoff' and calculate the median 'time' for each cutoff
         subset = df[df['algorithm'] == algorithm].groupby('cutoff')['time'].median()
-        # Plot the median values for the algorithm
         plt.plot(subset.index, subset.values, label=f'Algorithm {algorithm}', marker='o')
     plt.xlabel('Cutoff')
     plt.ylabel('Median Time')
@@ -78,10 +76,9 @@ def plot_level_biosort_subplots(df, output_file=None):
     1. Degree of presortedness vs. average comparisons
     2. Degree of presortedness vs. median time
     """
-    # Sort data
     df = df.sort_values(by=["degree of presortedness"])
 
-    # Group by label and degree of presortedness
+    #making grps of label and degree of presortedness
     avg_comparisons_df = (
         df.groupby(["algorithm", "degree of presortedness"])["comparisons"]
         .mean()
@@ -92,7 +89,7 @@ def plot_level_biosort_subplots(df, output_file=None):
         .median()
         .reset_index()
     )
-    # Create subplots (stacked vertically)
+    
     fig, axes = plt.subplots(2, 1, figsize=(10, 12)) ## (2, 1) vertical (1, 2) for side by side
 
     for algorithm, group in avg_comparisons_df.groupby("algorithm"):
@@ -153,18 +150,13 @@ def plot_level_biosort_by_cutoff(df, output_file=None):
 def plot_horse_race(df, output_file=None):
     #df = pd.read_csv("HorseRaceResults.csv")
 
-    # Compute the median time for each algorithm at each n
     median_times = df.groupby(["n", "algorithm"])["time"].median().reset_index()
-
-    # Get the list of unique algorithms
     algorithms = median_times["algorithm"].unique()
 
     plt.figure(figsize=(12, 8))
     for algo in algorithms:
         subset = median_times[median_times["algorithm"] == algo]
         plt.plot(subset["n"], subset["time"], marker="o", label=algo)
-
-    # Labels and title
     plt.xlabel("n")
     plt.ylabel("Median Time")
     title = "Algorithm Performance Comparison"
@@ -173,12 +165,11 @@ def plot_horse_race(df, output_file=None):
     plt.grid(True)
     plt.savefig(f"{title}.png")
 
-def plot_presortedness(df, output_file = None):
 
+def plot_presortedness(df, output_file = None):
 
     df["cutoff"] = df["cutoff"]
     df["time"] = df["time"]
-
     median_times = df.groupby(["algorithm", "degree of presortedness", "cutoff"])["time"].median().reset_index()
 
     group_1 = ["binomialSort Presort INTEGERS Adaptive", "binomialSort Presort INTEGERS NonAdaptive"]
@@ -186,7 +177,7 @@ def plot_presortedness(df, output_file = None):
 
     fig, axes = plt.subplots(1, 2, figsize=(16, 8), sharey=True)
 
-    # Plot for group 1
+    # group 1
     ax = axes[0]
     for (algorithm, presortedness), group in median_times[median_times["algorithm"].isin(group_1)].groupby(["algorithm", "degree of presortedness"]):
         ax.plot(group["cutoff"], group["time"], marker='o', linestyle='-', label=f"{algorithm}, {presortedness}")
@@ -196,7 +187,7 @@ def plot_presortedness(df, output_file = None):
     ax.legend()
     ax.grid(True)
 
-    # Plot for group 2
+    # group 2
     ax = axes[1]
     for (algorithm, presortedness), group in median_times[median_times["algorithm"].isin(group_2)].groupby(["algorithm", "degree of presortedness"]):
         ax.plot(group["cutoff"], group["time"], marker='o', linestyle='-', label=f"{algorithm}, {presortedness}")
@@ -209,11 +200,8 @@ def plot_presortedness(df, output_file = None):
     plt.savefig("PresortednessLevelAndBioSort.png")
 
 def plot_presortednessComparisons(df, output_file = None):
-
-
     df["cutoff"] = df["cutoff"]
     df["time"] = df["time"]
-
     median_times = df.groupby(["algorithm", "degree of presortedness", "cutoff"])["comparisons"].median().reset_index()
 
     group_1 = ["binomialSort Presort INTEGERS Adaptive", "binomialSort Presort INTEGERS NonAdaptive"]
@@ -221,22 +209,22 @@ def plot_presortednessComparisons(df, output_file = None):
 
     fig, axes = plt.subplots(1, 2, figsize=(16, 8), sharey=True)
 
-    # Plot for group 1
+    # group 1
     ax = axes[0]
     for (algorithm, presortedness), group in median_times[median_times["algorithm"].isin(group_1)].groupby(["algorithm", "degree of presortedness"]):
         ax.plot(group["cutoff"], group["comparisons"], marker='o', linestyle='-', label=f"{algorithm}, {presortedness}")
     ax.set_xlabel("Cutoff")
-    ax.set_ylabel("Median Time")
-    ax.set_title("BinomialSort Algorithms")
+    ax.set_ylabel("Avg Comparisons")
+    ax.set_title("BinomialSort Algorithms Comparisons")
     ax.legend()
     ax.grid(True)
 
-    # Plot for group 2
+    # group 2
     ax = axes[1]
     for (algorithm, presortedness), group in median_times[median_times["algorithm"].isin(group_2)].groupby(["algorithm", "degree of presortedness"]):
         ax.plot(group["cutoff"], group["comparisons"], marker='o', linestyle='-', label=f"{algorithm}, {presortedness}")
     ax.set_xlabel("Cutoff")
-    ax.set_title("LevelSort Algorithms comparisons")
+    ax.set_title("LevelSort Algorithms Comparisons")
     ax.legend()
     ax.grid(True)
 
@@ -245,7 +233,7 @@ def plot_presortednessComparisons(df, output_file = None):
 
 
 # Parallel Cutoff plots
-def load_cutoff_data(filename):
+def load_parallel_data(filename):
 
     df = pd.read_csv(filename)
     # Replace commas with dots and convert to float
@@ -253,7 +241,7 @@ def load_cutoff_data(filename):
     df['variation'] = df['variation'].apply(lambda x: float(str(x).replace(',', '.')))
     return df
 
-def plot_all_cutoff_data(file_list, labels, output_file='parallel_cutoff_plots.png'):
+def plot_all_cutoff_parallel(file_list, labels, output_file='parallel_cutoff_plots.png'):
 
     n_plots = len(file_list)
     # Reduce height for less squashed appearance (e.g., height set to 3 instead of 6)
@@ -264,7 +252,7 @@ def plot_all_cutoff_data(file_list, labels, output_file='parallel_cutoff_plots.p
         axes = [axes]
 
     for ax, filename, label in zip(axes, file_list, labels):
-        df = load_cutoff_data(filename)
+        df = load_parallel_data(filename)
         df.sort_values('cutoff', inplace=True)
 
         # Plot cutoff vs. time with error bars (variation)
@@ -291,10 +279,10 @@ def plot_all_cutoff_data(file_list, labels, output_file='parallel_cutoff_plots.p
     # Parallel Scaling plots
 def load_parallel_data(filename):
     df = pd.read_csv(filename)
-    # Convert 'nanoseconds' and 'variance' from comma decimals to floats.
+    # 'nanoseconds' and 'variance' from comma decimals to floats.
     df['nanoseconds'] = df['nanoseconds'].apply(lambda x: float(str(x).replace(',', '.')))
     df['variance'] = df['variance'].apply(lambda x: float(str(x).replace(',', '.')))
-    # For Arrays.parallelSort, assign thread count as 1; otherwise, convert normally.
+    # assign thread count as 1 otherwise, convert normally.
     df['threads'] = df.apply(lambda row: 1 if row['name'] == 'Arrays.parallelSort'
     else pd.to_numeric(row['threads'], errors='coerce'), axis=1)
     return df
@@ -302,19 +290,14 @@ def load_parallel_data(filename):
 def plot_all_parallel_scaling(file_list, labels, output_file="parallel_thread_scaling_all.png"):
 
     n_plots = len(file_list)
-    # Increase width; adjust height to make plots less tall.
     fig, axes = plt.subplots(1, n_plots, figsize=(6 * n_plots + 2, 3), constrained_layout=True)
 
-    # Ensure axes is always iterable.
     if n_plots == 1:
         axes = [axes]
-
     for ax, filename, label in zip(axes, file_list, labels):
         df = load_parallel_data(filename)
-        # Determine the maximum thread count from non-baseline algorithms.
-        max_threads = df[df['name'] != 'Arrays.parallelSort']['threads'].max()
 
-        # Get unique algorithm names in this dataset.
+        max_threads = df[df['name'] != 'Arrays.parallelSort']['threads'].max()
         algorithms = df['name'].unique()
         for alg in algorithms:
             sub = df[df['name'] == alg].copy()
@@ -333,7 +316,6 @@ def plot_all_parallel_scaling(file_list, labels, output_file="parallel_thread_sc
         ax.set_title(f'Array Size: {label}')
         ax.grid(True)
         ax.legend(title='Algorithm')
-
     plt.savefig(output_file)
     plt.show()
 
@@ -370,4 +352,4 @@ if __name__ == "__main__":
 
     # file_list = ['Parallel_testing_FirstTest parallelTesting ParallelCutoff100k.csv', 'Parallel_testing_FirstTest parallelTesting ParallelCutoff1M.csv', 'Parallel_testing_FirstTest parallelTesting ParallelCutoff10M.csv']
     # labels = ['100k', '1M', '10M']
-    # plot_all_cutoff_data(file_list, labels)
+    # plot_all_cutoff_parallel(file_list, labels)
