@@ -279,7 +279,7 @@ def load_parallel_data(filename):
 
 def plot_all_parallel_scaling(file_list, labels, output_file="parallel_thread_scaling_all.png"):
     n_plots = len(file_list)
-    fig, axes = plt.subplots(1, n_plots, figsize=(6 * n_plots + 2, 3), constrained_layout=True)
+    fig, axes = plt.subplots(1, n_plots, figsize=(10, 6), constrained_layout=True)
 
     if n_plots == 1:
         axes = [axes]
@@ -317,10 +317,10 @@ if __name__ == "__main__":
 
     df_lvlbio_presort = load_data('LevelAndBioSort.csv')
     plot_level_biosort_subplots(df_lvlbio_presort)
-    
+
     df_lvlbio_presort = load_data('LevelAndBioSort.csv')
     plot_presortedness(df_lvlbio_presort)
-    
+
     df_lvlbio_presort = load_data('LevelAndBioSort.csv')
     plot_presortednessComparisons(df_lvlbio_presort)
 
